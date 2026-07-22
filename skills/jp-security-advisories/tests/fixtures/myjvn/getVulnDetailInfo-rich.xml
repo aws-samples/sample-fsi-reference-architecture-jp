@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<VULDEF-Document 
+version="3.2" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://jvn.jp/vuldef/" 
+xmlns:vuldef="http://jvn.jp/vuldef/" 
+xmlns:status="http://jvndb.jvn.jp/myjvn/Status" 
+xmlns:sec="http://jvn.jp/rss/mod_sec/3.0/" 
+xmlns:marking="http://data-marking.mitre.org/Marking-1" 
+xmlns:tlpMarking="http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1" 
+xsi:schemaLocation="http://jvn.jp/vuldef/ https://jvndb.jvn.jp/schema/vuldef_3.2.xsd http://jvn.jp/rss/mod_sec/3.0/ https://jvndb.jvn.jp/schema/mod_sec_3.0.xsd http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1 https://jvndb.jvn.jp/schema/tlp_marking.xsd http://jvndb.jvn.jp/myjvn/Status https://jvndb.jvn.jp/schema/status_3.3.xsd" 
+xml:lang="ja">
+    <Vulinfo>
+      <VulinfoID>JVNDB-2026-018098</VulinfoID>
+      <VulinfoData>
+        <Title>日立ディスクアレイシステムにおけるSVP 脆弱性対策について　(2026年4月分)</Title>
+        <VulinfoDescription>
+          <Overview>Microsoft製品に対して、以下に示す脆弱性が公開されました。 [脆弱性の内容] &lt;ol&gt;&lt;li&gt;UEFI セキュア ブートのセキュリティ機能バイパスの脆弱性 (CVE-2026-0390)&lt;/li&gt;&lt;li&gt;Windows COM サーバーの情報漏えいの脆弱性 (CVE-2026-20806)&lt;/li&gt;&lt;li&gt;Windows 回復環境のセキュリティ機能バイパスの脆弱性 (CVE-2026-20928)&lt;/li&gt;&lt;li&gt;Windows Management サービスの特権昇格の脆弱性 (CVE-2026-20930)&lt;/li&gt;&lt;li&gt;.NET Framework のサービス拒否の脆弱性 (CVE-2026-23666)&lt;/li&gt;&lt;li&gt;Windows 仮想化ベース セキュリティ (VBS) のセキュリティ機能バイパスの脆弱性 (CVE-2026-23670)&lt;/li&gt;&lt;li&gt;MITRE: CVE-2026-25250 セキュア ブートを無効にする Eazy 修正プログラム (CVE-2026-25250)&lt;/li&gt;&lt;li&gt;リモート デスクトップのスプーフィングの脆弱性 (CVE-2026-26151)&lt;/li&gt;&lt;li&gt;Microsoft Cryptographic Services の特権の昇格の脆弱性 (CVE-2026-26152)&lt;/li&gt;&lt;li&gt;Windows 暗号化ファイル システム (EFS) の特権昇格の脆弱性 (CVE-2026-26153)&lt;/li&gt;&lt;li&gt;Microsoft Local Security Authority Subsystem Service の情報漏えいの脆弱性 (CVE-2026-26155)&lt;/li&gt;&lt;li&gt;Windows Hyper-V のリモートでコードが実行される脆弱性 (CVE-2026-26156)&lt;/li&gt;&lt;li&gt;リモート デスクトップ ライセンス サービスの特権昇格の脆弱性 (CVE-2026-26159)&lt;/li&gt;&lt;li&gt;リモート デスクトップ ライセンス サービスの特権昇格の脆弱性 (CVE-2026-26160)&lt;/li&gt;&lt;li&gt;Windows Sensor Data Service の特権昇格の脆弱性 (CVE-2026-26161)&lt;/li&gt;&lt;li&gt;Windows OLE の特権の昇格の脆弱性 (CVE-2026-26162)&lt;/li&gt;&lt;li&gt;Windows カーネルの特権の昇格の脆弱性 (CVE-2026-26163)&lt;/li&gt;&lt;li&gt;Windows プッシュ通知の特権昇格の脆弱性 (CVE-2026-26167)&lt;/li&gt;&lt;li&gt;WinSock 用 Windows Ancillary Function Driver の特権の昇格の脆弱性 (CVE-2026-26168)&lt;/li&gt;&lt;li&gt;Windows カーネル メモリの情報漏えいの脆弱性 (CVE-2026-26169)&lt;/li&gt;&lt;li&gt;PowerShell の特権の昇格の脆弱性 (CVE-2026-26170)&lt;/li&gt;&lt;li&gt;Windows プッシュ通知の特権昇格の脆弱性 (CVE-2026-26172)&lt;/li&gt;&lt;li&gt;WinSock 用 Windows Ancillary Function Driver の特権の昇格の脆弱性 (CVE-2026-26173)&lt;/li&gt;&lt;li&gt;Windows Server Update Services (WSUS) の特権の昇格の脆弱性 (CVE-2026-26174)&lt;/li&gt;&lt;li&gt;Windows ブート マネージャーのセキュリティ機能のバイパスの脆弱性 (CVE-2026-26175)&lt;/li&gt;&lt;li&gt;Windows クライアント側のキャッシュ ドライバー (csc.sys) の特権昇格の脆弱性 (CVE-2026-26176)&lt;/li&gt;&lt;li&gt;WinSock 用 Windows Ancillary Function Driver の特権の昇格の脆弱性 (CVE-2026-26177)&lt;/li&gt;&lt;li&gt;Windows Advanced Rasterization Platform の特権昇格の脆弱性 (CVE-2026-26178)&lt;/li&gt;&lt;li&gt;Windows カーネルの特権の昇格の脆弱性 (CVE-2026-26180)&lt;/li&gt;&lt;li&gt;WinSock 用 Windows Ancillary Function Driver の特権の昇格の脆弱性 (CVE-2026-26182)&lt;/li&gt;&lt;li&gt;Windows Projected File System の特権の昇格の脆弱性 (CVE-2026-26184)&lt;/li&gt;&lt;li&gt;Windows Hello のセキュリティ機能のバイパスの脆弱性 (CVE-2026-27906)&lt;/li&gt;&lt;li&gt;Windows TDI 翻訳ドライバー (tdx.sys) の特権昇格の脆弱性 (CVE-2026-27908)&lt;/li&gt;&lt;li&gt;Windows Search サービスの特権の昇格の脆弱性 (CVE-2026-27909)&lt;/li&gt;&lt;li&gt;Windows インストーラーの特権の昇格の脆弱性 (CVE-2026-27910)&lt;/li&gt;&lt;li&gt;Windows ユーザー インターフェイス コアの特権昇格の脆弱性 (CVE-2026-27911)&lt;/li&gt;&lt;li&gt;Microsoft 管理コンソールの特権昇格の脆弱性 (CVE-2026-27914)&lt;/li&gt;&lt;li&gt;Windows UPnP Device Host の特権の昇格の脆弱性 (CVE-2026-27915)&lt;/li&gt;&lt;li&gt;Windows UPnP Device Host の特権の昇格の脆弱性 (CVE-2026-27916)&lt;/li&gt;&lt;li&gt;Windows WFP NDIS ライトウェイト フィルター ドライバー (wfplwfs.sys) の特権昇格の脆弱性 (CVE-2026-27917)&lt;/li&gt;&lt;li&gt;Windows シェルの特権の昇格の脆弱性 (CVE-2026-27918)&lt;/li&gt;&lt;li&gt;Windows UPnP Device Host の特権の昇格の脆弱性 (CVE-2026-27919)&lt;/li&gt;&lt;li&gt;Windows UPnP Device Host の特権の昇格の脆弱性 (CVE-2026-27920)&lt;/li&gt;&lt;li&gt;Windows TDI 翻訳ドライバー (tdx.sys) の特権昇格の脆弱性 (CVE-2026-27921)&lt;/li&gt;&lt;li&gt;WinSock 用 Windows Ancillary Function Driver の特権の昇格の脆弱性 (CVE-2026-27922)&lt;/li&gt;&lt;li&gt;デスクトップ ウィンドウ マネージャーの特権昇格の脆弱性 (CVE-2026-27923)&lt;/li&gt;&lt;li&gt;デスクトップ ウィンドウ マネージャーの特権昇格の脆弱性 (CVE-2026-27924)&lt;/li&gt;&lt;li&gt;Windows UPnP デバイス ホスティングの情報漏えいの脆弱性 (CVE-2026-27925)&lt;/li&gt;&lt;li&gt;Windows Cloud Files Mini Filter ドライバーの特権の昇格の脆弱性 (CVE-2026-27926)&lt;/li&gt;&lt;li&gt;Windows Projected File System の特権の昇格の脆弱性 (CVE-2026-27927)&lt;/li&gt;&lt;li&gt;Windows LUA ファイル仮想化フィルター ドライバーの特権昇格の脆弱性 (CVE-2026-27929)&lt;/li&gt;&lt;li&gt;Windows GDI の情報漏えいの脆弱性 (CVE-2026-27930)&lt;/li&gt;&lt;li&gt;Windows GDI の情報漏えいの脆弱性 (CVE-2026-27931)&lt;/li&gt;&lt;li&gt;Windows Simple Search Discovery Protocol (SSDP) サービスの特権昇格の脆弱性 (CVE-2026-32068)&lt;/li&gt;&lt;li&gt;Windows Projected File System の特権の昇格の脆弱性 (CVE-2026-32069)&lt;/li&gt;&lt;li&gt;Windows 共通ログ ファイル システム ドライバーの特権の昇格の脆弱性 (CVE-2026-32070)&lt;/li&gt;&lt;li&gt;Windows ローカル セキュリティ機関サブシステム サービス (LSASS) のサービス拒否の脆弱性 (CVE-2026-32071)&lt;/li&gt;&lt;li&gt;Active Directory のなりすましの脆弱性 (CVE-2026-32072)&lt;/li&gt;&lt;li&gt;WinSock 用 Windows Ancillary Function Driver の特権の昇格の脆弱性 (CVE-2026-32073)&lt;/li&gt;&lt;li&gt;Windows Projected File System の特権の昇格の脆弱性 (CVE-2026-32074)&lt;/li&gt;&lt;li&gt;Windows UPnP Device Host の特権の昇格の脆弱性 (CVE-2026-32075)&lt;/li&gt;&lt;li&gt;Windows UPnP Device Host の特権の昇格の脆弱性 (CVE-2026-32077)&lt;/li&gt;&lt;li&gt;Windows Projected File System の特権の昇格の脆弱性 (CVE-2026-32078)&lt;/li&gt;&lt;li&gt;Web アカウント マネージャーの情報漏えいの脆弱性 (CVE-2026-32079)&lt;/li&gt;&lt;li&gt;パッケージ カタログの情報漏えいの脆弱性 (CVE-2026-32081)&lt;/li&gt;&lt;li&gt;Windows Simple Search Discovery Protocol (SSDP) サービスの特権昇格の脆弱性 (CVE-2026-32082)&lt;/li&gt;&lt;li&gt;Windows Simple Search Discovery Protocol (SSDP) サービスの特権昇格の脆弱性 (CVE-2026-32083)&lt;/li&gt;&lt;li&gt;Windows 印刷スプーラーの情報漏えいの脆弱性 (CVE-2026-32084)&lt;/li&gt;&lt;li&gt;リモート プロシージャ コールの情報漏えいの脆弱性 (CVE-2026-32085)&lt;/li&gt;&lt;li&gt;Windows Function Discovery Service (fdwsd.dll) の特権昇格の脆弱性 (CVE-2026-32086)&lt;/li&gt;&lt;li&gt;Windows Function Discovery Service (fdwsd.dll) の特権昇格の脆弱性 (CVE-2026-32087)&lt;/li&gt;&lt;li&gt;Windows 生体認証サービスのセキュリティ機能のバイパスの脆弱性 (CVE-2026-32088)&lt;/li&gt;&lt;li&gt;Windows Speech Brokered API の特権昇格の脆弱性 (CVE-2026-32089)&lt;/li&gt;&lt;li&gt;Windows Speech Brokered API の特権昇格の脆弱性 (CVE-2026-32090)&lt;/li&gt;&lt;li&gt;Microsoft Resilient File System の特権昇格の脆弱性 (CVE-2026-32091)&lt;/li&gt;&lt;li&gt;Windows Function Discovery Service (fdwsd.dll) の特権昇格の脆弱性 (CVE-2026-32093)&lt;/li&gt;&lt;li&gt;Windows Hyper-V のリモートでコードが実行される脆弱性 (CVE-2026-32149)&lt;/li&gt;&lt;li&gt;Windows Function Discovery Service (fdwsd.dll) の特権昇格の脆弱性 (CVE-2026-32150)&lt;/li&gt;&lt;li&gt;Windows シェルの情報漏えいの脆弱性 (CVE-2026-32151)&lt;/li&gt;&lt;li&gt;Windows Speech Runtime の特権の昇格の脆弱性 (CVE-2026-32153)&lt;/li&gt;&lt;li&gt;デスクトップ ウィンドウ マネージャーの特権昇格の脆弱性 (CVE-2026-32154)&lt;/li&gt;&lt;li&gt;デスクトップ ウィンドウ マネージャーの特権昇格の脆弱性 (CVE-2026-32155)&lt;/li&gt;&lt;li&gt;Windows UPnP デバイス ホストのリモートでコードが実行される脆弱性 (CVE-2026-32156)&lt;/li&gt;&lt;li&gt;リモート デスクトップ クライアントのリモートでコードが実行される脆弱性 (CVE-2026-32157)&lt;/li&gt;&lt;li&gt;Windows プッシュ通知の特権昇格の脆弱性 (CVE-2026-32158)&lt;/li&gt;&lt;li&gt;Windows プッシュ通知の特権昇格の脆弱性 (CVE-2026-32159)&lt;/li&gt;&lt;li&gt;Windows プッシュ通知の特権昇格の脆弱性 (CVE-2026-32160)&lt;/li&gt;&lt;li&gt;Windows COM の特権の昇格の脆弱性 (CVE-2026-32162)&lt;/li&gt;&lt;li&gt;Windows ユーザー インターフェイス コアの特権昇格の脆弱性 (CVE-2026-32163)&lt;/li&gt;&lt;li&gt;Windows ユーザー インターフェイス コアの特権昇格の脆弱性 (CVE-2026-32164)&lt;/li&gt;&lt;li&gt;Windows ユーザー インターフェイス コアの特権昇格の脆弱性 (CVE-2026-32165)&lt;/li&gt;&lt;li&gt;接続ユーザー エクスペリエンスとテレメトリ サービスのサービス拒否の脆弱性 (CVE-2026-32181)&lt;/li&gt;&lt;li&gt;Windows Snipping Tool のリモートでコードが実行される脆弱性 (CVE-2026-32183)&lt;/li&gt;&lt;li&gt;Windows シェルのスプーフィングの脆弱性 (CVE-2026-32202)&lt;/li&gt;&lt;li&gt;ユニバーサル プラグ アンド プレイ (upnp.dll) の情報漏えいの脆弱性 (CVE-2026-32212)&lt;/li&gt;&lt;li&gt;ユニバーサル プラグ アンド プレイ (upnp.dll) の情報漏えいの脆弱性 (CVE-2026-32214)&lt;/li&gt;&lt;li&gt;Windows カーネルの情報漏えいの脆弱性 (CVE-2026-32215)&lt;/li&gt;&lt;li&gt;Windows カーネルの情報漏えいの脆弱性 (CVE-2026-32217)&lt;/li&gt;&lt;li&gt;Windows カーネルの情報漏えいの脆弱性 (CVE-2026-32218)&lt;/li&gt;&lt;li&gt;Windows シェル セキュリティ機能のバイパスの脆弱性 (CVE-2026-32225)&lt;/li&gt;&lt;li&gt;.NET Framework のサービス拒否の脆弱性 (CVE-2026-32226)&lt;/li&gt;&lt;li&gt;Windows Container Isolation FS Filter ドライバーの特権の昇格の脆弱性 (CVE-2026-33098)&lt;/li&gt;&lt;li&gt;WinSock 用 Windows Ancillary Function Driver の特権の昇格の脆弱性 (CVE-2026-33099)&lt;/li&gt;&lt;li&gt;WinSock 用 Windows Ancillary Function Driver の特権の昇格の脆弱性 (CVE-2026-33100)&lt;/li&gt;&lt;li&gt;Win32k の特権の昇格の脆弱性 (CVE-2026-33104)&lt;/li&gt;&lt;li&gt;.NET、.NET Framework、Visual Studio のサービス拒否の脆弱性 (CVE-2026-33116)&lt;/li&gt;&lt;li&gt;Windows インターネット キー交換 (IKE) サーバー拡張機能のリモートでコードが実行される脆弱性 (CVE-2026-33824)&lt;/li&gt;&lt;li&gt;Windows TCP/IP のリモートでコードが実行される脆弱性 (CVE-2026-33827)&lt;/li&gt;&lt;li&gt;Windows Snipping Tool のなりすましの脆弱性 (CVE-2026-33829)&lt;/li&gt;&lt;/ol&gt;SVPは直接ストレージ機能には係わりませんので、万一攻撃者から攻撃された場合であってもストレージとしてのデータの内容およびRead/Write機能に支障はありません。また日立ディスクアレイシステムに蓄積されているデータを読み取られることもありません。</Overview>
+        </VulinfoDescription>
+        <Affected>
+          <AffectedItem>
+            <Name>日立</Name>
+            <ProductName>Hitachi Virtual Storage Platform</ProductName>
+            <Cpe version="2.2">cpe:/h:hitachi:virtual_storage_platform</Cpe>
+            <VersionNumber>5100, 5500, 5100H, 5500H [Windows 10 for x64-based Systems (Version1809)]が搭載されている場合 (CVE-2026-0390, ...)</VersionNumber>
+            <VersionNumber>5100, 5500, 5100H, 5500H [Windows 10 for x64-based Systems (Version21H2)]が搭載されている場合 (CVE-2026-0390, ...)</VersionNumber>
+            <VersionNumber>5200, 5600, 5200H, 5600H [Windows 10 for x64-based Systems (Version1809)]が搭載されている場合 (CVE-2026-0390, ...)</VersionNumber>
+            <VersionNumber>5200, 5600, 5200H, 5600H [Windows 10 for x64-based Systems (Version21H2)]が搭載されている場合 (CVE-2026-0390, ...)</VersionNumber>
+            <VersionNumber>E390, E590, E790, E1090, E390H, E590H, E790H, E1090H [Windows 10 for x64-based Systems (Version1809)]が搭載されている場合 (CVE-2026-0390, ...)</VersionNumber>
+            <VersionNumber>E390, E590, E790, E1090, E390H, E590H, E790H, E1090H [Windows 10 for x64-based Systems (Version21H2)]が搭載されている場合 (CVE-2026-0390, ...)</VersionNumber>
+          </AffectedItem>
+        </Affected>
+        <Impact>
+          <ImpactItem>
+            <Description>想定される影響については、ベンダ情報をご確認ください。</Description>
+          </ImpactItem>
+        </Impact>
+        <Solution>
+          <SolutionItem>
+            <Description>ベンダ情報を参照して適切な対策を実施してください。</Description>
+          </SolutionItem>
+        </Solution>
+        <Related>
+          <RelatedItem type="vendor">
+            <Name>日立ストレージソリューションセキュリティ情報</Name>
+            <VulinfoID>hitachi-sec-2026-311</VulinfoID>
+            <URL>https://www.hitachi.co.jp/products/it/storage-solutions/techsupport/sec_info/sec_202604.html</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27929</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27929</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-33824</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-33824</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26168</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26168</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32091</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32091</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27920</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27920</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32218</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32218</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26155</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26155</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32083</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32083</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27910</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27910</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32165</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32165</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-20928</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-20928</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32073</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32073</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26177</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26177</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32156</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32156</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27927</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27927</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-33116</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-33116</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26167</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26167</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32090</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32090</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27919</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27919</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32217</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32217</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26153</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26153</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32082</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32082</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27909</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27909</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32164</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32164</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-20806</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-20806</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32072</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32072</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26176</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26176</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32155</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32155</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26175</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26175</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32154</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32154</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27926</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27926</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-33104</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-33104</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26163</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26163</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32089</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32089</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27918</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27918</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32215</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32215</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26152</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26152</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32081</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32081</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27908</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27908</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32163</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32163</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-0390</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-0390</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32071</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32071</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26174</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26174</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32153</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32153</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27925</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27925</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-33100</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-33100</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26162</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26162</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32088</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32088</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27917</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27917</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32214</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32214</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26151</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26151</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32079</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32079</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27906</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27906</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32162</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32162</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32070</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32070</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26173</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26173</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32151</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32151</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27924</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27924</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-33099</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-33099</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26161</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26161</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32087</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32087</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27916</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27916</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32212</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32212</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-25250</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-25250</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32078</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32078</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26184</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26184</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32160</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32160</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32069</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32069</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26172</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26172</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32150</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32150</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27923</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27923</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-33098</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-33098</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26160</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26160</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32086</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32086</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27915</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27915</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32202</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32202</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-23670</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-23670</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32077</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32077</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26182</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26182</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32159</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32159</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32068</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32068</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27931</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27931</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-33829</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-33829</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26170</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26170</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32149</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32149</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27922</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27922</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32226</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32226</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26159</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26159</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32085</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32085</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27914</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27914</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32183</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32183</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-23666</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-23666</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32075</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32075</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26180</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26180</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32158</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32158</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27930</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27930</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-33827</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-33827</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26169</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26169</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32093</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32093</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27921</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27921</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32225</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32225</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26156</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26156</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32084</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32084</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-27911</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-27911</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32181</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32181</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-20930</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-20930</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32074</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32074</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-26178</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-26178</URL>
+          </RelatedItem>
+          <RelatedItem type="advisory">
+            <Name>Common Vulnerabilities and Exposures (CVE)</Name>
+            <VulinfoID>CVE-2026-32157</VulinfoID>
+            <URL>https://www.cve.org/CVERecord?id=CVE-2026-32157</URL>
+          </RelatedItem>
+        </Related>
+        <History>
+          <HistoryItem>
+            <HistoryNo>1</HistoryNo>
+            <DateTime>2026-06-04T16:59:24+09:00</DateTime>
+            <Description>[2026年06月04日]\n  掲載</Description>
+          </HistoryItem>
+        </History>
+        <DateFirstPublished>2026-06-04T16:59:24+09:00</DateFirstPublished>
+        <DateLastUpdated>2026-06-04T16:59:24+09:00</DateLastUpdated>
+        <DatePublic>2026-05-27T00:00:00+09:00</DatePublic>
+      </VulinfoData>
+    </Vulinfo>
+    <sec:handling>
+      <marking:Marking>
+        <marking:Marking_Structure xsi:type="tlpMarking:TLPMarkingStructureType" marking_model_name="TLP" marking_model_ref="http://www.us-cert.gov/tlp/" color="WHITE"/>
+      </marking:Marking>
+    </sec:handling>
+    <status:Status version="3.3" method="getVulnDetailInfo" lang="ja" retCd="0" retMax="10" errCd="" errMsg="" totalRes="1" totalResRet="1" firstRes="1" feed="hnd" vulnId="JVNDB-2026-018098" maxCountItem="1"/>
+  </VULDEF-Document>
+

@@ -1,0 +1,6 @@
+[project]
+name = "aws-customer-references"
+version = "1.0.0"
+description = "Fetch AWS customer reference case studies via the official AWS API"
+requires-python = ">=3.11"
+dependencies = []

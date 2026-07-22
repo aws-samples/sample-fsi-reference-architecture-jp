@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aws-jp-fsi-sa/jp-security-advisories/detail-response-schema.json",
+  "title": "Japan Security Advisories — detail response",
+  "type": "object",
+  "required": ["source", "url", "title"],
+  "additionalProperties": false,
+  "properties": {
+    "source": {
+      "type": "string",
+      "enum": ["jpcert", "myjvn-vuln"]
+    },
+    "url": { "type": "string", "format": "uri" },
+    "id": {
+      "type": ["string", "null"],
+      "description": "Source-native identifier (e.g. JVNDB-2026-018267)"
+    },
+    "title": { "type": "string" },
+    "date_first_published": { "type": ["string", "null"] },
+    "date_last_updated": { "type": ["string", "null"] },
+    "date_public": { "type": ["string", "null"] },
+
+    "overview": {
+      "type": ["string", "null"],
+      "description": "Plain-text overview / summary"
+    },
+    "body_text": {
+      "type": ["string", "null"],
+      "description": "Plain text extracted from HTML body (jpcert only)"
+    },
+    "sections": {
+      "type": "object",
+      "description": "JPCERT only — best-effort heading split. Empty when no headings match.",
+      "additionalProperties": { "type": "string" }
+    },
+
+    "affected": {
+      "type": "array",
+      "description": "myjvn-vuln only — affected products list",
+      "items": {
+        "type": "object",
+        "required": ["vendor", "product"],
+        "properties": {
+          "vendor": { "type": "string" },
+          "product": { "type": "string" },
+          "cpe": { "type": ["string", "null"] },
+          "versions": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+
+    "cvss": {
+      "type": "array",
+      "description": "myjvn-vuln only — CVSS evaluations (one per evaluator/version)",
+      "items": {
+        "type": "object",
+        "required": ["version"],
+        "properties": {
+          "version": { "type": "string" },
+          "type": {
+            "type": ["string", "null"],
+            "description": "base / temporal / environmental"
+          },
+          "severity": {
+            "type": ["string", "null"],
+            "enum": ["none", "low", "medium", "high", "critical", null]
+          },
+          "score": { "type": ["number", "null"] },
+          "vector": { "type": ["string", "null"] }
+        }
+      }
+    },
+
+    "impact": { "type": ["string", "null"] },
+    "mitigation": { "type": ["string", "null"] },
+
+    "references": {
+      "type": "array",
+      "description": "myjvn-vuln only — related advisories (CVE, CWE, vendor advisories)",
+      "items": {
+        "type": "object",
+        "required": ["url"],
+        "properties": {
+          "type": {
+            "type": ["string", "null"],
+            "description": "advisory / cwe / etc."
+          },
+          "name": { "type": ["string", "null"] },
+          "id": { "type": ["string", "null"] },
+          "title": { "type": ["string", "null"] },
+          "url": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": { "type": ["string", "null"] },
+          "description": { "type": "string" }
+        }
+      }
+    },
+
+    "cves": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^CVE-\\d{4}-\\d{4,7}$" }
+    },
+    "jvn_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

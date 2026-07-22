@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AWS Security Bulletins - List Response",
+  "description": "Schema for the JSON output of `fetch_bulletins.py list`",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["locale", "bulletinId", "title", "publishedDate", "severity", "url"],
+    "properties": {
+      "locale": {
+        "type": "string",
+        "description": "Locale of the API response (e.g. en_US)"
+      },
+      "bulletinId": {
+        "type": "string",
+        "description": "Bulletin identifier (e.g. AWS-2025-032, 2026-004-AWS)"
+      },
+      "title": {
+        "type": "string",
+        "description": "Title of the security bulletin"
+      },
+      "publishedDate": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Publication date in ISO 8601 format"
+      },
+      "severity": {
+        "type": "string",
+        "enum": ["important", "informational", ""],
+        "description": "Severity level of the bulletin"
+      },
+      "url": {
+        "type": "string",
+        "format": "uri",
+        "description": "Full URL to the bulletin detail page"
+      }
+    },
+    "additionalProperties": false
+  }
+}
