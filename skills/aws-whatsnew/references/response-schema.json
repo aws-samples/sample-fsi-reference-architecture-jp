@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "postDateTime": {"type": "string", "format": "date-time"},
+      "headline": {"type": "string"},
+      "headlineUrl": {"type": "string"},
+      "service": {"type": ["string", "null"]},
+      "category": {"type": ["string", "null"]}
+    },
+    "required": ["postDateTime", "headline", "headlineUrl"]
+  }
+}

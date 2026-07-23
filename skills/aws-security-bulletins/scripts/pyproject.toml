@@ -1,0 +1,7 @@
+[project]
+name = "aws-security-bulletins"
+version = "1.0.0"
+description = "Fetch and search AWS Security Bulletins via the official AWS API"
+requires-python = ">=3.11"
+dependencies = []
+

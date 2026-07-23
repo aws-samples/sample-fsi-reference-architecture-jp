@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  ロードマップ詳細レポート テンプレート (roadmap-detail-template.html)
+  =====================================================================
+  本ファイルは fsi-ransomware-protect Workflow B の Step 8b で生成する
+  ロードマップ詳細レポートのテンプレートである。AI エージェントは本
+  テンプレートのスタイル・セクション構造・配色・フォントを完全に踏襲し、
+  データ部分 (お客様情報・ロードマップ各項目の詳細) のみを差し替える
+  形でレポートを生成する。
+
+  本ファイル内のデータは特定のお客様環境を想定したサンプルである。
+  実際の生成時はお客様の入力情報・ロードマップ内容に置き換えること。
+
+  詳細な仕様は同階層の template-spec.md を参照する。
+  =====================================================================
+-->
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>【保護フェーズ】AWS ランサムウェア対策ロードマップ詳細レポート — fsi-ransomware-protect Workflow B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-1: #0F2942;
+    --navy-2: #1E4D7B;
+    --teal: #1A7F8E;
+    --teal-light: #CCFBF1;
+    --gold: #C9A961;
+    --primary-light: #E8EEF7;
+    --text: #1F2933;
+    --text-dark: #0A1A2F;
+    --text-muted: #5A6677;
+    --border: #E2E8F0;
+    --bg-page: #F4F6FA;
+    --bg-card: #F7F9FC;
+    --bg-soft: #FAFBFC;
+    --short: #2E7D32;
+    --short-light: #E8F5E9;
+    --mid: #1565C0;
+    --mid-light: #E3F2FD;
+    --long: #6A1B9A;
+    --long-light: #F3E5F5;
+    --ng: #C62828;
+    --ok: #2E7D32;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Inter", "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    color: var(--text);
+    line-height: 1.75;
+    background: var(--bg-page);
+    margin: 0;
+    padding: 32px 16px;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "palt", "kern";
+  }
+  .page {
+    max-width: 980px;
+    margin: 0 auto 32px;
+    background: var(--bg-card);
+    box-shadow: 0 8px 32px rgba(15,41,66,0.10), 0 2px 8px rgba(15,41,66,0.06);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .cover {
+    background: linear-gradient(180deg, #B8C8E8 0%, #C8B8D8 50%, #D8C8E0 100%);
+    color: var(--text-dark);
+    padding: 64px 72px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--mid) 0%, var(--long) 100%);
+  }
+  .cover .label {
+    color: var(--text-dark);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    font-weight: 600;
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+  .cover .phase-nav {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .cover .phase-nav .phase {
+    font-size: 12px;
+    line-height: 1.3;
+    padding: 5px 12px;
+    border-radius: 6px;
+    color: rgba(10,26,47,0.5);
+    border: 1px solid rgba(10,26,47,0.2);
+    text-align: center;
+  }
+  .cover .phase-nav .phase .ja { font-weight: 600; display: block; }
+  .cover .phase-nav .phase .en {
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 1px;
+  }
+  .cover .phase-nav .phase.active {
+    color: #fff;
+    background: var(--long);
+    border-color: var(--long);
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(10,26,47,0.18);
+  }
+  .phase-hl {
+    color: var(--long);
+    font-weight: 700;
+  }
+  .cover h1 {
+    font-size: 38px;
+    font-weight: 800;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+    color: var(--text-dark);
+  }
+  .cover .subtitle {
+    color: var(--text-dark);
+    opacity: 0.8;
+    font-size: 16px;
+    margin: 0;
+  }
+  .cover .date {
+    margin-top: 32px;
+    font-size: 13px;
+    color: var(--text-dark);
+    opacity: 0.6;
+    border-top: 1px solid rgba(10,26,47,0.15);
+    padding-top: 16px;
+    font-family: "Inter", monospace;
+    letter-spacing: 0.03em;
+  }
+  .body { padding: 56px 96px; }
+  .about {
+    background: linear-gradient(135deg, #F8FAFC 0%, #EEF4FA 100%);
+    border-left: 3px solid var(--teal);
+    padding: 20px 24px;
+    margin: 0 0 40px;
+    font-size: 14px;
+    line-height: 1.9;
+    border-radius: 0 8px 8px 0;
+  }
+  .about h2 {
+    font-size: 11px;
+    color: var(--teal);
+    margin: 0 0 8px;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    padding: 0; background: none; border: none;
+  }
+  .about p { margin: 0 0 10px; }
+  .about p:last-child { margin-bottom: 0; }
+  h2.section {
+    font-size: 22px;
+    color: var(--navy-1);
+    margin: 48px 0 20px;
+    padding: 0 0 12px;
+    border-bottom: 2px solid var(--navy-1);
+    position: relative;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  h2.section::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 60px; height: 2px;
+    background: var(--gold);
+  }
+  h3.minor {
+    font-size: 12px;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    margin: 32px 0 12px;
+    text-transform: uppercase;
+  }
+  .overview-block {
+    margin: 20px 0 24px;
+    padding: 36px 32px;
+    background: linear-gradient(135deg, var(--teal-light) 0%, #ffffff 55%, var(--primary-light) 100%);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(15,41,66,0.10), 0 2px 6px rgba(15,41,66,0.06);
+  }
+  .overview-block::before {
+    content: "";
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(26,127,142,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .overview-block > * { position: relative; z-index: 1; }
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 12px 0 24px;
+    font-size: 13.5px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(15,41,66,0.08), 0 1px 3px rgba(15,41,66,0.05);
+  }
+  th {
+    background: linear-gradient(180deg, var(--navy-1) 0%, var(--navy-2) 100%);
+    color: #fff;
+    text-align: left;
+    padding: 14px 16px;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+  }
+  td {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px;
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  table.overview-table td:first-child { font-weight: 700; }
+  .phase {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .phase.short { color: var(--short); background: var(--short-light); }
+  .phase.mid { color: var(--mid); background: var(--mid-light); }
+  .phase.long { color: var(--long); background: var(--long-light); }
+  .flow-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin: 20px 0 8px;
+  }
+  .flow-node {
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 14px 24px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    width: 100%;
+    max-width: 480px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(15,41,66,0.04);
+  }
+  .flow-node.short { border-color: var(--short); color: var(--short); background: var(--short-light); }
+  .flow-node.mid { border-color: var(--mid); color: var(--mid); background: var(--mid-light); }
+  .flow-node.long { border-color: var(--long); color: var(--long); background: var(--long-light); }
+  .flow-node .num {
+    font-size: 11px;
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    font-family: "Inter", monospace;
+    opacity: 0.8;
+  }
+  .flow-arrow-down {
+    color: var(--text-muted);
+    font-size: 22px;
+    font-weight: 700;
+    padding: 6px 0;
+  }
+  .overview-note {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    margin-top: 16px;
+    line-height: 1.85;
+  }
+  .item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 18px 0 24px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(15,41,66,0.08), 0 1px 3px rgba(15,41,66,0.05);
+  }
+  .item-header {
+    padding: 14px 22px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .item-header.short { background: linear-gradient(180deg, var(--short) 0%, #1F5F22 100%); }
+  .item-header.mid { background: linear-gradient(180deg, var(--mid) 0%, #0D47A1 100%); }
+  .item-header.long { background: linear-gradient(180deg, var(--long) 0%, #4A148C 100%); }
+  .item-header .num {
+    background: rgba(255,255,255,0.22);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    flex-shrink: 0;
+    font-family: "Inter", monospace;
+  }
+  .item-header .title { flex: 1; font-weight: 700; font-size: 17px; letter-spacing: 0.01em; }
+  .item-header .period-badge {
+    background: rgba(255,255,255,0.22);
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .item-body { padding: 22px 26px; }
+  .item-body h4 {
+    font-size: 13px;
+    color: var(--navy-1);
+    margin: 18px 0 8px;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 4px;
+    font-weight: 700;
+  }
+  .item-body h4:first-child { margin-top: 0; }
+  .item-body p { margin: 0 0 8px; font-size: 14px; }
+  .item-body ul, .item-body ol { margin: 4px 0 8px; padding-left: 24px; font-size: 14px; }
+  .item-body li { margin-bottom: 4px; }
+  .item-body strong { color: var(--navy-1); font-weight: 700; }
+  .item-body code {
+    background: var(--bg-soft);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 12.5px;
+    border: 1px solid var(--border);
+    font-family: "Inter", monospace;
+    color: var(--navy-1);
+  }
+  table.data {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 8px 0 12px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+  }
+  table.data th {
+    background: var(--navy-1);
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  table.data td {
+    border-bottom: 1px solid var(--border);
+    padding: 10px 12px;
+    vertical-align: top;
+  }
+  table.data tbody tr:nth-child(even) td { background: var(--bg-soft); }
+  table.compare {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 10px 0 12px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+  }
+  table.compare th {
+    background: var(--bg-soft);
+    color: var(--navy-1);
+    font-weight: 700;
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+    font-size: 12.5px;
+  }
+  table.compare td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.compare .before { color: var(--ng); background: rgba(198,40,40,0.04); font-weight: 600; }
+  table.compare .after { color: var(--ok); background: rgba(46,125,50,0.05); font-weight: 600; }
+  pre.flow-text {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    font-family: "Inter", "SF Mono", Consolas, monospace;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--navy-1);
+    margin: 8px 0 12px;
+    overflow-x: auto;
+  }
+  .ref-link {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--navy-1);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  footer {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 16px 72px;
+    color: var(--text-muted);
+    font-size: 11px;
+    text-align: center;
+    font-family: "Inter", monospace;
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; padding: 40px 56px; margin: 0; border-radius: 0; }
+    h2.section { page-break-after: avoid; }
+    .item { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="cover">
+    <div class="label">FSI RANSOMWARE PROTECT — WORKFLOW B</div>
+    <h1>【保護フェーズ】<br>AWS ランサムウェア対策<br>ロードマップ詳細レポート</h1>
+    <div class="phase-nav">
+      <span class="phase active"><span class="ja">保護</span><span class="en">Protect</span></span>
+      <span class="phase"><span class="ja">検知</span><span class="en">Detect</span></span>
+      <span class="phase"><span class="ja">対応</span><span class="en">Respond</span></span>
+      <span class="phase"><span class="ja">復旧</span><span class="en">Recover</span></span>
+    </div>
+    <p class="subtitle">改善ロードマップと各項目の設計詳細 (短期 / 中期 / 長期)</p>
+    <div class="date">GENERATED — 2026-05-28</div>
+  </div>
+  <div class="body">
+    <div class="about">
+      <h2>ABOUT THIS REPORT</h2>
+      <p>本レポートは、ランサムウェア対策の 4 フェーズ（保護（Protect）・検知（Detect）・対応（Respond）・復旧（Recover））のうち <span class="phase-hl">保護（Protect）フェーズ</span> を対象としている。検知・対応・復旧の各フェーズは別途扱う。</p>
+      <p>本レポートは、AWS 金融リファレンスアーキテクチャ日本版で公開されているランサムウェア対策向けの SKILL を用いて、お客様の既存バックアップ環境に対する改善ロードマップを整理したものである。「評価結果レポート」で示した不足ポイントに対する具体的な実装ロードマップ (短期・中期・長期) と、各施策の設計判断・期待される防御効果をまとめている。</p>
+    </div>
+    <h2 class="section">ロードマップ全体像</h2>
+    <div class="overview-block">
+      <table class="overview-table" style="margin-top:0;">
+        <thead><tr><th style="width:110px">フェーズ</th><th>主要施策</th></tr></thead>
+        <tbody>
+          <tr><td><span class="phase short">短期</span></td><td>SCP 適用、ログ保管 S3 保護</td></tr>
+          <tr><td><span class="phase mid">中期</span></td><td>アカウント新設 → AWS Backup 移行 → クロスアカウント / クロスリージョンコピー → Vault Lock 適用</td></tr>
+          <tr><td><span class="phase long">長期</span></td><td>マルウェアスキャン導入、監視・監査の高度化、LAG vault のハイブリッド構成検討</td></tr>
+        </tbody>
+      </table>
+      <h3 class="minor">Progression</h3>
+      <div class="flow-vertical">
+        <div class="flow-node short"><span class="num">短期 1</span>SCP 適用</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node short"><span class="num">短期 2</span>ログ保管 S3 保護</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node mid"><span class="num">中期 3</span>マルチアカウント構成の導入</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node mid"><span class="num">中期 4</span>AWS Backup への移行と組織横断管理</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node mid"><span class="num">中期 5</span>クロスアカウント・クロスリージョンコピー</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node mid"><span class="num">中期 6</span>Vault Lock (Compliance mode) 適用</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node long"><span class="num">長期 7</span>マルウェアスキャンの導入</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node long"><span class="num">長期 8</span>クロスアカウントモニタリング + Audit Manager</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node long"><span class="num">長期 9</span>LAG vault のハイブリッド構成検討</div>
+      </div>
+      <p class="overview-note">中長期にわたる取り組みとなるが、短期項目だけでも防御力は大きく向上するため、まずは短期項目に着手しつつ、中期・長期の計画を並行して立案することを推奨する。</p>
+    </div>
+
+    <h2 class="section">短期項目 (最優先・即着手)</h2>
+
+    <div class="item">
+      <div class="item-header short">
+        <div class="num">1</div>
+        <div class="title">SCP によるバックアップ・ログ保護の予防的統制</div>
+        <div class="period-badge">短期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>既存の Organizations + SCP 基盤がそのまま使えるため、新規アカウント作成やアーキテクチャ変更なしで即座に防御力を引き上げられる。攻撃者が業務アカウントの管理者権限を奪取した場合でも、SCP で Deny されたアクションは実行できない (ルートユーザーでも不可) ため、現状構成のまま適用できる最も効果的な予防策である。</p>
+
+        <h4>設計すべき SCP のパターン</h4>
+
+        <p><strong>(1) バックアップ・スナップショット削除防止</strong></p>
+        <table class="data">
+          <thead><tr><th>統制対象</th><th>Deny するアクション例</th></tr></thead>
+          <tbody>
+            <tr><td>EBS スナップショット削除</td><td><code>ec2:DeleteSnapshot</code></td></tr>
+            <tr><td>RDS スナップショット削除</td><td><code>rds:DeleteDBSnapshot</code>, <code>rds:DeleteDBClusterSnapshot</code></td></tr>
+            <tr><td>EFS バックアップ削除</td><td>(AWS Backup 移行後は <code>backup:DeleteRecoveryPoint</code> で統一可能)</td></tr>
+            <tr><td>FSx バックアップ削除</td><td><code>fsx:DeleteBackup</code></td></tr>
+          </tbody>
+        </table>
+        <p>現状は各サービス個別のスナップショットで運用しているため、サービスごとの削除アクションを個別に Deny する必要がある。中期で AWS Backup に移行した後は、<code>backup:DeleteRecoveryPoint</code> と <code>backup:DeleteBackupVault</code> の Deny に集約することが可能である。</p>
+        <p><strong>例外運用の考慮</strong>: 不要になったスナップショットの削除が完全にできなくなるため、特定の管理者ロール (Break Glass ロール) のみ除外する条件キーを付けるか、Organizations 管理アカウントから一時的に SCP をデタッチする運用手順を事前に整理しておく。</p>
+
+        <p><strong>(2) KMS キー削除・無効化防止</strong></p>
+        <table class="data">
+          <thead><tr><th>統制対象</th><th>Deny するアクション例</th></tr></thead>
+          <tbody>
+            <tr><td>キー削除のスケジュール</td><td><code>kms:ScheduleKeyDeletion</code></td></tr>
+            <tr><td>キーの無効化</td><td><code>kms:DisableKey</code></td></tr>
+          </tbody>
+        </table>
+        <p>CMK で暗号化されたスナップショットは、キーが削除されると復号不能になる。攻撃者がキーを削除するだけでバックアップを使い物にならなくできるため、この SCP は暗号化対策の補完として重要である。</p>
+
+        <p><strong>(3) CloudTrail / Config 停止・削除防止</strong></p>
+        <table class="data">
+          <thead><tr><th>統制対象</th><th>Deny するアクション例</th></tr></thead>
+          <tbody>
+            <tr><td>CloudTrail 停止</td><td><code>cloudtrail:StopLogging</code>, <code>cloudtrail:DeleteTrail</code>, <code>cloudtrail:UpdateTrail</code></td></tr>
+            <tr><td>Config 停止</td><td><code>config:StopConfigurationRecorder</code>, <code>config:DeleteConfigurationRecorder</code>, <code>config:DeleteDeliveryChannel</code></td></tr>
+          </tbody>
+        </table>
+        <p>攻撃者は証跡を消すためにログ取得を停止しようとする。SCP で予防的に Deny しておくことで、フォレンジック分析の基盤を確保する。</p>
+
+        <p><strong>(4) 組織離脱防止</strong></p>
+        <table class="data">
+          <thead><tr><th>統制対象</th><th>Deny するアクション例</th></tr></thead>
+          <tbody>
+            <tr><td>組織からの離脱</td><td><code>organizations:LeaveOrganization</code></td></tr>
+          </tbody>
+        </table>
+        <p>アカウントが組織を離脱すると SCP の統制が外れるため、攻撃者が離脱 → 削除の手順を踏むリスクを防ぐ。</p>
+
+        <h4>設計時の共通考慮事項</h4>
+        <ul>
+          <li><strong>Condition キーによる例外</strong>: Break Glass ロールを <code>aws:PrincipalArn</code> 条件で除外する設計が一般的</li>
+          <li><strong>適用範囲</strong>: 業務アカウントが所属する OU 全体に適用。Organizations 管理アカウント自体には SCP は効かない仕様のため、管理アカウントの保護は別途 IAM レベルで対応</li>
+          <li><strong>テスト</strong>: 本番適用前に、テスト用 OU で影響範囲を確認することを推奨</li>
+        </ul>
+
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th>攻撃シナリオ</th><th>SCP なし (現状)</th><th>SCP あり</th></tr></thead>
+          <tbody>
+            <tr><td>管理者権限奪取 → スナップショット全削除</td><td class="before">リスクあり</td><td class="after">Deny される</td></tr>
+            <tr><td>管理者権限奪取 → KMS キー削除 → バックアップ復号不能</td><td class="before">リスクあり</td><td class="after">Deny される</td></tr>
+            <tr><td>管理者権限奪取 → CloudTrail 停止 → 証跡消去</td><td class="before">リスクあり</td><td class="after">Deny される</td></tr>
+            <tr><td>侵害後にアカウント切り離し → 統制回避</td><td class="before">リスクあり</td><td class="after">Deny される</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-header short">
+        <div class="num">2</div>
+        <div class="title">ログ保管 S3 の改ざん防止</div>
+        <div class="period-badge">短期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>CloudTrail / Config のログは S3 に一元保管されているが、改ざん防止が未設定のため、攻撃者が S3 バケットへの権限を得た場合にログを削除・上書きできる状態である。フォレンジック分析の基盤を確保するため、ログ保管 S3 バケットに多層防御を適用する。</p>
+
+        <h4>適用すべき保護機構</h4>
+        <table class="data">
+          <thead><tr><th style="width:30px">#</th><th style="width:220px">保護機構</th><th>役割</th><th style="width:160px">適用方法</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>S3 Versioning</td><td>上書き・削除があっても旧バージョンが残る</td><td>バケット設定で有効化</td></tr>
+            <tr><td>2</td><td>S3 Object Lock (Compliance mode)</td><td>保持期間内のオブジェクトを WORM 保護</td><td>バケット作成時に有効化 (既存バケットへの後付けも可能)</td></tr>
+            <tr><td>3</td><td>MFA Delete</td><td>バージョンの完全削除に MFA 認証を要求</td><td>バケット設定で有効化 (ルートユーザーのみ設定可能)</td></tr>
+            <tr><td>4</td><td>バケットポリシーの最小権限化</td><td>ログへのアクセスを限定</td><td>書き込みはログ転送の仕組みのみ、読み取りは分析チームのみ</td></tr>
+          </tbody>
+        </table>
+
+        <h4>設計判断のポイント</h4>
+        <ul>
+          <li><strong>Object Lock の保持期間</strong>: 規制要件で定められた保管期間 (例: 7 年) を基準に設定する。直近 1 年程度は即時アクセス可能な Standard クラスで保管し、それ以降は S3 Glacier へのライフサイクル移行でコスト最適化する設計が一般的</li>
+          <li><strong>既存バケットへの適用</strong>: S3 Object Lock は既存バケットに対しても有効化が可能 (バージョニングが有効であることが前提)。Object Lock 有効化後に書き込まれるオブジェクトから保護が適用され、既存オブジェクトに対しても個別にリテンション設定を適用することが可能</li>
+          <li><strong>SCP との組み合わせ</strong>: 短期項目 1 の SCP で <code>s3:PutBucketPolicy</code> や <code>s3:DeleteBucket</code> を Deny しておくことで、バケットポリシー改変やバケット削除も防止。ログ保管バケットの ARN を条件に含めた SCP を追加することを推奨</li>
+        </ul>
+
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th>攻撃シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>攻撃者がログオブジェクトを削除</td><td class="before">リスクあり</td><td class="after">Object Lock で Deny される</td></tr>
+            <tr><td>攻撃者がログを上書き (改ざん)</td><td class="before">リスクあり</td><td class="after">Versioning で旧バージョン保護 + Object Lock で改変不可</td></tr>
+            <tr><td>攻撃者がバージョンを完全削除</td><td class="before">リスクあり</td><td class="after">MFA Delete で MFA 認証が必要</td></tr>
+            <tr><td>攻撃者がバケットポリシーを書き換え</td><td class="before">リスクあり</td><td class="after">SCP で <code>s3:PutBucketPolicy</code> が Deny される</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h2 class="section">中期項目 (基盤構築)</h2>
+
+    <div class="item">
+      <div class="item-header mid">
+        <div class="num">3</div>
+        <div class="title">マルチアカウント構成の導入</div>
+        <div class="period-badge">中期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>現状は業務アカウント内でバックアップを保管しているため、業務アカウントが侵害されればバックアップも同時に破壊される。Vault Lock を業務アカウント内の Vault に適用してもアカウントごと侵害されるリスクは残るため、まずはバックアップを業務アカウントから物理的に分離するアカウント構成を作ることが、後続のすべての中期施策の前提となる。</p>
+
+        <h4>追加すべきアカウント</h4>
+        <table class="data">
+          <thead><tr><th style="width:170px">新設アカウント</th><th>役割</th><th style="width:200px">配置 OU の推奨</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Backup アカウント</td>
+              <td>組織全体のバックアップポリシーを集中管理。Organizations から AWS Backup の delegated administrator として委任。組織横断のモニタリングと監査レポートの集約先</td>
+              <td rowspan="3">専用 OU (Security OU 配下、または独立した Backup OU)</td>
+            </tr>
+            <tr>
+              <td>隔離アカウント (Isolated)</td>
+              <td>業務アカウントから切り離されたバックアップの追加保護先。クロスアカウントコピーで業務アカウントから複製を受け取り、Vault Lock で改変・削除耐性を担保</td>
+            </tr>
+            <tr>
+              <td>リカバリアカウント</td>
+              <td>フォレンジック分析、リストアテスト、有事の際の復旧確認の場。隔離アカウントから平時から継続的にコピーを受ける (推奨)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>アカウント分離の設計判断</h4>
+        <ul>
+          <li><strong>Backup アカウントと隔離アカウントを分ける理由</strong>: ポリシー管理 (Backup アカウント) とデータ保管 (隔離アカウント) の責務を分離。責務の分離 (Separation of Duties) が成立し、Backup アカウントが侵害されてもデータそのものは隔離アカウントで生き残る</li>
+          <li><strong>リカバリアカウントが必要な理由</strong>: リストア操作とバックアップ操作の責務分離を IAM ロールレベルで実現。フォレンジック分析時、感染した可能性のあるデータを業務アカウントに戻して調査するのはリスクがあるため、隔離された分析環境が必要</li>
+          <li><strong>OU 設計</strong>: 既存の SCP (短期項目 1) は業務アカウント向けに設計されており、Backup / 隔離 / リカバリアカウントには異なる SCP を適用。200 アカウントが既に業務システム単位で分離されているため、新設 3 アカウントは Security OU または独立した Backup OU を作成して配置するのが運用上整理しやすい</li>
+        </ul>
+
+        <h4>各アカウントに配置するリソース</h4>
+        <table class="data">
+          <thead><tr><th style="width:230px">アカウント</th><th>配置リソース</th></tr></thead>
+          <tbody>
+            <tr><td>Organizations 管理アカウント (既存)</td><td>バックアップ管理の delegated administrator 設定、組織トレイル、SCP</td></tr>
+            <tr><td>Backup アカウント (新設)</td><td>バックアップポリシー、Audit Manager レポートプラン、レポート保管 S3</td></tr>
+            <tr><td>業務アカウント (既存 200)</td><td>業務ワークロード、東京リージョンの Backup vault、KMS CMK、バックアップ実行用 IAM Role</td></tr>
+            <tr><td>隔離アカウント (新設)</td><td>東京リージョンの Backup vault (Vault Lock 適用)、KMS CMK</td></tr>
+            <tr><td>リカバリアカウント (新設)</td><td>東京リージョンの Backup vault、KMS CMK、リストア実行用 IAM Role</td></tr>
+          </tbody>
+        </table>
+
+        <h4>リージョン戦略</h4>
+        <p>東京 (プライマリ) と大阪 (クロスリージョンコピー先) の 2 リージョンで構成する。データの流れは以下のとおり。</p>
+<pre class="flow-text">業務アカウント(東京)
+  ├─→ 業務アカウント(大阪)        [クロスリージョンコピー: DR 対策]
+  └─→ 隔離アカウント(東京)        [クロスアカウントコピー: ランサム対策]
+        └─→ リカバリアカウント(東京)  [クロスアカウントコピー: 復旧基盤]
+</pre>
+
+        <h4>金融機関の文脈での補足</h4>
+        <p>200 アカウント規模の組織では、Backup アカウントの集中管理によるオペレーション効率化の効果が大きく出る。Control Tower は使っていないとのことだが、本構成は Control Tower なしでも実装可能である。Control Tower を後から導入する場合、ランディングゾーンの再設計が伴うため、現時点での Control Tower 導入は必須ではない。</p>
+
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th>攻撃シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>業務アカウント管理者権限奪取 → 同一アカウント内バックアップ全削除</td><td class="before">リスクあり</td><td class="after">バックアップは隔離アカウントに存在、業務アカウント権限では削除不可</td></tr>
+            <tr><td>業務アカウントの KMS キー削除でバックアップ復号不能化</td><td class="before">リスクあり</td><td class="after">隔離アカウントの独立 KMS キーで再暗号化済み、業務アカウント鍵掌握では影響なし</td></tr>
+            <tr><td>感染データを業務環境にリストアして再感染</td><td class="before">リスクあり</td><td class="after">リカバリアカウントで隔離分析後にリストア可能</td></tr>
+            <tr><td>東京リージョン障害でバックアップ消失</td><td class="before">リスクあり</td><td class="after">大阪リージョンに DR 用コピーが存在</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-header mid">
+        <div class="num">4</div>
+        <div class="title">AWS Backup への移行と組織横断管理</div>
+        <div class="period-badge">中期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>現状は各サービス個別のスナップショット機能を使っているが、200 アカウントで以下の課題が想定される。</p>
+        <ul>
+          <li>各アカウント・各サービスで個別に設定する必要があり、設定漏れ・不整合が発生しやすい</li>
+          <li>取得頻度・保持期間の標準化が困難</li>
+          <li>クロスアカウント・クロスリージョンコピーや Vault Lock といったランサム対策機能が AWS Backup を経由しないと使えない (一部のサービスでは個別機能でも実現可能だが、統一的な管理にはならない)</li>
+        </ul>
+        <p>AWS Backup と Organizations のバックアップポリシーを組み合わせて、200 アカウントを Backup アカウントから一元管理する構成に移行することを推奨する。</p>
+
+        <h4>Organizations のバックアップポリシーによる組織横断管理</h4>
+        <p>仕組みは以下のとおり。</p>
+        <ol>
+          <li>Backup アカウントでバックアップポリシー (JSON) を定義</li>
+          <li>Organizations の OU またはアカウントにアタッチ</li>
+          <li>適用された業務アカウントに、対応するバックアッププランが自動作成される</li>
+          <li>バックアッププランに従って AWS Backup がバックアップを実行</li>
+        </ol>
+        <p>この仕組みにより、各業務アカウントへ個別ログインしてバックアッププランを設定する必要がなくなり、Backup アカウントから組織全体に統一されたバックアップ標準が適用される。</p>
+
+        <h4>業務影響度別のバックアッププラン分割</h4>
+        <p>基幹系と情報系でバックアップ要件 (求められる取得頻度・周期) が異なる (基幹系: 1 時間ごと / 情報系: 日次) ため、業務影響度別に複数のバックアッププランを作成することを推奨する。</p>
+        <table class="data">
+          <thead><tr><th style="width:160px">プラン</th><th style="width:240px">対象</th><th>取得頻度</th><th>保持期間 (例)</th></tr></thead>
+          <tbody>
+            <tr><td>Critical (基幹系)</td><td>タグ <code>Backup-Tier: critical</code> のリソース</td><td>1 時間ごと、または Continuous backup</td><td>規制要件に基づく長期保管</td></tr>
+            <tr><td>Standard (情報系)</td><td>タグ <code>Backup-Tier: standard</code> のリソース</td><td>日次</td><td>中期保管</td></tr>
+          </tbody>
+        </table>
+        <p>タグベース運用とすることで、新規リソース作成時にタグを付ければ自動的に対象に含まれる運用が可能となる。Organizations のタグポリシーを併用すると、200 アカウント横断でのタグ命名統一が実現できる。</p>
+
+        <h4>リソース別の特性整理</h4>
+        <p>リソースごとに AWS Backup での扱いが異なる点に注意する。</p>
+        <table class="data">
+          <thead><tr><th>リソース</th><th>AWS Backup での独立暗号化</th><th>Continuous backup (PITR)</th><th>留意点</th></tr></thead>
+          <tbody>
+            <tr><td>EC2 / EBS</td><td>非対応 (ソース EBS の暗号化キーを継承)</td><td>非対応</td><td>既存 EBS が CMK 暗号化済みであれば問題なし</td></tr>
+            <tr><td>RDS / Aurora</td><td>非対応</td><td>対応 (PITR 活用が可能)</td><td>基幹系の短い取得間隔の要件は PITR で実現容易</td></tr>
+            <tr><td>S3</td><td>対応 (Vault の KMS で再暗号化)</td><td>対応</td><td>周期的バックアップ + Continuous backup の組み合わせ可能</td></tr>
+            <tr><td>EFS</td><td>対応</td><td>非対応</td><td>業務側ジョブ完了との連携で静止点を確保する運用設計が必要</td></tr>
+            <tr><td>FSx for Windows</td><td>非対応 (FSx 側の暗号化キーを継承)</td><td>非対応</td><td>VSS 連携でアプリケーション整合性のあるバックアップが取得可能</td></tr>
+          </tbody>
+        </table>
+
+        <h4>基幹系のバックアップ要件 (1 時間ごとの取得) の達成方針</h4>
+        <ul>
+          <li><strong>RDS / Aurora</strong>: Continuous backup (PITR) で対応</li>
+          <li><strong>S3</strong>: Continuous backup + 周期的バックアップの組み合わせで対応</li>
+          <li><strong>EC2 / EBS、EFS、FSx</strong>: 1 時間ごとのスナップショット取得 + バックアップ開始ウィンドウを最小値 (60 分) に設定</li>
+        </ul>
+
+        <h4>FSx for Windows の静止点確保</h4>
+        <p>FSx for Windows は VSS (Volume Shadow Copy Service) 連携の AWS Backup 統合がサポートされており、アプリケーション整合性のあるバックアップが取得可能である。業務システムによって静止点の厳密性が求められる場合、業務側ジョブ完了との連携を運用設計に組み込む。</p>
+
+        <h4>既存スナップショットからの段階的移行</h4>
+        <ol>
+          <li>AWS Backup での新規バックアップ取得を開始 (既存スナップショットと並走)</li>
+          <li>一定期間並走させ、AWS Backup でのバックアップが正常に取得できることを確認</li>
+          <li>既存の個別スナップショット取得を停止</li>
+          <li>既存スナップショットは保持期間満了まで残し、自然消滅させる</li>
+        </ol>
+        <p>並走期間中はストレージコストが二重にかかるが、移行リスクを最小化するために必要なステップとなる。</p>
+
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th>攻撃シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>個別アカウントの設定漏れによる保護対象外リソースが侵害</td><td class="before">リスクあり</td><td class="after">タグベースで自動対象化、新規リソース作成時も自動的に保護対象</td></tr>
+            <tr><td>取得頻度の不整合で基幹系の必要な取得世代が欠落</td><td class="before">リスクあり</td><td class="after">業務影響度別プランでバックアップ要件を組織横断で標準化</td></tr>
+            <tr><td>200 アカウント個別の Vault Lock 設定漏れ</td><td class="before">リスクあり</td><td class="after">Organizations バックアップポリシーで一元適用が可能</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-header mid">
+        <div class="num">5</div>
+        <div class="title">クロスアカウント・クロスリージョンコピーの実装</div>
+        <div class="period-badge">中期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>中期 3 で新設したアカウント間でバックアップを複製する経路を構築する。バックアップ取得と同時に自動的にコピーが作成される仕組みとし、運用負荷を最小化する。</p>
+
+        <h4>コピー経路の設計</h4>
+<pre class="flow-text">業務アカウント(東京)でバックアップ取得
+  ├─→ 業務アカウント(大阪)        [クロスリージョンコピー: DR 対策]
+  └─→ 隔離アカウント(東京)        [クロスアカウントコピー: ランサム対策]
+        └─→ リカバリアカウント(東京)  [クロスアカウントコピー: 復旧基盤]
+</pre>
+        <p>各コピーは、バックアッププラン内の Copy Action 設定で定義する。</p>
+
+        <h4>コピー成立のためのポリシー連携 (4 レイヤー)</h4>
+        <p>クロスアカウントコピーは以下の 4 つのポリシーが連携して初めて成立する。1 つでも欠けるとコピーは失敗する。</p>
+        <table class="data">
+          <thead><tr><th style="width:60px">レイヤー</th><th style="width:220px">ポリシー</th><th style="width:200px">配置場所</th><th>役割</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>バックアップ実行 IAM Role</td><td>業務アカウント</td><td>コピー操作を実行する権限</td></tr>
+            <tr><td>2</td><td>KMS キーポリシー (コピー元)</td><td>業務アカウント</td><td>コピー元データの復号許諾</td></tr>
+            <tr><td>3</td><td>Vault アクセスポリシー (コピー先)</td><td>隔離 / リカバリアカウント</td><td>クロスアカウントからのコピー受け入れ許諾</td></tr>
+            <tr><td>4</td><td>KMS キーポリシー (コピー先)</td><td>隔離 / リカバリアカウント</td><td>コピー先データの再暗号化許諾</td></tr>
+          </tbody>
+        </table>
+
+        <h4>重要な制約: クロスアカウントで許可される操作</h4>
+        <ul>
+          <li>Vault アクセスポリシーで許可できるクロスアカウントアクションは <code>backup:CopyIntoBackupVault</code> のみ</li>
+          <li>これ以外のアクション (リカバリポイント削除等) はクロスアカウントでは実行不可能な仕様</li>
+          <li>結果として、業務アカウントが侵害されても、隔離アカウントの Vault 内のリカバリポイントは削除できない構造になる</li>
+        </ul>
+        <p>この仕様自体がランサム対策として効果を持つ点が、クロスアカウントコピーを採用する大きな理由のひとつである。</p>
+
+        <h4>KMS CMK のアカウント別・リージョン別分離</h4>
+        <p>各コピー先で KMS CMK を独立して管理することで、単一鍵掌握のリスクを回避する。</p>
+        <table class="data">
+          <thead><tr><th>配置</th><th>管理主体</th></tr></thead>
+          <tbody>
+            <tr><td>業務アカウント (東京) の CMK</td><td>業務アカウントの管理者</td></tr>
+            <tr><td>業務アカウント (大阪) の CMK</td><td>業務アカウントの管理者</td></tr>
+            <tr><td>隔離アカウントの CMK</td><td>隔離アカウントの管理者</td></tr>
+            <tr><td>リカバリアカウントの CMK</td><td>リカバリアカウントの管理者</td></tr>
+          </tbody>
+        </table>
+        <p>各コピー時、コピー先の CMK で再暗号化されるため、コピー元の CMK を掌握した攻撃者でもコピー先データは復号できない。</p>
+
+        <h4>リカバリアカウントへのコピー方針</h4>
+        <p>基幹系については、ランサム被災時に迅速に復旧へ着手できるよう、平時からリカバリアカウントにコピーしておく構成を推奨する。</p>
+        <table class="data">
+          <thead><tr><th>アプローチ</th><th>復旧着手への影響</th><th>コスト</th></tr></thead>
+          <tbody>
+            <tr><td>平時から継続的にコピー (推奨)</td><td>即座にリストア開始可能</td><td>ストレージコスト二重</td></tr>
+            <tr><td>インシデント発生時にオンデマンドコピー</td><td>コピー完了まで復旧着手が遅延</td><td>コスト最適</td></tr>
+          </tbody>
+        </table>
+        <p>基幹系は復旧着手の迅速性が求められるため、隔離 → リカバリのコピーが間に合わない可能性を踏まえ、平時からの継続コピーを推奨する。情報系は復旧着手までの許容時間に余裕があるため、コスト最適化の観点でオンデマンドコピーでも対応が可能となる。なお、復旧完了までの所要時間 (RTO) はバックアップ・コピー設計だけでなく、リストア・切替・検証等の運用要素を含めて確保されるものであり、本項目はそのうちの復旧着手の準備性に寄与する位置づけである。</p>
+
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th>攻撃シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>業務アカウント侵害でバックアップ消失</td><td class="before">リスクあり</td><td class="after">隔離アカウントへの複製が残る</td></tr>
+            <tr><td>東京リージョン障害でバックアップ消失</td><td class="before">リスクあり</td><td class="after">大阪リージョンに DR 用コピー</td></tr>
+            <tr><td>業務アカウントの KMS キー掌握で隔離コピーも復号</td><td class="before">リスクあり</td><td class="after">隔離アカウントの独立 CMK で再暗号化済み</td></tr>
+            <tr><td>復旧時のコピー時間で復旧着手が遅延</td><td class="before">リスクあり</td><td class="after">平時コピーでリカバリアカウントから即時リストア可能</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-header mid">
+        <div class="num">6</div>
+        <div class="title">Vault Lock (Compliance mode) の適用</div>
+        <div class="period-badge">中期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>クロスアカウントコピーで分離された隔離アカウントの Backup vault に Vault Lock を適用することで、リカバリポイントの改変・削除を構造的に不可能にする。本施策がランサム対策の核心である。</p>
+
+        <h4>適用対象</h4>
+        <table class="data">
+          <thead><tr><th style="width:280px">適用先</th><th>適用判断</th></tr></thead>
+          <tbody>
+            <tr><td>隔離アカウントの Backup vault</td><td>必須適用</td></tr>
+            <tr><td>リカバリアカウントの Backup vault</td><td>推奨適用</td></tr>
+            <tr><td>業務アカウントの Backup vault</td><td>任意 (コピー前に削除されるリスクへの追加防御)</td></tr>
+          </tbody>
+        </table>
+        <p>ランサム対策の核心は隔離アカウントへの Vault Lock 適用となる。</p>
+
+        <h4>モード選択: Compliance mode を推奨</h4>
+        <table class="data">
+          <thead><tr><th style="width:200px">モード</th><th>特徴</th><th>採用判断</th></tr></thead>
+          <tbody>
+            <tr><td>Governance mode</td><td>特定 IAM 権限で Lock 解除可能</td><td>攻撃者が IAM 権限を奪取した場合に解除されるリスクが残る</td></tr>
+            <tr><td>Compliance mode (推奨)</td><td>grace time 経過後はいかなる権限でも解除不可 (AWS サポートでも不可)</td><td>金融機関の規制対応、ランサム対策として最も堅牢</td></tr>
+          </tbody>
+        </table>
+
+        <h4>設計判断のポイント</h4>
+
+        <p><strong>grace time の設定</strong></p>
+        <ul>
+          <li>Vault Lock 有効化直後に設けられる猶予期間</li>
+          <li>grace time 中は設定変更や Lock 解除が可能、grace time 経過後は一切不可</li>
+          <li>慎重に検証してから grace time を経過させることが重要</li>
+        </ul>
+
+        <p><strong>保持期間の慎重な設計</strong></p>
+        <p>Compliance mode では grace time 経過後は保持期間の変更ができないため、以下を慎重に決定する。</p>
+        <ul>
+          <li><strong>最小保持期間</strong>: 規制要件・業務要件で定められた最低限の保管期間 (例: 7 年)</li>
+          <li><strong>最大保持期間</strong>: コスト膨張を防ぐための上限 (無期限設定は避ける)</li>
+          <li><strong>バックアップライフサイクルの保持期間との整合</strong>: Vault Lock の範囲内に収める</li>
+        </ul>
+
+        <p><strong>コールドストレージへの移行</strong></p>
+        <ul>
+          <li>長期保管のコスト最適化のため、ライフサイクルでコールドストレージへ移行する設計を推奨</li>
+          <li>Compliance mode では移行設定も Lock の対象となるため、Vault Lock 有効化前に移行設計を確定する</li>
+        </ul>
+
+        <h4>Cohasset Associates によるコンプライアンス評価</h4>
+        <p>AWS Backup Vault Lock は、SEC 17a-4、CFTC、FINRA 規制の環境での利用に対する適合性評価が Cohasset Associates によって実施されている。金融機関での採用に際して、規制対応の観点での説明材料として活用することが可能である。</p>
+
+        <h4>Vault Lock とログ保管 S3 の Object Lock の使い分け</h4>
+        <table class="data">
+          <thead><tr><th style="width:240px">機能</th><th>保護対象</th></tr></thead>
+          <tbody>
+            <tr><td>AWS Backup Vault Lock</td><td>Backup vault に保管されたバックアップデータ (リカバリポイント)</td></tr>
+            <tr><td>S3 Object Lock</td><td>S3 バケットに保管されたオブジェクト (ログデータ等)</td></tr>
+          </tbody>
+        </table>
+        <p>両方を併用することで、バックアップとログの両方をイミュータブル化する。</p>
+
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th>攻撃シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>管理者権限奪取によるリカバリポイント削除</td><td class="before">リスクあり</td><td class="after">Compliance mode で grace time 後は削除不可</td></tr>
+            <tr><td>保持期間の短縮による早期削除</td><td class="before">リスクあり</td><td class="after">保持期間の変更不可</td></tr>
+            <tr><td>AWS サポート経由での解除要求</td><td class="before">リスクあり (Governance mode の場合)</td><td class="after">Compliance mode では AWS 側からも解除不可</td></tr>
+            <tr><td>規制対応で WORM 保護の説明材料が不足</td><td class="before">リスクあり</td><td class="after">Cohasset 評価を活用</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h2 class="section">長期項目 (運用高度化)</h2>
+
+    <div class="item">
+      <div class="item-header long">
+        <div class="num">7</div>
+        <div class="title">マルウェアスキャンの導入</div>
+        <div class="period-badge">長期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>中期で「クリーンな状態のバックアップを安全に隔離保管する」基盤が完成した後、次の段階として「そのバックアップが感染していないことを継続的に確認する」仕組みを追加する。バックアップ取得・保護の仕組みがない段階でスキャンだけ導入しても効果が限定的なため、中期の後ろに位置づける。</p>
+
+        <h4>第一候補: GuardDuty Malware Protection for Backup</h4>
+        <p>AWS Backup と Amazon GuardDuty の統合機能で、Backup vault 内の復旧ポイントに対して直接マルウェアスキャンを実施することが可能となる。リストアを経ずにスキャンが完結する点が運用上の大きな利点である。</p>
+
+        <p>本機能でネイティブにスキャンが可能なリソースは以下のとおり。</p>
+        <table class="data">
+          <thead><tr><th>リソース</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td>EC2 / EBS</td><td>EBS スナップショット、AMI 内のスナップショットがスキャン対象</td></tr>
+            <tr><td>S3</td><td>周期的バックアップが対象</td></tr>
+          </tbody>
+        </table>
+        <p>RDS / Aurora、EFS、FSx for Windows はネイティブスキャンの対象外であり、スキャンが必要な場合は後述のサードパーティ製品でのリストア → 実機スキャンによる補完アプローチを検討する。</p>
+
+        <h4>スキャンモードの運用設計</h4>
+        <table class="data">
+          <thead><tr><th>モード</th><th>用途</th><th>推奨頻度</th></tr></thead>
+          <tbody>
+            <tr><td>自動・増分スキャン</td><td>日々のバックアップ取得時の継続的なチェック</td><td>バックアップ完了ごと (自動)</td></tr>
+            <tr><td>自動・フルスキャン</td><td>最新シグネチャでの全量検査</td><td>月次等の周期</td></tr>
+            <tr><td>オンデマンド・フルスキャン</td><td>リストア前の最終確認</td><td>復旧オペレーション実施時</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>運用シナリオ</strong></p>
+        <ul>
+          <li>平時: 増分スキャンで継続的にチェックし、月次でフルスキャンを実施</li>
+          <li>有事: リストア対象のリカバリポイントに対してオンデマンドフルスキャンを実行し、最新シグネチャでクリーンなことを確認してからリストア</li>
+        </ul>
+
+        <h4>スキャン実行アカウントの整理</h4>
+        <table class="data">
+          <thead><tr><th>スキャン種別</th><th>主に実行されるアカウント</th></tr></thead>
+          <tbody>
+            <tr><td>バックアップ完了後の自動スキャン</td><td>業務アカウント (バックアップが最初に取得される場所)</td></tr>
+            <tr><td>リストア前のオンデマンドスキャン</td><td>リカバリアカウント (復旧オペレーションの場)</td></tr>
+          </tbody>
+        </table>
+        <p>クロスアカウントでコピーされた EC2 復旧ポイントは増分スキャンが利用できず、フルスキャンが必要となる点に注意する。隔離アカウント・リカバリアカウントでスキャンを実施する場合は、フルスキャンのコスト・実行時間を運用設計に組み込む。</p>
+
+        <h4>クォータ起因の事前確認</h4>
+        <p>GuardDuty Malware Protection for Backup には複数の調整不可クォータが定義されている (スナップショットサイズ上限、AMI 内スナップショット数上限、S3 オブジェクトサイズ上限等)。具体的な数値は機能拡張により変わるため、AWS 公式ドキュメントの最新版で確認する。</p>
+        <p>特に以下のワークロードは事前確認が必要である。</p>
+        <ul>
+          <li>大容量 EBS ボリュームを持つデータベースサーバー</li>
+          <li>多数のディスクを持つ EC2 インスタンス</li>
+          <li>大容量 S3 オブジェクトを扱うシステム</li>
+        </ul>
+        <p>クォータに収まらない場合は、ワークロード側の構成見直し (ボリューム分割等) か、後述のサードパーティ製品との併用ワークアラウンドを検討する。</p>
+
+        <h4>EC2 上の EDR との関係</h4>
+        <p>既に EC2 上で EDR が稼働しているが、EDR は稼働中の OS 上で動作するエージェント型のため、バックアップデータ (スナップショット) に対する直接スキャンには対応していないのが一般的である。GuardDuty Malware Protection for Backup と EDR は補完関係にあり、以下のように役割を分けることを推奨する。</p>
+        <table class="data">
+          <thead><tr><th>検知層</th><th>機能</th></tr></thead>
+          <tbody>
+            <tr><td>EC2 稼働中のリアルタイム検知</td><td>既存 EDR</td></tr>
+            <tr><td>バックアップデータの定期スキャン</td><td>GuardDuty Malware Protection for Backup</td></tr>
+          </tbody>
+        </table>
+        <p>両者を併用することで、攻撃のタイミングと検出経路を多層化する。</p>
+
+        <h4>サードパーティ製品でのチェック (補完アプローチ)</h4>
+        <p>組織の標準セキュリティ製品 (既存 EDR と同系列の製品等) でバックアップデータもチェックしたい場合、リストア → 実機スキャンのワークアラウンドが選択肢になる。</p>
+        <p>アーキテクチャ概要は以下のとおり。リカバリアカウント内で AWS Backup の Restore testing 機能を活用し、定期的に復旧ポイントをリストア → EDR でスキャン → 結果を記録 → 復元したインスタンスを破棄、というフローを自動化する。</p>
+        <ol>
+          <li>AWS Backup の Restore testing で定期的にリカバリポイントを EC2 として復元</li>
+          <li>EventBridge で EC2 起動を検知し、Lambda が EDR 管理サーバーへスキャン指示</li>
+          <li>スキャン結果を DynamoDB 等に記録 (AWS Backup 側に検査ステータスをマーキングする仕組みは現時点では提供されていないため、外部データストアでの管理が必要)</li>
+          <li>感染検知時は SNS で通知</li>
+          <li>スキャン完了後、Lambda で復元 EC2 を停止・削除</li>
+        </ol>
+        <p><strong>留意点</strong>:</p>
+        <ul>
+          <li>定期的なリストアによりストレージ・コンピュートコストが発生</li>
+          <li>GuardDuty Malware Protection for Backup と比較してコストが高くなる傾向</li>
+          <li>ただし、組織で標準化された EDR の検知エンジン・SOC 運用プロセスとの統合が可能</li>
+        </ul>
+
+        <h4>推奨アプローチ</h4>
+        <table class="data">
+          <thead><tr><th style="width:200px">対象</th><th>推奨スキャン手段</th></tr></thead>
+          <tbody>
+            <tr><td>EC2 / EBS</td><td>GuardDuty Malware Protection for Backup (自動増分 + 月次フル + リストア前オンデマンド)</td></tr>
+            <tr><td>S3</td><td>GuardDuty Malware Protection for Backup</td></tr>
+            <tr><td>RDS / Aurora / EFS / FSx for Windows</td><td>EDR 系製品でのリストア → 実機スキャン、または運用上スキャン対象外として受容</td></tr>
+            <tr><td>既存 EC2 稼働中の検知</td><td>既存 EDR を継続</td></tr>
+          </tbody>
+        </table>
+        <p>RDS / Aurora / EFS / FSx for Windows のスキャン対象外分については、組織のセキュリティ部門との合意形成が必要となる。完全なスキャンを求める場合はリストア → 実機スキャンの実装、コストとのバランスで運用上スキャン対象外として受容するのも選択肢になる。</p>
+
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th>攻撃シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>潜伏期間中に感染状態のバックアップが蓄積</td><td class="before">リスクあり</td><td class="after">増分・月次フルで継続的に検知</td></tr>
+            <tr><td>感染データをリストアして再感染</td><td class="before">リスクあり</td><td class="after">リストア前のオンデマンドスキャンで検出</td></tr>
+            <tr><td>EDR 単独では稼働中しか守れずバックアップは盲点</td><td class="before">リスクあり</td><td class="after">EDR + GuardDuty で稼働中・保管中の両層をカバー</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-header long">
+        <div class="num">8</div>
+        <div class="title">クロスアカウントモニタリング + Audit Manager レポート</div>
+        <div class="period-badge">長期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>200 アカウント規模でバックアップを運用する場合、各アカウントに個別ログインしてジョブ状況を確認するのは現実的ではない。組織横断の可視化と監査証跡の自動化が、200 アカウント運用の現実的な前提となる。</p>
+
+        <h4>クロスアカウントモニタリング</h4>
+        <p><strong>機能概要</strong>: Organizations 配下の全アカウントで実行されたバックアップ・コピー・リストアジョブを、Backup アカウントから一元的に確認することが可能となる機能。</p>
+
+        <p><strong>確認可能な情報</strong></p>
+        <ul>
+          <li>ジョブのステータス (成功・失敗・進行中)</li>
+          <li>アカウント ID、リソース名、リソースタイプ</li>
+          <li>ジョブ ID、実行日時</li>
+          <li>フィルタリング・検索 (アカウント ID、ステータス、ジョブ ID 等で絞り込み)</li>
+        </ul>
+
+        <p><strong>設計判断のポイント</strong></p>
+        <ul>
+          <li><strong>オプトイン式</strong>: Organizations 管理アカウント側で有効化が必要</li>
+          <li><strong>過去ジョブは遡及不可</strong>: 有効化後に作成されたジョブのみが集約ビューに表示される仕様。中期 4 (AWS Backup 移行) の早期段階で有効化することを推奨</li>
+          <li><strong>無効化後の保持</strong>: 終了状態到達後の一定期間は表示されるが、それ以降は表示されなくなる (具体的な保持期間は AWS 公式ドキュメントで確認)</li>
+        </ul>
+
+        <p><strong>運用シナリオ</strong></p>
+        <table class="data">
+          <thead><tr><th style="width:140px">利用シーン</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>日次運用</td><td>失敗ジョブの一覧確認、失敗原因の特定</td></tr>
+            <tr><td>週次レビュー</td><td>200 アカウント横断のバックアップカバレッジ確認</td></tr>
+            <tr><td>インシデント時</td><td>特定アカウント・特定リソースのジョブ履歴を即時確認</td></tr>
+          </tbody>
+        </table>
+
+        <h4>AWS Backup Audit Manager レポート</h4>
+        <p><strong>機能概要</strong>: 組織内のバックアップアクティビティを自動的に S3 にレポート出力する機能。継続的な監査証跡の確保や、規制対応の一環として活用する。</p>
+
+        <p><strong>レポートの種類</strong></p>
+        <table class="data">
+          <thead><tr><th style="width:200px">レポート</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>ジョブレポート</td><td>過去 24 時間に完了したジョブとアクティブなジョブ。Vault プロパティ、バックアッププラン構成、ライフサイクル設定等のコンテキストも含む</td></tr>
+            <tr><td>コンプライアンスレポート</td><td>リソースレベル・適用中のコントロール状況をモニタリング</td></tr>
+          </tbody>
+        </table>
+        <p>ジョブレポートには Vault タイプ・Lock ステータス・暗号化情報・スケジュール・保持期間等のコンテキストが含まれるため、追加 API 呼び出しなしで包括的なジョブ情報を取得することが可能となる。</p>
+
+        <p><strong>出力仕様</strong></p>
+        <table class="data">
+          <thead><tr><th style="width:120px">項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>配信先</td><td>レポートプラン作成元アカウントが所有する S3 バケットのみ (クロスアカウント S3 配信は非サポート)</td></tr>
+            <tr><td>出力形式</td><td>同一リージョン・同一アカウント宛は CSV または JSON、それ以外は CSV</td></tr>
+            <tr><td>頻度</td><td>24 時間ごと (自動)、オンデマンド実行も可能</td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>配置と保護</strong></p>
+        <ul>
+          <li>レポートプラン: Backup アカウントで作成 (クロスアカウントレポート対応のため delegated administrator として実行)</li>
+          <li>レポート保管 S3: Backup アカウント配下に配置</li>
+          <li>保護: 短期項目 2 で適用したログ保管 S3 と同等の保護機構 (S3 Object Lock / Versioning / MFA Delete / 最小権限化) を適用</li>
+        </ul>
+
+        <h4>マルウェアスキャン結果との連携</h4>
+        <p>長期項目 7 で導入する GuardDuty Malware Protection for Backup のスキャンジョブ履歴も Audit Manager レポートで確認可能となる。組織横断で「バックアップ取得状況」と「マルウェアスキャン結果」を一元的にモニタリングする運用が成立する。</p>
+
+        <h4>金融機関の文脈での活用</h4>
+
+        <p><strong>規制対応・監査対応</strong></p>
+        <p>200 アカウント規模での監査対応は、各アカウントから個別に証跡を集めるのは現実的ではない。Audit Manager レポートを継続的に S3 に保管しておくことで、以下が可能となる。</p>
+        <ul>
+          <li>内部監査・外部監査・規制当局検査での証跡即時提示</li>
+          <li>Vault Lock 有効化状況、保持期間設定、暗号化設定の継続モニタリング</li>
+          <li>バックアップポリシー遵守状況の継続検証、設定逸脱の早期検知</li>
+        </ul>
+
+        <p><strong>レポート保管期間</strong></p>
+        <p>業務記録・取引記録の保管期間 (規制要件) と整合させて、Audit Manager レポートも長期保管する。コスト最適化のため、一定期間後は S3 Glacier へのライフサイクル移行を併用する。</p>
+
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th>攻撃シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>特定アカウントのバックアップ失敗を検知できず</td><td class="before">リスクあり</td><td class="after">クロスアカウントモニタリングで Backup アカウントから即時把握</td></tr>
+            <tr><td>監査時に 200 アカウントの証跡を個別収集</td><td class="before">運用負荷大</td><td class="after">Audit Manager レポートで自動集約、即時提示</td></tr>
+            <tr><td>Vault Lock 設定の逸脱を検知できず</td><td class="before">リスクあり</td><td class="after">コンプライアンスレポートで継続モニタリング</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-header long">
+        <div class="num">9</div>
+        <div class="title">LAG vault のハイブリッド構成検討</div>
+        <div class="period-badge">長期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>LAG vault (Logically Air-Gapped vault) はさらに踏み込んだ保護機構として位置づけられる発展構成。中期で構築した「通常 Vault + Vault Lock」の構成でもランサム対策として有効だが、LAG vault には以下の追加的な特性がある。</p>
+
+        <h4>LAG vault の特性</h4>
+        <table class="data">
+          <thead><tr><th style="width:240px">特性</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>AWS 所有キーによる暗号化</td><td>顧客側のキー削除リスクを構造的に排除 (顧客アカウントを掌握された場合でもキー削除が成立しない)</td></tr>
+            <tr><td>Multi-party approval</td><td>リストア時に複数人の承認を要求。単独の攻撃者がリストア権限を得ても不正復元を防止</td></tr>
+            <tr><td>イミュータブル化が強制適用</td><td>作成時点で改変・削除耐性が組み込まれており、Vault Lock の別途設定が不要</td></tr>
+            <tr><td>RAM によるリソース共有</td><td>コピーせず別アカウントから共有してアクセス可能。ストレージコスト削減</td></tr>
+          </tbody>
+        </table>
+
+        <h4>今回の構成での採用判断</h4>
+        <p>LAG vault でネイティブに保護できるリソースは以下のとおり (機能拡張により対応リソースは随時変わるため、設計時に AWS 公式ドキュメントで最新状況を確認する)。</p>
+        <table class="data">
+          <thead><tr><th>リソース</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td>EC2 / EBS</td><td>対応</td></tr>
+            <tr><td>S3</td><td>対応</td></tr>
+            <tr><td>EFS</td><td>対応</td></tr>
+            <tr><td>FSx for Windows</td><td>設計時に最新状況を AWS 公式ドキュメントで確認</td></tr>
+          </tbody>
+        </table>
+        <p>RDS / Aurora は LAG vault でのネイティブ保護対象外であるため、画一的に LAG vault 単独構成は採用できない。LAG vault 対応リソースと対象外リソースを分割保護するハイブリッド構成が現実解となる。</p>
+
+        <h4>推奨構成: ハイブリッド構成</h4>
+        <table class="data">
+          <thead><tr><th style="width:280px">リソース</th><th>隔離アカウントでの保管先</th></tr></thead>
+          <tbody>
+            <tr><td>RDS / Aurora</td><td>通常 Backup vault + Vault Lock (Compliance mode)</td></tr>
+            <tr><td>EC2 / EBS / S3 / EFS / FSx for Windows (対応する場合)</td><td>LAG vault</td></tr>
+          </tbody>
+        </table>
+        <p>中期項目 6 で構築する Vault Lock の構成は RDS / Aurora 用に維持しつつ、他リソース向けに LAG vault を追加する形になる。</p>
+
+        <h4>採用検討時のトレードオフ</h4>
+
+        <p><strong>メリット</strong></p>
+        <ul>
+          <li>AWS 所有キー暗号化により、顧客側 KMS キー削除リスクが構造的に排除される</li>
+          <li>Multi-party approval により、リストア時の承認統制が強化される</li>
+          <li>Vault Lock の設定漏れによる保護不全のリスクがなくなる</li>
+        </ul>
+
+        <p><strong>留意点</strong></p>
+        <table class="data">
+          <thead><tr><th style="width:200px">観点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>キー管理の柔軟性</td><td>顧客側でのキーポリシー設計・キーローテーション設定等は不可。組織のキー管理ポリシーが「顧客管理キーでの暗号化」を厳格に求める場合、LAG vault 採用に組織内承認が必要なケースがある</td></tr>
+            <tr><td>マルウェアスキャンへの影響</td><td>LAG vault 内の EC2 復旧ポイントは増分スキャンが利用できず、フルスキャンが必要。長期項目 7 のスキャン運用設計と整合させる必要がある</td></tr>
+            <tr><td>対応リソースタイプの制約</td><td>RDS / Aurora は対象外のため、当面はハイブリッド構成が前提となる。将来 RDS / Aurora が LAG vault に対応した場合は構成統一の検討余地が出る</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Multi-party approval の運用設計</h4>
+        <p>LAG vault を採用する場合、Multi-party approval は単独攻撃者による不正復元への強力な防御となるが、運用上の準備が必要となる。</p>
+        <ul>
+          <li><strong>承認者の選定</strong>: 復旧オペレーションを承認できる権限者を平時から指名しておく</li>
+          <li><strong>緊急時の承認プロセス</strong>: 夜間・休日のインシデント時にも承認者が確実に対応できる体制を整備</li>
+          <li><strong>承認ログの保全</strong>: 承認の証跡を CloudTrail で記録し、監査対応に活用</li>
+        </ul>
+        <p>組織のインシデント対応プロセスと整合する形で、承認体制を設計する。</p>
+
+        <h4>採用判断のステップ</h4>
+        <ol>
+          <li>中期項目 6 までを完了し、通常 Vault + Vault Lock の構成で運用を安定化</li>
+          <li>LAG vault の対応リソース最新状況、Multi-party approval の運用設計を確認</li>
+          <li>組織のキー管理ポリシーとの整合を確認 (特に「顧客管理キーでの暗号化」が必須要件かを確認)</li>
+          <li>ハイブリッド構成への移行計画を策定 (RDS / Aurora は通常 Vault + Vault Lock を継続)</li>
+        </ol>
+
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th>攻撃シナリオ</th><th>現状 (Vault Lock のみ)</th><th>LAG vault 適用後</th></tr></thead>
+          <tbody>
+            <tr><td>顧客側 KMS キー削除でバックアップ復号不能化</td><td class="before">リスクあり (鍵掌握次第)</td><td class="after">AWS 所有キーで復号、構造的にリスク排除</td></tr>
+            <tr><td>単独管理者の権限掌握による不正リストア</td><td class="before">リスクあり</td><td class="after">Multi-party approval で複数承認が必要</td></tr>
+            <tr><td>Vault Lock 設定漏れによる保護不全</td><td class="before">リスクあり</td><td class="after">作成時点でイミュータブル化が強制適用</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h2 class="section">付録</h2>
+    <h3 class="minor">参照した reference 一覧</h3>
+    <p style="font-size: 13.5px; color: var(--text-muted); margin: 0 0 12px;">ランサムウェア対策 SKILL の保護 (Protect) フェーズの <code>references/</code> フォルダに格納された以下の詳細ガイドファイルを参照して作成している。</p>
+    <ul style="font-size: 14px;">
+      <li><span class="ref-link">references/01-multi-account-architecture.md</span> 全体構造の土台 (アカウント構成・データフロー・LAG vault・クロスアカウントコピー)</li>
+      <li><span class="ref-link">references/02-immutability.md</span> イミュータブル化 (Vault Lock、Object Lock)</li>
+      <li><span class="ref-link">references/03-backup-plan-design.md</span> 取得頻度・対象選定・保持期間・ライフサイクル</li>
+      <li><span class="ref-link">references/04-encryption-strategy.md</span> KMS 暗号化、キー管理</li>
+      <li><span class="ref-link">references/05-malware-protection.md</span> AWS Backup マルウェアスキャン + サードパーティ + ECR コンテナ保護</li>
+      <li><span class="ref-link">references/06-policy-and-access-control.md</span> 6 つのポリシー制御ポイント + SCP</li>
+      <li><span class="ref-link">references/07-log-collection-and-protection.md</span> ログ収集カテゴリ・ログ保護・CloudTrail / Config 集約</li>
+      <li><span class="ref-link">references/08-monitoring-and-audit.md</span> クロスアカウントモニタリング・Audit Manager</li>
+    </ul>
+
+  </div>
+</div>
+<footer>
+  Generated by fsi-ransomware-protect Workflow B / Skill version 1 / 2026-05-28
+</footer>
+</body>
+</html>

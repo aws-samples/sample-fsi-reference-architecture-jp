@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<rdf:RDF 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://purl.org/rss/1.0/" 
+xmlns:rss="http://purl.org/rss/1.0/" 
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+xmlns:dc="http://purl.org/dc/elements/1.1/" 
+xmlns:dcterms="http://purl.org/dc/terms/" 
+xmlns:sec="http://jvn.jp/rss/mod_sec/3.0/" 
+xmlns:marking="http://data-marking.mitre.org/Marking-1" 
+xmlns:tlpMarking="http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1" 
+xmlns:status="http://jvndb.jvn.jp/myjvn/Status" 
+xsi:schemaLocation="http://purl.org/rss/1.0/ https://jvndb.jvn.jp/schema/jvnrss_3.2.xsd http://jvndb.jvn.jp/myjvn/Status https://jvndb.jvn.jp/schema/status_3.3.xsd" 
+xml:lang="ja">
+    <channel rdf:about="https://jvndb.jvn.jp/apis/myjvn">
+      <title>JVNDB　脆弱性対策情報</title>
+      <link>https://jvndb.jvn.jp/apis/myjvn</link>
+      <description>JVNDB　脆弱性対策情報</description>
+      <dc:date>2026-06-08T09:18:03+09:00</dc:date>
+      <dcterms:issued/>
+      <dcterms:modified>2026-06-08T09:18:03+09:00</dcterms:modified>
+      <sec:handling>
+        <marking:Marking>
+          <marking:Marking_Structure xsi:type="tlpMarking:TLPMarkingStructureType" marking_model_name="TLP" marking_model_ref="http://www.us-cert.gov/tlp/" color="WHITE"/>
+        </marking:Marking>
+      </sec:handling>
+      <items>
+        <rdf:Seq>
+          <rdf:li rdf:resource="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018267.html"/>
+          <rdf:li rdf:resource="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-000082.html"/>
+          <rdf:li rdf:resource="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018237.html"/>
+          <rdf:li rdf:resource="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018236.html"/>
+          <rdf:li rdf:resource="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018235.html"/>
+          <rdf:li rdf:resource="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018234.html"/>
+          <rdf:li rdf:resource="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018233.html"/>
+          <rdf:li rdf:resource="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018232.html"/>
+          <rdf:li rdf:resource="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018231.html"/>
+          <rdf:li rdf:resource="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018230.html"/>
+        </rdf:Seq>
+      </items>
+    </channel>
+    <item rdf:about="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018267.html">
+      <title>Securly Chrome Extensionにおける複数の脆弱性</title>
+      <link>https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018267.html</link>
+      <description>CERT/CCから本件に関するアドバイザリが公表されました。 &lt;ul&gt;&lt;li&gt;&lt;a href='https://kb.cert.org/vuls/id/595768' target='_blank'&gt;Vulnerability Note VU#595768 Securly Chrome Extension contains multiple weak encryption and access control vulnerabilities&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+      <dc:creator>Information-technology Promotion Agency, Japan</dc:creator>
+      <sec:identifier>JVNDB-2026-018267</sec:identifier>
+      <sec:references source="JVN" id="JVNVU#97035938">https://jvn.jp/vu/JVNVU97035938/index.html</sec:references>
+      <sec:cpe version="2.2" vendor="（複数のベンダ）" product="（複数の製品）">cpe:/a:misc:multiple_vendors</sec:cpe>
+      <dc:date>2026-06-05T13:34:36+09:00</dc:date>
+      <dcterms:issued>2026-06-05T13:34:36+09:00</dcterms:issued>
+      <dcterms:modified>2026-06-05T13:34:36+09:00</dcterms:modified>
+    </item>
+    <item rdf:about="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-000082.html">
+      <title>複数のTP-LINK製品における重要情報の平文送信の脆弱性</title>
+      <link>https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-000082.html</link>
+      <description>TP-Link Systems Inc.が提供する複数の製品には、次の脆弱性が存在します。 &lt;ul&gt;&lt;li&gt;重要情報の平文送信（CWE-319）- CVE-2026-34126&lt;/li&gt;&lt;/ul&gt; この脆弱性情報は、情報セキュリティ早期警戒パートナーシップに基づき下記の方がIPAに報告し、JPCERT/CCが開発者との調整を行いました。 報告者：合同会社エルプラス eyegrep 氏、izurina 氏</description>
+      <dc:creator>Information-technology Promotion Agency, Japan</dc:creator>
+      <sec:identifier>JVNDB-2026-000082</sec:identifier>
+      <sec:references source="CVE" id="CVE-2026-34126">https://www.cve.org/CVERecord?id=CVE-2026-34126</sec:references>
+      <sec:references source="JVN" id="JVN#70631953">https://jvn.jp/jp/JVN70631953/index.html</sec:references>
+      <sec:references id="CWE-Other" title="その他(CWE-Other)">https://www.ipa.go.jp/security/vuln/scap/cwe.html</sec:references>
+      <sec:cpe version="2.2" vendor="TP-Link Systems Inc." product="Tapo D100C">cpe:/h:misc:tp-link_tapo_d100c</sec:cpe>
+      <sec:cpe version="2.2" vendor="TP-Link Systems Inc." product="Tapo L535E">cpe:/h:misc:tp-link_tapo_l535e</sec:cpe>
+      <sec:cpe version="2.2" vendor="TP-Link Systems Inc." product="Tapo P300">cpe:/h:misc:tp-link_tapo_p300</sec:cpe>
+      <sec:cvss score="6.7" severity="Medium" vector="CVSS:3.0/AV:A/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:L" version="3.0" type="Base"/>
+      <dc:date>2026-06-05T12:08:40+09:00</dc:date>
+      <dcterms:issued>2026-06-05T12:08:40+09:00</dcterms:issued>
+      <dcterms:modified>2026-06-05T12:08:40+09:00</dcterms:modified>
+    </item>
+    <item rdf:about="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018237.html">
+      <title>opentelemetryのeBPF Instrumentationにおける複数の脆弱性</title>
+      <link>https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018237.html</link>
+      <description>OpenTelemetry eBPFインストルメンテーションは、OpenTelemetry標準に基づくeBPFインストルメンテーションを提供します。バージョン0.9.0以前では、OBIの置換ELFパーサーは実行ファイルからのセクションオフセット、カウント、および文字列オフセットを信頼していました。細工されたローカルELFファイルにより、OBIが無効なセクションポインタを逆参照したり、文字列表を越えてスライスしたりする可能性があり、その結果、エージェントがプロセスの言語を判別する際にパニックを引き起こしてしまう恐れがありました。この問題はバージョン0.9.0で修正されています。 </description>
+      <dc:creator>Information-technology Promotion Agency, Japan</dc:creator>
+      <sec:identifier>JVNDB-2026-018237</sec:identifier>
+      <sec:references source="CVE" id="CVE-2026-45676">https://www.cve.org/CVERecord?id=CVE-2026-45676</sec:references>
+      <sec:references source="NVD" id="CVE-2026-45676">https://nvd.nist.gov/vuln/detail/CVE-2026-45676</sec:references>
+      <sec:references source="関連文書" id="Release v0.9.0  open-telemetry/opentelemetry-ebpf-instrumentation  GitHub">https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/releases/tag/v0.9.0</sec:references>
+      <sec:references id="CWE-20" title="不適切な入力確認(CWE-20)">https://jvndb.jvn.jp/ja/cwe/CWE-20.html</sec:references>
+      <sec:references id="CWE-248" title="キャッチされない例外(CWE-248)">https://cwe.mitre.org/data/definitions/248.html</sec:references>
+      <sec:cpe version="2.2" vendor="opentelemetry" product="eBPF Instrumentation">cpe:/a:opentelemetry:ebpf_instrumentation</sec:cpe>
+      <sec:cvss score="5.5" severity="Medium" vector="CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H" version="3.0" type="Base"/>
+      <dc:date>2026-06-05T10:51:06+09:00</dc:date>
+      <dcterms:issued>2026-06-05T10:51:06+09:00</dcterms:issued>
+      <dcterms:modified>2026-06-05T10:51:06+09:00</dcterms:modified>
+    </item>
+    <item rdf:about="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018236.html">
+      <title>opentelemetryのeBPF Instrumentationにおける複数の脆弱性</title>
+      <link>https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018236.html</link>
+      <description>OpenTelemetry eBPFインストルメンテーションは、OpenTelemetry標準に基づくeBPFインストルメンテーションを提供します。バージョン0.9.0以前では、PostgresプロトコルパーサーがBINDメッセージのペイロードに有効なヌル終端されたポータル名が含まれていると仮定していました。細工された空のペイロードや終端されていないペイロードによって、OBIがキャプチャされたバッファの末尾を超えてスライスし、パニックを引き起こす可能性がありました。この問題はバージョン0.9.0で修正されました。 </description>
+      <dc:creator>Information-technology Promotion Agency, Japan</dc:creator>
+      <sec:identifier>JVNDB-2026-018236</sec:identifier>
+      <sec:references source="CVE" id="CVE-2026-45678">https://www.cve.org/CVERecord?id=CVE-2026-45678</sec:references>
+      <sec:references source="NVD" id="CVE-2026-45678">https://nvd.nist.gov/vuln/detail/CVE-2026-45678</sec:references>
+      <sec:references source="関連文書" id="Release v0.9.0  open-telemetry/opentelemetry-ebpf-instrumentation  GitHub">https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/releases/tag/v0.9.0</sec:references>
+      <sec:references id="CWE-20" title="不適切な入力確認(CWE-20)">https://jvndb.jvn.jp/ja/cwe/CWE-20.html</sec:references>
+      <sec:references id="CWE-754" title="例外的な状態における不適切なチェック(CWE-754)">https://cwe.mitre.org/data/definitions/754.html</sec:references>
+      <sec:cpe version="2.2" vendor="opentelemetry" product="eBPF Instrumentation">cpe:/a:opentelemetry:ebpf_instrumentation</sec:cpe>
+      <sec:cvss score="7.5" severity="High" vector="CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H" version="3.0" type="Base"/>
+      <dc:date>2026-06-05T10:51:03+09:00</dc:date>
+      <dcterms:issued>2026-06-05T10:51:03+09:00</dcterms:issued>
+      <dcterms:modified>2026-06-05T10:51:03+09:00</dcterms:modified>
+    </item>
+    <item rdf:about="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018235.html">
+      <title>opentelemetryのeBPF Instrumentationにおける複数の脆弱性</title>
+      <link>https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018235.html</link>
+      <description>OpenTelemetry eBPF計測は、OpenTelemetry標準に基づくeBPF計測を提供します。バージョン0.9.0以前では、OBIがスパンステータスメッセージとして生のRedisエラーテキストをエクスポートしていました。Redisのエラー応答には攻撃者が制御可能な値や機密情報が含まれている可能性があるため、この動作によってトークン、個人識別情報(PII)、その他の機密入力がテレメトリバックエンドに漏洩したり、信頼されていないテキストが下流の分析システムに注入される恐れがありました。この問題はバージョン0.9.0で修正されています。 </description>
+      <dc:creator>Information-technology Promotion Agency, Japan</dc:creator>
+      <sec:identifier>JVNDB-2026-018235</sec:identifier>
+      <sec:references source="CVE" id="CVE-2026-45679">https://www.cve.org/CVERecord?id=CVE-2026-45679</sec:references>
+      <sec:references source="NVD" id="CVE-2026-45679">https://nvd.nist.gov/vuln/detail/CVE-2026-45679</sec:references>
+      <sec:references source="関連文書" id="Release v0.9.0  open-telemetry/opentelemetry-ebpf-instrumentation  GitHub">https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/releases/tag/v0.9.0</sec:references>
+      <sec:references id="CWE-117" title="不適切なログ出力の無効化(CWE-117)">https://cwe.mitre.org/data/definitions/117.html</sec:references>
+      <sec:references id="CWE-532" title="ログファイルからの情報漏えい(CWE-532)">https://cwe.mitre.org/data/definitions/532.html</sec:references>
+      <sec:cpe version="2.2" vendor="opentelemetry" product="eBPF Instrumentation">cpe:/a:opentelemetry:ebpf_instrumentation</sec:cpe>
+      <sec:cvss score="6.5" severity="Medium" vector="CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N" version="3.0" type="Base"/>
+      <dc:date>2026-06-05T10:51:00+09:00</dc:date>
+      <dcterms:issued>2026-06-05T10:51:00+09:00</dcterms:issued>
+      <dcterms:modified>2026-06-05T10:51:00+09:00</dcterms:modified>
+    </item>
+    <item rdf:about="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018234.html">
+      <title>opentelemetryのeBPF Instrumentationにおける複数の脆弱性</title>
+      <link>https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018234.html</link>
+      <description>OpenTelemetry eBPFインストルメンテーションは、OpenTelemetry標準に基づくeBPFの計測機能を提供します。バージョン0.9.0以前では、OBIは記録された実行回数ごとに一度ループを行い、BPFプローブのヒットをヒストグラム観測に反映していました。負荷の高いシステムでは、実行回数の差分が非常に大きくなり、メトリクスエクスポーターが収集間隔ごとに過度のCPU時間を狭いループで消費する原因となっていました。この問題はバージョン0.9.0で修正されています。 </description>
+      <dc:creator>Information-technology Promotion Agency, Japan</dc:creator>
+      <sec:identifier>JVNDB-2026-018234</sec:identifier>
+      <sec:references source="CVE" id="CVE-2026-45680">https://www.cve.org/CVERecord?id=CVE-2026-45680</sec:references>
+      <sec:references source="NVD" id="CVE-2026-45680">https://nvd.nist.gov/vuln/detail/CVE-2026-45680</sec:references>
+      <sec:references source="関連文書" id="Release v0.9.0  open-telemetry/opentelemetry-ebpf-instrumentation  GitHub">https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/releases/tag/v0.9.0</sec:references>
+      <sec:references id="CWE-400" title="リソースの枯渇(CWE-400)">https://cwe.mitre.org/data/definitions/400.html</sec:references>
+      <sec:references id="CWE-834" title="過度なイテレーション(CWE-834)">https://cwe.mitre.org/data/definitions/834.html</sec:references>
+      <sec:cpe version="2.2" vendor="opentelemetry" product="eBPF Instrumentation">cpe:/a:opentelemetry:ebpf_instrumentation</sec:cpe>
+      <sec:cvss score="7.5" severity="High" vector="CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H" version="3.0" type="Base"/>
+      <dc:date>2026-06-05T10:50:56+09:00</dc:date>
+      <dcterms:issued>2026-06-05T10:50:56+09:00</dcterms:issued>
+      <dcterms:modified>2026-06-05T10:50:56+09:00</dcterms:modified>
+    </item>
+    <item rdf:about="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018233.html">
+      <title>opentelemetryのeBPF Instrumentationにおける複数の脆弱性</title>
+      <link>https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018233.html</link>
+      <description>OpenTelemetry eBPF Instrumentationは、OpenTelemetry標準に基づくeBPF計測を提供します。バージョン0.9.0以前では、CPUごとのメッセージバッファのフォールバックパスに256バイトのバックアップバッファを使用していましたが、元のペイロードサイズ（最大8KB）を保持していました。CPUの不一致が発生した場合、OBIがフォールバックバッファを超えて読み取り、隣接するメモリをテレメトリに漏洩させる可能性がありました。この問題はバージョン0.9.0で修正されました。 </description>
+      <dc:creator>Information-technology Promotion Agency, Japan</dc:creator>
+      <sec:identifier>JVNDB-2026-018233</sec:identifier>
+      <sec:references source="CVE" id="CVE-2026-45681">https://www.cve.org/CVERecord?id=CVE-2026-45681</sec:references>
+      <sec:references source="NVD" id="CVE-2026-45681">https://nvd.nist.gov/vuln/detail/CVE-2026-45681</sec:references>
+      <sec:references source="関連文書" id="Release v0.9.0  open-telemetry/opentelemetry-ebpf-instrumentation  GitHub">https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/releases/tag/v0.9.0</sec:references>
+      <sec:references id="CWE-125" title="境界外読み取り(CWE-125)">https://cwe.mitre.org/data/definitions/125.html</sec:references>
+      <sec:references id="CWE-130" title="レングスパラメーターの不整合による不適切な処理(CWE-130)">https://cwe.mitre.org/data/definitions/130.html</sec:references>
+      <sec:cpe version="2.2" vendor="opentelemetry" product="eBPF Instrumentation">cpe:/a:opentelemetry:ebpf_instrumentation</sec:cpe>
+      <sec:cvss score="5.9" severity="Medium" vector="CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N" version="3.0" type="Base"/>
+      <dc:date>2026-06-05T10:50:53+09:00</dc:date>
+      <dcterms:issued>2026-06-05T10:50:53+09:00</dcterms:issued>
+      <dcterms:modified>2026-06-05T10:50:53+09:00</dcterms:modified>
+    </item>
+    <item rdf:about="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018232.html">
+      <title>opentelemetryのeBPF Instrumentationにおける複数の脆弱性</title>
+      <link>https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018232.html</link>
+      <description>OpenTelemetry eBPFインストルメンテーションは、OpenTelemetry標準に基づくeBPFインストルメンテーションを提供します。バージョン0.9.0以前では、Java TLS状態追跡のために導入されたカスタムCappedConcurrentHashMapが、エントリが削除されても挿入順序キューからキーを削除しませんでした。長時間稼働する計測されたJVMでは、接続の繰り返しの変動によりキューが無制限に増加し、ヒープメモリを枯渇させる可能性がありました。この問題はバージョン0.9.0で修正されました。 </description>
+      <dc:creator>Information-technology Promotion Agency, Japan</dc:creator>
+      <sec:identifier>JVNDB-2026-018232</sec:identifier>
+      <sec:references source="CVE" id="CVE-2026-45682">https://www.cve.org/CVERecord?id=CVE-2026-45682</sec:references>
+      <sec:references source="NVD" id="CVE-2026-45682">https://nvd.nist.gov/vuln/detail/CVE-2026-45682</sec:references>
+      <sec:references source="関連文書" id="Release v0.9.0  open-telemetry/opentelemetry-ebpf-instrumentation  GitHub">https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/releases/tag/v0.9.0</sec:references>
+      <sec:references id="CWE-401" title="有効期限後のメモリの解放の欠如(CWE-401)">https://cwe.mitre.org/data/definitions/401.html</sec:references>
+      <sec:references id="CWE-770" title="制限またはスロットリング無しのリソースの割り当て(CWE-770)">https://cwe.mitre.org/data/definitions/770.html</sec:references>
+      <sec:cpe version="2.2" vendor="opentelemetry" product="eBPF Instrumentation">cpe:/a:opentelemetry:ebpf_instrumentation</sec:cpe>
+      <sec:cvss score="5.5" severity="Medium" vector="CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H" version="3.0" type="Base"/>
+      <dc:date>2026-06-05T10:50:50+09:00</dc:date>
+      <dcterms:issued>2026-06-05T10:50:50+09:00</dcterms:issued>
+      <dcterms:modified>2026-06-05T10:50:50+09:00</dcterms:modified>
+    </item>
+    <item rdf:about="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018231.html">
+      <title>opentelemetryのeBPF Instrumentationにおける複数の脆弱性</title>
+      <link>https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018231.html</link>
+      <description>OpenTelemetry eBPFインストルメンテーションは、OpenTelemetry標準に基づくeBPFインストルメンテーションを提供します。バージョン0.9.0以前では、Java TLS ioctlプローブがbpf_probe_read_userではなくbpf_probe_readを使用してユーザー制御のioctlポインタを読み取っていました。そのため、インストルメンテーションされたローカルプロセスはOBIをカーネルメモリに指し示し、そのメモリがテレメトリにコピーされる可能性がありました。この問題はバージョン0.9.0で修正されました。 </description>
+      <dc:creator>Information-technology Promotion Agency, Japan</dc:creator>
+      <sec:identifier>JVNDB-2026-018231</sec:identifier>
+      <sec:references source="CVE" id="CVE-2026-45683">https://www.cve.org/CVERecord?id=CVE-2026-45683</sec:references>
+      <sec:references source="NVD" id="CVE-2026-45683">https://nvd.nist.gov/vuln/detail/CVE-2026-45683</sec:references>
+      <sec:references source="関連文書" id="Release v0.9.0  open-telemetry/opentelemetry-ebpf-instrumentation  GitHub">https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/releases/tag/v0.9.0</sec:references>
+      <sec:references id="CWE-127" title="バッファアンダーリード(CWE-127)">https://cwe.mitre.org/data/definitions/127.html</sec:references>
+      <sec:references id="CWE-200" title="情報漏えい(CWE-200)">https://jvndb.jvn.jp/ja/cwe/CWE-200.html</sec:references>
+      <sec:cpe version="2.2" vendor="opentelemetry" product="eBPF Instrumentation">cpe:/a:opentelemetry:ebpf_instrumentation</sec:cpe>
+      <sec:cvss score="3.8" severity="Low" vector="CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:C/C:L/I:N/A:N" version="3.0" type="Base"/>
+      <dc:date>2026-06-05T10:50:47+09:00</dc:date>
+      <dcterms:issued>2026-06-05T10:50:47+09:00</dcterms:issued>
+      <dcterms:modified>2026-06-05T10:50:47+09:00</dcterms:modified>
+    </item>
+    <item rdf:about="https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018230.html">
+      <title>opentelemetryのeBPF Instrumentationにおける複数の脆弱性</title>
+      <link>https://jvndb.jvn.jp/ja/contents/2026/JVNDB-2026-018230.html</link>
+      <description>OpenTelemetry eBPFインストルメンテーションは、OpenTelemetry標準に基づくeBPFインストルメンテーションを提供します。バージョン0.7.0から0.9.0未満のバージョンにおいて、OBIのログエンリッチャーはwritevバッファを誤って処理し、最初のiovecエントリのみを読み取りますが、コピー長として合計のiov_iter.countを使用していました。ログインジェクションが有効な場合、細工されたマルチセグメントのwritev呼び出しにより、OBIが最初のセグメントを超えたメモリを読み取り上書きする可能性があります。この問題はバージョン0.9.0で修正されました。 </description>
+      <dc:creator>Information-technology Promotion Agency, Japan</dc:creator>
+      <sec:identifier>JVNDB-2026-018230</sec:identifier>
+      <sec:references source="CVE" id="CVE-2026-45684">https://www.cve.org/CVERecord?id=CVE-2026-45684</sec:references>
+      <sec:references source="NVD" id="CVE-2026-45684">https://nvd.nist.gov/vuln/detail/CVE-2026-45684</sec:references>
+      <sec:references source="関連文書" id="Release v0.9.0  open-telemetry/opentelemetry-ebpf-instrumentation  GitHub">https://github.com/open-telemetry/opentelemetry-ebpf-instrumentation/releases/tag/v0.9.0</sec:references>
+      <sec:references id="CWE-126" title="バッファオーバーリード(CWE-126)">https://cwe.mitre.org/data/definitions/126.html</sec:references>
+      <sec:references id="CWE-787" title="境界外書き込み(CWE-787)">https://cwe.mitre.org/data/definitions/787.html</sec:references>
+      <sec:cpe version="2.2" vendor="opentelemetry" product="eBPF Instrumentation">cpe:/a:opentelemetry:ebpf_instrumentation</sec:cpe>
+      <sec:cvss score="5.3" severity="Medium" vector="CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:L" version="3.0" type="Base"/>
+      <dc:date>2026-06-05T10:50:45+09:00</dc:date>
+      <dcterms:issued>2026-06-05T10:50:45+09:00</dcterms:issued>
+      <dcterms:modified>2026-06-05T10:50:45+09:00</dcterms:modified>
+    </item>
+    <status:Status version="3.3" method="getVulnOverviewList" lang="ja" retCd="0" retMax="50" errCd="" errMsg="" totalRes="35" totalResRet="10" firstRes="1" feed="hnd" maxCountItem="10" rangeDatePublished="w"/>
+  </rdf:RDF>
+
