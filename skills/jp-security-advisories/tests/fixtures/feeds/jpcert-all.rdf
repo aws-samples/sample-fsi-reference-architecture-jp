@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<rdf:RDF
+  xmlns="http://purl.org/rss/1.0/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xml:lang="ja">
+
+  <channel rdf:about="https://www.jpcert.or.jp/rss/jpcert-all.rdf">
+    <title>統合版 JPCERT/CC RSS</title>
+    <link>https://www.jpcert.or.jp/</link>
+    <description>注意喚起、Weekly Report、脆弱性情報（JVN）、JPCERT/CCからのお知らせやイベントの新着情報をまとめて提供</description>
+    <dc:publisher>JPCERT/CC</dc:publisher>
+    <dc:creator>webmaster@jpcert.or.jp</dc:creator>
+    <items>
+      <rdf:Seq>
+        
+        <rdf:li rdf:resource="https://blogs.jpcert.or.jp/ja/2026/06/tsubame-overflow20260103.html" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/tsubame/report/report202601-03.html" />
+        <rdf:li rdf:resource="https://blogs.jpcert.or.jp/ja/2026/05/tsubame-overflow20251012.html" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/press/2026/PR20260423.html" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/report/press.html" />
+        
+        
+        
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/at/2026/at260015.html" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/at/2026/at260014.html" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/at/2026/at260013.html" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/at/2026/at260012.html" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/at/2025/at250021.html" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/at/2026/at260011.html" />
+        
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/wr/2026/wr260603.html#1" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/wr/2026/wr260603.html#2" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/wr/2026/wr260603.html#3" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/wr/2026/wr260603.html#4" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/wr/2026/wr260603.html#5" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/wr/2026/wr260603.html#6" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/wr/2026/wr260603.html#7" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/wr/2026/wr260603.html#8" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/wr/2026/wr260603.html#9" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/wr/2026/wr260603.html#10" />
+        <rdf:li rdf:resource="https://www.jpcert.or.jp/wr/2026/wr260603.html#11" />
+        
+        <rdf:li rdf:resource="https://jvn.jp/jp/JVN70631953/" />
+        <rdf:li rdf:resource="https://jvn.jp/vu/JVNVU91429317/" />
+        <rdf:li rdf:resource="https://jvn.jp/vu/JVNVU97035938/" />
+        <rdf:li rdf:resource="https://jvn.jp/vu/JVNVU95215075/" />
+        <rdf:li rdf:resource="https://jvn.jp/vu/JVNVU98968214/" />
+        <rdf:li rdf:resource="https://jvn.jp/vu/JVNVU95031413/" />
+      </rdf:Seq>
+
+    </items>
+  </channel>
+  
+  <item rdf:about="https://blogs.jpcert.or.jp/ja/2026/06/tsubame-overflow20260103.html">
+    <title>お知らせ：JPCERT/CC Eyes「TSUBAMEレポート Overflow（2026年1～3月）」</title>
+    
+    <link>https://blogs.jpcert.or.jp/ja/2026/06/tsubame-overflow20260103.html</link>
+    <dc:date>2026-06-02T13:38+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/tsubame/report/report202601-03.html">
+    <title>お知らせ：JPCERT/CC インターネット定点観測レポート［2026年1月1日～2026年3月31日］</title>
+    
+    <link>https://www.jpcert.or.jp/tsubame/report/report202601-03.html</link>
+    <dc:date>2026-05-15T13:36+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://blogs.jpcert.or.jp/ja/2026/05/tsubame-overflow20251012.html">
+    <title>お知らせ：JPCERT/CC Eyes「TSUBAMEレポート Overflow（2025年10～12月）」</title>
+    
+    <link>https://blogs.jpcert.or.jp/ja/2026/05/tsubame-overflow20251012.html</link>
+    <dc:date>2026-05-13T13:35+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/press/2026/PR20260423.html">
+    <title>お知らせ：LogonTracerにおける複数の脆弱性について</title>
+    
+    <link>https://www.jpcert.or.jp/press/2026/PR20260423.html</link>
+    <dc:date>2026-04-23T13:05+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/report/press.html">
+    <title>お知らせ：ソフトウェア等の脆弱性関連情報に関する届出状況［2026年第1四半期（1月～3月）］</title>
+    
+    <link>https://www.jpcert.or.jp/report/press.html</link>
+    <dc:date>2026-04-16T11:57+09:00</dc:date>
+  </item>
+  
+  
+  
+  
+  <item rdf:about="https://www.jpcert.or.jp/at/2026/at260015.html">
+    <title>注意喚起: Palo Alto Networks製PAN-OSにおける認証回避の脆弱性（CVE-2026-0265）に関する注意喚起  (公開)</title>
+    
+    <link>https://www.jpcert.or.jp/at/2026/at260015.html</link>
+    <dc:identifier>at260015</dc:identifier>
+    <dc:date>2026-05-22T11:09+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/at/2026/at260014.html">
+    <title>注意喚起: TrendAI Apex Oneなどのトレンドマイクロ製品における複数の脆弱性に関する注意喚起  (公開)</title>
+    
+    <link>https://www.jpcert.or.jp/at/2026/at260014.html</link>
+    <dc:identifier>at260014</dc:identifier>
+    <dc:date>2026-05-21T15:23+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/at/2026/at260013.html">
+    <title>注意喚起: GUARDIANWALL MailSuiteにおけるスタックベースのバッファオーバーフローの脆弱性に関する注意喚起  (公開)</title>
+    
+    <link>https://www.jpcert.or.jp/at/2026/at260013.html</link>
+    <dc:identifier>at260013</dc:identifier>
+    <dc:date>2026-05-13T15:33+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/at/2026/at260012.html">
+    <title>注意喚起: 2026年5月マイクロソフトセキュリティ更新プログラムに関する注意喚起  (公開)</title>
+    
+    <link>https://www.jpcert.or.jp/at/2026/at260012.html</link>
+    <dc:identifier>at260012</dc:identifier>
+    <dc:date>2026-05-13T11:18+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/at/2025/at250021.html">
+    <title>注意喚起: Cisco ASAおよびFTDにおける複数の脆弱性（CVE-2025-20333、CVE-2025-20362）に関する注意喚起  (更新)</title>
+    
+    <link>https://www.jpcert.or.jp/at/2025/at250021.html</link>
+    <dc:identifier>at250021</dc:identifier>
+    <dc:date>2026-04-27T10:47+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/at/2026/at260011.html">
+    <title>注意喚起: Adobe AcrobatおよびReaderの脆弱性（APSB26-44）に関する注意喚起  (公開)</title>
+    
+    <link>https://www.jpcert.or.jp/at/2026/at260011.html</link>
+    <dc:identifier>at260011</dc:identifier>
+    <dc:date>2026-04-15T11:53+09:00</dc:date>
+  </item>
+  
+  
+  <item rdf:about="https://www.jpcert.or.jp/wr/2026/wr260603.html#1">
+    <title>Weekly Report: 複数のOracle製品に脆弱性</title>
+    <description>複数のOracle製品には、脆弱性があります。対象となる製品およびバージョンは多岐にわたります。詳細は、開発者が提供する情報を参照してください。</description>    
+	<content:encoded>
+	<![CDATA[複数のOracle製品には、脆弱性があります。対象となる製品およびバージョンは多岐にわたります。詳細は、開発者が提供する情報を参照してください。<a href="https://www.jpcert.or.jp/wr/2026/wr260603.html#1">続きを読む</a>]]>
+	</content:encoded>
+    <link>https://www.jpcert.or.jp/wr/2026/wr260603.html#1</link>
+    <dc:identifier>wr260603</dc:identifier>
+    <dc:date>2026-06-03T09:07+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/wr/2026/wr260603.html#2">
+    <title>Weekly Report: Atril、EvinceおよびXreaderに引数インジェクションの脆弱性</title>
+    <description>Atril、EvinceおよびXreaderには、引数インジェクションの脆弱性があります。攻撃者が、本脆弱性を悪用する細工したPDF文書をユーザーに開かせ、文書内のリンクをクリックさせることで、当該ユーザーの権限で任意のコードを実行する可能性があります。開発者および各ディストリビューションベンダーが提供する情報を確認のうえ、修正済みのバージョンや対策情報が公開されている場合は速やかな適用を推奨します。</description>    
+	<content:encoded>
+	<![CDATA[Atril、EvinceおよびXreaderには、引数インジェクションの脆弱性があります。攻撃者が、本脆弱性を悪用する細工したPDF文書をユーザーに開かせ、文書内のリンクをクリックさせることで、当該ユーザーの権限で任意のコードを実行する可能性があります。開発者および各ディストリビューションベンダーが提供する情報を確認のうえ、修正済みのバージョンや対策情報が公開されている場合は速やかな適用を推奨します。<a href="https://www.jpcert.or.jp/wr/2026/wr260603.html#2">続きを読む</a>]]>
+	</content:encoded>
+    <link>https://www.jpcert.or.jp/wr/2026/wr260603.html#2</link>
+    <dc:identifier>wr260603</dc:identifier>
+    <dc:date>2026-06-03T09:07+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/wr/2026/wr260603.html#3">
+    <title>Weekly Report: Google Chromeに複数の脆弱性</title>
+    <description>Google Chromeには、複数の脆弱性があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。</description>    
+	<content:encoded>
+	<![CDATA[Google Chromeには、複数の脆弱性があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。<a href="https://www.jpcert.or.jp/wr/2026/wr260603.html#3">続きを読む</a>]]>
+	</content:encoded>
+    <link>https://www.jpcert.or.jp/wr/2026/wr260603.html#3</link>
+    <dc:identifier>wr260603</dc:identifier>
+    <dc:date>2026-06-03T09:07+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/wr/2026/wr260603.html#4">
+    <title>Weekly Report: GitLabに複数の脆弱性</title>
+    <description>GitLabには、複数の脆弱性があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。</description>    
+	<content:encoded>
+	<![CDATA[GitLabには、複数の脆弱性があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。<a href="https://www.jpcert.or.jp/wr/2026/wr260603.html#4">続きを読む</a>]]>
+	</content:encoded>
+    <link>https://www.jpcert.or.jp/wr/2026/wr260603.html#4</link>
+    <dc:identifier>wr260603</dc:identifier>
+    <dc:date>2026-06-03T09:07+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/wr/2026/wr260603.html#5">
+    <title>Weekly Report: Giteaに複数の脆弱性</title>
+    <description>Giteaには、複数の脆弱性があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。</description>    
+	<content:encoded>
+	<![CDATA[Giteaには、複数の脆弱性があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。<a href="https://www.jpcert.or.jp/wr/2026/wr260603.html#5">続きを読む</a>]]>
+	</content:encoded>
+    <link>https://www.jpcert.or.jp/wr/2026/wr260603.html#5</link>
+    <dc:identifier>wr260603</dc:identifier>
+    <dc:date>2026-06-03T09:07+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/wr/2026/wr260603.html#6">
+    <title>Weekly Report: Joomla!に複数の脆弱性</title>
+    <description>Joomla!には、複数の脆弱性があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。</description>    
+	<content:encoded>
+	<![CDATA[Joomla!には、複数の脆弱性があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。<a href="https://www.jpcert.or.jp/wr/2026/wr260603.html#6">続きを読む</a>]]>
+	</content:encoded>
+    <link>https://www.jpcert.or.jp/wr/2026/wr260603.html#6</link>
+    <dc:identifier>wr260603</dc:identifier>
+    <dc:date>2026-06-03T09:07+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/wr/2026/wr260603.html#7">
+    <title>Weekly Report: Sambaに複数の脆弱性</title>
+    <description>Sambaには、複数の脆弱性があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。</description>    
+	<content:encoded>
+	<![CDATA[Sambaには、複数の脆弱性があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。<a href="https://www.jpcert.or.jp/wr/2026/wr260603.html#7">続きを読む</a>]]>
+	</content:encoded>
+    <link>https://www.jpcert.or.jp/wr/2026/wr260603.html#7</link>
+    <dc:identifier>wr260603</dc:identifier>
+    <dc:date>2026-06-03T09:07+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/wr/2026/wr260603.html#8">
+    <title>Weekly Report: Apache ForyのPyForyに信頼できないデータのデシリアライゼーションの脆弱性</title>
+    <description>Apache ForyのPyForyには、信頼できないデータのデシリアライゼーションの脆弱性（CVE-2026-48207）があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。</description>    
+	<content:encoded>
+	<![CDATA[Apache ForyのPyForyには、信頼できないデータのデシリアライゼーションの脆弱性（CVE-2026-48207）があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。<a href="https://www.jpcert.or.jp/wr/2026/wr260603.html#8">続きを読む</a>]]>
+	</content:encoded>
+    <link>https://www.jpcert.or.jp/wr/2026/wr260603.html#8</link>
+    <dc:identifier>wr260603</dc:identifier>
+    <dc:date>2026-06-03T09:07+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/wr/2026/wr260603.html#9">
+    <title>Weekly Report: Roundcube Webmailに複数の脆弱性</title>
+    <description>Roundcube Webmailには、複数の脆弱性があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。</description>    
+	<content:encoded>
+	<![CDATA[Roundcube Webmailには、複数の脆弱性があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。<a href="https://www.jpcert.or.jp/wr/2026/wr260603.html#9">続きを読む</a>]]>
+	</content:encoded>
+    <link>https://www.jpcert.or.jp/wr/2026/wr260603.html#9</link>
+    <dc:identifier>wr260603</dc:identifier>
+    <dc:date>2026-06-03T09:07+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/wr/2026/wr260603.html#10">
+    <title>Weekly Report: NGINXにヒープベースのバッファオーバーフローの脆弱性</title>
+    <description>NGINX Plus、NGINX Open Sourceには、ヒープベースのバッファオーバーフローの脆弱性があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。</description>    
+	<content:encoded>
+	<![CDATA[NGINX Plus、NGINX Open Sourceには、ヒープベースのバッファオーバーフローの脆弱性があります。この問題は、当該製品を修正済みのバージョンに更新することで解決します。詳細は、開発者が提供する情報を参照してください。<a href="https://www.jpcert.or.jp/wr/2026/wr260603.html#10">続きを読む</a>]]>
+	</content:encoded>
+    <link>https://www.jpcert.or.jp/wr/2026/wr260603.html#10</link>
+    <dc:identifier>wr260603</dc:identifier>
+    <dc:date>2026-06-03T09:07+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://www.jpcert.or.jp/wr/2026/wr260603.html#11">
+    <title>Weekly Report: GitHubがGitHub Enterprise Server管理者にGPG公開鍵のローテーションを呼び掛け</title>
+    <description>GitHubは、2026年5月26日（現地時間）、同社の内部リポジトリーに対する不正アクセスに関する記事を更新しました。同社によると、現在も調査は継続中であるものの、予防措置として、GitHub Enterprise Serverの署名鍵を含む鍵のローテーションを実施しているとのことです。これに伴い、GitHub Enterprise Serverの管理者に対して、各インスタンスのGPG公開鍵をローテーションするよう対応を求めています。なお、GitHub Enterprise Cloudについては対応不要とされています。</description>    
+	<content:encoded>
+	<![CDATA[GitHubは、2026年5月26日（現地時間）、同社の内部リポジトリーに対する不正アクセスに関する記事を更新しました。同社によると、現在も調査は継続中であるものの、予防措置として、GitHub Enterprise Serverの署名鍵を含む鍵のローテーションを実施しているとのことです。これに伴い、GitHub Enterprise Serverの管理者に対して、各インスタンスのGPG公開鍵をローテーションするよう対応を求めています。なお、GitHub Enterprise Cloudについては対応不要とされています。<a href="https://www.jpcert.or.jp/wr/2026/wr260603.html#11">続きを読む</a>]]>
+	</content:encoded>
+    <link>https://www.jpcert.or.jp/wr/2026/wr260603.html#11</link>
+    <dc:identifier>wr260603</dc:identifier>
+    <dc:date>2026-06-03T09:07+09:00</dc:date>
+  </item>
+  
+  
+  <item rdf:about="https://jvn.jp/jp/JVN70631953/">
+    <title>JVN: 複数のTP-LINK製品における重要情報の平文送信の脆弱性</title>
+    
+    <description>TP-Link Systems Inc.が提供する複数の製品には、重要情報の平文送信の脆弱性が存在します。</description>    
+	<content:encoded>
+	<![CDATA[TP-Link Systems Inc.が提供する複数の製品には、重要情報の平文送信の脆弱性が存在します。<a href="https://jvn.jp/jp/JVN70631953/">続きを読む</a>]]>
+	</content:encoded>
+	
+    <link>https://jvn.jp/jp/JVN70631953/</link>
+    <dc:date>2026-06-05T12:00:00+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://jvn.jp/vu/JVNVU91429317/">
+    <title>JVN: CISA ICS Advisory / ICS Medical Advisory（2026年06月04日）</title>
+    
+    <description>2026年06月04日（現地時間）、米国CISAがCISA ICS Advisory / ICS Medical Advisoryを公表しました。</description>    
+	<content:encoded>
+	<![CDATA[2026年06月04日（現地時間）、米国CISAがCISA ICS Advisory / ICS Medical Advisoryを公表しました。<a href="https://jvn.jp/vu/JVNVU91429317/">続きを読む</a>]]>
+	</content:encoded>
+	
+    <link>https://jvn.jp/vu/JVNVU91429317/</link>
+    <dc:date>2026-06-05T09:00:00+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://jvn.jp/vu/JVNVU97035938/">
+    <title>JVN: Securly Chrome Extensionにおける複数の脆弱性</title>
+    
+    <description>CERT/CCから本件に関するアドバイザリが公表されました。</description>    
+	<content:encoded>
+	<![CDATA[CERT/CCから本件に関するアドバイザリが公表されました。<a href="https://jvn.jp/vu/JVNVU97035938/">続きを読む</a>]]>
+	</content:encoded>
+	
+    <link>https://jvn.jp/vu/JVNVU97035938/</link>
+    <dc:date>2026-06-04T14:15:00+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://jvn.jp/vu/JVNVU95215075/">
+    <title>JVN: CISA ICS Advisory / ICS Medical Advisory（2026年06月02日）</title>
+    
+    <description>2026年06月02日（現地時間）、米国CISAがCISA ICS Advisory / ICS Medical Advisoryを公表しました。</description>    
+	<content:encoded>
+	<![CDATA[2026年06月02日（現地時間）、米国CISAがCISA ICS Advisory / ICS Medical Advisoryを公表しました。<a href="https://jvn.jp/vu/JVNVU95215075/">続きを読む</a>]]>
+	</content:encoded>
+	
+    <link>https://jvn.jp/vu/JVNVU95215075/</link>
+    <dc:date>2026-06-04T14:00:00+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://jvn.jp/vu/JVNVU98968214/">
+    <title>JVN: Appsmithにおけるクロスサイトスクリプティングの脆弱性</title>
+    
+    <description>CERT/CCから本件に関するアドバイザリが公表されました。</description>    
+	<content:encoded>
+	<![CDATA[CERT/CCから本件に関するアドバイザリが公表されました。<a href="https://jvn.jp/vu/JVNVU98968214/">続きを読む</a>]]>
+	</content:encoded>
+	
+    <link>https://jvn.jp/vu/JVNVU98968214/</link>
+    <dc:date>2026-06-03T14:15:15+09:00</dc:date>
+  </item>
+  
+  <item rdf:about="https://jvn.jp/vu/JVNVU95031413/">
+    <title>JVN: Collibra Platform Agentにおける複数の脆弱性</title>
+    
+    <description>CERT/CCから本件に関するアドバイザリが公表されました。</description>    
+	<content:encoded>
+	<![CDATA[CERT/CCから本件に関するアドバイザリが公表されました。<a href="https://jvn.jp/vu/JVNVU95031413/">続きを読む</a>]]>
+	</content:encoded>
+	
+    <link>https://jvn.jp/vu/JVNVU95031413/</link>
+    <dc:date>2026-06-03T14:15:00+09:00</dc:date>
+  </item>
+  
+</rdf:RDF>

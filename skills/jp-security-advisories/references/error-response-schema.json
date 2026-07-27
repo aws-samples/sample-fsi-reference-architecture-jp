@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aws-jp-fsi-sa/jp-security-advisories/error-response-schema.json",
+  "title": "Japan Security Advisories — error response (stderr)",
+  "type": "object",
+  "required": ["error", "code", "message"],
+  "additionalProperties": false,
+  "properties": {
+    "error": {
+      "type": "boolean",
+      "const": true
+    },
+    "code": {
+      "type": "string",
+      "enum": [
+        "FETCH_ERROR",
+        "PARSE_ERROR",
+        "INVALID_ARGUMENT",
+        "UNKNOWN_SOURCE",
+        "UNRESOLVABLE_ID",
+        "TIMEOUT",
+        "INTERNAL_ERROR"
+      ]
+    },
+    "message": { "type": "string" },
+    "source": {
+      "type": "string",
+      "description": "Source name when the error is associated with a specific source"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL that caused the error (e.g., feed URL or detail URL)"
+    },
+    "status_code": {
+      "type": ["integer", "null"],
+      "description": "HTTP status code if applicable"
+    }
+  }
+}

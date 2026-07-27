@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<VULDEF-Document 
+version="3.2" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://jvn.jp/vuldef/" 
+xmlns:vuldef="http://jvn.jp/vuldef/" 
+xmlns:status="http://jvndb.jvn.jp/myjvn/Status" 
+xmlns:sec="http://jvn.jp/rss/mod_sec/3.0/" 
+xmlns:marking="http://data-marking.mitre.org/Marking-1" 
+xmlns:tlpMarking="http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1" 
+xsi:schemaLocation="http://jvn.jp/vuldef/ https://jvndb.jvn.jp/schema/vuldef_3.2.xsd http://jvn.jp/rss/mod_sec/3.0/ https://jvndb.jvn.jp/schema/mod_sec_3.0.xsd http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1 https://jvndb.jvn.jp/schema/tlp_marking.xsd http://jvndb.jvn.jp/myjvn/Status https://jvndb.jvn.jp/schema/status_3.3.xsd" 
+xml:lang="ja">
+    <Vulinfo>
+      <VulinfoID>JVNDB-2026-018267</VulinfoID>
+      <VulinfoData>
+        <Title>Securly Chrome Extensionにおける複数の脆弱性</Title>
+        <VulinfoDescription>
+          <Overview>CERT/CCから本件に関するアドバイザリが公表されました。 &lt;ul&gt;&lt;li&gt;&lt;a href='https://kb.cert.org/vuls/id/595768' target='_blank'&gt;Vulnerability Note VU#595768 Securly Chrome Extension contains multiple weak encryption and access control vulnerabilities&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</Overview>
+        </VulinfoDescription>
+        <Affected>
+          <AffectedItem>
+            <Name>（複数のベンダ）</Name>
+            <ProductName>（複数の製品）</ProductName>
+            <Cpe version="2.2">cpe:/a:misc:multiple_vendors</Cpe>
+            <VersionNumber/>
+          </AffectedItem>
+        </Affected>
+        <Impact>
+          <ImpactItem>
+            <Description>CERT/CCのアドバイザリを参照してください。</Description>
+          </ImpactItem>
+        </Impact>
+        <Solution>
+          <SolutionItem>
+            <Description>CERT/CCのアドバイザリを参照してください。</Description>
+          </SolutionItem>
+        </Solution>
+        <Related>
+          <RelatedItem type="advisory">
+            <Name>JVN</Name>
+            <VulinfoID>JVNVU#97035938</VulinfoID>
+            <URL>https://jvn.jp/vu/JVNVU97035938/index.html</URL>
+          </RelatedItem>
+        </Related>
+        <History>
+          <HistoryItem>
+            <HistoryNo>1</HistoryNo>
+            <DateTime>2026-06-05T13:34:36+09:00</DateTime>
+            <Description>[2026年06月05日]\n  掲載</Description>
+          </HistoryItem>
+        </History>
+        <DateFirstPublished>2026-06-05T13:34:36+09:00</DateFirstPublished>
+        <DateLastUpdated>2026-06-05T13:34:36+09:00</DateLastUpdated>
+        <DatePublic>2026-06-04T00:00:00+09:00</DatePublic>
+      </VulinfoData>
+    </Vulinfo>
+    <sec:handling>
+      <marking:Marking>
+        <marking:Marking_Structure xsi:type="tlpMarking:TLPMarkingStructureType" marking_model_name="TLP" marking_model_ref="http://www.us-cert.gov/tlp/" color="WHITE"/>
+      </marking:Marking>
+    </sec:handling>
+    <status:Status version="3.3" method="getVulnDetailInfo" lang="ja" retCd="0" retMax="10" errCd="" errMsg="" totalRes="1" totalResRet="1" firstRes="1" feed="hnd" vulnId="JVNDB-2026-018267"/>
+  </VULDEF-Document>
+

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  評価結果レポート テンプレート (evaluation-report-template.html)
+  =====================================================================
+  本ファイルは fsi-ransomware-detect Workflow B で生成する評価結果
+  レポートのテンプレートである。AI エージェントは本テンプレートの
+  スタイル・セクション構造・配色・フォントを完全に踏襲し、データ部分
+  (お客様情報・評価結果) のみを差し替える形でレポートを生成する。
+
+  本ファイル内のデータは特定のお客様環境を想定したサンプルである。
+  実際の生成時はお客様の入力情報・評価結果に置き換えること。
+
+  本テンプレートは保護(Protect)フェーズの evaluation-report-template.html
+  を雛形とし、本文配色・カード構造・フォント・円グラフ・判定色を踏襲しつつ、
+  表紙を Detect 独自色(深いティールグリーン)、フェーズインジケータを
+  検知(Detect) active、内容を検知・分析フェーズ(評価項目 5 本)に
+  差し替えている。
+
+  詳細な仕様は同階層の template-spec.md を参照する。
+  =====================================================================
+-->
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>【検知・分析フェーズ】AWS ランサムウェア対策評価結果レポート — fsi-ransomware-detect Workflow B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* アクセント(本文。Protect 共通) */
+    --navy-1: #0F2942;
+    --navy-2: #1E4D7B;
+    --teal: #1A7F8E;
+    --teal-light: #CCFBF1;
+    --gold: #C9A961;
+    --primary-light: #E8EEF7;
+    /* 表紙(Detect 独自色: 深いティールグリーン) */
+    --cover-1: #0E7C7B;
+    --cover-2: #1A8C8A;
+    --cover-3: #3FB8AD;
+    --cover-accent: #BFF0E8;
+    /* テキスト・背景(Protect 共通) */
+    --text: #1F2933;
+    --text-muted: #5A6677;
+    --border: #E2E8F0;
+    --bg-page: #F4F6FA;
+    --bg-card: #F7F9FC;
+    --bg-soft: #FAFBFC;
+    /* 判定色(Protect 共通) */
+    --ok: #2E7D32;
+    --ok-bg: #E8F5E9;
+    --ok-row: #F5FBF5;
+    --partial: #E89B0E;
+    --partial-bg: #FFF4D9;
+    --partial-row: #FFFBF0;
+    --ng: #C62828;
+    --ng-bg: #FFE3E3;
+    --ng-row: #FFF5F5;
+    --unknown: #757575;
+    --unknown-bg: #F5F5F5;
+    --unknown-row: #F7F7F7;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Inter", "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+    color: var(--text);
+    line-height: 1.75;
+    background: var(--bg-page);
+    margin: 0;
+    padding: 32px 16px;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "palt", "kern";
+  }
+  .page {
+    max-width: 980px;
+    margin: 0 auto 32px;
+    background: var(--bg-card);
+    box-shadow: 0 8px 32px rgba(15, 41, 66, 0.10), 0 2px 8px rgba(15, 41, 66, 0.06);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  /* 表紙(Detect 独自色: 深いティールグリーン) */
+  .cover {
+    background: linear-gradient(135deg, var(--cover-1) 0%, var(--cover-2) 60%, var(--cover-3) 100%);
+    color: #fff;
+    padding: 64px 72px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: "";
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(191,240,232,0.30) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cover::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--cover-accent) 0%, transparent 100%);
+  }
+  .cover .label {
+    color: var(--cover-accent);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    font-weight: 600;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .cover .phase-nav {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+    margin-bottom: 16px;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  .cover .phase-nav .phase {
+    font-size: 12px;
+    line-height: 1.3;
+    padding: 5px 12px;
+    border-radius: 6px;
+    color: rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.3);
+    text-align: center;
+  }
+  .cover .phase-nav .phase .ja { font-weight: 600; display: block; }
+  .cover .phase-nav .phase .en {
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 1px;
+  }
+  .cover .phase-nav .phase.active {
+    color: #0C3B38;
+    background: var(--cover-accent);
+    border-color: var(--cover-accent);
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .phase-hl {
+    color: var(--teal);
+    font-weight: 700;
+  }
+  .cover h1 {
+    font-size: 38px;
+    font-weight: 800;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+    position: relative;
+  }
+  .cover .subtitle {
+    color: rgba(255,255,255,0.85);
+    font-size: 16px;
+    margin: 0;
+    position: relative;
+  }
+  .cover .date {
+    margin-top: 32px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 16px;
+    position: relative;
+    font-family: "Inter", monospace;
+    letter-spacing: 0.03em;
+  }
+  /* 本文コンテナ */
+  .body { padding: 56px 96px; }
+  /* このレポートについて */
+  .about {
+    background: linear-gradient(135deg, #F8FAFC 0%, #EEF4FA 100%);
+    border-left: 3px solid var(--teal);
+    padding: 20px 24px;
+    margin: 0 0 40px;
+    font-size: 14px;
+    line-height: 1.9;
+    border-radius: 0 8px 8px 0;
+  }
+  .about h2 {
+    font-size: 11px;
+    color: var(--teal);
+    margin: 0 0 8px;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    padding: 0;
+    background: none;
+    border: none;
+  }
+  .about p { margin: 0 0 10px; }
+  .about p:last-child { margin-bottom: 0; }
+  .about ul { margin: 6px 0 10px; padding-left: 24px; }
+  .about li { margin-bottom: 4px; }
+  .callout {
+    color: var(--teal);
+    font-weight: 600;
+  }
+  /* セクション見出し */
+  h2.section {
+    font-size: 22px;
+    color: var(--navy-1);
+    margin: 48px 0 20px;
+    padding: 0 0 12px;
+    border-bottom: 2px solid var(--navy-1);
+    position: relative;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  h2.section::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+  }
+  /* 評価サマリブロック */
+  .summary-block {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 40px;
+    align-items: center;
+    margin: 20px 0 24px;
+    padding: 36px 32px;
+    background: linear-gradient(135deg, var(--teal-light) 0%, #ffffff 55%, var(--primary-light) 100%);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(15,41,66,0.10), 0 2px 6px rgba(15,41,66,0.06);
+  }
+  .summary-block::before {
+    content: "";
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(26, 127, 142, 0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .pie-wrap { display: flex; justify-content: center; position: relative; z-index: 1; }
+  .pie-wrap svg {
+    width: 220px; height: 220px;
+    filter: drop-shadow(0 4px 16px rgba(15,41,66,0.12));
+  }
+  .legend { font-size: 14px; position: relative; z-index: 1; }
+  .legend-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+  }
+  .legend-row.r-ok { background: rgba(46, 125, 50, 0.08); }
+  .legend-row.r-partial { background: rgba(232, 155, 14, 0.10); }
+  .legend-row.r-ng { background: rgba(198, 40, 40, 0.08); }
+  .legend-row.r-unknown { background: rgba(148, 163, 184, 0.10); }
+  .legend-swatch {
+    width: 12px; height: 12px;
+    border-radius: 3px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
+  }
+  .legend-label { flex: 1; font-weight: 600; }
+  .legend-value {
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    font-family: "Inter", monospace;
+    font-size: 13px;
+  }
+  .legend-value strong { color: var(--text); margin-right: 4px; font-weight: 700; font-size: 16px; }
+  /* 総合評価 */
+  h3.minor {
+    font-size: 12px;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    margin: 32px 0 12px;
+    text-transform: uppercase;
+  }
+  .overall-comment {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    padding: 24px 28px;
+    margin: 0 0 24px;
+    font-size: 14px;
+    line-height: 1.95;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 4px 14px rgba(15,41,66,0.08), 0 1px 3px rgba(15,41,66,0.05);
+  }
+  .overall-comment p { margin: 0 0 12px; }
+  .overall-comment p:last-child { margin-bottom: 0; }
+  .overall-comment strong { color: var(--ng); font-weight: 700; }
+  /* 表 */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 12px 0 24px;
+    font-size: 13.5px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(15,41,66,0.08), 0 1px 3px rgba(15,41,66,0.05);
+  }
+  th {
+    background: linear-gradient(180deg, var(--navy-1) 0%, var(--navy-2) 100%);
+    color: #fff;
+    text-align: left;
+    padding: 14px 16px;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+  }
+  td {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px;
+    vertical-align: top;
+  }
+  table.eval-summary td:nth-child(2) {
+    font-weight: 700;
+    font-size: 14.5px;
+    color: var(--navy-1);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  table.eval-summary tr.row-ok td { background: var(--ok-row); }
+  table.eval-summary tr.row-partial td { background: var(--partial-row); }
+  table.eval-summary tr.row-ng td { background: var(--ng-row); }
+  table.eval-summary tr.row-unknown td { background: var(--unknown-row); }
+  table.input-table tbody tr:nth-child(even) td { background: var(--bg-soft); }
+  /* 判定バッジ */
+  .verdict {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+  }
+  .verdict.ok { color: var(--ok); background: var(--ok-bg); }
+  .verdict.partial { color: var(--partial); background: var(--partial-bg); }
+  .verdict.ng { color: var(--ng); background: var(--ng-bg); }
+  .verdict.unknown { color: var(--unknown); background: var(--unknown-bg); }
+  /* 評価項目カード */
+  .item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 18px 0 20px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(15,41,66,0.08), 0 1px 3px rgba(15,41,66,0.05);
+  }
+  .item-header {
+    padding: 14px 22px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .item-header.ok { background: linear-gradient(180deg, var(--ok) 0%, #1F5F22 100%); }
+  .item-header.partial { background: linear-gradient(180deg, var(--partial) 0%, #B07000 100%); }
+  .item-header.ng { background: linear-gradient(180deg, var(--ng) 0%, #931E1E 100%); }
+  .item-header.unknown { background: linear-gradient(180deg, var(--unknown) 0%, #4D4D4D 100%); }
+  .item-header .num {
+    background: rgba(255,255,255,0.22);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    flex-shrink: 0;
+    font-family: "Inter", monospace;
+  }
+  .item-header .title { flex: 1; font-weight: 700; font-size: 17px; letter-spacing: 0.01em; }
+  .item-header .verdict-inline {
+    background: rgba(255,255,255,0.22);
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .item-body { padding: 22px 26px; }
+  .item-body h4 {
+    font-size: 13px;
+    color: var(--navy-1);
+    margin: 16px 0 6px;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 4px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .item-body h4:first-child { margin-top: 0; }
+  .item-body p { margin: 0 0 8px; font-size: 14px; }
+  .item-body ul { margin: 4px 0 8px; padding-left: 24px; font-size: 14px; }
+  .item-body li { margin-bottom: 4px; }
+  .scenario {
+    background: var(--bg-soft);
+    border-left: 3px solid var(--ng);
+    padding: 10px 14px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: var(--text);
+    border-radius: 0 6px 6px 0;
+  }
+  .scenario.mitigated { border-left-color: var(--ok); }
+  .ref-link {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--navy-1);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  /* フッター */
+  footer {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 16px 72px;
+    color: var(--text-muted);
+    font-size: 11px;
+    text-align: center;
+    font-family: "Inter", monospace;
+    letter-spacing: 0.05em;
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; padding: 40px 56px; margin: 0; border-radius: 0; }
+    h2 { page-break-after: avoid; }
+    .item { page-break-inside: avoid; }
+    .summary-block { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- 表紙 -->
+  <div class="cover">
+    <div class="label">FSI RANSOMWARE DETECT — WORKFLOW B</div>
+    <h1>【検知・分析フェーズ】<br>AWS ランサムウェア対策評価結果レポート</h1>
+    <div class="phase-nav">
+      <span class="phase"><span class="ja">保護</span><span class="en">Protect</span></span>
+      <span class="phase active"><span class="ja">検知</span><span class="en">Detect</span></span>
+      <span class="phase"><span class="ja">対応</span><span class="en">Respond</span></span>
+      <span class="phase"><span class="ja">復旧</span><span class="en">Recover</span></span>
+    </div>
+    <div class="subtitle">既存の検知・分析態勢のランサムウェア対策十分性評価</div>
+    <div class="date">GENERATED — 2026-06-03</div>
+  </div>
+
+  <div class="body">
+
+    <!-- このレポートについて -->
+    <div class="about">
+      <h2>ABOUT THIS REPORT</h2>
+      <p>本レポートは、AWS 金融リファレンスアーキテクチャ日本版で公開されているランサムウェア対策向けの SKILL を用いて、お客様の既存の検知・分析態勢をランサムウェア対策の観点で評価した結果をまとめたものである。AWS Well-Architected Framework、AWS のインシデント対応に関するガイダンス等の AWS 公式ガイダンスをベースに、金融機関の文脈で求められる設計考慮を加味した観点で評価を実施している。</p>
+      <p>ランサムウェア対策は、保護（Protect）・検知（Detect）・対応（Respond）・復旧（Recover）の 4 つの観点で体系的に整備することが有効である。本レポートは、このうち <span class="phase-hl">検知（Detect）フェーズ</span> ― 被害・脅威を迅速に検知し、検知した事象を分析・調査する態勢 ― の十分性を評価したものである。</p>
+    </div>
+
+    <!-- 評価サマリ -->
+    <h2 class="section">評価サマリ</h2>
+    <div class="summary-block">
+      <div class="pie-wrap">
+        <!--
+          円グラフ: 12 時方向開始・時計回り。判定区分の件数に応じて各セグメントの
+          stroke-dasharray と stroke-dashoffset を調整する。
+          全 5 項目の例: NG 2 / 一部対応 2 / OK 1 / 未確認 0。
+          円周 = 2πr = 2 × π × 80 ≈ 502.65。各区分の弧長 = 円周 × (件数 / 総数)。
+        -->
+        <svg viewBox="0 0 200 200">
+          <g transform="rotate(-90 100 100)">
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#E2E8F0" stroke-width="36"></circle>
+            <!-- NG 2/5 = 弧長 201.06 -->
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#C62828" stroke-width="36"
+              stroke-dasharray="201.06 502.65" stroke-dashoffset="0"></circle>
+            <!-- 一部対応 2/5 = 弧長 201.06、offset -201.06 -->
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#E89B0E" stroke-width="36"
+              stroke-dasharray="201.06 502.65" stroke-dashoffset="-201.06"></circle>
+            <!-- OK 1/5 = 弧長 100.53、offset -402.12 -->
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#2E7D32" stroke-width="36"
+              stroke-dasharray="100.53 502.65" stroke-dashoffset="-402.12"></circle>
+          </g>
+          <text x="100" y="94" text-anchor="middle" font-size="30" font-weight="800" fill="#0F2942" font-family="Inter">5</text>
+          <text x="100" y="116" text-anchor="middle" font-size="11" fill="#5A6677" font-family="Inter" letter-spacing="1">ITEMS</text>
+        </svg>
+      </div>
+      <div class="legend">
+        <div class="legend-row r-ng"><span class="legend-swatch" style="background:#C62828;"></span><span class="legend-label">NG(未対応)</span><span class="legend-value"><strong>2</strong>件 / 40%</span></div>
+        <div class="legend-row r-partial"><span class="legend-swatch" style="background:#E89B0E;"></span><span class="legend-label">一部対応</span><span class="legend-value"><strong>2</strong>件 / 40%</span></div>
+        <div class="legend-row r-ok"><span class="legend-swatch" style="background:#2E7D32;"></span><span class="legend-label">OK(対応済み)</span><span class="legend-value"><strong>1</strong>件 / 20%</span></div>
+        <div class="legend-row r-unknown"><span class="legend-swatch" style="background:#757575;"></span><span class="legend-label">未確認</span><span class="legend-value"><strong>0</strong>件 / 0%</span></div>
+      </div>
+    </div>
+
+    <h3 class="minor">総合評価</h3>
+    <div class="overall-comment">
+      <p>お客様の検知・分析態勢は、Amazon CloudWatch による基本的なリソース・メトリクス監視や、一部アカウントでの Amazon GuardDuty の有効化など、検知の出発点となる仕組みは整いつつある。サービス影響に気づくための土台は部分的に存在している。</p>
+      <p>一方で、ランサム対策の観点では不足が見られる。サービス監視が<strong>リソース監視中心にとどまり、外形監視・アプリケーションレベルの監視(業務指標)まで到達していない</strong>ため、利用者影響の検知に漏れが生じうる。また、GuardDuty の<strong>保護プランの有効化・対象リソースのカバレッジが未統一</strong>で、攻撃検知に空白が残る。さらに、<strong>検知結果が各アカウントに分散し、セキュリティアカウントへの集約・一元管理ができていない</strong>ため、組織横断での見逃し・対応遅延のリスクがある。</p>
+      <p>早急に着手すべきは、サービス監視の深さの点検・拡充と、GuardDuty の保護プランの有効化・カバレッジ確保である。これらは既存環境への影響が小さく即効性が高い。検知・分析の集約・一元管理は影響範囲が広いため、段階的に整備することを推奨する。</p>
+    </div>
+
+    <!-- 評価結果サマリ -->
+    <h2 class="section">評価結果サマリ</h2>
+    <table class="eval-summary">
+      <thead>
+        <tr><th style="width:40px">#</th><th style="width:200px">観点</th><th style="width:90px">判定</th><th>不足ポイント / リスク</th></tr>
+      </thead>
+      <tbody>
+        <tr class="row-partial"><td>1</td><td>サービス影響検知の整備</td><td><span class="verdict partial">一部対応</span></td><td>リソース監視中心で、外形監視・アプリケーションレベルの監視(業務指標)が未整備。利用者影響の検知漏れリスク</td></tr>
+        <tr class="row-partial"><td>2</td><td>セキュリティ攻撃検知の整備</td><td><span class="verdict partial">一部対応</span></td><td>GuardDuty が一部アカウントのみ。保護プランの有効化・対象リソースのカバレッジが未統一</td></tr>
+        <tr class="row-ng"><td>3</td><td>原因切り分けオペレーション(手動確認)の整備</td><td><span class="verdict ng">NG</span></td><td>アラート発生後に外部攻撃かを判断する手順(脅迫文・暗号化ファイル・不審通信の確認)が整備されておらず、属人的</td></tr>
+        <tr class="row-ok"><td>4</td><td>ログを活用した分析基盤</td><td><span class="verdict ok">OK</span></td><td>調査に必要なログは参照可能。分析の高度化は今後の検討余地</td></tr>
+        <tr class="row-ng"><td>5</td><td>検知の集約・可視化</td><td><span class="verdict ng">NG</span></td><td>各アカウントで個別確認。セキュリティアカウントへの集約・委任管理が未実施で、組織横断の見逃しリスク</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 評価項目の詳細 -->
+    <h2 class="section">評価項目の詳細</h2>
+
+    <!-- 評価 1: サービス影響検知の整備(一部対応) -->
+    <div class="item">
+      <div class="item-header partial">
+        <div class="num">1</div>
+        <div class="title">サービス影響検知の整備</div>
+        <div class="verdict-inline">一部対応</div>
+      </div>
+      <div class="item-body">
+        <h4>現状の整理</h4>
+        <p>Amazon CloudWatch で主要リソースのメトリクス・ログ監視を実施している。外形監視は一部の公開系システムのみで、アプリケーションレベルの監視(業務指標。ログイン数・取引数等)は重要システムでも未整備である。</p>
+        <h4>判定の根拠</h4>
+        <p>サービス影響に気づくための監視は存在するが、監視の深さがリソース監視・一部のサービス監視にとどまり、利用者視点での影響を捉える外形監視・業務指標の監視まで到達していないため「一部対応」と判定した。</p>
+        <h4>不足している要素 / なぜそれが問題か</h4>
+        <ul>
+          <li>外形監視が公開系の一部に限定され、重要システムを網羅していない</li>
+          <li>アプリケーションレベルの監視(業務指標)が未整備で、リソースが正常でも利用者にサービスが提供できていない状況を見逃しうる</li>
+          <li>システムの重要度に応じた監視レベルのラベリングがなく、監視の重点配分ができていない</li>
+        </ul>
+        <h4>想定されるリスクシナリオ</h4>
+        <div class="scenario">ランサム被害でサービスが実質停止 → リソースメトリクスは正常範囲のまま → 利用者からの問い合わせで初めて影響に気づき、検知が遅延する</div>
+        <h4>関連する改善項目</h4>
+        <p>短期 1 サービス監視の深さの点検・拡充</p>
+        <h4>参照 reference</h4>
+        <p><span class="ref-link">references/01-detection-strategy.md</span></p>
+      </div>
+    </div>
+
+    <!-- 評価 2: セキュリティ攻撃検知の整備(一部対応) -->
+    <div class="item">
+      <div class="item-header partial">
+        <div class="num">2</div>
+        <div class="title">セキュリティ攻撃検知の整備</div>
+        <div class="verdict-inline">一部対応</div>
+      </div>
+      <div class="item-body">
+        <h4>現状の整理</h4>
+        <p>Amazon GuardDuty を一部アカウントで有効化している。保護プランの有効化状況や、各製品が対象とするリソースのカバレッジは組織内で統一されていない。</p>
+        <h4>判定の根拠</h4>
+        <p>攻撃検知の仕組みは導入されているが、有効化範囲・保護プラン・対象リソースのカバレッジに空白があり、組織全体で一貫した攻撃検知ができていないため「一部対応」と判定した。</p>
+        <h4>不足している要素 / なぜそれが問題か</h4>
+        <ul>
+          <li>GuardDuty が一部アカウントのみで、未有効化のアカウントに検知の空白がある</li>
+          <li>ランサム関連の保護プラン(Malware Protection for EC2 / S3、Runtime Monitoring、S3 Protection 等)の有効化が未統一</li>
+          <li>対象リソースに対する検知カバレッジが整理されていない</li>
+        </ul>
+        <h4>想定されるリスクシナリオ</h4>
+        <div class="scenario">GuardDuty 未有効化のアカウントで不審なアクティビティが発生 → 攻撃の兆候が検知されず、被害が拡大してから判明する</div>
+        <h4>関連する改善項目</h4>
+        <p>短期 2 GuardDuty の有効化・保護プランの整備</p>
+        <h4>参照 reference</h4>
+        <p><span class="ref-link">references/01-detection-strategy.md</span></p>
+      </div>
+    </div>
+
+    <!-- 評価 3: 原因切り分けオペレーション(手動確認)の整備(NG) -->
+    <div class="item">
+      <div class="item-header ng">
+        <div class="num">3</div>
+        <div class="title">原因切り分けオペレーション(手動確認)の整備</div>
+        <div class="verdict-inline">NG</div>
+      </div>
+      <div class="item-body">
+        <h4>現状の整理</h4>
+        <p>サービス影響検知・セキュリティ攻撃検知のアラートが発生した際に、それが外部攻撃(ランサム等)によるものかを判断するための手動確認(Web サイトの脅迫文の有無、サーバ上の暗号化ファイル・不審プロセス・不審な外部通信の確認)について、整備された手順は存在せず、対応は属人的である。</p>
+        <h4>判定の根拠</h4>
+        <p>アラート発生後に外部攻撃かどうかを判断する原因切り分けの手順が整備されておらず、誰が・どのタイミングで実施するかも定まっていないため「NG」と判定した。</p>
+        <h4>不足している要素 / なぜそれが問題か</h4>
+        <ul>
+          <li>原因切り分けの観点・手順がチェックリスト化されていない</li>
+          <li>誰が・どのタイミングで実施するかが定まっておらず、属人的で再現性がない</li>
+          <li>アラート発生後、外部攻撃かどうかの判断が遅れ、対応開始が遅延するリスクがある</li>
+        </ul>
+        <h4>想定されるリスクシナリオ</h4>
+        <div class="scenario">サービス異常のアラートが発生 → 外部攻撃か通常の障害かを判断する手順がなく、対応方針の決定が遅れる → その間に暗号化が進行してから発覚する</div>
+        <h4>関連する改善項目</h4>
+        <p>中期 3 原因切り分けオペレーション(手動確認)の運用手順の整備</p>
+        <h4>参照 reference</h4>
+        <p><span class="ref-link">references/01-detection-strategy.md</span></p>
+      </div>
+    </div>
+
+    <!-- 評価 4: ログを活用した分析基盤(OK) -->
+    <div class="item">
+      <div class="item-header ok">
+        <div class="num">4</div>
+        <div class="title">ログを活用した分析基盤</div>
+        <div class="verdict-inline">OK</div>
+      </div>
+      <div class="item-body">
+        <h4>現状の整理</h4>
+        <p>調査に必要なログは収集・保管されており、参照・クエリ可能な状態にある。検知した事象を分析・調査する基盤は確保されている。</p>
+        <h4>判定の根拠</h4>
+        <p>収集済みログを活用して分析・調査できる状態にあり、検知から分析への接続が成立しているため「OK」と判定した。なお、分析の高度化(Amazon Detective / SIEM on Amazon OpenSearch Service の本格活用)は今後の検討余地がある。</p>
+        <h4>不足している要素 / なぜそれが問題か</h4>
+        <ul>
+          <li>(現状は充足) 分析の高度化・可視化は今後の余地として残る</li>
+          <li>分析ハードルが高い場合のフォレンジックベンダ連携の事前準備は別途整理が望ましい</li>
+        </ul>
+        <h4>想定されるリスクシナリオ</h4>
+        <div class="scenario mitigated">検知した事象について、収集済みログを参照して影響範囲を分析でき、初動の絞り込みが可能</div>
+        <h4>関連する改善項目</h4>
+        <p>中期 4 ログを活用した分析基盤の高度化 / フォレンジックベンダ連携の事前準備</p>
+        <h4>参照 reference</h4>
+        <p><span class="ref-link">references/02-log-analysis-and-investigation.md</span></p>
+      </div>
+    </div>
+
+    <!-- 評価 5: 検知の集約・可視化(NG) -->
+    <div class="item">
+      <div class="item-header ng">
+        <div class="num">5</div>
+        <div class="title">検知の集約・可視化</div>
+        <div class="verdict-inline">NG</div>
+      </div>
+      <div class="item-body">
+        <h4>現状の整理</h4>
+        <p>検知結果は各アカウントで個別に確認しており、セキュリティアカウントへの集約・委任管理は行われていない。組織横断での一元的な可視化ができていない。</p>
+        <h4>判定の根拠</h4>
+        <p>検知結果が分散し、組織横断で一元的に把握する仕組みがないため「NG」と判定した。アカウント数が多いほど見逃し・対応遅延のリスクが高まる。</p>
+        <h4>不足している要素 / なぜそれが問題か</h4>
+        <ul>
+          <li>GuardDuty / Security Hub の委任管理者による検知結果の集約が未実施</li>
+          <li>各アカウントを個別に確認する運用で、見逃し・対応遅延が生じやすい</li>
+          <li>組織横断での優先度付け・可視化ができていない</li>
+        </ul>
+        <h4>想定されるリスクシナリオ</h4>
+        <div class="scenario">あるアカウントで検知が上がる → 集約された可視化がなく、担当者が個別アカウントを見るまで気づけない → 対応開始が遅延する</div>
+        <h4>関連する改善項目</h4>
+        <p>長期 5 検知・分析の集約・委任管理</p>
+        <h4>参照 reference</h4>
+        <p><span class="ref-link">references/01-detection-strategy.md</span></p>
+      </div>
+    </div>
+
+    <!-- お客様の前提情報 -->
+    <h2 class="section">お客様の検知・分析態勢の前提情報</h2>
+    <p style="font-size:13.5px; color:var(--text-muted); margin:0 0 12px;">本評価の前提となる要件・方針。各評価項目の現状は次表「現在の検知・分析態勢の状況」に整理している。</p>
+    <table class="input-table">
+      <thead>
+        <tr><th style="width:50px">#</th><th style="width:300px">項目</th><th>回答 / 状況</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>感染検知の主な対象となる利用中のリソース</td><td>Amazon EC2、コンテナ(Amazon ECS / Amazon EKS / AWS Fargate)を中心に利用。重要データの保管に Amazon S3 を多用</td></tr>
+        <tr><td>2</td><td>フォレンジック分析の実施方針</td><td>当面は外部のフォレンジックベンダへの依頼を基本方針とし、将来的に組織内での一次分析スキルの醸成も検討</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 現在の検知・分析態勢の状況 -->
+    <h2 class="section">現在の検知・分析態勢の状況</h2>
+    <table class="input-table">
+      <thead>
+        <tr><th style="width:50px">#</th><th style="width:300px">評価観点</th><th>現状</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>サービス影響検知の整備</td><td>リソース監視中心。外形監視は一部、アプリケーションレベルの監視(業務指標)は未整備。重要度に応じた監視レベルのラベリングなし</td></tr>
+        <tr><td>2</td><td>セキュリティ攻撃検知の整備</td><td>GuardDuty 一部アカウントのみ。保護プラン・対象リソースのカバレッジ未統一</td></tr>
+        <tr><td>3</td><td>原因切り分けオペレーション(手動確認)の整備</td><td>アラート発生後の原因切り分け手順未整備、属人的</td></tr>
+        <tr><td>4</td><td>ログを活用した分析基盤</td><td>調査に必要なログは参照可能。分析の高度化は今後の余地</td></tr>
+        <tr><td>5</td><td>検知の集約・可視化</td><td>各アカウントで個別確認。セキュリティアカウントへの集約・委任管理は未実施</td></tr>
+      </tbody>
+    </table>
+
+    <!-- より詳細な改善設計について -->
+    <h2 class="section">より詳細な改善設計について</h2>
+    <div class="about" style="margin: 16px 0 0;">
+      <p>本レポートは、ランサムウェア対策の 4 フェーズ（保護（Protect）・検知（Detect）・対応（Respond）・復旧（Recover））のうち <span class="phase-hl">検知（Detect）フェーズ</span> の十分性を評価したものである。</p>
+      <p>本レポートは現状の評価結果と不足ポイントの提示を主眼としている。<span class="callout">各不足項目を実際に「どの順序で・何を根拠に・どんな効果を狙って」改善するかは、本レポートに続けて生成できる「ロードマップ詳細レポート」で詳しく扱う。</span>評価で NG・一部対応となった項目に対する具体的な改善設計案を、短期 / 中期 / 長期のロードマップとして展開する。</p>
+      <p><span class="callout">改善の優先順位や各施策の期待される効果(現状 vs 改善後)まで含めた実装ロードマップ</span>を確認されたい場合は、続けてロードマップ詳細レポートを生成することができる。</p>
+      <p style="font-size: 13px; margin-top: 12px;">
+        <strong style="color: var(--navy-1);">出力先(ロードマップ詳細レポートを生成した場合):</strong>
+        <code>../html/roadmap-detail.html</code> / <code>../md/roadmap-detail.md</code>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Generated by fsi-ransomware-detect Workflow B / Skill version 1 / 2026-06-03
+</footer>
+
+</body>
+</html>
