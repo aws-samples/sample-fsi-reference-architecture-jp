@@ -1,0 +1,11 @@
+[project]
+name = "fsa-announcements"
+version = "0.1.0"
+description = "Fetch and search announcements from the Financial Services Agency of Japan (FSA)"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]

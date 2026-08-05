@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AWS Blog Detail Response",
+  "description": "Output schema for `fetch_blogs.py detail` mode. An array of blog post details.",
+  "type": "array",
+  "items": {
+    "oneOf": [
+      {
+        "type": "object",
+        "required": ["locale", "dateCreated", "dateUpdated", "title", "url", "content"],
+        "properties": {
+          "locale": {
+            "type": "string",
+            "description": "Locale of the blog post (en_US or ja_JP).",
+            "enum": ["en_US", "ja_JP"]
+          },
+          "dateCreated": {
+            "type": "string",
+            "description": "Creation timestamp of the blog post (ISO 8601)."
+          },
+          "dateUpdated": {
+            "type": "string",
+            "description": "Last updated timestamp of the blog post (ISO 8601)."
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the blog post."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Canonical URL of the blog post."
+          },
+          "content": {
+            "type": "string",
+            "description": "Full HTML content of the blog post."
+          }
+        },
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "required": ["error"],
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message when the blog post could not be found."
+          }
+        },
+        "additionalProperties": false
+      }
+    ]
+  }
+}
