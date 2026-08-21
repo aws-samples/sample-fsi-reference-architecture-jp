@@ -1,0 +1,22 @@
+[project]
+name = "boj-statistics"
+version = "1.0.0"
+description = "Python client library and CLI for the Bank of Japan Time-Series Statistics API"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.uv]
+exclude-newer = "1 week"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-mock>=3.12",
+]
+
+[project.scripts]
+boj-statistics = "boj_statistics_cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

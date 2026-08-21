@@ -1,0 +1,1466 @@
+{
+ "fisc_version": "13",
+ "source": "金融機関向け AWS FISC安全対策基準対応リファレンス（FISC安全対策基準・解説書 第13版 対応 / 作成: アマゾン ウェブ サービス ジャパン合同会社）",
+ "generated_from": "AWS_FISC_安全対策基準対応Reference.pdf",
+ "columns_used": [
+  "お客様が統制すべき内容",
+  "補足情報"
+ ],
+ "columns_excluded": [
+  "AWSの対応状況"
+ ],
+ "codes": 165,
+ "rows": 224,
+ "map": {
+  "実1": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   },
+   {
+    "branch": "5",
+    "customer_control": "すべての AWS API と CLI リクエストに対して、⻑期的認証情報ではなく⼀時的なセキュリティ認証情報を使⽤します。AWS\nサービスに対する API および CLI リクエストは、ほとんどの場合、AWS アクセスキーを使って署名する必要があります。これ\nらのリクエストの署名に使⽤する認証情報は、⼀時的でも⻑期的でもかまいません。⻑期的認証情報 (⻑期的アクセスキー) を使\n⽤すべき唯⼀の状況は、IAM ユーザーまたは AWS アカウント ルートユーザーを使⽤している場合です。AWS に対してフェデ\nレーションを⾏うか、または他の⽅法により IAM ロールを担う場合、⼀時的認証情報が⽣成されます。サインイン認証情報を\n使って AWS Management Console にアクセスしても、AWS サービスへのコールを⾏うために⼀時的な認証情報が⽣成されま\nす。⻑期的認証情報が必要な状況はほとんどなく、⼀時的な認証情報でほとんどのタスクを遂⾏できます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-pillar/sec_identities_unique.html\nユーザーが各⾃のパスワードを変更できるように許可する場合は、強⼒なパスワードを作成することをユーザーに要求するパス\nワードポリシーを作成します。 IAM ユーザーのデフォルトのパスワードポリシーでは、次の条件が適⽤されます。\n・パスワードの⽂字数制限: 8 〜 128 ⽂字\n・⼤⽂字、⼩⽂字、数字、! @ # $ % ^ & * ( ) _ + - = [ ] { } | ' 記号のうち、最低 3 つの⽂字タイプの組み合わせ\n・AWS アカウント名または E メールアドレスと同じでないこと\n必要に応じて、IAM コンソールの [Account Settings] (アカウント設定) ページで、AWS アカウントのカスタムパスワードポリ\nシーを作成できます。AWS のデフォルトのパスワードポリシーからアップグレードして、最⼩⽂字数、アルファベット以外の⽂\n字が必要かどうか、変更頻度など、パスワードの要件を定義します。詳細については、「IAM ユーザー⽤のアカウントパスワー\nドポリシーの設定」を参照してください。\nID の使⽤者のみがパスワードを知っている状態を担保するため、ID を発⾏後、初回サインイン時にパスワードの変更を強制しま\nす。IAM ユーザーに初回サインイン時に新しいパスワードの作成を求めるには、AWS マネジメントコンソールの IAM ユーザー\n作成ウィザードで、[Require password reset (パスワードのリセットが必要)] を選択します。\nhttps://github.com/aws-samples/baseline-environment-on-aws-for-financial-services-institute/blob/main/doc/fsi-lens-\nfor-fisc/security.md",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html\nAWS Well-Architected フレームワー\nク FSI Lens for FISC セキュリティの柱\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-\ninstitute/blob/main/doc/fsi-lens-for-\nfisc/security.md"
+   }
+  ],
+  "実10": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   },
+   {
+    "branch": "8",
+    "customer_control": "マネジメントコンソールのアクセス履歴はCloudTrailに記録されます。\nhttps://docs.aws.amazon.com/ja_jp/awscloudtrail/latest/userguide/cloudtrail-event-reference-aws-console-sign-in-\nevents.html\nCloudTrail が配信した後でログファイルが変更、削除、または変更されなかったかどうかを判断するには、CloudTrail ログファ\nイルの整合性の検証を使⽤することができます。この機能は、業界標準のアルゴリズムを使⽤して構築されています。ハッシュ⽤\nの SHA-256 とデジタル署名⽤の RSA を備えた SHA-256。これにより、CloudTrail ログファイルを検出せずに変更、削除、ま\nたは偽造することは計算上実⾏不可能になります。AWS CLI を使⽤して CloudTrail が配信した場所のファイルを検証すること\nができます。\nhttps://docs.aws.amazon.com/ja_jp/awscloudtrail/latest/userguide/cloudtrail-log-file-validation-intro.html",
+    "supplement": ""
+   },
+   {
+    "branch": "9",
+    "customer_control": "CloudTrailのイベントは協定世界時(UTC)で出⼒されます。\nhttps://docs.aws.amazon.com/ja_jp/awscloudtrail/latest/userguide/cloudtrail-event-reference-record-contents.html\nAmazon では、Amazon Time Sync Service を提供します。このサービスはすべての EC2 インスタンスからアクセスでき、そ\nの他の AWS のサービス にも利⽤されます。このサービスは、各 AWS リージョン で衛星接続された原⼦基準クロックを使⽤\nし、ネットワークタイムプロトコル (NTP) を通じて世界標準時 (UTC) の現在の正確な現在時刻を表⽰します。Amazon Time\nSync Service は、UTC に追加されたうるう秒を⾃動的に均⼀化します。\nhttps://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/set-time.html\nすべての Amazon RDS DB インスタンスは、デフォルトで UTC/GMT 時間を使⽤します。タイムゾーンの変更は任意です。デー\nタベースレイヤーでは UTC タイムゾーンを使⽤するのがベストプラクティスです。UTC では夏時間 (DST) が適⽤されないた\nめ、夏時間の⽇付となっても時刻を調整する必要はありません。ローカルタイムゾーンを使⽤する必要がある場合は、代わりにア\nプリケーションレイヤーでタイムゾーンを変更してください。その際、事前にデータベース管理者またはアプリケーションチーム\nに相談してください。\nhttps://repost.aws/ja/knowledge-center/rds-change-time-zone\nCloudWatch\nダッシュボードのタイムゾーン形式を変更して、ダッシュボードのデータを UTC またはローカルタイムで表⽰することもできま\nす。ローカルタイムは、コンピュータのオペレーティングシステムで指定されているタイムゾーンです。\nhttps://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/change_dashboard_time_format.html",
+    "supplement": ""
+   },
+   {
+    "branch": "参考2",
+    "customer_control": "各アカウントで AWS CloudTrail をオンにして、サポートされている各リージョンで使⽤します。アクセスが⾮常に制限されて\nいる⼀元化されたログアカウントに AWS CloudTrail ログを保存します。CloudTrail ログファイルの整合性の検証を使⽤するこ\nとでログファイル⾃体が変更されていないこと、または特定のユーザーの認証情報が特定の API アクティビティを実⾏したこと\nを確実に検証することができます。\nCloudTrail ログファイルの整合性の検証プロセスでは、ログファイルが削除または変更されたかどうかを知ることもできます。\nまた、指定された期間内にログファイルがアカウントに配信されていないことを確実に検証することが可能です。CloudTrail ロ\nグファイルを定期的に調べます。\nまた、AWS CloudTrail イベント、VPC フローログ、DNS ログを継続的に分析することで脅威を検出するサービスである\nGuardDuty を使⽤することもできます。Amazon S3 バケットのロギングを有効にして、各バケットに対して⾏われたリクエス\nトを監視します。アカウントが不正に使⽤されたと考えられる場合は、発⾏された⼀時的な認証情報に注意してください。\n認識できない⼀時的な認証情報が発⾏された場合は、それらのアクセス許可を無効にします。サービスの最終アクセス時間データ\nを使⽤して、IAM ロールを定期的に確認します。IAM エンティティ (ユーザーまたはロール) が最後にサービスにアクセスを試み\nたときのレポートを表⽰できます。次に、その情報を使⽤してポリシーを調整し、使⽤中のサービスのみへのアクセスを許可する\nことができます。IAM のリソースの種類ごとにレポートを⽣成できます。詳細については、サービスの最終アクセス時間データ\nの表⽰プロセスのドキュメントをお読みください。\nhttps://github.com/aws-samples/baseline-environment-on-aws-for-financial-services-institute/blob/main/doc/fsi-lens-\nfor-fisc/security.md",
+    "supplement": "AWS Well-Architected フレームワー\nク FSI Lens for FISC セキュリティの柱\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-\ninstitute/blob/main/doc/fsi-lens-for-\nfisc/security.md"
+   }
+  ],
+  "実100": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "アマゾン ウェブ サービス︓AWS リス\nクとコンプライアンス\nAWS CSA Consensus Assessments\nInitiative Questionnaire (CAIQ)"
+   },
+   {
+    "branch": "4",
+    "customer_control": "AWS には、脆弱性管理プログラムに役⽴つ様々なサービスがあります。Amazon Inspector は、ソフトウェアの問題と意図しな\nいネットワークアクセスを検出するために、継続的に AWS ワークロードをスキャンします。AWS Systems Manager Patch\nManager を使うと、Amazon EC2 インスタンス全体のパッチ適⽤を管理できます。Amazon Inspector と Systems Manager\nは、AWS Security Hub で表⽰できます。これは、AWS セキュリティチェックを⾃動化して、セキュリティアラートを⼀元化す\nるのに役⽴つクラウドセキュリティ体制管理サービスです。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-\npillar/sec_protect_compute_vulnerability_management.html\nAWS Config は、設定が誤っているリソースを報告し、AWS Config ポリシーチェックを通して、パブリックアクセスが設定され\nたリソースを検出できます。AWS Control TowerやAWS Security Hubなどのサービスでは、AWS Organizations 全体でチェッ\nクとガードレールのデプロイが簡素化され、公開されたリソースを特定および修復します。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-\npillar/sec_permissions_analyze_cross_account.html",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   }
+  ],
+  "実101": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nAmazon CloudWatch は、AWS クラウドリソースと AWS で実⾏されるアプリケーションのモニタリングサービスです。お客様\nは、Amazon CloudWatch を使⽤して、メトリクスを収集/追跡し、ログファイルを収集してモニタリングし、アラームを設定で\nきます。Amazon CloudWatch は、Amazon EC2 インスタンス、Amazon DynamoDB テーブル、Amazon RDS DB インスタ\nンスなどの AWS リソース、アプリケーションやサービスに⽣成されたカスタムメトリクス、アプリケーションが⽣成するあらゆ\nるログファイルをモニタリングできます。Amazon CloudWatch を使⽤して、リソース使⽤率、アプリケーションパフォーマン\nス、オペレーションの状態においてシステム全体の可視性を得られます。",
+    "supplement": "AWS Webサイト︓AWS のコント\nロール - キャパシティの管理\nhttps://aws.amazon.com/jp/co\nmpliance/data-center/controls/"
+   },
+   {
+    "branch": "3",
+    "customer_control": "需要に合わせてリソースをプロアクティブにスケールし、可⽤性への影響を回避します。\n多くの AWS サービスは、需要に合わせて⾃動的にスケールします。Amazon EC2 インスタンスまたは Amazon ECS クラス\nターを使⽤している場合、ワークロードの需要に対応する使⽤状況のメトリクスに基づいて Auto Scaling を実⾏するように設定\nできます。Amazon EC2 では、平均 CPU 使⽤率、ロードバランサーリクエスト数、またはネットワーク帯域幅を使⽤して、EC2\nインスタンスをスケールアウト (またはスケールイン) できます。Amazon ECS では、平均 CPU 使⽤率、ロードバランサーリク\nエスト数、およびメモリ使⽤率を使⽤して、ECS タスクをスケールアウト (またはスケールイン) できます。AWS で Target\nAuto Scaling を使⽤すると、オートスケーラーは家庭⽤サーモスタットのように機能し、指定したターゲット値 (例えば、CPU\n使⽤率 70%) を維持するためにリソースを追加または削除します。\nAWS Auto Scaling はまた、 Predictive Auto Scaling も実⾏できます。これは、機械学習を使⽤して各リソースの過去のワーク\nロードを分析し、次の 2 ⽇間の負荷を定期的に予測します。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/reliability-pillar/design-your-workload-to-adapt-to-\nchanges-in-demand.html",
+    "supplement": "AWS Well-Architected フレームワー\nク 信頼性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/reliability-\npillar/welcome.html"
+   }
+  ],
+  "実102": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nAmazon CloudWatch は、AWS クラウドリソースと AWS で実⾏されるアプリケーションのモニタリングサービスです。お客様\nは、Amazon CloudWatch を使⽤して、メトリクスを収集/追跡し、ログファイルを収集してモニタリングし、アラームを設定で\nきます。Amazon CloudWatch は、Amazon EC2 インスタンス、Amazon DynamoDB テーブル、Amazon RDS DB インスタ\nンスなどの AWS リソース、アプリケーションやサービスに⽣成されたカスタムメトリクス、アプリケーションが⽣成するあらゆ\nるログファイルをモニタリングできます。Amazon CloudWatch を使⽤して、リソース使⽤率、アプリケーションパフォーマン\nス、オペレーションの状態においてシステム全体の可視性を得られます。",
+    "supplement": "アマゾン ウェブ サービス︓AWS リス\nクとコンプライアンス"
+   },
+   {
+    "branch": "3",
+    "customer_control": "ワークロードを設計する際には、可観測性と問題調査への対応においてすべてのコンポーネントにわたって内部状態 (メトリク\nス、ログ、イベント、トレースなど) を理解するために必要な情報が送出されるようにします。ワークロードの稼働状態を監視\nし、結果にリスクがあった場合にそれを特定し、効果的な対応を可能にするために必要なテレメトリの開発を繰り返します。\nAWS ではアプリケーションとワークロードコンポーネントからログ、メトリクス、イベントを送出して収集し、内部的な状況と\n稼働状態を把握できます。分散トレースを統合して、ワークロードを通過するリクエストを追跡できます。このデータを使⽤し\nて、アプリケーションと基盤となるコンポーネントがどのように相互作⽤するかを理解し、問題とパフォーマンスを分析します。\nワークロードを計測する際は、フィルターを使⽤して時間の経過とともに最も有⽤な情報を選択できるので、状況認識を可能にす\nる幅広い情報 (状態の変化、ユーザーのアクティビティ、権限アクセス、使⽤量のカウンターなど) を取得します。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/operational-excellence-pillar/design-telemetry.htm\nlAWS は、Service Health Dashboard でサービスの可⽤性に関する最新情報を公開しています。いつでも確認して最新のステー\nタス情報を⼊⼿したり、RSSフィードを購読して個々のサービスの中断の通知を受けたりすることがきます。AWS のいずれかの\nサービスでリアルタイムの運⽤上の問題が発⽣し、それが Service Health Dashboard に表⽰されない場合は、サポートリクエ\nストを作成できます。AWS Health Dashboard には、アカウントに影響する可能性がある AWS Health イベントの情報が表⽰さ\nれます。情報は 2 つの⽅法で表⽰されます。ダッシュボードには、最近のイベントおよび予定されているイベントがカテゴリ別\nに分類されて表⽰されます。詳細なイベントログには、過去 90 ⽇間のすべてのイベントが表⽰されます。\nhttps://docs.aws.amazon.com/ja_jp/whitepapers/latest/disaster-recovery-workloads-on-aws/detection.html",
+    "supplement": "AWS Well-Architected フレームワー\nク 運⽤上の優秀性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/operational-\nexcellence-pillar/welcome.html\nAWS でのワークロードの災害対策: ク\nラウド内での復旧\nhttps://docs.aws.amazon.com/ja_jp/\nwhitepapers/latest/disaster-\nrecovery-workloads-on-\naws/detection.html"
+   }
+  ],
+  "実103": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nAmazon CloudWatch は、AWS クラウドリソースと AWS で実⾏されるアプリケーションのモニタリングサービスです。お客様\nは、Amazon CloudWatch を使⽤して、メトリクスを収集/追跡し、ログファイルを収集してモニタリングし、アラームを設定で\nきます。Amazon CloudWatch は、Amazon EC2 インスタンス、Amazon DynamoDB テーブル、Amazon RDS DB インスタ\nンスなどの AWS リソース、アプリケーションやサービスに⽣成されたカスタムメトリクス、アプリケーションが⽣成するあらゆ\nるログファイルをモニタリングできます。Amazon CloudWatch を使⽤して、リソース使⽤率、アプリケーションパフォーマン\nス、オペレーションの状態においてシステム全体の可視性を得られます。",
+    "supplement": "アマゾン ウェブ サービス︓AWS リス\nクとコンプライアンス"
+   },
+   {
+    "branch": "2",
+    "customer_control": "お客様の責任は、選択した AWS クラウド サービスにより異なります。選択したサービスにより、お客様が回復性についての責\n任の⼀環として実⾏する必要がある設定作業の量が決まります。例えば、Amazon Elastic Compute Cloud (Amazon EC2) のよ\nうなサービスでは、お客様は必要となる回復性の設定と管理をすべて実⾏する必要があります。Amazon EC2 インスタンスをデ\nプロイするお客様の場合は、Amazon EC2 インスタンスを複数のロケーション (AWS アベイラビリティーゾーンなど) にデプロ\nイして、Auto Scaling などのサービスを使⽤して、⾃⼰修復を実装し、インスタンスにインストールしたアプリケーションに対\nして回復⼒のあるワークロードアーキテクチャのベストプラクティスを使⽤する責任があります。Amazon S3 と Amazon\nDynamoDB などのマネージドサービスの場合は、インフラストラクチャレイヤー、オペレーティングシステム、プラットフォー\nムの運⽤を AWS が⾏い、お客様はエンドポイントにアクセスしてデータを保存、取得します。お客様は、バックアップ、バー\nジョニング、レプリケーション戦略など、データの回復⼒を管理する責任があります。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/reliability-pillar/shared-responsibility-model-for-\nresiliency.html\nリソース障害の発⽣時に、正常なリソースが引き続きリクエストに対応できるようにします。ロケーション障害 (アベイラビリ\nティゾーンや AWS リージョン など) に対しては、障害のないロケーションの正常なリソースにフェイルオーバーするシステムを\n⽤意します。Elastic Load Balancing や AWS Auto Scaling などの AWS のサービスは、複数のリソースおよびアベイラビリ\nティゾーンへの負荷分散に役⽴ちます。そのため、個々のリソース (EC2 インスタンスなど) の障害や、アベイラビリティゾーン\nの障害を、残りの正常なリソースにトラフィックをシフトすることによって緩和できます。\nマルチリージョンのワークロードの場合、状況はさらに複雑です。例えば、クロスリージョンリードレプリカを使⽤すると、デー\nタを複数の AWS リージョン にデプロイできますが、障害が発⽣した場合は、リードレプリカをプライマリに昇格させ、そこに\nトラフィックを向かわせる必要があります。Amazon Route 53 と AWS Global Accelerator は、AWS リージョン 間のトラ\nフィックのルーティングを容易にします。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/reliability-\npillar/rel_withstand_component_failures_failover2good.html",
+    "supplement": "AWS Well-Architected フレームワー\nク 信頼性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/reliability-\npillar/welcome.html"
+   }
+  ],
+  "実103-1": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "アマゾン ウェブ サービス︓AWS リス\nクとコンプライアンス"
+   }
+  ],
+  "実104": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実105": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実106": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実107": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実108": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実109": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実11": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実110": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実111": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実112": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実113": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実114": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実115": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実116": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実117": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実118": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実119": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実12": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実120": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実121": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実122": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実123": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実124": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実125": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実126": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実13": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   },
+   {
+    "branch": "4",
+    "customer_control": "AWS Key Management Service (AWS KMS) は、カスタマーマスターキー (CMK) によるエンベロープ暗号化戦略を採⽤してい\nます。エンベロープ暗号化は、平⽂データをデータキーで暗号化し、次にデータキーを別のキー、即ち CMK で暗号化する⽅法で\nす。AWS KMS の外部でデータの暗号化に利⽤するデータキーは、CMK により⽣成、暗号化、復号されています。CMK は AWS\nKMS で作成され、暗号化されていない状態のままになることはありません。AWS KMS は、カスタマー管理の CMK、AWS 管理\nの CMK、AWS 所有の CMK という 3 種類の CMK をサポートします (詳細については、\nhttps://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\nを参照してください)。多くの⾦融機関のお客様にとって、カスタマー管理の CMK は、お客様のアプリケーションと AWS の\nサービスの両⽅からのアクセス権限を管理できるため推奨されます。カスタマー管理の CMK は、キーの⽣成や保管にさらなる柔\n軟性も提供します。また、キーの使⽤またはポリシーの変更はすべて、監査⽬的で AWS CloudTrail を⽤いて記録します。\nhttps://github.com/aws-samples/baseline-environment-on-aws-for-financial-services-institute/blob/main/doc/fsi-lens-\nfor-fisc/security.md\nAWS KMSは、FIPS 140-2 セキュリティレベル 3 で認定され、耐タンパ性を持つハードウェアセキュリティモジュール (HSM)内\nでキーに関連する暗号化操作が⾏われます。\nhttps://aws.amazon.com/jp/about-aws/whats-new/2023/05/aws-kms-hsm-fips-security-level-3/",
+    "supplement": "AWS Well-Architected フレームワー\nク FSI Lens for FISC セキュリティの柱\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-\ninstitute/blob/main/doc/fsi-lens-for-\nfisc/security.md\nアマゾン ウェブ サービス︓リスクとコ\nンプライアンス\nhttps://d1.awsstatic.com/whitepape\nrs/compliance/JP_Whitepapers/AWS\n_Risk_and_Compliance_Whitepaper\n_JP.pdf"
+   },
+   {
+    "branch": "5",
+    "customer_control": "データの暗号化を⾏う際は、暗号化を⾏う秘密鍵の管理者とデータを所有するリソースの管理者を分離することでより強固なセ\nキュリティ対策を採⽤することが可能です。AWS KMS でカスタマーマネージドキーを使⽤することで、キーポリシーによりアク\nセス許可を定義することが可能になります。例えば、故意/過失に依らず Amazon S3 内のオブジェクトを不特定多数のインター\nネットに公開してしまった場合でも、暗号化を⾏う秘密鍵のキーポリシーでインターネットから秘密鍵へのアクセスが許可されて\nいなければ、インターネットから Amazon S3 内のオブジェクトにはアクセスできません。\nhttps://github.com/aws-samples/baseline-environment-on-aws-for-financial-services-institute/blob/main/doc/fsi-lens-\nfor-fisc/security.md",
+    "supplement": "AWS Well-Architected フレームワー\nク FSI Lens for FISC セキュリティの柱\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-\ninstitute/blob/main/doc/fsi-lens-for-\nfisc/security.md"
+   }
+  ],
+  "実132": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実133": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実134": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実135": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実136": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実137": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実138": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nAmazon Simple Email Service 開発者ガイドE メールの認証⽅法https://docs.aws.amazon.com/ja_jp/ses/latest/dg/email-\nauthentication-methods.html\nAmazon Simple Email Service 開発者ガイドAmazon SES およびセキュリティプロトコル\nhttps://docs.aws.amazon.com/ja_jp/ses/latest/dg/security-protocols.htmlAmazon Amazon Simple Notification\nService 開発者ガイドAmazon SNS による SMS メッセージングの専⽤ショートコードをリクエストする\nhttps://docs.aws.amazon.com/ja_jp/sns/latest/dg/channels-sms-awssupport-short-code.html",
+    "supplement": ""
+   }
+  ],
+  "実139": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実14": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nインフラストラクチャ保護: Amazon Virtual Private Cloud (Amazon VPC) を使⽤して、お客様が定義した仮想ネットワーク内\nで AWS リソースを起動できます。Amazon\nCloudFront は、DDoS を緩和する AWS Shield に統合されたビューワーに対して、データ、動画、アプリケーション、API を安\n全に提供する、グローバルコンテンツ配信ネットワークです。AWS WAF は、ウェブの⼀般的な脆弱性からウェブアプリケー\nションを保護するために役⽴つ、Amazon CloudFront または Application Load\nBalancer にデプロイされたウェブアプリケーションファイアウォールです。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス\nNIST サイバーセキュリティフレーム\nワーク (CSF) AWS クラウドにおける\nNIST CSF への準拠\nhttps://d1.awsstatic.com/whitepape\nrs/ja_JP/compliance/NIST_Cybersec\nurity_Framework_CSF.pdf"
+   },
+   {
+    "branch": "8",
+    "customer_control": "ウェブベースのトラフィックの保護を⾃動化する: AWS では、AWS CloudFormation を使⽤して、⼀般的なウェブベースの攻\n撃をフィルタリングするために設計された AWS WAF ルールセットを⾃動的にデプロイするソリューションを提供しています。\nユーザーは、AWS WAF ウェブアクセスコントロールリスト (ウェブ ACL) に含まれるルールを定義する、あらかじめ設定された\n保護機能から選択することができます。AWS Partner ソリューションを検討する: AWS パートナーは、お客様のオンプレミス環\n境にある既存のコントロールと同等または統合された、業界をリードする何百もの製品を提供しています。これらの製品は、既存\nの AWS サービスを補完し、包括的なセキュリティアーキテクチャの導⼊と、クラウドとオンプレミス環境におけるよりシームレ\nスなエクスペリエンスを実現します。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-pillar/sec_network_protection_auto_protect.html\nAmazon GuardDuty を設定する: GuardDuty は、脅威検出サービスです。悪意のあるアクティビティや不正な動作を継続的にモ\nニタリングし、AWS アカウント とワークロードを保護します。GuardDuty を有効にし、⾃動アラートを設定します。仮想プラ\nイベートクラウド (VPC) フローログを設定する: VPC フローログは、VPC のネットワークインターフェイス間を⾏き来する IP\nトラフィックに関する情報をキャプチャできるようにする機能です。フローログデータは Amazon CloudWatch Logs および\nAmazon Simple Storage Service (Amazon S3) にパブリッシュできます。フローログを作成した後、選択した送信先でデータ\nを取得したり表⽰したりできます。VPC トラフィックのミラーリングを検討する: トラフィックミラーリングは、Amazon\nElastic Compute Cloud (Amazon EC2) インスタンスの Elastic Network Interface からネットワークトラフィックをコピー\nし、コンテンツ検査、脅威のモニタリング、トラブルシューティングのために帯域外セキュリティおよびモニタリングアプライア\nンスに送信するために使⽤できる Amazon VPC の機能です。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-pillar/sec_network_protection_inspection.html",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   },
+   {
+    "branch": "9",
+    "customer_control": "ブルートフォース攻撃や不正アクセスを検知するために、ログイン試⾏回数やログイン履歴などのアプリケーションログを収集し\nます。CloudWatch エージェントや Kinesis エージェントを EC2 にインストールすることで、AWS 上で業務アプリケーション\nのログを収集することができます。コンテナを実⾏する場合には、Firelens を⽤いてログを AWS 上に保存することができま\nす。データベースへのアクセス状況を把握するためには、監査ログが利⽤できます。\n予期されるネットワークトラフィックと予期しないネットワークトラフィックを監視します。不規則なアクセスやネットワークト\nラフィックを特定します。例えば、ネットワークのメトリクスを監視し、通常時よりも多⼤なトラフィックが検知される場合は攻\n撃を受けている可能性があります。予期しない外部システムへの接続の試みは、内部ホストが侵害されている可能性があります。\nVPC フローログで IP トラフィックに関する情報を記録します。GuardDuty を⽤いて悪意のある動作や不正な動作を継続的にモ\nニタリングし、AWS のアカウントとワークロードを保護します。AWS Web Application Firewall (WAF) や AWS Shield を⽤\nいて外部に公開している Web サイトをサービス妨害攻撃から守ります。AWS WAF では、定義された条件に基づきウェブリクエ\nストを許可、ブロック、監視するルールを設定し、ワークロードを保護します。例えば、レートベースのルールを設定すること\nで、5 分間に⼀定数以上のリクエストを⾏った IP アドレスをブロックします。AWS Shield Standard は⾃動的に有効化され、\nSYN/UDP フラッド攻撃やリフレクション攻撃といったレイヤー 3 とレイヤー 4 に対する攻撃からワークロードを守ります。\nAWS Shield Advances を追加で有効化することで、レイヤー 7 に対する DDoS 攻撃を⾃動的に緩和します。\nhttps://github.com/aws-samples/baseline-environment-on-aws-for-financial-services-institute/blob/main/doc/fsi-lens-\nfor-fisc/security.md",
+    "supplement": "AWS Well-Architected フレームワー\nク FSI Lens for FISC セキュリティの柱\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-\ninstitute/blob/main/doc/fsi-lens-for-\nfisc/security.md"
+   },
+   {
+    "branch": "参考5",
+    "customer_control": "脆弱性に対する取り組みは以下の通りです。\nhttps://aws.amazon.com/jp/security/vulnerability-reporting/\nAWS はセキュリティ情報の形式で公表を⾏い、AWS セキュリティウェブサイトに掲載いたします。個⼈や企業、セキュリティ\n担当チームがよくウェブサイトやフォーラムに各⾃の勧告を掲載しています。関連性がある場合は、このようなサードパーティの\nリソースへのリンクも AWS セキュリティ情報に含めています。",
+    "supplement": ""
+   },
+   {
+    "branch": "参考6",
+    "customer_control": "ペネトレーションテストの AWS カスタマーサポートポリシーは以下の通りです。\nhttps://aws.amazon.com/jp/security/penetration-testing/",
+    "supplement": ""
+   }
+  ],
+  "実14-1": [
+   {
+    "branch": "",
+    "customer_control": "AWS SOC 1 と AWS SOC 2 は、AWS Artifact (AWS のコンプライアンスレポートをオンデマンドで⼊⼿するためのセルフサー\nビスポータル) を使⽤して⼊⼿できます。\n各アカウントで AWS CloudTrail をオンにして、サポートされている各リージョンで使⽤します。アクセスが⾮常に制限されて\nいる⼀元化されたログアカウントに AWS CloudTrail ログを保存します。CloudTrail ログファイルの整合性の検証を使⽤するこ\nとでログファイル⾃体が変更されていないこと、または特定のユーザーの認証情報が特定の API アクティビティを実⾏したこと\nを確実に検証することができます。\nCloudTrail ログファイルの整合性の検証プロセスでは、ログファイルが削除または変更されたかどうかを知ることもできます。\nまた、指定された期間内にログファイルがアカウントに配信されていないことを確実に検証することが可能です。CloudTrail ロ\nグファイルを定期的に調べます。\nまた、AWS CloudTrail イベント、VPC フローログ、DNS ログを継続的に分析することで脅威を検出するサービスである\nGuardDuty を使⽤することもできます。Amazon S3 バケットのロギングを有効にして、各バケットに対して⾏われたリクエス\nトを監視します。アカウントが不正に使⽤されたと考えられる場合は、発⾏された⼀時的な認証情報に注意してください。\n認識できない⼀時的な認証情報が発⾏された場合は、それらのアクセス許可を無効にします。サービスの最終アクセス時間データ\nを使⽤して、IAM ロールを定期的に確認します。IAM エンティティ (ユーザーまたはロール) が最後にサービスにアクセスを試み\nたときのレポートを表⽰できます。次に、その情報を使⽤してポリシーを調整し、使⽤中のサービスのみへのアクセスを許可する\nことができます。IAM のリソースの種類ごとにレポートを⽣成できます。詳細については、サービスの最終アクセス時間データ\nの表⽰プロセスのドキュメントをお読みください。\nhttps://github.com/aws-samples/baseline-environment-on-aws-for-financial-services-institute/blob/main/doc/fsi-lens-\nfor-fisc/security.md\nAWS Shield Advanced のお客様はグローバル脅威環境ダッシュボードにアクセスし、過去 2 週間に AWS で発⽣したすべての\nDDoS 攻撃を、匿名化されたサンプルの形で確認できます。また、AWS Shield Advanced では、13 か⽉間のすべての攻撃履歴\nを確認できます。",
+    "supplement": ""
+   }
+  ],
+  "実14-2": [
+   {
+    "branch": "",
+    "customer_control": "ペネトレーションテストの AWS カスタマーサポートポリシーは以下の通りです。\nhttps://aws.amazon.com/jp/security/penetration-testing/",
+    "supplement": ""
+   }
+  ],
+  "実140": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実141": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実142": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実143": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実144": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実145": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実146": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実147": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実148": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実149": [
+   {
+    "branch": "",
+    "customer_control": "お客様の施設（流通・⼩売店舗）での対策項⽬になります。",
+    "supplement": ""
+   }
+  ],
+  "実15": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nお客様はAmazon VPCを使⽤することにより、アマゾン ウェブ サービス (AWS) クラウド内で論理的に分離したセクションをプ\nロビジョニングし、お客様が定義する仮想ネットワークで AWS リソースを起動できます。また、VPC 内のセキュリティグルー\nプにより、各 Amazon EC2 インスタンスにおける着信および発信両⽅のネットワークトラフィックを指定することができます。\n明⽰的に許可されていないトラフィックは⾃動的に拒否されます。\nセキュリティグループに加えて、各サブネットに出⼊りするネットワークトラフィックは、ネットワークアクセスコントロールリ\nスト (ACL) を使⽤して許可または拒否することができます。\nAWS PrivateLink を使⽤して、VPC と AWS のサービスをセキュアでスケーラブルな⽅法で接続できます。AWS PrivateLink\nのトラフィックはインターネットを経由しないため、ブルートフォース攻撃や DDoS (分散型サービス拒否) 攻撃の脅威に晒され\nる危険を軽減できます。プライベート IP 接続とセキュリティグループを使⽤することで、サービスは⾃社のプライベートネット\nワークで直接ホストしているように機能します。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス"
+   },
+   {
+    "branch": "3",
+    "customer_control": "システムへの接続許可を、正当な端末やネットワークを利⽤して接続する場合のみに与えるよう構成することで、不特定多数の端\n末からの不正アクセスを防⽌します。接続元の確認⽅法としては、認証情報、IP アドレス、クライアント証明書などがあり、こ\nれらを組み合わせて利⽤することでセキュリティを強化できます。 AWS マネジメントコンソールへの API 呼び出しを特定の IP\nアドレス範囲に限定するには、 ⼀連のアクセス許可がアタッチされた IAM ロール を作成し、aws:SourceIp 条件キーを使⽤して\nIAM ロールを引き受けるアクセス許可を IAM ユーザーに付与します。AWS 外のワークロードやアプリケーションなどから AWS\nの API 呼び出しが必要な場合は、クライアント証明書を利⽤した⼀時認証情報の取得を検討します。詳細は IAM Roles\nAnywhereを参照してください。\nhttps://github.com/aws-samples/baseline-environment-on-aws-for-financial-services-institute/blob/main/doc/fsi-lens-\nfor-fisc/security.md",
+    "supplement": "AWS Well-Architected フレームワー\nク FSI Lens for FISC セキュリティの柱\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-\ninstitute/blob/main/doc/fsi-lens-for-\nfisc/security.md"
+   }
+  ],
+  "実150": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\n責任あるAI\nhttps://aws.amazon.com/jp/ai/responsible-ai/\nAWS User Guide to Governance, Risk and Compliance for Responsible AI Adoption within Financial Services Industries\nAWS Artifactからダウンロード\nGenerative AI Lens - AWS Well-Architected Framework\nhttps://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html\nMachine Learning Lens - AWS Well-Architected Framework\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/machine-learning-lens/machine-learning-lens.html",
+    "supplement": ""
+   }
+  ],
+  "実151": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\n責任あるAI\nhttps://aws.amazon.com/jp/ai/responsible-ai/\nAWS User Guide to Governance, Risk and Compliance for Responsible AI Adoption within Financial Services Industries\nAWS Artifactからダウンロード\nGenerative AI Lens - AWS Well-Architected Framework\nhttps://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html\nMachine Learning Lens - AWS Well-Architected Framework\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/machine-learning-lens/machine-learning-lens.html",
+    "supplement": ""
+   }
+  ],
+  "実152": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\n責任あるAI\nhttps://aws.amazon.com/jp/ai/responsible-ai/\nAWS User Guide to Governance, Risk and Compliance for Responsible AI Adoption within Financial Services Industries\nAWS Artifactからダウンロード\nGenerative AI Lens - AWS Well-Architected Framework\nhttps://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html\nMachine Learning Lens - AWS Well-Architected Framework\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/machine-learning-lens/machine-learning-lens.html",
+    "supplement": ""
+   }
+  ],
+  "実153": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\n責任あるAI\nhttps://aws.amazon.com/jp/ai/responsible-ai/\nAWS User Guide to Governance, Risk and Compliance for Responsible AI Adoption within Financial Services Industries\nAWS Artifactからダウンロード\nGenerative AI Lens - AWS Well-Architected Framework\nhttps://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html\nMachine Learning Lens - AWS Well-Architected Framework\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/machine-learning-lens/machine-learning-lens.html",
+    "supplement": ""
+   }
+  ],
+  "実16": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nAWS Shield は、AWS で実⾏されるアプリケーションを Distributed Denial of Service (DDoS) 攻撃から保護するマネージド型\nのサービスです。AWS Shield Standard は、すべてのお客様に対し追加料⾦なしで⾃動的に有効化されます。AWS Shield\nAdvanced は任意で利⽤できる有料サービスです。AWS Shield Advanced により、Amazon EC2、Elastic Load Balancing\n(ELB)、Amazon CloudFront、AWS Global Accelerator、Route 53 で実⾏中のアプリケーションを標的とする、⾼度化された\n⼤規模な攻撃からの保護を強化することができます。\nまた、Amazon GuardDuty は、AWS アカウントとワークロードを継続的にモニタリングおよび保護できる脅威検出機能を提供\nしています。お客様はGuardDuty を使⽤することで、AWS CloudTrail イベント、Amazon VPC フローログ、および DNS ログ\nで⾒つかったアカウントとネットワークアクティビティから⽣成されたメタデータの連続ストリームを分析することができます。\nまた、既知の悪意のある IP アドレス、異常の検出、機械学習などの統合された脅威インテリジェンスを使⽤して、脅威をより正\n確に識別することができます。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス"
+   },
+   {
+    "branch": "2",
+    "customer_control": "Amazon GuardDuty などのツールを使⽤して、疑わしい活動や定義された境界外にデータを移動させようとする試みを⾃動的に\n検出します。例えば、GuardDuty は Amazon Simple Storage Service (Amazon S3) 読み取りアクティビティを検出できます\nが、それには Exfiltration:S3/AnomalousBehavior 調査結果を使⽤します.GuardDuty に加えて、ネットワークトラフィック情\n報をキャプチャする Amazon VPC フローログを Amazon EventBridge とともに使⽤して、異常な接続 (成功と拒否の両⽅) の\n検出をトリガーできます。Amazon S3 Access Analyzer は Amazon S3 バケット内で誰がどのデータにアクセス可能かを評価\nするのに役⽴ちます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-\npillar/sec_protect_data_transit_auto_unintended_access.html",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html\nAWS Well-Architected フレームワー\nク FSI Lens for FISC セキュリティの柱\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-\ninstitute/blob/main/doc/fsi-lens-for-\nfisc/security.md"
+   }
+  ],
+  "実17": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実18": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実19": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nお客様はAmazon Detective を使⽤することにより、潜在的なセキュリティ問題や不審なアクティビティの根本原因を簡単に分\n析、調査し、すばやく特定できます。Amazon Detective は、AWS リソースからログデータを⾃動的に収集し、機械学習、統計\n的分析、グラフ理論を使⽤して、リンクされたデータセットを構築します。これにより、より迅速かつ効率的なセキュリティ調査\nを簡単に⾏えます。",
+    "supplement": "NIST サイバーセキュリティフレーム\nワーク (CSF) AWS クラウドにおける\nNIST CSF への準拠\nhttps://d1.awsstatic.com/whitepape\nrs/ja_JP/compliance/NIST_Cybersec\nurity_Framework_CSF.pdf"
+   },
+   {
+    "branch": "3",
+    "customer_control": "Amazon GuardDuty は、AWSアカウントとワークロードを継続的にモニタリングおよび保護できる脅威検出機能を提供してい\nます。お客様はGuardDuty を使⽤することで、AWS CloudTrailイベント、Amazon VPC フローログ、および DNSログで⾒つ\nかったアカウントとネットワークアクティビティから⽣成されたメタデータの連続ストリームを分析することができます。また、\n既知の悪意のある IPアドレス、異常の検出、機械学習などの統合された脅威インテリジェンスを使⽤して、脅威をより正確に識\n別することができます。お客様はAmazon Detectiveを使⽤することにより、潜在的なセキュリティ問題や不審なアクティビティ\nの根本原因を簡単に分析、調査し、すばやく特定できます。Amazon Detectiveは、AWSリソースからログデータを⾃動的に収\n集し、機械学習、統計的分析、グラフ理論を使⽤して、リンクされたデータセットを構築します。これにより、より迅速かつ効率\n的なセキュリティ調査を簡単に⾏えます。\nhttps://aws.amazon.com/jp/guardduty/\nhttps://aws.amazon.com/jp/detective/",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス\nhttps://d1.awsstatic.com/whitepape\nrs/compliance/JP_Whitepapers/AWS\n_Risk_and_Compliance_Whitepaper\n_JP.pdf"
+   }
+  ],
+  "実2": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実20": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   },
+   {
+    "branch": "3",
+    "customer_control": "AWS WAF は、可⽤性に影響を与えたり、セキュリティを侵害したり、リソースを過剰に消費したりする可能性のある⼀般的な\nウェブエクスプロイトやボットから保護するのに役⽴ちます。AWS Shield は、AWS で実⾏されるアプリケーションを\nDistributed Denial of Service (DDoS) 攻撃から保護するマネージド型のサービスです。AWS Shield Standardは、すべてのお\n客様に対し追加料⾦なしで⾃動的に有効化されます。AWS Shield Advanced は任意で利⽤できる有料サービスです。AWS\nShield Advancedにより、Amazon EC2、Elastic Load Balancing (ELB)、Amazon CloudFront、AWS Global Accelerator、\nRoute 53で実⾏中のアプリケーションを標的とする、⾼度化された⼤規模な攻撃からの保護を強化することができます。AWS\nNetwork Firewall では、ネットワークトラフィックをきめ細かく制御するファイアウォールルールを定義できます。Network\nFirewall は AWS Firewall Manager と連携するため、Network Firewall ルールに基づいてポリシーを構築し、それらのポリ\nシーを仮想プライベートクラウド (VPC) とアカウント全体に⼀元的に適⽤できます。\nhttps://aws.amazon.com/jp/waf/\nhttps://aws.amazon.com/jp/shield/\nhttps://aws.amazon.com/jp/network-firewall/\nお客様はAmazon VPCを使⽤することにより、アマゾン ウェブ サービス (AWS)クラウド内で論理的に分離したセクションをプ\nロビジョニングし、お客様が定義する仮想ネットワークで AWS リソースを起動できます。また、VPC内のセキュリティグループ\nにより、各 Amazon EC2インスタンスにおける着信および発信両⽅のネットワークトラフィックを指定することができます。明\n⽰的に許可されていないトラフィックは⾃動的に拒否されます。セキュリティグループに加えて、各サブネットに出⼊りするネッ\nトワークトラフィックは、ネットワークアクセスコントロールリスト (ACL)を使⽤して許可または拒否することができます。お\n客様は Amazon EC2 Auto Scaling を使⽤することにより、起動テンプレートとして、Amazon マシンイメージ (AMI)、インス\nタンスタイプ、ブロックストレージデバイス、SSH キーペア、およびインスタンスのインバウンドトラフィックとアウトバウン\nドトラフィックを制御するセキュリティグループなどのインスタンス属性を設定できます。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス\nhttps://d1.awsstatic.com/whitepape\nrs/compliance/JP_Whitepapers/AWS\n_Risk_and_Compliance_Whitepaper\n_JP.pdf"
+   }
+  ],
+  "実21": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス"
+   },
+   {
+    "branch": "2",
+    "customer_control": "Amazon GuardDuty は、悪意のあるアクティビティのために AWS アカウントとワークロードを継続的にモニタリングし、可視\n化と修復のための詳細なセキュリティ調査結果を提供する脅威検出サービスです。 Elastic Compute Cloud (EC2) 上で動作する\nインスタンスとコンテナのワークロードで、マルウェアが疑わしい動作をする可能性のあるファイルを Amazon Elastic Block\nStore (EBS) でスキャンします。 AWS Security Hub は、 Amazon GuardDuty からの侵⼊検知結果、 Amazon Inspector から\nの脆弱性スキャン、および Amazon Macie からの機密データ識別結果などの、AWS アカウント全体で有効化されているセキュ\nリティサービスからの検出結果を収集します。AWS Security Hub は、標準化された AWS Security Finding Format を使⽤し\nてパートナーのセキュリティ製品からの検出結果を収集するため、時間のかかるデータ解析と正規化の作業が不要になります。お\n客様は、アカウント全体にわたってあらゆる検出結果を確認できるマスターアカウントを指定できます。\nhttps://aws.amazon.com/jp/guardduty/\nhttps://aws.amazon.com/jp/guardduty/faqs/#GuardDuty_Malware_Protection\nhttps://aws.amazon.com/jp/security-hub/\nAmazon GuardDuty と AWS Security Hub は、他の AWS のサービスでも利⽤できるログレコードの集約、重複排除、分析メ\nカニズムを提供します。GuardDuty は、AWS CloudTrail 管理やデータイベント、VPC DNS ログ、および VPC Flow Logs など\nのソースからの情報を取込み、集計し、分析します。Security Hub は、GuardDuty、AWS Config、Amazon Inspector、\nAmazon Macie、AWS Firewall Manager、および AWS Marketplace で利⽤できるかなりの数のサードパーティーセキュリ\nティ製品、そして適切にビルドした場合は独⾃のコードからの出⼒を取込み、集計、分析できます。GuardDuty と Security Hub\nのどちらにも、複数のアカウントにわたって調査結果とインサイトを集約できるマスターメンバーモデルがあります。Security\nHub は、オンプレミスの SIEM を導⼊しているお客様に AWS 側のログ/アラートのプリプロセッサ/アグリゲータとしてよく使⽤\nされ、お客様はそこから AWS Lambda ベースのプロセッサとフォワーダーを介して Amazon EventBridge を取り込むことが\nできます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-\npillar/sec_detect_investigate_events_analyze_all.html",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   }
+  ],
+  "実22": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "・AWS CSA Consensus Assessments\nInitiative Questionnaire (CAIQ)\n・アマゾン ウェブ サービス︓リスクと\nコンプライアンス"
+   },
+   {
+    "branch": "3",
+    "customer_control": "Amazon GuardDuty、Amazon EventBridge、および AWS Lambda を使⽤すると、セキュリティ検出結果に基づいて、⾃動で\nの修復処置を柔軟に設定できます。たとえば、セキュリティの検出結果に基づいて Lambda 関数を作成し、AWS セキュリティ\nグループのルールを変更できます。GuardDuty の検出結果において、Amazon EC2 インスタンスの 1 つを既知の悪意のある IP\nが探知したことが⽰された場合は、EventBridge ルールを使⽤してそのアドレスを指定できます。このルールは、セキュリティ\nグループルールを⾃動的に変更し、そのポートへのアクセスを制限する Lambda 関数を起動します。\nhttps://aws.amazon.com/jp/guardduty/faqs/#Enabling_GuardDuty",
+    "supplement": "AWS Well-Architected フレームワー\nク FSI Lens for FISC セキュリティの柱\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-\ninstitute/blob/main/doc/fsi-lens-for-\nfisc/security.md"
+   }
+  ],
+  "実23": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス"
+   }
+  ],
+  "実24": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "AWS CSA Consensus Assessments\nInitiative Questionnaire (CAIQ)\nアマゾン ウェブ サービス︓リスクとコ\nンプライアンス"
+   }
+  ],
+  "実25": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nお客様はAWS Identity and access Management(IAM) を使⽤して、お客様の AWS リソースへの個⼈またはグループによるア\nクセスを安全にコントロールすることができます。\nお客様はCloudTrail を使⽤することで、リクエストを実⾏したユーザー、使⽤したサービス、実⾏されたアクション、そのアク\nションのパラメーター、AWS のサービスによって返されたレスポンス要素など、各アクションの重要な情報が記録することがで\nきます。この情報は、AWS リソースに加えられた変更を追跡し、操作に関する問題を解決するために役⽴ちます。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス"
+   },
+   {
+    "branch": "3",
+    "customer_control": "お客様はAWS Identity and access Management(IAM) を使⽤して、お客様のAWSリソースへの個⼈またはグループによるア\nクセスを安全にコントロールすることができます。お客様はCloudTrailを使⽤することで、リクエストを実⾏したユーザー、使⽤\nしたサービス、実⾏されたアクション、そのアクションのパラメーター、AWSのサービスによって返されたレスポンス要素な\nど、各アクションの重要な情報が記録することができます。この情報は、AWSリソースに加えられた変更を追跡し、操作に関す\nる問題を解決するために役⽴ちます。AWS リソースへのアクセスをコントロールするには、IAM コンソール、AWS API、AWS\nCLI で作成および管理できます。\nhttps://aws.amazon.com/jp/iam/\nSecurity Hub は、AWS Foundational Security Best Practices 標準や、CIS AWS Foundations Benchmark、National\nInstitute of Standards and Technology (NIST)、Payment Card Industry Data Security Standard (PCI DSS) などのサポー\nトされている他の業界のベストプラクティスおよび標準のコントロールに照らして、継続的かつ⾃動的なアカウントレベルおよび\nリソースレベルの設定チェックを実⾏します。",
+    "supplement": ""
+   }
+  ],
+  "実26": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nお客様はAWS Identity and access Management(IAM) を使⽤して、お客様の AWS リソースへの個⼈またはグループによるア\nクセスを安全にコントロールすることができます。AWS IAMでは、パスワードの最⼩⻑を定義したり、数字を 1 つ以上含めるよ\nうにするなど、強⼒なパスワードを要求できます。⾃動パスワード失効の実施、以前に使⽤したパスワードの再利⽤禁⽌、次回\nAWS サインイン時のパスワードリセットの要求も設定できます。\nまた、セキュリティを向上させるには、多要素認証（MFA）を設定して AWS リソースを保護することを推奨します。\nhttps://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_credentials_mfa.html\nhttps://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/enable-mfa.html",
+    "supplement": "PCI DSS 8.2.3\nPCI DSS 8.2.4"
+   }
+  ],
+  "実27": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス"
+   },
+   {
+    "branch": "4",
+    "customer_control": "保管中のデータを保護するには、分離やバージョニングなどのメカニズムを使ってアクセス制御を実施し、最⼩特権の原則を適⽤\nしてください。データへパブリックアクセスが付与されるのを防⽌します。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-pillar/sec_protect_data_rest_access_control.html\nAWS リソースへのアクセス権限付与について、アクセス権限の申請者と承認者で相互牽制が働く構造とすることが推奨されま\nす。IAM エンティティのアクセス許可境界 を利⽤することで、アイデンティティベースのポリシーが IAM エンティティに付与で\nきるアクセス許可の上限を設定することが可能です。エンティティのアクセス許可の境界により、エンティティは、アイデンティ\nティベースのポリシーとそのアクセス許可の境界の両⽅で許可されているアクションのみを実⾏できます。また、特権の昇格を防\nぐために、サービスコントロールポリシー (SCP) を利⽤してアカウント内のユーザー (IAM 管理者または委任された管理者を除\nく) が管理 IAM アクションを使⽤できないよう制御することも可能です。アクセス権限は⼀定期間での⾒直しが求められます\nが、それ以外にも、所属や組織の変更に伴う⼈事異動時、⼊社や退職、休職、⻑期の出張、システムの追加やリタイア等のタイミ\nングでも⾒直しを⾏うことが必要となります。アクセス権限の⾒直しは、⼈に属する権限に限定せず、サーバーリソースに付与さ\nれている権限についても⾒直しが必要です。アクセス権限の管理・変更は、クラウド利⽤者側でのワークフロー対応の他、AWS\nIdentity and Access Management (IAM) アクセスアドバイザーによる不要なアクセス権限付与の確認や、AWS IAM Access\nAnalyzer による意図しないアクセス許可の確認が有効です。\nhttps://github.com/aws-samples/baseline-environment-on-aws-for-financial-services-institute/blob/main/doc/fsi-lens-\nfor-fisc/security.md",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス\nhttps://d1.awsstatic.com/whitepape\nrs/compliance/JP_Whitepapers/AWS\n_Risk_and_Compliance_Whitepaper\n_JP.pdf\nAWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html\nAWS Well-Architected フレームワー\nク FSI Lens for FISC セキュリティの柱\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-\ninstitute/blob/main/doc/fsi-lens-for-\nfisc/security.md"
+   }
+  ],
+  "実28": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実29": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実3": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   },
+   {
+    "branch": "8",
+    "customer_control": "キーの保存、ローテーション、アクセス制御を含む暗号化アプローチを定義することで、不正ユーザーからのコンテンツの保護\nや、正規ユーザーへの不必要な公開を防⽌することができます。AWS Key Management Service (AWS KMS) は暗号化キーの\n管理をサポートして 多数の AWS のサービスと統合します.このサービスでは、AWS KMS キーのための、耐久性と安全性が⾼\nく、冗⻑なストレージを利⽤できます。キーのエイリアスのほか、キーレベルのポリシーも定義できます。ポリシーは、キー管理\n者やキーユーザーを定義するのに役⽴ちます。さらに、AWS CloudHSM はクラウドベースのハードウェアセキュリティモジュー\nル (HSM) であり、AWS クラウド 上で独⾃の暗号化キーを簡単に⽣成して使⽤できます。FIPS 140-2 レベル 3 検証済みの HSM\nを使⽤することで、データセキュリティに関する企業、契約、規制のコンプライアンス要件を満たすことができます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-pillar/sec_protect_data_rest_key_mgmt.html",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html\nアマゾン ウェブ サービス︓リスクとコ\nンプライアンス\nhttps://d1.awsstatic.com/whitepape\nrs/compliance/JP_Whitepapers/AWS\n_Risk_and_Compliance_Whitepaper\n_JP.pdf"
+   },
+   {
+    "branch": "参考3",
+    "customer_control": "AWS Key Management Service (AWS KMS) は、アプリケーションと AWS のサービス全体で暗号キーを作成、管理、制御す\nることができます。 AWS KMS は、暗号化と復号化のための KMS キーを作成する際に 256 ビットのキーをサポートします。発\n信者に返される⽣成済みデータキーは、256 ビット、128 ビット、または最⼤ 1024 バイトまでの任意の値にすることができま\nす。AWS KMS でお客様の代わりに 256 ビットの KMS キーを使⽤して暗号化または復号化を⾏う場合、Galois Counter Mode\nの AES アルゴリズム (AES-GCM) が使⽤されます。カスタマー管理の KMS キーのライフサイクルを管理し、誰がそれを使⽤ま\nたは管理できるかを管理します。AWS KMS がキーを⾃動的にローテーションすることを選択した場合は、データを再暗号化する\n必要はありません。AWS KMS は過去のバージョンのキーを⾃動的に保管して、そのキーで暗号化されたデータを復号化できるよ\nうにします。AWS KMS のキーに対する新しい暗号化リクエストは、すべて最新バージョンのキーで実⾏されます。\nhttps://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/crypto-primitives.html\"",
+    "supplement": "AWS KMS の暗号化の詳細説明\nhttps://docs.aws.amazon.com/ja_jp/\nkms/latest/cryptographic-\ndetails/intro.html\nAWS Well-Architected フレームワー\nク FSI Lens for FISC セキュリティの柱\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-\ninstitute/blob/main/doc/fsi-lens-for-\nfisc/security.md"
+   }
+  ],
+  "実30": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   },
+   {
+    "branch": "4",
+    "customer_control": "AWS Key Management Service (AWS KMS) は、アプリケーションと AWS のサービス全体で暗号キーを作成、管理、制御す\nることができます。 AWS KMS は、暗号化と復号化のための KMS キーを作成する際に 256 ビットのキーをサポートします。発\n信者に返される⽣成済みデータキーは、256 ビット、128 ビット、または最⼤ 1024 バイトまでの任意の値にすることができま\nす。AWS KMS でお客様の代わりに 256 ビットの KMS キーを使⽤して暗号化または復号化を⾏う場合、Galois Counter Mode\nの AES アルゴリズム (AES-GCM) が使⽤されます。カスタマー管理の KMS キーのライフサイクルを管理し、誰がそれを使⽤ま\nたは管理できるかを管理します。AWS KMS がキーを⾃動的にローテーションすることを選択した場合は、データを再暗号化する\n必要はありません。AWS KMS は過去のバージョンのキーを⾃動的に保管して、そのキーで暗号化されたデータを復号化できるよ\nうにします。AWS KMS のキーに対する新しい暗号化リクエストは、すべて最新バージョンのキーで実⾏されます。\nhttps://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/crypto-primitives.html",
+    "supplement": "AWS KMS の暗号化の詳細説明\nhttps://docs.aws.amazon.com/ja_jp/\nkms/latest/cryptographic-\ndetails/intro.htmlAWS Well-\nArchitected フレームワーク FSI Lens\nfor FISC セキュリティの柱\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-\ninstitute/blob/main/doc/fsi-lens-for-\nfisc/security.md"
+   }
+  ],
+  "実31": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス"
+   },
+   {
+    "branch": "4",
+    "customer_control": "「AWS の最新情報」 は、すべての AWS 機能、サービス、および発表に関する最新情報を確認する優れた⽅法です。\nhttps://aws.amazon.com/jp/new/\nナレッジ管理は、チームメンバーが業務を遂⾏するために情報を検索する際に役⽴ちます。従業員の学びが促進される組織では、\n個⼈を⽀援する情報が⾃由に共有されています。情報は探索したり検索したりできます。情報は正確かつ最新の内容です。新しい\n情報を作成し、既存の情報を更新し、古い情報をアーカイブするメカニズムが存在します。ナレッジ管理プラットフォームの最も\n⼀般的な例は、wiki などのコンテンツ管理システムです。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/operational-excellence-\npillar/ops_evolve_ops_knowledge_management.html\n運⽤アクティビティから学んだ教訓を⽂書化して共有し、社内とチーム全体で利⽤できるようにします。チームが学んだことを共\n有して、組織全体のメリットを増やす必要があります。情報とリソースを共有して、回避可能なエラーを防⽌し、開発作業を容易\nにする必要があります。これにより、望まれる機能の提供に集中できます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/operational-excellence-\npillar/ops_evolve_ops_share_lessons_learned.html",
+    "supplement": "AWS Well-Architected フレームワー\nク 運⽤上の優秀性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/operational-\nexcellence-pillar/welcome.html\nAWSの最新情報\nhttps://aws.amazon.com/jp/new/"
+   }
+  ],
+  "実32": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス"
+   }
+  ],
+  "実33": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実34": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス\nNIST サイバーセキュリティフレーム\nワーク (CSF) AWS クラウドにおける\nNIST CSF への準拠\nhttps://d1.awsstatic.com/whitepape\nrs/ja_JP/compliance/NIST_Cybersec\nurity_Framework_CSF.pdf"
+   },
+   {
+    "branch": "5",
+    "customer_control": "",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス\nhttps://d1.awsstatic.com/whitepape\nrs/compliance/JP_Whitepapers/AWS\n_Risk_and_Compliance_Whitepaper\n_JP.pdf"
+   }
+  ],
+  "実35": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス\nAWS データセンターWebサイト︓境界\n防御レイヤー\nhttps://aws.amazon.com/jp/complia\nnce/data-center/perimeter-layer/"
+   },
+   {
+    "branch": "2",
+    "customer_control": "サインイン (サインイン認証情報を使った認証) は、多要素認証 (MFA) などのメカニズムを使わない場合、特にサインイン認証情\n報が不⽤意に開⽰されたり、容易に推測されたりする場合に、リスクが発⽣する恐れがあります。MFA や強⼒なパスワードポリ\nシーを要求することで、これらのリスクを軽減する強⼒なサインインのメカニズムを使⽤します。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-pillar/sec_identities_enforce_mechanisms.html\nまた、送信元のIPに基づいてAWSへのアクセスを拒否することも可能です。\nhttps://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_examples_aws_deny-ip.html\nこれらの機能により、正当なオペレータ以外のアクセスを防⽌する処置をとってください。",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   }
+  ],
+  "実36": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "AWS CSA Consensus Assessments\nInitiative Questionnaire (CAIQ)\nアマゾン ウェブ サービス︓リスクとコ\nンプライアンス"
+   }
+  ],
+  "実37": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "AWS CSA Consensus Assessments\nInitiative Questionnaire (CAIQ)"
+   },
+   {
+    "branch": "5",
+    "customer_control": "AWS CloudTrail は、AWS のサービスアクティビティをキャプチャする AWS アカウント に対して API コールをトラッキングす\nるログサービスです。これは、デフォルトで有効になっており、管理イベントは 90 ⽇間保持され、AWS Management\nConsole、AWS CLI、または AWS を使⽤して CloudTrail イベント履歴から検索することが可能です。データイベントをより⻑\nく保持および確認するには、CloudTrail 証跡を作成して、Amazon S3 バケットと、そしてオプションで Amazon CloudWatch\nロググループと関連付けます。または、CloudTrail Lake を作成できます。これは、CloudTrail ログを最⻑ 7 年間保持し、SQL\nベースのクエリ施設を提供します。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-\npillar/sec_detect_investigate_events_app_service_logging.html",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   }
+  ],
+  "実38": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "NIST サイバーセキュリティフレーム\nワーク (CSF) AWS クラウドにおける\nNIST CSF への準拠\nhttps://d1.awsstatic.com/whitepape\nrs/ja_JP/compliance/NIST_Cybersec\nurity_Framework_CSF.pdf"
+   }
+  ],
+  "実39": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   },
+   {
+    "branch": "5",
+    "customer_control": "すべての AWS データストアは、バックアップ機能を備えています。Amazon RDS や Amazon DynamoDB などのサービスは、\nポイントインタイムリカバリ (PITR) を有効にする⾃動バックアップを追加でサポートします。これにより、現在時刻の 5 分前ま\nでの任意の時刻にバックアップを復元することができます。\n多くの AWS サービスは、バックアップを別の AWS リージョン にコピーする機能を備えています。AWS Backup は、AWS\nサービス全体にわたるデータ保護を⼀元化して⾃動化する機能を提供するツールです。AWS Elastic Disaster Recovery を使⽤\nすると、サーバーのワークロード全体をコピーして、オンプレミス、クロス AZ、またはクロスリージョンから継続的なデータ保\n護を維持できます。⽬標復旧時点 (RPO) は秒単位で測定されます。Amazon S3 をセルフマネージドおよび AWS マネージド\nデータソースのバックアップ先として使⽤できます。\nAmazon EBS、Amazon RDS、Amazon DynamoDB などの AWS サービスには、バックアップを作成する機能が組み込まれて\nいます。サードパーティー製のバックアップソフトウェアも使⽤できます。オンプレミスのデータは、AWS Storage Gateway\nまたは AWS DataSync を使⽤して AWS クラウド にバックアップできます。このデータを AWS で保管するには、Amazon S3\nバケットを使⽤できます。\nAmazon S3 は、Amazon S3 Glacier や S3 Glacier Deep Archive などの複数のストレージ層を提供し、データストレージコス\nトを低減します。他のソースからデータを再⽣成することによって、データリカバリのニーズを満たすこともできます。例えば、\nAmazon ElastiCache レプリカノードまたは Amazon RDS リードレプリカ を使⽤して、プライマリが失われた場合にデータを\n再⽣成できます。\nこのようなソースを使⽤して⽬標復旧時点 (RPO) と⽬標復旧時間 (RTO) を満たすことができる場合には、バックアップは必要で\nないことがあります。別の例として、Amazon EMR を使⽤している場合、データを Amazon S3 から Amazon EMR に再⽣成で\nきる限り、HDFS データストアをバックアップする必要がないことがあります。バックアップ戦略を選択するときには、データの\n復旧にかかる時間を考慮してください。データの復旧に必要な時間は、バックアップのタイプ (バックアップ戦略の場合) やデー\nタ再⽣成メカニズムの複雑性に依存します。この時間は、ワークロードの RTO 以内でなければなりません。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/reliability-\npillar/rel_backing_up_data_identified_backups_data.html\n使⽤可能なデータと、バックアップとして保存されているデータは区別します。 AWS Backup を使⽤して、AWS サービス間の\nデータのバックアップを⾃動化することを検討してください。 Amazon EBS スナップショットは、EBS ボリュームをコピーし、\nライフサイクル、データ保護、保護メカニズムへのアクセスなどの S3 機能を使⽤して保存する⽅法を提供します。これらの機能\nのうち 2 つは S3 Object Lock と AWS Backup ボールトロックです。これにより、バックアップのセキュリティと制御を強化で\nきます。バックアップに関して、職務とアクセス権を明確に分離して管理します。バックアップはアカウントレベルで分離し、イ\nベントの発⽣時に影響を受ける環境から分離した状態を維持できるようにします。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-\npillar/sec_data_classification_lifecycle_management.html",
+    "supplement": "AWS Well-Architected フレームワー\nク 信頼性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/reliability-\npillar/welcome.html\nAWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   }
+  ],
+  "実4": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   },
+   {
+    "branch": "5",
+    "customer_control": "暗号化キーと証明書を安全に保存し、厳格なアクセスコントロールによって適切な時間間隔でローテーションします。これを実現\nする最善の⽅法として、 AWS Certificate Manager (ACM).これにより、AWS のサービスおよび内部接続リソースで使⽤するた\nめのパブリックおよびプライベートの Transport Layer Security (TLS) 証明書のプロビジョニング、管理、デプロイが容易にな\nります。TLS 証明書は、ネットワーク通信を保護し、プライベートネットワーク上のリソースだけでなく、インターネット上の\nウェブサイトのアイデンティティを確⽴するために使⽤されます。ACM は、Elastic Load Balancers (ELB)、AWS ディストリ\nビューション、API Gateway の API などの AWS リソース と統合し、証明書の⾃動更新も処理します。Amazon Elastic\nCompute Cloud を使⽤してプライベートルート CA をデプロイする場合、証明書とプライベートキーの両⽅を ACM (Amazon\nEC2) インスタンス、コンテナなどで使⽤するために提供できます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-\npillar/sec_protect_data_transit_key_cert_mgmt.html",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   }
+  ],
+  "実40": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実41": [
+   {
+    "branch": "",
+    "customer_control": "使⽤可能なデータと、バックアップとして保存されているデータは区別します。 AWS Backup を使⽤して、AWS サービス間の\nデータのバックアップを⾃動化することを検討してください。 Amazon EBS スナップショットは、EBS ボリュームをコピーし、\nライフサイクル、データ保護、保護メカニズムへのアクセスなどの S3 機能を使⽤して保存する⽅法を提供します。これらの機能\nのうち 2 つは S3 Object Lock と AWS Backup ボールトロックです。これにより、バックアップのセキュリティと制御を強化で\nきます。バックアップに関して、職務とアクセス権を明確に分離して管理します。バックアップはアカウントレベルで分離し、イ\nベントの発⽣時に影響を受ける環境から分離した状態を維持できるようにします。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-\npillar/sec_data_classification_lifecycle_management.html",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   }
+  ],
+  "実42": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nお客様はAWSリソースの管理にAWS Configを使⽤することができます。AWS Config は、セキュリティとガバナンスのためのフ\nルマネージド型のサービスであり、ご利⽤の AWS リソースのインベントリ、構成履歴、構成変更通知の機能を備えています。\nAWS Config では、既存の AWS リソースの特定や、構成の詳細すべてを含めたお客様の AWS リソースインベントリのエクス\nポートが可能になり、特定の時点でどのようにリソースが構成されたかを判断できます。これらの機能は、コンプライアンス監\n査、セキュリティ分析、リソース変更の追跡、トラブルシューティングを可能にします。",
+    "supplement": "AWS CSA Consensus Assessments\nInitiative Questionnaire (CAIQ)"
+   },
+   {
+    "branch": "1",
+    "customer_control": "インスタンス、コンテナ、サーバーレス機能、またはデバイスで実⾏されているアプリケーションで動的な構成を使⽤している場\n合、 AWS AppConfig を使⽤して 環境全体での管理と実装を⾏うことができます。AWS では、 AWS Config を使⽤して アカウ\nントおよびリージョン全体の AWS リソース構成を 継続的にモニタリングできます。そうすることで、構成履歴の追跡、構成変\n化の他のリソースへの影響、 AWS Config Rules および AWS Config コンフォーマンスパックを使⽤した期待される、または望\nまれる設定との⽐較監査を⾏えます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/operational-excellence-\npillar/ops_dev_integ_conf_mgmt_sys.html",
+    "supplement": "AWS Well-Architected フレームワー\nク 運⽤上の優秀性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/operational-\nexcellence-pillar/welcome.html"
+   },
+   {
+    "branch": "4",
+    "customer_control": "AWS マネジメントコンソールにログインできるユーザーの ID およびパスワードについてはAWS Identity and Access\nManagementにて管理できます。https://aws.amazon.com/jp/iam/また、AWS マネジメントコンソールへのログイン履歴に\nついては AWS CloudTrail に記録されます。\nhttps://docs.aws.amazon.com/ja_jp/awscloudtrail/latest/userguide/cloudtrail-event-reference-aws-console-sign-in-\nevents.html",
+    "supplement": ""
+   },
+   {
+    "branch": "参考",
+    "customer_control": "",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス\nhttps://d1.awsstatic.com/whitepape\nrs/compliance/JP_Whitepapers/AWS\n_Risk_and_Compliance_Whitepaper\n_JP.pdf"
+   }
+  ],
+  "実43": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nお客様はAWSリソースの管理にAWS Configを使⽤することができます。AWS Config は、セキュリティとガバナンスのためのフ\nルマネージド型のサービスであり、ご利⽤の AWS リソースのインベントリ、構成履歴、構成変更通知の機能を備えています。\nAWS Config では、既存の AWS リソースの特定や、構成の詳細すべてを含めたお客様の AWS リソースインベントリのエクス\nポートが可能になり、特定の時点でどのようにリソースが構成されたかを判断できます。これらの機能は、コンプライアンス監\n査、セキュリティ分析、リソース変更の追跡、トラブルシューティングを可能にします。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス"
+   },
+   {
+    "branch": "1",
+    "customer_control": "ワークロードモニタリングがどのように実装されているかを頻繁に確認し、重要なイベントや変更に基づいて更新します。効果的\nなモニタリングは、主要なビジネスメトリクスが原動⼒になります。ビジネスの優先順位が変化したときに、メトリクスがワーク\nロードに確実に対応できるようにします。\nモニタリングを監査することで、アプリケーションがどのタイミングで可⽤性の⽬標を満たしているかを確実に把握できます。根\n本原因の分析には、障害発⽣時に何が起こったかを発⾒する機能が必要です。\nAWS は、インシデント時にサービスの状態を追跡できるサービスを提供しています。Amazon CloudWatch Logs: このサービ\nスにログを保存してその内容を調査できます。\nAmazon CloudWatch Logs Insights: 数秒で⼤量のログを分析できるフルマネージドサービスです。⾼速でインタラクティブな\nクエリと視覚化が⾏えます。 AWS Config: さまざまな時点でどの AWS インフラストラクチャが使⽤されているかを確認できま\nす。\nAWS CloudTrail: どの AWS API が、いつどのプリンシパルに呼び出されたかを確認できます。AWS では、週に⼀度のミーティ\nングを実施して、 運⽤パフォーマンスをレビューし、 学んだ教訓をチーム間で共有しています。AWS には多数のチームが存在\nするため、 私たちは The Wheel を作成し、 ワークロードをランダムに選んで確認できるようにしました。運⽤パフォーマンス\nのレビューと知識の共有を定期的に⾏うことで、運⽤チームのパフォーマンスを向上させることができます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/reliability-\npillar/rel_monitor_aws_resources_review_monitoring.html",
+    "supplement": "AWS Well-Architected フレームワー\nク 信頼性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/reliability-\npillar/welcome.html"
+   }
+  ],
+  "実44": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス"
+   }
+  ],
+  "実45": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス"
+   }
+  ],
+  "実46": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nAmazon CloudWatch は、AWSのクラウド資源及びお客様が運⽤するアプリケーションに対するモニタリングを提供しま す。\nまた、AWSはサービス提供の最新の状況をAWS Health Dashboard (https://status.aws.amazon.com/)にて公開しています。",
+    "supplement": "アマゾン ウェブ サービス︓AWS リス\nクとコンプライアンス\nNIST サイバーセキュリティフレーム\nワーク (CSF) AWS クラウドにおける\nNIST CSF への準拠\nhttps://d1.awsstatic.com/whitepape\nrs/ja_JP/compliance/NIST_Cybersec\nurity_Framework_CSF.pdf"
+   },
+   {
+    "branch": "2",
+    "customer_control": "ログファイルとメトリクスの履歴を収集し、これらを分析して、幅広いトレンドとワークロードの洞察が得られます。Amazon\nCloudWatch Logs Insights は、 シンプルかつ強⼒なクエリ⾔語をサポートし、 ログデータの分析に使⽤できます。\nAmazon CloudWatch Logs ではさらに、シームレスにデータを Amazon S3 に送ってデータを使⽤したり、または Amazon\nAthena に送ってデータをクエリしたりできるサブスクリプションもサポートしています。\n豊富な種類のフォーマットのクエリがサポートされています。把握 サポートされる SerDes とデータ形式 詳細については、\nAmazon Athena ユーザーガイドを参照してください。巨⼤なログファイルセットの分析では、Amazon EMR クラスターを実⾏\nしてペタバイト規模の分析を実⾏できます。\n集計、処理、保存、分析を実⾏できる多数のツールが AWS パートナーやサードパーティによって提供されています。このような\nツールには、New Relic、Splunk、Loggly、Logstash、CloudHealth、Nagios などがあります。\nただし、システムやアプリケーションログの外で⾏うデータ⽣成は各クラウドプロバイダーに固有であり、また多くの場合サービ\nスごとに固有です。モニタリングプロセスで⾒落とされがちな点は、データ管理です。モニタリングのためのデータ保存要件を決\n定し、それに応じたライフサイクルポリシーを適⽤する必要があります。Amazon S3 はS3 バケットレベルのライフサイクル管\n理をサポートしています。\nこのライフサイクル管理には、バケット内のパスごとに異なる管理⽅法を適⽤できます。ライフサイクルの最終段階では、データ\nを Amazon S3 Glacier に移⾏して⻑期保存し、保存期間の終了後には期限切れにすることができます。S3 Intelligent-Tiering\nストレージクラスは、パフォーマンスへの影響や運⽤のオーバーヘッドなしに、データを最も費⽤対効果の⾼いアクセス階層に⾃\n動的に移動することにより、コストを最適化できるように設計されています。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/reliability-\npillar/rel_monitor_aws_resources_storage_analytics.html",
+    "supplement": "AWS Well-Architected フレームワー\nク 信頼性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/reliability-\npillar/welcome.html"
+   }
+  ],
+  "実47": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nAWS Cloudwatchは、AWSのクラウド資源及びお客様が運⽤するアプリケーションに対するモニタリングを提供しま す。\nまた、AWSはサービス提供の最新の状況をAWS Service Health Dashboard(https://status.aws.amazon.com/)にて公開して\nいます。",
+    "supplement": "AWS Webサイト︓AWSのコントロー\nル - セキュアな設計\nhttps://aws.amazon.com/jp/complia\nnce/data-center/controls/"
+   },
+   {
+    "branch": "3",
+    "customer_control": "AWS Cost Explorerで時間単位の粒度を有効にし、 AWS Cost and Usage Report (CUR)を作成します。これらのデータソース\nは、組織全体のコストと使⽤量の最も正確なビューを提供します。CUR では、課⾦されるすべての AWS のサービスについて、\n⽇単位または時間単位の使⽤量の粒度、料⾦、コスト、使⽤属性が提供されます。CUR には、タグ付け、場所、リソース属性、\nアカウント ID など想定可能なすべてのディメンションがあります。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/cost-optimization-\npillar/cost_monitor_usage_detailed_source.html\nService Quotas は、250 を超える AWS のサービスのクォータを⼀元的に管理するのに役⽴つ AWS のサービスです。クォータ\n値の検索に加えて、Service Quotas コンソールから、または AWS SDK を使⽤してクォータ増加をリクエスト、追跡することも\nできます。AWS Trusted Advisor には、あるサービスの⼀部の要素に関する使⽤状況とクォータを表⽰するサービスクォータ\nチェックが⽤意されています。サービスごとのデフォルトのサービスクォータは、それぞれのサービスの AWS ドキュメントにも\n記載されています (例えば、Amazon VPC クォータを参照してください)。スロットルされた API のレート制限など、⼀部のサー\nビス上の制限は、Amazon API Gateway 内で使⽤量プランを変更することで設定できます。\nそれぞれのサービス上の構成として設定される⼀部の制限には、プロビジョンド IOPS、割り当てられた Amazon RDS ストレー\nジ、Amazon EBS ボリューム割り当てなどがあります。Amazon Elastic Compute Cloud には、インスタンス、Amazon\nElastic Block Store、および Elastic IP アドレスの制限を管理するのに役⽴つ独⾃のサービスの制限ダッシュボードがありま\nす。サービスクォータがアプリケーションのパフォーマンスに影響を及ぼし、ニーズに合わせて調整できないような事例が発⽣し\nた場合は、AWS Support に連絡し、緩和策の有無についてお問い合わせください。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/reliability-\npillar/rel_manage_service_limits_aware_quotas_and_constraints.html",
+    "supplement": "AWS Well-Architected フレームワー\nク 信頼性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/reliability-\npillar/welcome.html\nAWS Well-Architected フレームワー\nク コスト最適化の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/cost-\noptimization-pillar/welcome.html"
+   },
+   {
+    "branch": "4",
+    "customer_control": "多くの AWS サービスは、需要に合わせて⾃動的にスケールします。Amazon EC2 インスタンスまたは Amazon ECS クラス\nターを使⽤している場合、ワークロードの需要に対応する使⽤状況のメトリクスに基づいて Auto Scaling を実⾏するように設定\nできます。Amazon EC2 では、平均 CPU 使⽤率、ロードバランサーリクエスト数、またはネットワーク帯域幅を使⽤して、EC2\nインスタンスをスケールアウト (またはスケールイン) できます。Amazon ECS では、平均 CPU 使⽤率、ロードバランサーリク\nエスト数、およびメモリ使⽤率を使⽤して、ECS タスクをスケールアウト (またはスケールイン) できます。AWS で Target\nAuto Scaling を使⽤すると、オートスケーラーは家庭⽤サーモスタットのように機能し、指定したターゲット値 (例えば、CPU\n使⽤率 70%) を維持するためにリソースを追加または削除します。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/reliability-\npillar/rel_adapt_to_changes_proactive_adapt_auto.html",
+    "supplement": "AWS Well-Architected フレームワー\nク 信頼性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/reliability-\npillar/welcome.html"
+   }
+  ],
+  "実48": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nAWS Systems Manager を使⽤することで、複数の AWS のサービスの運⽤データを⼀元化し、AWS リソース全体のタスクを\n⾃動化できます。アプリケーション、アプリケーションスタックのさまざまなレイヤー、本番環境と開発環境といったリソースの\n論理グループを作成できます。Systems Manager では、リソースグループを選択し、その最新の API アクティビティ、リソー\nス設定の変更、関連する通知、運⽤アラート、ソフトウェアインベントリ、パッチコンプライアンス状況を表⽰できます。運⽤\nニーズに応じて、各リソースグループに対してアクションを実⾏することもできます。Systems Manager により、AWS リソー\nスを⼀元的に表⽰および管理でき、運⽤を完全に可視化して制御できます。\nワークロードのデータフローと通信の要件を接続の開始側、ポート、プロトコル、ネットワークレイヤーの観点から把握し、イン\nベントリを作成します。接続の確⽴とデータ転送に使⽤できるプロトコルを評価して、保護要件を満たすプロトコル (例えば、\nHTTP ではなく HTTPS) を選択します。ネットワークの境界と各レイヤー内の両⽅で、これらの要件を把握してください。これら\nの要件を特定できたら、オプションを検討し、必要なトラフィックのみが各接続ポイントを流れるようにします。まず、VPC 内\nでセキュリティグループを使⽤することをお勧めします。セキュリティグループは、Amazon EC2 インスタンス、Amazon ECS\nタスク、Amazon EKS ポッド、Amazon RDS データベースなど、Elastic Network Interface (ENI) を使⽤するリソースにア\nタッチできます。レイヤー 4 のファイアウォールとは異なり、セキュリティグループには別のセキュリティグループからのトラ\nフィックを識別⼦ごとに許可するルールを設定できるため、グループ内のリソースが時間の経過とともに変化しても更新を最⼩限\nに抑えることができます。セキュリティグループを使⽤し、インバウンドルールとアウトバウンドルールの両⽅を⽤いて、トラ\nフィックをフィルタリングすることもできます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-pillar/sec_network_protection_layered.html",
+    "supplement": "アマゾン ウェブ サービス ︓リスクとコ\nンプライアンス\nAWS Systems Manager のよくある質\n問\nhttps://aws.amazon.com/jp/systems\n-manager/faq/\nAWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   },
+   {
+    "branch": "10",
+    "customer_control": "設定を変更し、変更を追跡記録するには、構成管理システムを使⽤します。これらのシステムは、⼿動プロセスによって発⽣する\nエラーと、変更を導⼊する労⼒を減らします。静的な構成管理では、ライフタイムを通じて⼀貫性を維持することが期待されるリ\nソースの初期化時に値を設定します。このケースの例として、インスタンス上のアプリケーションサーバーまたはウェブサーバー\n⽤の構成を設定する場合や、 AWS Management Console 内または AWS CLI を介して AWS サービスの構成を定義する場合が\n挙げられます。動的な構成管理では、ライフタイムを通じて変化する、または変化することが予測されるリソースの初期化時に値\nを設定します。例えば、構成変更を介してコードの機能を有効にするように機能トグルを設定したり、インシデント発⽣時にログ\nの詳細レベルを変更してより多くのデータを取得し、インシデント終了時に詳細レベルを元に戻して不要なログや負荷を減らした\nりすることができます。インスタンス、コンテナ、サーバーレス機能、またはデバイスで実⾏されているアプリケーションで動的\nな構成を使⽤している場合、 AWS AppConfig を使⽤して 環境全体での管理と実装を⾏うことができます。AWS では、 AWS\nConfig を使⽤して アカウントおよびリージョン全体の AWS リソース構成を 継続的にモニタリングできます。そうすることで、\n構成履歴の追跡、構成変化の他のリソースへの影響、 AWS Config Rules および AWS Config コンフォーマンスパックを使⽤し\nた期待される、または望まれる設定との⽐較監査を⾏えます。AWS では、以下のサービスを使⽤して、継続的インテグレーショ\nンと継続的デプロイ (CI/CD) パイプラインを構築できます。 AWS デベロッパーツール (例: AWS CodeCommit、 AWS\nCodeBuild、 AWS CodePipeline、 AWS CodeDeploy、および AWS CodeStar)。Change Calendar を⽤意して、変更の実施\nによって影響を受ける可能性のある重要なビジネスや運⽤上の活動やイベントが計画されている時期を追跡します。アクティビ\nティを調整して、これらの計画に関するリスクを管理します。 AWS Systems Manager Change Calendar は、変更に対して時\n間ブロックがオープンであるかクローズであるか、およびその理由を⽂書化し、 その情報を他の AWS アカウント と共有しま\nす。AWS Systems Manager Automation スクリプトは、カレンダーの変化に沿って実⾏されるように設定できます。AWS\nSystems Manager メンテナンスウィンドウは、 AWS SSM Run Command または Automation スクリプト、AWS Lambda\n呼び出し、または AWS Step Functions アクティビティの実⾏を指定した時間にスケジュールできます。これらのアクティビ\nティを評価に含めることができるように、Change Calendar 上で印を付けます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/operational-excellence-\npillar/ops_dev_integ_conf_mgmt_sys.html",
+    "supplement": "AWS Well-Architected フレームワー\nク 運⽤上の優秀性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/operational-\nexcellence-pillar/welcome.html"
+   },
+   {
+    "branch": "11",
+    "customer_control": "AWS セキュリティブログは、新しい AWS サービスおよび機能、実装ガイド、および⼀般的なセキュリティガイダンスを取り上\nげます。「AWS の最新情報」(http://aws.amazon.com/new)は、すべての AWS 機能、サービス、および発表に関する最新情\n報を確認する優れた⽅法です。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-\npillar/sec_securely_operate_implement_services_features.html",
+    "supplement": "AWSの最新情報\nhttps://aws.amazon.com/jp/new/\nAWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   }
+  ],
+  "実49": [
+   {
+    "branch": "",
+    "customer_control": "",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス\nAWS Webサイト︓AWSのコントロー\nル - セキュアな設定\nhttps://aws.amazon.com/jp/complia\nnce/data-center/controls/"
+   }
+  ],
+  "実5": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   },
+   {
+    "branch": "3",
+    "customer_control": "アクセス (最⼩特権を使⽤)、分離、バージョニングなど、複数のコントロールによって保管中のデータを保護できます。データ\nへのアクセスは、AWS CloudTrail などの探査メカニズムと、Amazon Simple Storage Service (Amazon S3) アクセスログな\nどのサービスレベルログを使⽤して監査する必要があります。パブリックにアクセス可能なデータをインベントリし、時間の経過\nとともにパブリックで利⽤可能なデータ量の削減します。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-pillar/sec_protect_data_rest_access_control.html\nlAWS リソースへのアクセス権限について、付与されている権限のうち、利⽤されていない権限について AWS Identity and\nAccess Management (IAM) アクセスアドバイザーで最終アクセス時間を確認することで検出することが可能になります。アク\nセス権限の妥当性について確認を⾏い、不要であれば削除します。インバウンドトラフィックとアウトバウンドトラフィックの両\n⽅について、多層防御アプローチでコントロールを適⽤します。たとえば、Amazon Virtual Private Cloud (VPC) の場合、これ\nにはセキュリティグループ、ネットワーク ACL、サブネットが含まれます。重要なファイルへのアクセスについて、VPC からの\nみアクセスを許可することで、ネットワークレイヤでの対策を追加することが可能になります。例えば Amazon S3 に保存する\n場合、VPC エンドポイントやパブリックブロックアクセスを活⽤することで実現することが可能です。\nhttps://github.com/aws-samples/baseline-environment-on-aws-for-financial-services-institute/blob/main/doc/fsi-lens-\nfor-fisc/security.md",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html\nAWS Well-Architected フレームワー\nク FSI Lens for FISC セキュリティの柱\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-\ninstitute/blob/main/doc/fsi-lens-for-\nfisc/security.md"
+   }
+  ],
+  "実50": [
+   {
+    "branch": "",
+    "customer_control": "",
+    "supplement": "アマゾン ウェブ サービス :リスクとコ\nンプライアンス"
+   }
+  ],
+  "実51": [
+   {
+    "branch": "",
+    "customer_control": "",
+    "supplement": "AWS Webサイト - コントロール\nhttps://aws.amazon.com/jp/complia\nnce/data-center/controls/\nアマゾン ウェブ サービス :リスクとコ\nンプライアンス\nAWS CSA Consensus Assessments\nInitiative Questionnaire (CAIQ)\nFeburary, 2020"
+   }
+  ],
+  "実52": [
+   {
+    "branch": "",
+    "customer_control": "",
+    "supplement": "AWS Webサイト︓コントロール\nhttps://aws.amazon.com/jp/complia\nnce/data-center/controls/"
+   }
+  ],
+  "実53": [
+   {
+    "branch": "",
+    "customer_control": "",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス\nAWS Webサイト︓データセンター -\nAWSのコントロール\nhttps://aws.amazon.com/jp/complia\nnce/data-center/controls/"
+   }
+  ],
+  "実54": [
+   {
+    "branch": "",
+    "customer_control": "",
+    "supplement": "AWS Webサイト︓AWSのコントロー\nル\nhttps://aws.amazon.com/jp/complia\nnce/data-center/controls/\nアマゾン ウェブ サービス: リスクとコ\nンプライアンス ホワイトペーパー"
+   }
+  ],
+  "実55": [
+   {
+    "branch": "",
+    "customer_control": "",
+    "supplement": "AWS Webサイト︓AWS のコントロー\nル - セキュアな設計\nhttps://aws.amazon.com/jp/complia\nnce/data-\ncenter/controls/#Secure_Design"
+   }
+  ],
+  "実56": [
+   {
+    "branch": "",
+    "customer_control": "",
+    "supplement": "アマゾン ウェブ サービス: リスクとコ\nンプライアンス\nAWS Webサイト︓AWS のコントロー\nル - 物理アクセス\nhttps://aws.amazon.com/jp/complia\nnce/data-\ncenter/controls/#Physical_Access"
+   }
+  ],
+  "実57": [
+   {
+    "branch": "",
+    "customer_control": "",
+    "supplement": "アマゾン ウェブ サービス: リスクとコ\nンプライアンス\nAWS Webサイト︓AWS のコントロー\nル - 物理アクセス\nhttps://aws.amazon.com/jp/complia\nnce/data-\ncenter/controls/#Physical_Access"
+   }
+  ],
+  "実58": [
+   {
+    "branch": "",
+    "customer_control": "",
+    "supplement": "アマゾン ウェブ サービス: リスクとコ\nンプライアンス\nAWS Webサイト︓AWS のコントロー\nル - 物理アクセス\nhttps://aws.amazon.com/jp/complia\nnce/data-\ncenter/controls/#Physical_Access"
+   }
+  ],
+  "実59": [
+   {
+    "branch": "",
+    "customer_control": "",
+    "supplement": "アマゾン ウェブ サービス: リスクとコ\nンプライアンス\nAWS Webサイト︓AWS のコントロー\nル\nhttps://aws.amazon.com/jp/complia\nnce/data-center/controls/"
+   }
+  ],
+  "実6": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実60": [
+   {
+    "branch": "",
+    "customer_control": "",
+    "supplement": "AWS Webサイト︓AWS のコントロー\nル - ビジネスの継続性と災害復旧\nhttps://aws.amazon.com/jp/complia\nnce/data-center/controls/"
+   }
+  ],
+  "実61": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実62": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実63": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実64": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実65": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実66": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実67": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実68": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実69": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実7": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   },
+   {
+    "branch": "2",
+    "customer_control": "暗号化キーと証明書を安全に保存し、厳格なアクセスコントロールによって適切な時間間隔でローテーションします。これを実現\nする最善の⽅法として、 AWS Certificate Manager (ACM).これにより、AWS のサービスおよび内部接続リソースで使⽤するた\nめのパブリックおよびプライベートの Transport Layer Security (TLS) 証明書のプロビジョニング、管理、デプロイが容易にな\nります。TLS 証明書は、ネットワーク通信を保護し、プライベートネットワーク上のリソースだけでなく、インターネット上の\nウェブサイトのアイデンティティを確⽴するために使⽤されます。ACM は、Elastic Load Balancers (ELB)、AWS ディストリ\nビューション、API Gateway の API などの AWS リソース と統合し、証明書の⾃動更新も処理します。Amazon Elastic\nCompute Cloud を使⽤してプライベートルート CA をデプロイする場合、証明書とプライベートキーの両⽅を ACM (Amazon\nEC2) インスタンス、コンテナなどで使⽤するために提供できます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-\npillar/sec_protect_data_transit_key_cert_mgmt.htm\nlAWS のサービスには、通信に TLS を使⽤し、AWS API との通信の際に伝送中データの暗号化を利⽤できる、HTTPS エンドポ\nイントが⽤意されています。HTTP など安全でないプロトコルは、セキュリティグループを使⽤して VPC で監査およびブロック\nできます。HTTP リクエストは、Amazon CloudFront または Application Load Balancer でHTTPS に⾃動的にリダイレクトす\nることもできます。コンピューティングリソースを完全に制御して、サービス全体に伝送中データの暗号化を実装できます。ま\nた、外部ネットワークまたは AWS Direct Connect からお使いの VPC に VPN で接続して、トラフィックの暗号化を促進できま\nす。クライアントが AWS API に電話かける際に、最低でも TLS 1.2 を使⽤していることを確認してください。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-pillar/sec_protect_data_transit_encrypt.html",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   }
+  ],
+  "実70": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nAWS サポートは、経験豊富な技術サポートエンジニアによる、1 対 1 の迅速なレスポンスを特徴とするサポートサービスです。\nAWS サポートは、お客様がそのインフラストラクチャをクラウドで運⽤できるように技術的な問題に関する⽀援を⾏います。操\n作上の問題や技術的な質問があるお客様は、サポートエンジニアのチームに連絡でき、予測可能な応答時間およびパーソナライズ\nされたサポートを受けることができます。\nAWSサポートの詳細については以下のURLをご参照ください。（ https://aws.amazon.com/jp/premiumsupport/ ）",
+    "supplement": "NIST サイバーセキュリティフレーム\nワーク (CSF) AWS クラウドにおける\nNIST CSF への準拠\nhttps://d1.awsstatic.com/whitepape\nrs/ja_JP/compliance/NIST_Cybersec\nurity_Framework_CSF.pdf"
+   }
+  ],
+  "実71": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nAWS サポートは、経験豊富な技術サポートエンジニアによる、1 対 1 の迅速なレスポンスを特徴とするサポートサービスです。\nAWS サポートは、お客様がそのインフラストラクチャをクラウドで運⽤できるように技術的な問題に関する⽀援を⾏います。操\n作上の問題や技術的な質問があるお客様は、サポートエンジニアのチームに連絡でき、予測可能な応答時間およびパーソナライズ\nされたサポートを受けることができます。\nAWSサポートの詳細については以下のURLをご参照ください。（ https://aws.amazon.com/jp/premiumsupport/ ）",
+    "supplement": "アマゾン ウェブ サービス︓リスクとコ\nンプライアンス\nNIST サイバーセキュリティフレーム\nワーク (CSF) AWS クラウドにおける\nNIST CSF への準拠\nhttps://d1.awsstatic.com/whitepape\nrs/ja_JP/compliance/NIST_Cybersec\nurity_Framework_CSF.pdf"
+   },
+   {
+    "branch": "4",
+    "customer_control": "AWS Health Dashboardでは、AWS サービスの可⽤性と運⽤状況を 1 か所で確認できます。AWS サービスの全体的なステータ\nスを表⽰できます。また、サインインすると、特定の AWS アカウントまたは組織に関するパーソナライズされたコミュニケー\nションを表⽰できます。アカウントビューでは、リソースの問題、今後の変更、重要な通知をより詳細に把握できます。\nhttps://docs.aws.amazon.com/ja_jp/health/latest/ug/what-is-aws-health.html\nAWS またはサードパーティ製のツールを使⽤して、システムの復旧を⾃動化し、トラフィックを DR サイトまたはリージョンに\nルーティングします。設定されたヘルスチェックに基づいて、Elastic Load Balancing や AWS Auto Scaling などの AWS サー\nビスは、正常なアベイラビリティゾーンに負荷を分散できますが、Amazon Route 53、や AWS Global Accelerator などのサー\nビスは、正常な AWS リージョン に負荷をルーティングできます。Route 53 Application Recovery Controller は、準備状況の\nチェックとルーティングコントロール機能を使⽤して、フェイルオーバーの管理と調整を⽀援します。これらの機能は、障害から\n回復するアプリケーションの能⼒を継続的にモニタリングするため、複数の AWS リージョン、アベイラビリティゾーン、および\nオンプレミスにまたがってアプリケーションの回復を管理できます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/reliability-\npillar/rel_planning_for_recovery_auto_recovery.html\nセキュリティ調査または要件に基づいた他のユースケース中、インシデントの全容とタイムラインを記録して理解するために関連\nログをレビューできる必要があります。ログはまた、関⼼のある特定のアクションが発⽣したことを⽰すアラート⽣成にも必須で\nす。クエリと取得のメカニズムを選択、有効化、保存、設定してアラートを発するのに不可⽋です。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-\npillar/sec_detect_investigate_events_app_service_logging.",
+    "supplement": "AWS Well-Architected フレームワー\nク 信頼性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/reliability-\npillar/welcome.html\nAWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html\nAWS でのワークロードの災害対策: ク\nラウド内での復旧\nhttps://docs.aws.amazon.com/ja_jp/\nwhitepapers/latest/disaster-\nrecovery-workloads-on-\naws/detection.html\nAWS Health ユーザーガイド\nhttps://docs.aws.amazon.com/ja_jp/\nhealth/latest/ug/what-is-aws-\nhealth.html"
+   },
+   {
+    "branch": "5",
+    "customer_control": "回避すべきパターンは、まれにしか実⾏されない復旧経路を作ることです。たとえば、読み取り専⽤のクエリに使⽤されるセカン\nダリデータストアがあるとします。データストアの書き込み時にプライマリデータストアで障害が発⽣した場合、セカンダリデー\nタストアにフェイルオーバーします。もしこのフェイルオーバーを頻繁にテストしない場合、セカンダリデータストアの機能に関\nする前提が正しくない可能性があります。セカンダリデータストアの容量は、最後にテストしたときには⼗分だったかもしれませ\nんが、このシナリオでは負荷に耐えられなくなる可能性があります。エラー復旧がうまくいくのは頻繁にテストする経路のみであ\nることは、これまでの経験からも明らかです。少数の復旧経路を⽤意することがベストであるのはそのためです。復旧パターンを\n確⽴して定期的にテストできます。復旧経路が複雑な場合や重⼤な場合に復旧経路が正常に機能するという確信を持つには、本番\n環境でその障害を定期的に実⾏する必要があります。前述の例では、その必要性に関係なく、スタンバイへのフェイルオーバーを\n定期的に⾏う必要があります。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/reliability-pillar/rel_planning_for_recovery_dr_tested.html\nAWS Resilience Hub でワークロードの RTO や RPO を含むレジリエンスポリシーを定義することで、構成されるインフラスト\nラクチャやアプリケーション設定などを評価することができます。\nhttps://github.com/aws-samples/baseline-environment-on-aws-for-financial-services-institute/blob/main/doc/fsi-lens-\nfor-fisc/reliability.md",
+    "supplement": "AWS Well-Architected フレームワー\nク 信頼性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/reliability-\npillar/welcome.html\nAWS Well-Architected フレームワー\nク FSI Lens for FISC 信頼性の柱\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-\ninstitute/blob/main/doc/fsi-lens-for-\nfisc/reliability.md"
+   }
+  ],
+  "実72": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nAWS サポートは、経験豊富な技術サポートエンジニアによる、1 対 1 の迅速なレスポンスを特徴とするサポートサービスです。\nAWS サポートは、お客様がそのインフラストラクチャをクラウドで運⽤できるように技術的な問題に関する⽀援を⾏います。操\n作上の問題や技術的な質問があるお客様は、サポートエンジニアのチームに連絡でき、予測可能な応答時間およびパーソナライズ\nされたサポートを受けることができます。\nAWSサポートの詳細については以下のURLをご参照ください。（ https://aws.amazon.com/jp/premiumsupport/ ）",
+    "supplement": "NIST サイバーセキュリティフレーム\nワーク (CSF) AWS クラウドにおける\nNIST CSF への準拠\nhttps://d1.awsstatic.com/whitepape\nrs/ja_JP/compliance/NIST_Cybersec\nurity_Framework_CSF.pdf"
+   },
+   {
+    "branch": "8",
+    "customer_control": "AWS Health Dashboardでは、AWS サービスの可⽤性と運⽤状況を 1 か所で確認できます。AWS サービスの全体的なステータ\nスを表⽰できます。また、サインインすると、特定の AWS アカウントまたは組織に関するパーソナライズされたコミュニケー\nションを表⽰できます。アカウントビューでは、リソースの問題、今後の変更、重要な通知をより詳細に把握できます。\nhttps://docs.aws.amazon.com/ja_jp/health/latest/ug/what-is-aws-health.html",
+    "supplement": "AWS Health ユーザーガイド\nhttps://docs.aws.amazon.com/ja_jp/\nhealth/latest/ug/what-is-aws-\nhealth.html"
+   },
+   {
+    "branch": "9",
+    "customer_control": "AWS Health Dashboard のサービス履歴では、過去12カ⽉間のAWSサービスの中断が表⽰されます。\nhttps://health.aws.amazon.com/health/status",
+    "supplement": "AWS Health Dashboard - サービスの\n状態\nhttps://health.aws.amazon.com/hea\nlth/status"
+   }
+  ],
+  "実73": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "AWS Webサイト︓AWS のコントロー\nル - 物理アクセスビジネスの継続性と災\n害復旧\nhttps://aws.amazon.com/jp/complia\nnce/data-center/controls/\nアマゾン ウェブ サービス︓AWS リス\nクとコンプライアンス"
+   },
+   {
+    "branch": "8",
+    "customer_control": "単⼀の AWS リージョン 内の複数のアベイラビリティゾーン (AZ) にまたがる DR 戦略は、⽕災、洪⽔、⼤規模な停電などの災害\nイベントに対して影響を緩和できます。ワークロードを特定の AWS リージョン で実⾏できなくなるような、可能性の低いイベ\nントに対する保護を実装する必要がある場合には、複数のリージョンを使⽤する DR 戦略を使⽤できます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/reliability-\npillar/rel_planning_for_recovery_disaster_recovery.html",
+    "supplement": "信頼性の柱 - AWS Well-Architected\nフレームワーク\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/reliability-\npillar/welcome.html"
+   }
+  ],
+  "実73-1": [
+   {
+    "branch": "",
+    "customer_control": "成熟した予防的、発⾒的統制が実装されていても、組織はセキュリティインシデントの潜在的な影響に対応し、影響を緩和するメ\nカニズムを実装する必要があります。準備することで、インシデントの際にチームが効果的に動作し、問題を切り分け、封じ込\nめ、フォレンジックを実⾏し、運⽤を既知の正常な状態に復元する能⼒に強く影響します。セキュリティインシデントが起こる前\nにツールとアクセス権を整備し、ゲームデー (実践訓練) を通じてインシデント対応を定期的に実施しておけば、ビジネスの中断\nを最⼩限に抑えながら復旧することができます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-pillar/incident-response.html\nAWS Security Incident Response は、最も重要なタイミングでの対応に役⽴ちます。このサービスには、監視と調査の⾃動\n化、迅速なコミュニケーションと調整、AWS Customer Incident Response Team (CIRT) への 24 時間 365 ⽇の直接アクセス\nなどの機能が組み合わされており、セキュリティイベントに対する準備、セキュリティイベントへの対応、セキュリティイベント\nからの復旧をすばやく⾏えます。\nhttps://aws.amazon.com/jp/security-incident-response/",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   }
+  ],
+  "実74": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": "アマゾン ウェブ サービス︓AWS リス\nクとコンプライアンス"
+   },
+   {
+    "branch": "4",
+    "customer_control": "単⼀の AWS リージョン 内の複数のアベイラビリティゾーン (AZ) にまたがる DR 戦略は、⽕災、洪⽔、⼤規模な停電などの災害\nイベントに対して影響を緩和できます。ワークロードを特定の AWS リージョン で実⾏できなくなるような、可能性の低いイベ\nントに対する保護を実装する必要がある場合には、複数のリージョンを使⽤する DR 戦略を使⽤できます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/reliability-\npillar/rel_planning_for_recovery_disaster_recovery.html\nAWSリージョンやデータセンターの設計を踏まえ、⽇本における地震災害において、どのようにAWSが⾼い耐障害性を確保して\nいるか、また、マルチリージョンの活⽤により、お客様がどのように⾼いレジリエンスを確保できるかを解説したホワイトペー\nパーを、AWS Artifactおいて公開しています。\nhttps://aws.amazon.com/jp/blogs/news/resiliency-in-japan/",
+    "supplement": "AWS Well-Architected フレームワー\nク 信頼性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/reliability-\npillar/welcome.html\nAWS でのワークロードの災害対策: ク\nラウド内での復旧\nhttps://docs.aws.amazon.com/ja_jp/\nwhitepapers/latest/disaster-\nrecovery-workloads-on-\naws/detection.html\nAWSグローバルインフラストラクチャ\nhttps://aws.amazon.com/jp/about-\naws/global-infrastructure/\nAWS Well-Architected フレームワー\nク FSI Lens for FISC 信頼性の柱\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-\ninstitute/blob/main/doc/fsi-lens-for-\nfisc/reliability.md"
+   }
+  ],
+  "実75": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nAWS は、脆弱性管理プログラムをサポートするさまざまなサービスを提供します。Amazon Inspector は、ソフトウェアの脆弱\n性や意図しないネットワークアクセスがないか、AWS ワークロードを継続的にスキャンし、AWS Systems Manager Patch\nManager は Amazon EC2 インスタンス間のパッチ適⽤の管理に役⽴ちます。これらのサービスは、AWS セキュリティチェック\nの⾃動化、セキュリティアラートの⼀元化、組織のセキュリティ体制の包括的なビューを提供するクラウドセキュリティ体制管理\nサービスである AWS Security Hub と統合できます。さらに、Amazon CodeGuru Securityは静的コード分析を使⽤して、開発\nフェーズ中の Java および Python アプリケーションの潜在的な問題を特定します。\nソフトウェア開発ライフサイクルに脆弱性管理プラクティスを組み込むことにより、本番環境に導⼊される前に、脆弱性をプロア\nクティブに解決できるため、セキュリティイベントのリスクが軽減され、脆弱性の潜在的な影響を最⼩限に抑えることができま\nす。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-\npillar/sec_protect_compute_vulnerability_management.html",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   }
+  ],
+  "実76": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   },
+   {
+    "branch": "3",
+    "customer_control": "AWS では、社内のレポート構造を流⽤せずに、個別アカウントごとにワークロードを整理し、機能、コンプライアンス要件、共\n通のコントロールセットに基づいてアカウントをグループ化することを推奨しています。AWS では、アカウントが強固な境界と\nなります。たとえば、開発およびテストのワークロードと本番ワークロードを切り離すために、アカウントレベルの分離を強く推\n奨しています。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-pillar/aws-account-management-and-\nseparation.html",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   }
+  ],
+  "実77": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実78": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実79": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実8": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   },
+   {
+    "branch": "8",
+    "customer_control": "⼈的 ID が AWS にサインインする⽅法は多数あります。AWS ベストプラクティスは、AWS に認証する際にフェデレーション\n(直接フェデレーションまたは AWS IAM Identity Center (successor to AWS Single Sign-On) を使⽤) を使って、⼀元化され\nた ID プロバイダーに依存する⽅法です。\nこの場合、ID プロバイダーまたは Microsoft Active Directory を使って、セキュアなサインインプロセスを確⽴する必要があり\nます。最初に AWS アカウント を開いたとき、AWS アカウント ルートユーザーから始めます。\nユーザー (およびルートユーザーを必要とする タスク) へのアクセスを設定するには、アカウントのルートユーザーのみを使⽤す\nる必要があります。.AWS アカウント を開いた直後にアカウントのルートユーザーに対して MFA を有効化し、AWS ベストプラ\nクティスガイドを使⽤してルートユーザーをセキュリティ保護することが重要です。AWS IAM Identity Center (successor to\nAWS Single Sign-On) でユーザーを作成する場合、そのサービスでサインインプロセスをセキュリティ保護します。\n消費者アイデンティティについては、Amazon Cognito user pools を使⽤して、そのサービスで、またはAmazon Cognito\nuser pools がサポートする ID プロバイダーの 1 つを使ってサインインプロセスをセキュリティ保護します。AWS Identity and\nAccess Management (IAM) ユーザーを使⽤している場合、IAM を使ってサインインプロセスをセキュリティ保護することにな\nります。サインイン⽅法に関係なく、強⼒なサインインポリシーを適⽤することが不可⽋です。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-pillar/sec_identities_enforce_mechanisms.html\n各認証⽅式でのFIDO2/パスキーの対応状況は以下のとおりです。\nIAM Identity Center は、FIDO2 認証機能をサポートします。\nhttps://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/mfa-types.html#mfa-types-fido2\nAmazon Cognitoは、パスキー認証をサポートします。\nhttps://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow-\nmethods.html#amazon-cognito-user-pools-authentication-flow-methods-passkey\nIAMユーザーの認証にパスキーを設定することが可能です。\nhttps://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_credentials_mfa_enable_fido.html",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   },
+   {
+    "branch": "参考4",
+    "customer_control": "すべての AWS API と CLI リクエストに対して、⻑期的認証情報ではなく⼀時的なセキュリティ認証情報を使⽤します。AWS\nサービスに対する API および CLI リクエストは、ほとんどの場合、AWS アクセスキーを使って署名する必要があります。これ\nらのリクエストの署名に使⽤する認証情報は、⼀時的でも⻑期的でもかまいません。⻑期的認証情報 (⻑期的アクセスキー) を使\n⽤すべき唯⼀の状況は、IAM ユーザーまたは AWS アカウント ルートユーザーを使⽤している場合です。AWS に対してフェデ\nレーションを⾏うか、または他の⽅法により IAM ロールを担う場合、⼀時的認証情報が⽣成されます。サインイン認証情報を\n使って AWS Management Console にアクセスしても、AWS サービスへのコールを⾏うために⼀時的な認証情報が⽣成されま\nす。⻑期的認証情報が必要な状況はほとんどなく、⼀時的な認証情報でほとんどのタスクを遂⾏できます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-pillar/sec_identities_unique.html",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html"
+   }
+  ],
+  "実80": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実81": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実82": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   },
+   {
+    "branch": "3",
+    "customer_control": "AWS環境における安全なデータ廃棄の⽅法の例は、以下の記事をご参照ください。\nクラウドにおける安全なデータの廃棄\nhttps://aws.amazon.com/jp/blogs/news/data_disposal/\nクラウドにおける安全なデータの廃棄（実践編）\nhttps://aws.amazon.com/jp/blogs/news/delstoragedatapractice/",
+    "supplement": "クラウドにおける安全なデータの廃棄\nhttps://aws.amazon.com/jp/blogs/n\news/data_disposal/\nクラウドにおける安全なデータの廃棄\n（実践編）\nhttps://aws.amazon.com/jp/blogs/n\news/delstoragedatapractice/"
+   }
+  ],
+  "実83": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実84": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nクラウド環境においてはハードウェアの冗⻑化のみならず、ソフトウェアによるサービスの冗⻑化構成も⾼可⽤性を実現するため\nに重要な要素となります。\nAWS は、堅牢な継続性計画を実装する機能をお客様に提供しています。たとえば、頻繁なサーバーインスタンスバックアップの\n利⽤、データの冗⻑レプリケーション、マルチリージョン/アベイラビリティーゾーンのデプロイアーキテクチャなどです。\nまた、お客様はAmazon EC2 Auto Scalingを使⽤することができます。Amazon EC2 Auto Scaling は、Amazon EC2 のインス\nタンスを⾃動的に作成または終了してアプリケーションの負荷を処理する Amazon EC2 インスタンスの数を調整できる、完全マ\nネージド型サービスです。Amazon EC2 Auto Scaling では、異常なインスタンスを検出して置き換えることにより、EC2 イン\nスタンスのフリートを管理できます。また、お客様が定義する条件に応じて Amazon EC2 のキャパシティーのスケールアップ/\nスケールダウンを⾃動的に⾏って、アプリケーションの可⽤性を維持できます。",
+    "supplement": "NIST サイバーセキュリティフレーム\nワーク (CSF) AWS クラウドにおける\nNIST CSF への準拠\nhttps://d1.awsstatic.com/whitepape\nrs/ja_JP/compliance/NIST_Cybersec\nurity_Framework_CSF.pdf"
+   }
+  ],
+  "実85": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nクラウド環境においてはハードウェアの冗⻑化のみならず、ソフトウェアによるサービスの冗⻑化構成も⾼可⽤性を実現するため\nに重要な要素となります。\nAWS は、堅牢な継続性計画を実装する機能をお客様に提供しています。たとえば、頻繁なサーバーインスタンスバックアップの\n利⽤、データの冗⻑レプリケーション、マルチリージョン/アベイラビリティーゾーンのデプロイアーキテクチャなどです。",
+    "supplement": "NIST サイバーセキュリティフレーム\nワーク (CSF) AWS クラウドにおける\nNIST CSF への準拠\nhttps://d1.awsstatic.com/whitepape\nrs/ja_JP/compliance/NIST_Cybersec\nurity_Framework_CSF.pdf"
+   }
+  ],
+  "実86": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nクラウド環境においてはハードウェアの冗⻑化のみならず、ソフトウェアによるサービスの冗⻑化構成も⾼可⽤性を実現するため\nに重要な要素となります。\nAWS は、堅牢な継続性計画を実装する機能をお客様に提供しています。たとえば、頻繁なサーバーインスタンスバックアップの\n利⽤、データの冗⻑レプリケーション、マルチリージョン/アベイラビリティーゾーンのデプロイアーキテクチャなどです。",
+    "supplement": "NIST サイバーセキュリティフレーム\nワーク (CSF) AWS クラウドにおける\nNIST CSF への準拠\nhttps://d1.awsstatic.com/whitepape\nrs/ja_JP/compliance/NIST_Cybersec\nurity_Framework_CSF.pdf"
+   }
+  ],
+  "実87": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nクラウド環境においてはハードウェアの冗⻑化のみならず、ソフトウェアによるサービスの冗⻑化構成も⾼可⽤性を実現するため\nに重要な要素となります。\nAWS は、堅牢な継続性計画を実装する機能をお客様に提供しています。たとえば、頻繁なサーバーインスタンスバックアップの\n利⽤、データの冗⻑レプリケーション、マルチリージョン/アベイラビリティーゾーンのデプロイアーキテクチャなどです。",
+    "supplement": "AWS Webサイト︓データセンター - 環\n境レイヤー\nhttps://aws.amazon.com/jp/complia\nnce/data-center/environmental-\nlayer/\nアマゾン ウェブ サービス︓セキュリ\nティプロセスの概要"
+   }
+  ],
+  "実88": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nクラウド環境においてはハードウェアの冗⻑化のみならず、ソフトウェアによるサービスの冗⻑化構成も⾼可⽤性を実現するため\nに重要な要素となります。\nAWS は、堅牢な継続性計画を実装する機能をお客様に提供しています。たとえば、頻繁なサーバーインスタンスバックアップの\n利⽤、データの冗⻑レプリケーション、マルチリージョン/アベイラビリティーゾーンのデプロイアーキテクチャなどです。",
+    "supplement": "AWS Webサイト︓データセンター - 環\n境レイヤー\nhttps://aws.amazon.com/jp/complia\nnce/data-center/environmental-\nlayer/\nAWS Webサイト︓グローバルインフラ\nストラクチャ - リージョンとアベイラビ\nリティーゾーン\nhttps://aws.amazon.com/jp/about-\naws/global-\ninfrastructure/regions_az/"
+   }
+  ],
+  "実89": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実9": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   },
+   {
+    "branch": "3",
+    "customer_control": "AWS アカウント を作成する場合は、このアカウントのすべての AWS のサービス とリソースに対して完全なアクセス権を持つ 1\nつのサインインアイデンティティから始めます。この ID は AWS アカウント ルートユーザーと呼ばれ、アカウントの作成に使⽤\nした E メールアドレスとパスワードでサインインすることによってアクセスできます。⽇常的なタスクには、ルートユーザーを\n使⽤しないことを強くお勧めします。ルートユーザーの認証情報を保護し、それらを使⽤してルートユーザーのみが実⾏できるタ\nスクを実⾏します。\nhttps://docs.aws.amazon.com/ja_jp/accounts/latest/reference/root-user.html\n以下は、アカウントのルートユーザーを保護するためのベストプラクティスです。\nhttps://docs.aws.amazon.com/ja_jp/accounts/latest/reference/best-practices-root-user.html",
+    "supplement": ""
+   }
+  ],
+  "実90": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実91": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実92": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実93": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実94": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実95": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実96": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実97": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実98": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。",
+    "supplement": ""
+   }
+  ],
+  "実99": [
+   {
+    "branch": "",
+    "customer_control": "お客様がAWS上で実装するシステムおよびサービスの管理は、AWSが提供する機能および情報もしくはその他の機能を⽤いて、\nお客様にて実施します。\nAWS Systems Manager を使⽤することで、複数の AWS のサービスの運⽤データを⼀元化し、AWS リソース全体のタスクを\n⾃動化できます。アプリケーション、アプリケーションスタックのさまざまなレイヤー、本番環境と開発環境といったリソースの\n論理グループを作成できます。Systems Manager では、リソースグループを選択し、その最新の API アクティビティ、リソー\nス設定の変更、関連する通知、運⽤アラート、ソフトウェアインベントリ、パッチコンプライアンス状況を表⽰できます。運⽤\nニーズに応じて、各リソースグループに対してアクションを実⾏することもできます。Systems Manager により、AWS リソー\nスを⼀元的に表⽰および管理でき、運⽤を完全に可視化して制御できます。\n・AWS CloudFormation は、開発や本運⽤に必要な、互いに関連する AWS およびサードパーティのリソースコレクションを作\n成し、そのリソースを適切な順序でプロビジョニングするためのサービスです。AWS CloudFormation を使⽤すれば、アプリ\nケーションを駆動する関連リソースのグループを予測可能な⽅法で繰り返し作成する作業を⾃動化および簡素化できます。",
+    "supplement": "アマゾン ウェブ サービス︓AWS リス\nクとコンプライアンス\nNIST サイバーセキュリティフレーム\nワーク (CSF) AWS クラウドにおける\nNIST CSF への準拠\nhttps://d1.awsstatic.com/whitepape\nrs/ja_JP/compliance/NIST_Cybersec\nurity_Framework_CSF.pdf\nAWS CSA Consensus Assessments\nInitiative Questionnaire (CAIQ)\nAWS Webサイト︓AWS Systems\nManagerのよくある質問\nhttps://aws.amazon.com/jp/systems\n-manager/faq/\nAWS Webサイト︓AWS\nCloudFormation のよくある質問\nhttps://aws.amazon.com/jp/cloudfor\nmation/faqs/"
+   },
+   {
+    "branch": "3",
+    "customer_control": "ランブックは、特定の成果を達成するために⽂書化されたプロセスです。ランブックは⼀連のステップから成り、それをたどるこ\nとでプロセスを完了できます。ランブックは、⾶⾏機の黎明期から運⽤に使⽤されてきました。クラウド運⽤では、ランブックを\n使⽤してリスクを削減し、望ましい成果を達成します。端的に⾔うと、ランブックはタスクを完了するためのチェックリストで\nす。\nランブックは、組織の成熟度に応じて、いくつかの形態をとります。少なくとも、ステップバイステップのテキスト⽂書で構成さ\nれている必要があります。期待される成果が明確に⽰されている必要があります。必要な特殊なアクセス許可やツールを明確に⽂\n書化します。問題発⽣時にエラー処理とエスカレーションに関する詳細なガイダンスを提供します。ランブックの所有者をリスト\nアップし、⼀元的な場所で公開します。ランブックが⽂書化されたら、チームの別のメンバーに使⽤してもらって検証します。プ\nロセスの進化につれて、変更管理プロセスに従ってランブックを更新します。\n組織が成熟するにつれて、テキストのランブックは⾃動化されるはずです。例えば、 AWS Systems Manager オートメーション\nなどのサービスを使⽤すると、フラットなテキストを、ワークロードに対して実⾏可能なオートメーションに変換できます。これ\nらのオートメーションはイベントに反応して実⾏でき、ワークロードを保守する運⽤上の負担が軽減されます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/operational-excellence-\npillar/ops_ready_to_support_use_runbooks.html\n⾃動スケーリングまたは⾃動復旧を使⽤できない場合、または⾃動復旧が失敗した場合は、AWS Step Functions と AWS\nLambda を使⽤して⾃動復旧を実装します。⾃動スケーリングを使⽤できず、さらに、⾃動復旧が使⽤できないか、⾃動復旧が\n失敗した場合は、AWS Step Functions と AWS Lambda を使⽤して修復を⾃動化できます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/reliability-\npillar/rel_withstand_component_failures_auto_healing_system.html",
+    "supplement": "AWS Well-Architected フレームワー\nク 運⽤上の優秀性の柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/operational-\nexcellence-pillar/welcome.html"
+   }
+  ],
+  "統1": [
+   {
+    "branch": "参考",
+    "customer_control": "・AWSとお客様は、責任共有モデルに基づきIT 環境を統制することになります。AWS 側の責任は、安全性の⾼い、統制されたプラットフォームでサービスを提\n供し、幅広いセキュリティ機能をユーザーに提供することです。お客様側の責任は、⽤途に合わせて安全かつ統制された⽅法で IT 環境を構成することにありま\nす。ITシステムのデプロイ⽅法にかかわらず、お客様はこれまでどおり、IT 統制環境全体に対する適切な管理を維持していただく必要があります。主な実施内容\nとして、関連資料を基にしたコンプライアンスの⽬標と要件の把握、その⽬標と要件を満たす統制環境の構築、組織のリスク許容度に基づいた必要となる妥当性\nの把握、統制環境の運⽤の有効性の検証などがあります。AWS クラウドへのデプロイにより、企業が各種の統制や検証⽅法を適⽤するにあたって選択の幅が広が\nります。お客様のコンプライアンスと管理が厳格な場合は、次のような基本的なアプローチも考慮可能です。このような⽅法でコンプライアンス管理にアプロー\nチすることで、社内の統制環境をより理解することができます。また、実⾏すべき検証活動を明確にすることもできます。\n1. AWS から⼊⼿できる情報、およびその他の必要な情報をレビューして IT 環境全体について可能な限り理解し、すべてのコンプライアンス要件を⽂書化しま\nす。\n2. 企業のコンプライアンス要件を満たす統制⽬標を設計し、実装します。\n3. 社外関係者が⾏う統制を特定し、⽂書化します\n4. すべての統制⽬標が満たされ、すべての主な統制が設計され、その運⽤が有効的かどうかを検証します。\n・カスタマーコンテンツの所有権と管理権について\nアクセス: お客様は、⾃分のコンテンツ、ならびに AWS のサービスとリソースへのユーザーアクセスを管理します。お客様がこれを効果的に実施できるように、\nAWS ではアクセス、暗号化、ログ記録の⾼度な機能セット (AWS CloudTrail など) を⽤意しています。いかなる⽬的であっても、当社がお客様の同意なしにお\n客様のコンテンツにアクセスしたり、それを使⽤したりすることはありません。\n保存: お客様は、コンテンツを保存する AWS リージョンを選択できます。当社が、お客様の同意なしに、お客様のコンテンツをお客様が選択した AWS リージョ\nンの外に移動したり複製したりすることはありません。 セキュリティ: お客様は、⾃分のコンテンツの安全をどのように確保するかを選択できます。AWS では、\n移動中および保管中のコンテンツに対する強⼒な暗号化機能を利⽤できます。暗号化キーをお客様ご⾃⾝で管理することもできます。\nカスタマーコンテンツの開⽰: 法律、または政府機関もしくは規制機関による有効かつ拘束⼒のある命令を遵守するために必要な場合を除き、当社がカスタマーコ\nンテンツを開⽰することはありません。開⽰が必要な際にも、事前の通知が禁⽌されている場合、または Amazon の製品もしくはサービスの使⽤に関連した違法\n⾏為の存在を明確に⽰すものがある場合を除き、Amazon はカスタマーコンテンツの開⽰に先⽴ってお客様に通知を⾏い、お客様が開⽰からの保護を求められる\nようにします。\nセキュリティアシュアランス活動: 当社は、お客様が AWS を安全に運⽤して AWS のセキュリティ統制環境を有効利⽤できるよう、グローバルなプライバシーと\nデータ保護に関するベストプラクティスを使⽤したセキュリティアシュアランス活動プログラムを展開しています。これらのセキュリティ保護と管理プロセス\nは、複数のサードパーティによる独⽴した評価によって、それぞれ個別に検証されています。 最新、詳細情報は下記を参照ください。\nhttps://aws.amazon.com/jp/compliance/data-privacy-faq/\n・ AWS 環境を利⽤している場合の監査の実施について\nほとんどのレイヤーと、物理統制よりも上の統制の監査は、お客様の責任範囲となります。AWS の論理統制と物理統制の定義は、SOC 1 Type II レポートに⽂書\n化されています。また、このレポートはお客様の監査チームとコンプライアンスチームのレビューに使⽤できます。また、AWS ISO/IEC 27001 およびその他の\n認定も監査⼈のレビュー⽤に使⽤できます。\nSOX監査等の実施について\nお客様が AWS クラウドで会計情報を処理する場合、AWS システムの⼀部を Sarbanes-Oxley (SOX) の要件ほほかほの範囲に組み込むことについては、お客様\nの監査⼈が判断することになるでしょう。お客様の監査⼈は、SOX の適⽤可能性について独⾃に判断する必要があります。ほとんどの論理アクセス統制はお客様\nが管理するため、関連する基準に統制活動が適合しているかどうかは、お客様が判断されるのが最適です。SOX 監査⼈が AWS の物理的統制に関する詳細情報を\n必要とする場合は、 SOC 1 Type II レポートを参照できます。AWS が提供する統制が詳細に記載されています。",
+    "supplement": ""
+   }
+  ],
+  "統14": [
+   {
+    "branch": "参考",
+    "customer_control": "・セキュリティ教育のためのツールとして、AWS Skill Builder のAWS セキュリティラーニングプランを提供しています。\nhttps://aws.amazon.com/jp/training/learn-about/security/\nhttps://explore.skillbuilder.aws/learn/public/learning_plan/view/91/security-learning-plan?la=sec&sec=lp\n・AWS Well-Architected Framework では、クラウド上でワークロードを設計および実⾏するための主要な概念、設計原則、アーキテクチャのベストプラク\nティスを提供しています。その中で、セキュリティの柱では、情報とシステムの保護に焦点を当てています。主なトピックには、データの機密性と完全性、ユー\nザー許可の管理、セキュリティイベントを検出するためのコントロールが含まれます。\nhttps://docs.aws.amazon.com/ja_jp/wellarchitected/latest/security-pillar/welcome.html",
+    "supplement": ""
+   }
+  ],
+  "統15": [
+   {
+    "branch": "参考",
+    "customer_control": "・AWS 認定として、基礎的な知識ベースのものから、⾼度な知識ベース、あるいは技術領域別の専⾨知識ベースの資格を設けています。\nhttps://aws.amazon.com/jp/certification/\n・学習のためのツールとしては、個⼈でオンラインで取り組めるものを提供しており、複数⼈で参加するクラスルームやハンズオンラボといった対⾯参加型プロ\nグラムも提供しています。\n- AWS クラスルームトレーニング\nhttps://aws.amazon.com/jp/training/classroom/",
+    "supplement": ""
+   }
+  ],
+  "統20": [
+   {
+    "branch": "3-(3)",
+    "customer_control": "(3)-1\n・AWSとお客様は、責任共有モデルに基づきIT 環境を統制することになります。AWS 側の責任は、安全性の⾼い、統制されたプラットフォームでサービスを提\n供し、幅広いセキュリティ機能をユーザーに提供することです。お客様側の責任は、⽤途に合わせて安全かつ統制された⽅法で IT 環境を構成することにありま\nす。ITシステムのデプロイ⽅法にかかわらず、お客様はこれまでどおり、IT 統制環境全体に対する適切な管理を維持していただく必要があります。主な実施内容\nとして、関連資料を基にしたコンプライアンスの⽬標と要件の把握、その⽬標と要件を満たす統制環境の構築、組織のリスク許容度に基づいた必要となる妥当性\nの把握、統制環境の運⽤の有効性の検証などがあります。AWS クラウドへのデプロイにより、企業が各種の統制や検証⽅法を適⽤するにあたって選択の幅が広が\nります。お客様のコンプライアンスと管理が厳格な場合は、次のような基本的なアプローチも考慮可能です。このような⽅法でコンプライアンス管理にアプロー\nチすることで、社内の統制環境をより理解することができます。また、実⾏すべき検証活動を明確にすることもできます。\n1. AWS から⼊⼿できる情報、およびその他の必要な情報をレビューして IT 環境全体について可能な限り理解し、すべてのコンプライアンス要件を⽂書化しま\nす。\n2. 企業のコンプライアンス要件を満たす統制⽬標を設計し、実装します。\n3. 社外関係者が⾏う統制を特定し、⽂書化します。\n4. すべての統制⽬標が満たされ、すべての主な統制が設計され、その運⽤が有効的かどうかを検証します。\n(3)-3 AWS では、インターネット経由での利⽤者のアクセスに対する強固な認証を実現するため、以下のようなサービスを提供しています。利⽤者に対して、こ\nれらのサービスを適切に使⽤することで、AWSにおけるインターネット接続に対する認証強度を向上させることが可能です。\n- AWS Identity and Access Management (IAM) : IAMを使⽤すると、AWSリソースへのアクセスを安全に制御できます。ユーザー、グループ、および役割を作\n成し、それらに対して特定の権限を付与することができます。\n- Multi-Factor Authentication (MFA) : MFAは、ユーザーが⾃⾝を証明するための2つ以上の要素を要求するセキュリティシステムです。これにより、パスワー\nドだけでなく、電話番号やハードウェアトークンなど、別の形式の認証が必要となります。\n- Amazon Cognito : Cognitoは、ユーザーのサインアップ、サインイン、アクセス制御などを管理するサービスです。Cognitoは、ソーシャルIDプロバイダ\n（FacebookやGoogleなど）やOpenID ConnectやSAMLなどの企業IDプロバイダを利⽤した認証もサポートしています。\n- AWS Key Management Service (KMS) : KMSは暗号キーの作成、制御、および管理を⾏うサービスで、これを利⽤することでデータを暗号化し、認証に関連\nする情報を安全に保管することができます。\n- AWS Secrets Manager : Secrets Managerは、アプリケーションのシークレット（パスワードやAPIキーなど）を安全にローテート、管理、および取得する\nサービスです。\n- AWS Certificate Manager : SSL/TLS証明書の取得、管理、デプロイを容易にします。これにより、AWSを使⽤してセキュアなネットワーク接続を確⽴できま\nす。",
+    "supplement": ""
+   },
+   {
+    "branch": "3-(11)",
+    "customer_control": "-\n-",
+    "supplement": ""
+   }
+  ],
+  "統23": [
+   {
+    "branch": "1, 2",
+    "customer_control": "-\n-",
+    "supplement": ""
+   }
+  ],
+  "統24": [
+   {
+    "branch": "2",
+    "customer_control": "-\n-",
+    "supplement": ""
+   },
+   {
+    "branch": "3",
+    "customer_control": "-\n-\n-",
+    "supplement": ""
+   },
+   {
+    "branch": "6",
+    "customer_control": "・以下の各項⽬は、リスクベースでお客様固有のクラウドサービスに関連する統制を考慮する際の情報として参照ください。\nAWS環境の監査、ガイドライン、リスクやコンプラインスに関する最新および詳細情報は下記のサイトをご参照ください。監査⼈向けのトレーニングコースの初\n回やAWS環境における監査の考え⽅に関連する資料などを掲載しています。\nhttps://aws.amazon.com/jp/compliance/resources/\nAWS セキュリティ監査のガイドライン\nセキュリティ設定を定期的に監査し、現在のビジネスのニーズに対応していることを確認する必要があります。監査では、不要な IAM ユーザー、ロール、グルー\nプ、およびポリシーを削除し、ユーザーとソフトウェアに対して必要なアクセス権限だけを与えるようにすることができます。\nセキュリティのベストプラクティスを実践するために、AWS リソースを体系的に確認し、モニタリングするためのガイドラインを⽰します。\nいつセキュリティ監査を⾏うか監査のための⼀般的なガイドライン\n- AWS アカウントの認証情報の確認\n- IAM ユーザーの確認 IAM グループの確認\n- IAM ロールの確認\n- SAML および OpenID Connect (OIDC) ⽤ IAM プロバイダの確認モバイルアプリの確認\n- Amazon EC2 セキュリティ設定の確認他のサービスの AWS ポリシーの確認 AWS アカウントのアクティビティの監視\n- IAM ポリシーを確認するためのヒント詳細情報\n最新、詳細情報は下記のサイトを参照ください。\nhttps://docs.aws.amazon.com/ja_jp/general/latest/gr/aws-security-audit-guide.html\nAWS 監査⼈のラーニングパスは、AWS のプラットフォームを使⽤して内部オペレーションのコンプライアンスを実証する⽅法を学習したいと考えている、監査\n⼈、コンプライアンス、および法的なロールを持っている⽅向けに設計されています。\n最新、詳細情報は下記のサイトを参照ください。\nhttps://aws.amazon.com/jp/compliance/auditor-learning-path/",
+    "supplement": ""
+   },
+   {
+    "branch": "7",
+    "customer_control": "・AWSとお客様は、責任共有モデルに基づきIT 環境を統制することになります。AWS 側の責任は、安全性の⾼い、統制されたプラットフォームでサービスを提\n供し、幅広いセキュリティ機能をユーザーに提供することです。お客様側の責任は、⽤途に合わせて安全かつ統制された⽅法で IT 環境を構成することにありま\nす。ITシステムのデプロイ⽅法にかかわらず、お客様はこれまでどおり、IT 統制環境全体に対する適切な管理を維持していただく必要があります。主な実施内容\nとして、関連資料を基にしたコンプライアンスの⽬標と要件の把握、その⽬標と要件を満たす統制環境の構築、組織のリスク許容度に基づいた必要となる妥当性\nの把握、統制環境の運⽤の有効性の検証などがあります。AWS クラウドへのデプロイにより、企業が各種の統制や検証⽅法を適⽤するにあたって選択の幅が広が\nります。お客様のコンプライアンスと管理が厳格な場合は、次のような基本的なアプローチも考慮可能です。このような⽅法でコンプライアンス管理にアプロー\nチすることで、社内の統制環境をより理解することができます。また、実⾏すべき検証活動を明確にすることもできます。\n1. AWS から⼊⼿できる情報、およびその他の必要な情報をレビューして IT 環境全体について可能な限り理解し、すべてのコンプライアンス要件を⽂書化しま\nす。\n2. 企業のコンプライアンス要件を満たす統制⽬標を設計し、実装します。\n3. 社外関係者が⾏う統制を特定し、⽂書化します。\n4. すべての統制⽬標が満たされ、すべての主な統制が設計され、その運⽤が有効的かどうかを検証します。\nなお、AWSのサービスごとの責任共有モデルの適⽤は以下のサイトより確認できます。\nhttps://docs.aws.amazon.com/security/\nAWSの法務関連の情報は以下のサイトをご参照ください。\nhttps://aws.amazon.com/jp/legal/\nまた、契約、その他法務関連のお問い合わせについては担当営業までご連絡ください。\n- AWS カスタマーアグリーメント – このカスタマーアグリーメントは、お客様による当サービスのご利⽤について規定するものです\n- AWS サービス条件 – この追加条件は、お客様による特定のサービスのご利⽤に対して適⽤されます\n- AWS サービスレベルアグリーメント – このサービスレベルアグリーメントは、お客様による特定のサービスのご利⽤に対して適⽤されます\n- AWS 適正利⽤規約 – この適正利⽤規約は、当サービスの利⽤に関して、禁⽌される事項を記載したものです\nAWS 環境にデプロイしたインフラストラクチャーの統制に関して\nAWS にデプロイされている部分では、AWS が該当する物理コンポーネントを統制します。その他の部分は、接続ポイントや送信の統制を含め、お客様がすべて\nを所有し、統制することになります。AWS で定めている統制の内容と、その統制がどのように効果的に運⽤されているかについて、AWS では SOC1 Type II レ\nポートを発⾏し、EC2、S3、VPC などに関連し定義された統制、ならびに詳細な物理セキュリティおよび環境に関する統制を公表しています。これらの統制は、\nほとんどのお客様のニーズに⾒合うように、ハイレベルで定義されています。AWS と機密保持契約を結んでいる AWS のお客様は、SOC1 Type II レポートを要\n求できます。AWS 環境を利⽤している場合の監査の実施についてほとんどのレイヤーと、物理統制よりも上の統制の監査は、お客様の責任範囲となります。\nAWS の論理統制と物理統制の定義は、SOC 1 Type II レポートに⽂書化されています。また、このレポートはお客様の監査チームとコンプライアンスチームのレ\nビューに使⽤できます。また、AWS ISO/IEC 27001 およびその他の認定も監査⼈のレビュー⽤に使⽤できます。\nSOX法の監査について\nお客様が AWS クラウドで会計情報を処理する場合、AWS システムの⼀部を Sarbanes-Oxley (SOX) の要件の範囲に組み込むことについては、お客様の監査⼈\nが判断することになるでしょう。お客様の監査⼈は、SOX の適⽤可能性について独⾃に判断する必要があります。ほとんどの論理アクセス統制はお客様が管理す\nるため、関連する基準に統制活動が適合しているかどうかは、お客様が判断されるのが最適です。SOX 監査⼈が AWS の物理的統制に関する詳細情報を必要とす\nる場合は、 SOC 1 Type II レポートを参照できます。AWS が提供する統制が詳細に記載されています。\nお客様のデータセンター訪問\nAWS のデータセンターは多数のお客様をホストしており、そうした様々なお客様が第三者による物理的なアクセスに曝されることになってしまうため、お客様に\nよるデータセンター訪問を許可しておりません。このようなデータセンターに関するお客様のニーズを満たすために、SOC 1 Type II レポートの取り組みの⼀つ\nとして、独⽴し、資格を持つ監査⼈がそのような統制の有無と運⽤を検証しています。この広く受け⼊れられている第三者による検証によって、お客様は運⽤さ\nれている統制の効果について独⽴した観点を得ることができます。AWS と機密保持契約を結んでいる AWS のお客様は、SOC 1Type II レポートのコピーを要求\nできます。また、データセンターの物理的なセキュリティの個別の確認についても、ISO/IEC 27001 監査、PCI 評価、ITAR 監査、FedRAMP 等のテストプログ\nラムの⼀部となっています。",
+    "supplement": ""
+   },
+   {
+    "branch": "8",
+    "customer_control": "AWS Security Hub を使⽤すると、セキュリティのベストプラクティスのチェックを⾃動化し、セキュリティアラートを単⼀の場所と形式に集約し、すべての\nAWS アカウントで全体的なセキュリティの体制を把握することができます。\nhttps://aws.amazon.com/jp/security-hub/\nAWS Control Tower の包括的なコントロール管理は、最⼩特権の適⽤、ネットワークアクセスの制限、データ暗号化の適⽤など、最も⼀般的な制御⽬的を果たす\nために必要な制御の定義、マッピング、管理にかかる時間を短縮するのに役⽴ちます。\nhttps://aws.amazon.com/jp/controltower/features/\nAWS Well-Architected Framework では、クラウド上でワークロードを設計および実⾏するための主要な概念、設計原則、アーキテクチャのベストプラクティ\nスを提供しています。\nhttps://aws.amazon.com/jp/architecture/well-architected/\n⾦融で求められるセキュリティと可⽤性に関するベストプラクティスを提供するフレームワークとして ⾦融リファレンスアーキテクチャ⽇本版を提供していま\nす。\nhttps://github.com/aws-samples/baseline-environment-on-aws-for-financial-services-institute",
+    "supplement": "AWS Well-Architected フレームワー\nク セキュリティの柱\nhttps://docs.aws.amazon.com/ja_jp/\nwellarchitected/latest/security-\npillar/welcome.html\nAWSカスタマーアグリーメント\nhttps://aws.amazon.com/jp/agreem\nent/\nAWSのサービス条件\nhttps://aws.amazon.com/jp/service-\nterms/\n⾦融リファレンスアーキテクチャ⽇本版\nhttps://github.com/aws-\nsamples/baseline-environment-on-\naws-for-financial-services-institute"
+   }
+  ],
+  "統3": [
+   {
+    "branch": "参考",
+    "customer_control": "・AWS の新サービスやアップデートの情報は、以下のサイトよりご提供しております。\n- AWS の最新情報\nhttps://aws.amazon.com/jp/new/\n- AWS ブログ\nhttps://aws.amazon.com/jp/blogs/aws/\nhttps://aws.amazon.com/blogs/aws/\nhttps://aws.amazon.com/jp/blogs/news/\n- AWS ドキュメント (各サービスのドキュメント履歴)\nhttps://docs.aws.amazon.com/ja_jp/index.html",
+    "supplement": "経済安全保障推進法における基幹インフ\nラ制度の AWS サービス利⽤に伴う考慮\n事項（⽇本語）\nhttps://d1.awsstatic.com/whitepape\nrs/ja_JP/Economic_Security_Act_Dis\ncussion_Paper.pdf"
+   }
+  ],
+  "統4-1": [
+   {
+    "branch": "",
+    "customer_control": "デジタル⼈材育成\n・マネージメント層のデジタル育成の推進に向けた知⾒や教訓を得ること⽬的とした EBC（Executive Briefing Center）という AWS のエグゼクティブや特定分\n野の専⾨家、グローバルチームと個別に具体的な話し合いをする場を提供しています。\nhttps://aws.amazon.com/jp/executive-insights/ebc-executive-briefing-center/\n・AWS へのクラウドジャーニーを個⼈的に推進した⼤企業の元 CxO や上級役員をメンバーとする AWS エンタープライズストラテジストというチームがありま\nす。チームは顧客の経営陣と協⼒して経験と戦略を共有し、スピードと敏捷性を⾼め、イノベーションを推進し、クラウドを使⽤して新しい運⽤モデルを作成\nし、顧客にさらに集中できるようにします。\nAWS エンタープライズストラテジストについては、こちらをご参照ください。\nhttps://aws.amazon.com/jp/executive-insights/enterprise-strategists/\n-\n・AWSでは、代表的なサービスやベーシックなアーキテクチャーなどの基礎コンテンツを数時間で集中的に学習できるAWS Builders Online Seriesを始め、\nAWSクラウドサービス活⽤資料集として、初⼼者向け資料やサービス別資料、⽇本語ハンズオン（初⼼者向けハンズオン、JP Contents Hub）を公開しており、\n⾃ら学ぶための資料や動画を多数提供しています。また、短期間で体系的に学びたいという⽅にはプレゼンテーションやディスカッション、実地の学習を組み合\nわせてすぐに役⽴つクラウドのスキルとベストプラクティスを教えるインストラクターによるライブ形式のAWS クラスルームトレーニング、⾃⾝の関⼼事に合わ\nせて⾃⾝のペースで学習を進めたい⽅にはオンライン学習としてAWS Skill Builderを提供しており、クラスルームトレーニングとオンライン学習を組み合わせた\nブレンド型学習が可能となっています。AWSでは、ロールやソリューション、業種ごとの学習ロードマップをAWS Ramp-Up Guidesとして公開しています。そ\nして、お客様のチームと直接連携し、組織の要件に合わせたデータ駆動型のトレーニングプランを構築するAWS Learning Needs Analysisというプログラムも提\n供しています。\n- AWS Builders Online Series\nhttps://aws.amazon.com/jp/events/builders-online-series/\n- AWSクラウドサービス活⽤資料集\nhttps://aws.amazon.com/jp/events/aws-event-resource/\n- 初⼼者向け資料\nhttps://aws.amazon.com/jp/events/aws-event-resource/beginner/\n- JP Contents Hub\nhttps://aws-samples.github.io/jp-contents-hub/\n- AWS クラスルームトレーニング\nhttps://aws.amazon.com/jp/training/classroom/\n- AWS Skill Builder\nhttps://aws.amazon.com/jp/training/digital/\n- AWS Ramp-Up Guides\nhttps://aws.amazon.com/jp/training/ramp-up-guides/\n- AWS Learning Needs Analysis\nhttps://aws.amazon.com/jp/training/teams/learning-needs-analysis/\n・AWS において学習環境を構築しやすくする仕組みとして、アカウントの分離を⾏うことがシンプルな⽅法となりますが、AWSアカウントを分離すると、複数\nのAWSアカウントを管理し、それぞれのAWSアカウントごとにセキュリティ設定を⾏い、必要に応じて最低限のリソースを事前に作成する必要がでてきます。こ\nのようなマルチアカウント環境の運⽤を実現する代表的なサービスとしてAWS Organizations とAWS Control Towerがあります。AWS Organizations と AWS\nControl Tower を利⽤することで、複数のAWSアカウントを⼀元的に管理すると共に、⼀定のセキュリティ設定を施した環境を素早く構築でき、効率的にマルチ\nアカウント管理を実現できます。\n・AWS では、専⾨家（AWS プロフェッショナルサービスやAWSパートナー）によるサポートも提供しています。\n- AWS プロフェッショナルサービス\nhttps://aws.amazon.com/jp/professional-services/\n- AWSパートナー\nhttps://aws.amazon.com/jp/partners/work-with-partners/",
+    "supplement": ""
+   }
+  ],
+  "統5-1": [
+   {
+    "branch": "",
+    "customer_control": "AWS Systems Manager インベントリにより、AWS でのコンピューティング環境が可視化されます。インベントリを使⽤して、マネージドノードからメタデー\nタを収集できます。\nAWS Config は、アカウント AWS 内の AWS リソースの設定の詳細ビューを提供します。これには、リソース間の関係と設定の履歴が含まれるため、時間の経過\nと共に設定と関係がどのように変わるかを確認できます。\nデータ分類に関しては、以下のホワイトペーパーをご参照ください: https://docs.aws.amazon.com/ja_jp/whitepapers/latest/data-classification/data-\nclassification-overview.html",
+    "supplement": ""
+   }
+  ],
+  "統5-2": [
+   {
+    "branch": "",
+    "customer_control": "AWS は、報告されたセキュリティ脆弱性で、Amazon および AWS のサービス、ソフトウェア、製品に影響を及ぼすものをすべて調査します。お客様が既知の問\n題に優先順位を付けて対処できるように、セキュリティ速報は以下の基準でフィルタリングして公開しています。\n* 注意を必要とする重要な速報 (影響評価、緩和策など)\n* 周知啓発のために共有される情報速報\nhttps://aws.amazon.com/jp/security/vulnerability-reporting/\nAWS セキュリティインシデント対応ガイドでは、お客様の AWS クラウド環境におけるセキュリティインシデント対応の基礎について概要を提供します。クラウ\nドセキュリティとインシデント対応の概念に注⽬し、お客様がセキュリティ問題に対応する際に利⽤できるクラウドの機能、サービス、メカニズムについて説明\nします。\nhttps://docs.aws.amazon.com/ja_jp/whitepapers/latest/aws-security-incident-response-guide/welcome.html\n(Amazon S3に保管したログの改ざん、削除からの保護)\nAmazon S3 Object Lock は、お客様が指定した保持期間中、永続オブジェクトが削除されないようにする機能です。データ保護を⼀層強化するために、または\n規制コンプライアンスを遵守するために、ファイル保持ポリシーを強制的に適⽤できます。S3 Object Lock では、S3 バージョニングが⾃動的に有効になり、こ\nれらの機能が連携して、ロックされたオブジェクトバージョンが (偶発的または意図的に) 完全に削除されたり、write-once-read-many (WORM) モデルを使⽤\nして上書きされたりすることを防ぎます。\nhttps://aws.amazon.com/jp/s3/features/object-lock/\n(AWS上でのSIEMの実装例)\nSIEM on Amazon OpenSearch Service は、セキュリティインシデントを調査するためのソリューションです。Amazon OpenSearch Service を活⽤して、\nAWS のマルチアカウント環境下で、複数種類のログを収集し、ログの相関分析や可視化をすることができます。デプロイは、AWS CloudFormation またはAWS\nCloud Development Kit (AWS CDK) で⾏います。30分程度でデプロイは終わります。AWS サービスのログを Simple Storage Service (Amazon S3) のバ\nケットに PUT すると、⾃動的に ETL 処理を⾏い、SIEM on OpenSearch Service に取り込まれます。ログを取り込んだ後は、ダッシュボードによる可視化や、\n複数ログの相関分析ができるようになります。\nhttps://github.com/aws-samples/siem-on-amazon-opensearch-service",
+    "supplement": ""
+   }
+  ],
+  "統5-3": [
+   {
+    "branch": "",
+    "customer_control": "Amazon Inspector は、Amazon EC2 インスタンス、コンテナ、Lambda 関数などのワークロードを⾃動的に検出し、ソフトウェアの脆弱性や意図しないネッ\nトワークの露出がないかをスキャンします。\nAWS Systems Manager のツールである Patch Manager は、セキュリティ関連の更新およびその他の種類の更新の両⽅を使⽤してマネージドノードにパッチを\n適⽤するプロセスを⾃動化します。\nAmazon CodeGuru セキュリティは、機械学習 (ML) と⾃動推論を組み合わせた静的アプリケーションセキュリティ検査 (SAST) ツールです。コードの脆弱性を\n特定し、特定された脆弱性を修正する⽅法に関する推奨事項を提⽰し、終了するまで脆弱性のステータスを追跡します。",
+    "supplement": ""
+   }
+  ],
+  "統5-4": [
+   {
+    "branch": "",
+    "customer_control": "AWS セキュリティインシデント対応ガイドでは、お客様の AWS クラウド環境におけるセキュリティインシデント対応の基礎について概要を提供します。クラウ\nドセキュリティとインシデント対応の概念に注⽬し、お客様がセキュリティ問題に対応する際に利⽤できるクラウドの機能、サービス、メカニズムについて説明\nします。\nhttps://docs.aws.amazon.com/ja_jp/whitepapers/latest/aws-security-incident-response-guide/welcome.html",
+    "supplement": ""
+   }
+  ],
+  "統9": [
+   {
+    "branch": "参考",
+    "customer_control": "1\n・AWSでは、CCoE を組成するための重要な指針としての考え⽅を⽰しています。以下をご参照ください\nhttps://aws.amazon.com/jp/blogs/news/how-to-get-started-your-own-ccoe/\nhttps://aws.amazon.com/jp/blogs/news/how-to-define-your-own-ccoe-tasks/\nhttps://aws.amazon.com/jp/blogs/news/steps_to_plot_ccoe/\n・お客様のクラウド導⼊事例として、さまざまな規模のお客様が AWS を使⽤して、アジリティの向上、コストの削減、そしてイノベーションの推進をクラウド\nで実現した⽅法をご紹介しております。 お客様のクラウド導⼊事例につきましては、以下のサイトをご参照ください。\nhttps://aws.amazon.com/jp/solutions/case-studies/ctice-jp/\n2\n・DevOps に対して、AWS がどのように役⽴つかをご紹介しております。DevOps のリソースについては、以下をご参照ください。\nhttps://aws.amazon.com/jp/devops/resources/",
+    "supplement": ""
+   }
+  ]
+ }
+}

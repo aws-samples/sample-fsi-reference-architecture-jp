@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AWS Security Bulletins - Detail Response",
+  "description": "Schema for the JSON output of `fetch_bulletins.py detail`",
+  "type": "object",
+  "required": ["bulletinId", "title", "publishedDate", "severity", "body"],
+  "properties": {
+    "bulletinId": {
+      "type": "string",
+      "description": "Bulletin identifier (e.g. AWS-2025-032)"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the security bulletin"
+    },
+    "publishedDate": {
+      "type": "string",
+      "description": "Publication date as shown on the bulletin page"
+    },
+    "severity": {
+      "type": "string",
+      "description": "Content type / severity (e.g. 'Important (requires attention)', 'Informational')"
+    },
+    "body": {
+      "type": "string",
+      "description": "Full HTML body of the bulletin for AI summarization"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,18 @@
+FROM public.ecr.aws/docker/library/node:22 as build
+WORKDIR /build
+COPY package*.json ./
+COPY prisma ./prisma
+RUN npm ci
+COPY . .
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm run bundle
+
+FROM public.ecr.aws/docker/library/node:22
+
+WORKDIR /app
+COPY package*.json ./
+COPY prisma ./prisma
+RUN npm ci --omit=dev
+COPY --from=build /build/dist .
+EXPOSE 3000
+
+CMD ["node", "index.js"]

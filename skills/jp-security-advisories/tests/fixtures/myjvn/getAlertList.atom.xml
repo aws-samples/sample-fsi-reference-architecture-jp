@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>   <feed xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.w3.org/2005/Atom" xmlns:sec="http://jvn.jp/rss/mod_sec/3.0/" xmlns:marking="http://data-marking.mitre.org/Marking-1" xmlns:tlpMarking="http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1" xmlns:status="http://jvndb.jvn.jp/myjvn/Status" xsi:schemaLocation="http://www.w3.org/2005/Atom https://jvndb.jvn.jp/schema/atom.xsd http://jvn.jp/rss/mod_sec/3.0/ https://jvndb.jvn.jp/schema/mod_sec_3.0.xsd http://data-marking.mitre.org/extensions/MarkingStructure#TLP-1 https://jvndb.jvn.jp/schema/tlp_marking.xsd http://jvndb.jvn.jp/myjvn/Status https://jvndb.jvn.jp/schema/status_3.3.xsd" xml:lang="ja">
+    <title type="text">IPA注意警戒サービスAPI</title>
+    <updated>2026-06-08T09:18:01+09:00</updated>
+    <id>swid:ipa.go.jp+myjvn_alert+1.0.0</id>
+    <link rel="alternate" type="text/html" hreflang="ja" href="https://jvndb.jvn.jp/apis/myjvn/"/>
+    <author>
+      <name>IPA</name>
+      <uri>https://www.ipa.go.jp/</uri>
+    </author>
+    <sec:handling>
+      <marking:Marking>
+        <marking:Marking_Structure xsi:type="tlpMarking:TLPMarkingStructureType" marking_model_name="TLP" marking_model_ref="http://www.us-cert.gov/tlp/" color="WHITE"/>
+      </marking:Marking>
+    </sec:handling>
+    <entry>
+      <title>Cisco 製品に関するセキュリティ情報 (2025年11月6日 公開)</title>
+      <id>MYJVN-ALT-2025-0096</id>
+      <published>2026-04-27T16:14:36+09:00</published>
+      <updated>2026-04-27T16:14:36+09:00</updated>
+      <category label="注意" term="Low"/>
+      <sec:items>
+        <sec:item>
+          <sec:title>更新:Cisco Secure Firewall ASAおよびCisco Secure FTDの脆弱性について (CVE-2025-20333等)</sec:title>
+          <sec:identifier>MYJVN-ALT-2025-0096-0001</sec:identifier>
+          <sec:link href="https://www.ipa.go.jp/security/security-alert/2025/alert20251106.html"/>
+          <sec:published>2026-04-27T00:00:00+09:00</sec:published>
+          <sec:updated>2026-04-27T16:14:23+09:00</sec:updated>
+        </sec:item>
+        <sec:item>
+          <sec:title>Cisco Event Response: Continued Attacks Against Cisco Firewalls</sec:title>
+          <sec:identifier>MYJVN-ALT-2025-0096-0002</sec:identifier>
+          <sec:link href="https://sec.cloudapps.cisco.com/security/center/resources/asa_ftd_continued_attacks"/>
+          <sec:published>2025-11-06T00:00:00+09:00</sec:published>
+          <sec:updated>2025-11-06T17:38:52+09:00</sec:updated>
+        </sec:item>
+      </sec:items>
+    </entry>
+    <entry>
+      <title>Joomla! に関するセキュリティ情報 (2026年1月7日 公開)</title>
+      <id>MYJVN-ALT-2026-0001</id>
+      <published>2026-01-07T10:51:25+09:00</published>
+      <updated>2026-01-07T10:51:25+09:00</updated>
+      <category label="INFO" term="Info"/>
+      <sec:items>
+        <sec:item>
+          <sec:title>Joomla! Downloads (6.0.2)</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0001-0001</sec:identifier>
+          <sec:link href="https://downloads.joomla.org/ja/cms/joomla6/6-0-2"/>
+          <sec:cpe>cpe:/a:joomla:joomla%21</sec:cpe>
+          <sec:published>2026-01-07T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-07T10:51:25+09:00</sec:updated>
+        </sec:item>
+        <sec:item>
+          <sec:title>Joomla! Downloads (5.4.2)</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0001-0002</sec:identifier>
+          <sec:link href="https://downloads.joomla.org/ja/cms/joomla5/5-4-2"/>
+          <sec:published>2026-01-07T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-07T10:51:25+09:00</sec:updated>
+        </sec:item>
+        <sec:item>
+          <sec:title>Security Announcements ([20260101]、[20260102])</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0001-0003</sec:identifier>
+          <sec:link href="https://developer.joomla.org/security-centre/"/>
+          <sec:published>2026-01-07T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-07T10:51:25+09:00</sec:updated>
+        </sec:item>
+      </sec:items>
+    </entry>
+    <entry>
+      <title>Apache Struts に関するセキュリティ情報 (2026年1月13日 公開)</title>
+      <id>MYJVN-ALT-2026-0002</id>
+      <published>2026-01-13T11:16:54+09:00</published>
+      <updated>2026-01-13T11:16:54+09:00</updated>
+      <category label="INFO" term="Info"/>
+      <sec:items>
+        <sec:item>
+          <sec:title>Security Bulletins (S2-069)</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0002-0001</sec:identifier>
+          <sec:link href="https://cwiki.apache.org/confluence/display/WW/S2-069"/>
+          <sec:cpe>cpe:/a:apache:struts</sec:cpe>
+          <sec:published>2026-01-13T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-13T11:16:54+09:00</sec:updated>
+        </sec:item>
+      </sec:items>
+    </entry>
+    <entry>
+      <title>Microsoft 製品に関するセキュリティ情報 (2026年1月14日 公開)</title>
+      <id>MYJVN-ALT-2026-0003</id>
+      <published>2026-01-14T14:15:43+09:00</published>
+      <updated>2026-01-14T14:15:43+09:00</updated>
+      <category label="緊急" term="Critical"/>
+      <sec:items>
+        <sec:item>
+          <sec:title>Microsoft 製品の脆弱性対策について(2026年1月)</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0003-0001</sec:identifier>
+          <sec:link href="https://www.ipa.go.jp/security/security-alert/2025/0114-ms.html"/>
+          <sec:published>2026-01-14T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-14T14:15:43+09:00</sec:updated>
+        </sec:item>
+        <sec:item>
+          <sec:title>2026 年 1 月のセキュリティ更新プログラム (月例)</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0003-0002</sec:identifier>
+          <sec:link href="https://msrc.microsoft.com/blog/2026/01/202601-security-update/"/>
+          <sec:published>2026-01-14T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-14T14:15:43+09:00</sec:updated>
+        </sec:item>
+      </sec:items>
+    </entry>
+    <entry>
+      <title>Cisco 製品に関するセキュリティ情報 (2026年1月19日 公開)</title>
+      <id>MYJVN-ALT-2026-0004</id>
+      <published>2026-01-19T17:25:25+09:00</published>
+      <updated>2026-01-19T17:25:25+09:00</updated>
+      <category label="緊急" term="Critical"/>
+      <sec:items>
+        <sec:item>
+          <sec:title>Cisco Secure Email Gatewayの脆弱性対策について(CVE-2025-20393)</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0004-0001</sec:identifier>
+          <sec:link href="https://www.ipa.go.jp/security/security-alert/2025/alert20260119.html"/>
+          <sec:published>2026-01-19T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-19T17:25:25+09:00</sec:updated>
+        </sec:item>
+        <sec:item>
+          <sec:title>Reports About Cyberattacks Against Cisco Secure Email Gateway And Cisco Secure Email and Web Manager</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0004-0002</sec:identifier>
+          <sec:link href="https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-sma-attack-N9bf4"/>
+          <sec:published>2026-01-19T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-19T17:25:25+09:00</sec:updated>
+        </sec:item>
+      </sec:items>
+    </entry>
+    <entry>
+      <title>Oracle Java に関するセキュリティ情報 (2026年1月21日 公開)</title>
+      <id>MYJVN-ALT-2026-0005</id>
+      <published>2026-01-21T12:18:13+09:00</published>
+      <updated>2026-01-21T12:18:13+09:00</updated>
+      <category label="注意" term="Low"/>
+      <sec:items>
+        <sec:item>
+          <sec:title>Oracle Java の脆弱性対策について(2026年1月)</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0005-0001</sec:identifier>
+          <sec:link href="https://www.ipa.go.jp/security/security-alert/2025/0121-jre.html"/>
+          <sec:published>2026-01-21T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-21T12:18:13+09:00</sec:updated>
+        </sec:item>
+        <sec:item>
+          <sec:title>Oracle Critical Patch Update Advisory - January 2026</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0005-0002</sec:identifier>
+          <sec:link href="https://www.oracle.com/security-alerts/cpujan2026.html#AppendixJAVA"/>
+          <sec:published>2026-01-21T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-21T12:18:13+09:00</sec:updated>
+        </sec:item>
+      </sec:items>
+    </entry>
+    <entry>
+      <title>BIND に関するセキュリティ情報 (2026年1月22日 公開)</title>
+      <id>MYJVN-ALT-2026-0007</id>
+      <published>2026-01-26T09:42:34+09:00</published>
+      <updated>2026-01-26T09:42:34+09:00</updated>
+      <category label="INFO" term="Info"/>
+      <sec:items>
+        <sec:item>
+          <sec:title>Downloads (9.18.44、9.20.18)</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0007-0001</sec:identifier>
+          <sec:link href="https://www.isc.org/downloads/"/>
+          <sec:cpe>cpe:/a:isc:bind</sec:cpe>
+          <sec:published>2026-01-22T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-22T09:42:11+09:00</sec:updated>
+        </sec:item>
+        <sec:item>
+          <sec:title>2025-13878: Malformed BRID/HHIT records</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0007-0002</sec:identifier>
+          <sec:link href="https://kb.isc.org/docs/cve-2025-13878"/>
+          <sec:published>2026-01-22T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-22T09:42:11+09:00</sec:updated>
+        </sec:item>
+        <sec:item>
+          <sec:title>BIND 9の脆弱性対策について（CVE-2025-13878）</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0007-0003</sec:identifier>
+          <sec:link href="https://www.ipa.go.jp/security/security-alert/2025/alert20260123.html"/>
+          <sec:published>2026-01-26T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-26T09:42:34+09:00</sec:updated>
+        </sec:item>
+      </sec:items>
+    </entry>
+    <entry>
+      <title>Apache Tomcat に関するソフトウェア更新情報 (2026年1月26日 公開)</title>
+      <id>MYJVN-ALT-2026-0008</id>
+      <published>2026-01-26T09:41:17+09:00</published>
+      <updated>2026-01-26T09:41:17+09:00</updated>
+      <category label="INFO" term="Info"/>
+      <sec:items>
+        <sec:item>
+          <sec:title>Tomcat 9 Software Downloads (9.0.115)</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0008-0001</sec:identifier>
+          <sec:link href="https://tomcat.apache.org/download-90.cgi"/>
+          <sec:cpe>cpe:/a:apache:tomcat</sec:cpe>
+          <sec:published>2026-01-26T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-26T09:41:17+09:00</sec:updated>
+        </sec:item>
+      </sec:items>
+    </entry>
+    <entry>
+      <title>Apache Tomcat に関するソフトウェア更新情報 (2026年1月27日 公開)</title>
+      <id>MYJVN-ALT-2026-0009</id>
+      <published>2026-01-27T09:41:49+09:00</published>
+      <updated>2026-01-27T09:41:49+09:00</updated>
+      <category label="INFO" term="Info"/>
+      <sec:items>
+        <sec:item>
+          <sec:title>Tomcat 11 Software Downloads (11.0.18)</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0009-0001</sec:identifier>
+          <sec:link href="https://tomcat.apache.org/download-11.cgi"/>
+          <sec:cpe>cpe:/a:apache:tomcat</sec:cpe>
+          <sec:published>2026-01-27T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-27T09:41:49+09:00</sec:updated>
+        </sec:item>
+      </sec:items>
+    </entry>
+    <entry>
+      <title>OpenSSL に関するセキュリティ情報 (2026年1月28日 公開)</title>
+      <id>MYJVN-ALT-2026-0010</id>
+      <published>2026-01-28T10:01:03+09:00</published>
+      <updated>2026-01-28T10:01:03+09:00</updated>
+      <category label="INFO" term="Info"/>
+      <sec:items>
+        <sec:item>
+          <sec:title>Downloads (openssl-3.6.1、openssl-3.5.5、openssl-3.4.4、openssl-3.3.6、openssl-3.0.19)</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0010-0001</sec:identifier>
+          <sec:link href="https://www.openssl.org/source/"/>
+          <sec:cpe>cpe:/a:openssl:openssl</sec:cpe>
+          <sec:published>2026-01-28T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-28T10:01:03+09:00</sec:updated>
+        </sec:item>
+        <sec:item>
+          <sec:title>OpenSSL Security Advisory OpenSSL Security Advisory [27th January 2026]</sec:title>
+          <sec:identifier>MYJVN-ALT-2026-0010-0002</sec:identifier>
+          <sec:link href="https://openssl-library.org/news/secadv/20260127.txt"/>
+          <sec:published>2026-01-28T00:00:00+09:00</sec:published>
+          <sec:updated>2026-01-28T10:01:03+09:00</sec:updated>
+        </sec:item>
+      </sec:items>
+    </entry>
+    <status:Status version="3.3" method="getAlertList" retCd="0" retMax="50" errCd="" errMsg="" totalRes="53" totalResRet="10" firstRes="1" feed="hnd" maxCountItem="10"/>
+  </feed>
+

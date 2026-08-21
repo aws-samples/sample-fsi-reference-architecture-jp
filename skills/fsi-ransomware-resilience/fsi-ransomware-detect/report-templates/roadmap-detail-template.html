@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  ロードマップ詳細レポート テンプレート (roadmap-detail-template.html)
+  =====================================================================
+  本ファイルは fsi-ransomware-detect Workflow B で生成するロードマップ
+  詳細レポートのテンプレートである。AI エージェントは本テンプレートの
+  スタイル・セクション構造・配色・フォントを完全に踏襲し、データ部分
+  (お客様情報・ロードマップ各項目の詳細) のみを差し替える形でレポートを
+  生成する。
+
+  注: Workflow A (検知・分析態勢の全体設計) は設計提案レポート 1 本に
+  設計提案と段階的ロードマップを集約するため、本テンプレートは使用しない。
+  本テンプレートは Workflow B (既存態勢の十分性評価) 専用である。
+
+  本ファイル内のデータは特定のお客様環境を想定したサンプル(Workflow B 起点)
+  である。
+
+  本テンプレートは保護(Protect)フェーズの roadmap-detail-template.html を
+  雛形とし、本文配色・カード構造・フォント・フェーズ色を踏襲しつつ、表紙を
+  Detect 独自色(淡いミントグリーン)、フェーズインジケータを検知(Detect)
+  active、内容を検知・分析フェーズに差し替えている。
+
+  詳細な仕様は同階層の template-spec.md を参照する。
+  =====================================================================
+-->
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>【検知・分析フェーズ】AWS ランサムウェア対策ロードマップ詳細レポート — fsi-ransomware-detect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy-1: #0F2942;
+    --navy-2: #1E4D7B;
+    --teal: #1A7F8E;
+    --teal-light: #CCFBF1;
+    --gold: #C9A961;
+    --primary-light: #E8EEF7;
+    --text: #1F2933;
+    --text-dark: #0A3330;
+    --text-muted: #5A6677;
+    --border: #E2E8F0;
+    --bg-page: #F4F6FA;
+    --bg-card: #F7F9FC;
+    --bg-soft: #FAFBFC;
+    --short: #2E7D32;
+    --short-light: #E8F5E9;
+    --mid: #1565C0;
+    --mid-light: #E3F2FD;
+    --long: #6A1B9A;
+    --long-light: #F3E5F5;
+    --ng: #C62828;
+    --ok: #2E7D32;
+    /* 表紙(Detect 独自色: 淡いミントグリーン) */
+    --cover-1: #AEE0DA;
+    --cover-2: #BFE3DC;
+    --cover-3: #CFEAE6;
+    --cover-accent: #0E7C7B;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Inter", "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    color: var(--text);
+    line-height: 1.75;
+    background: var(--bg-page);
+    margin: 0;
+    padding: 32px 16px;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "palt", "kern";
+  }
+  .page {
+    max-width: 980px;
+    margin: 0 auto 32px;
+    background: var(--bg-card);
+    box-shadow: 0 8px 32px rgba(15,41,66,0.10), 0 2px 8px rgba(15,41,66,0.06);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  /* 表紙(Detect 独自色: 淡いミントグリーン) */
+  .cover {
+    background: linear-gradient(180deg, var(--cover-1) 0%, var(--cover-2) 50%, var(--cover-3) 100%);
+    color: var(--text-dark);
+    padding: 64px 72px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--cover-accent) 0%, transparent 100%);
+  }
+  .cover .label {
+    color: var(--text-dark);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    font-weight: 600;
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+  .cover .phase-nav {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .cover .phase-nav .phase {
+    font-size: 12px;
+    line-height: 1.3;
+    padding: 5px 12px;
+    border-radius: 6px;
+    color: rgba(10,51,48,0.5);
+    border: 1px solid rgba(10,51,48,0.2);
+    text-align: center;
+  }
+  .cover .phase-nav .phase .ja { font-weight: 600; display: block; }
+  .cover .phase-nav .phase .en {
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 1px;
+  }
+  .cover .phase-nav .phase.active {
+    color: #fff;
+    background: var(--cover-accent);
+    border-color: var(--cover-accent);
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(10,51,48,0.18);
+  }
+  .phase-hl {
+    color: var(--cover-accent);
+    font-weight: 700;
+  }
+  .cover h1 {
+    font-size: 38px;
+    font-weight: 800;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+    color: var(--text-dark);
+  }
+  .cover .subtitle {
+    color: var(--text-dark);
+    opacity: 0.8;
+    font-size: 16px;
+    margin: 0;
+  }
+  .cover .date {
+    margin-top: 32px;
+    font-size: 13px;
+    color: var(--text-dark);
+    opacity: 0.6;
+    border-top: 1px solid rgba(10,51,48,0.15);
+    padding-top: 16px;
+    font-family: "Inter", monospace;
+    letter-spacing: 0.03em;
+  }
+  .body { padding: 56px 96px; }
+  .about {
+    background: linear-gradient(135deg, #F8FAFC 0%, #EEF4FA 100%);
+    border-left: 3px solid var(--teal);
+    padding: 20px 24px;
+    margin: 0 0 40px;
+    font-size: 14px;
+    line-height: 1.9;
+    border-radius: 0 8px 8px 0;
+  }
+  .about h2 {
+    font-size: 11px;
+    color: var(--teal);
+    margin: 0 0 8px;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    padding: 0; background: none; border: none;
+  }
+  .about p { margin: 0 0 10px; }
+  .about p:last-child { margin-bottom: 0; }
+  h2.section {
+    font-size: 22px;
+    color: var(--navy-1);
+    margin: 48px 0 20px;
+    padding: 0 0 12px;
+    border-bottom: 2px solid var(--navy-1);
+    position: relative;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  h2.section::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 60px; height: 2px;
+    background: var(--gold);
+  }
+  h3.minor {
+    font-size: 12px;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    margin: 32px 0 12px;
+    text-transform: uppercase;
+  }
+  .overview-block {
+    margin: 20px 0 24px;
+    padding: 36px 32px;
+    background: linear-gradient(135deg, var(--teal-light) 0%, #ffffff 55%, var(--primary-light) 100%);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(15,41,66,0.10), 0 2px 6px rgba(15,41,66,0.06);
+  }
+  .overview-block::before {
+    content: "";
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(26,127,142,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .overview-block > * { position: relative; z-index: 1; }
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 12px 0 24px;
+    font-size: 13.5px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(15,41,66,0.08), 0 1px 3px rgba(15,41,66,0.05);
+  }
+  th {
+    background: linear-gradient(180deg, var(--navy-1) 0%, var(--navy-2) 100%);
+    color: #fff;
+    text-align: left;
+    padding: 14px 16px;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+  }
+  td {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px;
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  table.overview-table td:first-child { font-weight: 700; }
+  .phase {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .phase.short { color: var(--short); background: var(--short-light); }
+  .phase.mid { color: var(--mid); background: var(--mid-light); }
+  .phase.long { color: var(--long); background: var(--long-light); }
+  .flow-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin: 20px 0 8px;
+  }
+  .flow-node {
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 14px 24px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    width: 100%;
+    max-width: 520px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(15,41,66,0.04);
+  }
+  .flow-node.short { border-color: var(--short); color: var(--short); background: var(--short-light); }
+  .flow-node.mid { border-color: var(--mid); color: var(--mid); background: var(--mid-light); }
+  .flow-node.long { border-color: var(--long); color: var(--long); background: var(--long-light); }
+  .flow-node .num {
+    font-size: 11px;
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    font-family: "Inter", monospace;
+    opacity: 0.8;
+  }
+  .flow-arrow-down {
+    color: var(--text-muted);
+    font-size: 22px;
+    font-weight: 700;
+    padding: 6px 0;
+  }
+  .overview-note {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    margin-top: 16px;
+    line-height: 1.85;
+  }
+  .item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 18px 0 24px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(15,41,66,0.08), 0 1px 3px rgba(15,41,66,0.05);
+  }
+  .item-header {
+    padding: 14px 22px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .item-header.short { background: linear-gradient(180deg, var(--short) 0%, #1F5F22 100%); }
+  .item-header.mid { background: linear-gradient(180deg, var(--mid) 0%, #0D47A1 100%); }
+  .item-header.long { background: linear-gradient(180deg, var(--long) 0%, #4A148C 100%); }
+  .item-header .num {
+    background: rgba(255,255,255,0.22);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    flex-shrink: 0;
+    font-family: "Inter", monospace;
+  }
+  .item-header .title { flex: 1; font-weight: 700; font-size: 17px; letter-spacing: 0.01em; }
+  .item-header .period-badge {
+    background: rgba(255,255,255,0.22);
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .item-body { padding: 22px 26px; }
+  .item-body h4 {
+    font-size: 13px;
+    color: var(--navy-1);
+    margin: 18px 0 8px;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 4px;
+    font-weight: 700;
+  }
+  .item-body h4:first-child { margin-top: 0; }
+  .item-body p { margin: 0 0 8px; font-size: 14px; }
+  .item-body ul, .item-body ol { margin: 4px 0 8px; padding-left: 24px; font-size: 14px; }
+  .item-body li { margin-bottom: 4px; }
+  .item-body strong { color: var(--navy-1); font-weight: 700; }
+  .item-body code {
+    background: var(--bg-soft);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 12.5px;
+    border: 1px solid var(--border);
+    font-family: "Inter", monospace;
+    color: var(--navy-1);
+  }
+  table.data {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 8px 0 12px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+  }
+  table.data th {
+    background: var(--navy-1);
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  table.data td {
+    border-bottom: 1px solid var(--border);
+    padding: 10px 12px;
+    vertical-align: top;
+  }
+  table.data tbody tr:nth-child(even) td { background: var(--bg-soft); }
+  table.compare {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 10px 0 12px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+  }
+  table.compare th {
+    background: var(--bg-soft);
+    color: var(--navy-1);
+    font-weight: 700;
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+    font-size: 12.5px;
+  }
+  table.compare td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  table.compare .before { color: var(--ng); background: rgba(198,40,40,0.04); font-weight: 600; }
+  table.compare .after { color: var(--ok); background: rgba(46,125,50,0.05); font-weight: 600; }
+  pre.flow-text {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    font-family: "Inter", "SF Mono", Consolas, monospace;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--navy-1);
+    margin: 8px 0 12px;
+    overflow-x: auto;
+  }
+  .ref-link {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--navy-1);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  footer {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 16px 72px;
+    color: var(--text-muted);
+    font-size: 11px;
+    text-align: center;
+    font-family: "Inter", monospace;
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; padding: 40px 56px; margin: 0; border-radius: 0; }
+    h2.section { page-break-after: avoid; }
+    .item { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="cover">
+    <div class="label">FSI RANSOMWARE DETECT — WORKFLOW B</div>
+    <h1>【検知・分析フェーズ】<br>AWS ランサムウェア対策<br>ロードマップ詳細レポート</h1>
+    <div class="phase-nav">
+      <span class="phase"><span class="ja">保護</span><span class="en">Protect</span></span>
+      <span class="phase active"><span class="ja">検知</span><span class="en">Detect</span></span>
+      <span class="phase"><span class="ja">対応</span><span class="en">Respond</span></span>
+      <span class="phase"><span class="ja">復旧</span><span class="en">Recover</span></span>
+    </div>
+    <p class="subtitle">改善ロードマップと各項目の設計詳細 (短期 / 中期 / 長期)</p>
+    <div class="date">GENERATED — 2026-06-03</div>
+  </div>
+  <div class="body">
+    <div class="about">
+      <h2>ABOUT THIS REPORT</h2>
+      <p>本レポートは、ランサムウェア対策の 4 フェーズ（保護（Protect）・検知（Detect）・対応（Respond）・復旧（Recover））のうち <span class="phase-hl">検知（Detect）フェーズ</span> を対象としている。保護・対応・復旧の各フェーズは別途扱う。</p>
+      <p>本レポートは、AWS 金融リファレンスアーキテクチャ日本版で公開されているランサムウェア対策向けの SKILL を用いて、お客様の既存の検知・分析態勢に対する改善ロードマップを整理したものである。「評価結果レポート」で示した不足ポイントに対する具体的な実装ロードマップ (短期・中期・長期) と、各施策の設計判断・期待される効果をまとめている。</p>
+    </div>
+
+    <h2 class="section">ロードマップ全体像</h2>
+    <div class="overview-block">
+      <table class="overview-table" style="margin-top:0;">
+        <thead><tr><th style="width:110px">フェーズ</th><th>主要施策</th></tr></thead>
+        <tbody>
+          <tr><td><span class="phase short">短期</span></td><td>サービス監視の深さの点検・拡充、GuardDuty の有効化・保護プラン整備、重要システムの監視レベルのラベリング</td></tr>
+          <tr><td><span class="phase mid">中期</span></td><td>原因切り分けオペレーション(手動確認)の運用手順の整備、ログを活用した分析基盤の整備、フォレンジックベンダ連携の事前準備</td></tr>
+          <tr><td><span class="phase long">長期</span></td><td>検知・分析の集約・委任管理、検知から対応への連携設計の高度化</td></tr>
+        </tbody>
+      </table>
+      <h3 class="minor">実施順序の全体像</h3>
+      <div class="flow-vertical">
+        <div class="flow-node short"><span class="num">SHORT 1</span>サービス監視の深さの点検・拡充</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node short"><span class="num">SHORT 2</span>GuardDuty の有効化・保護プラン整備</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node short"><span class="num">SHORT 3</span>重要システムの監視レベルのラベリング</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node mid"><span class="num">MID 4</span>原因切り分けオペレーション(手動確認)の運用手順の整備</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node mid"><span class="num">MID 5</span>ログを活用した分析基盤の整備</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node mid"><span class="num">MID 6</span>フォレンジックベンダ連携の事前準備</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node long"><span class="num">LONG 7</span>検知・分析の集約・委任管理</div>
+        <div class="flow-arrow-down">↓</div>
+        <div class="flow-node long"><span class="num">LONG 8</span>検知から対応への連携設計の高度化</div>
+      </div>
+      <p class="overview-note">中長期にわたる取り組みとなるが、短期項目だけでも検知力は大きく向上するため、まずは短期項目に着手しつつ、中期・長期の計画を並行して立案することを推奨する。各フェーズの具体的な期間は組織の体制・予算・既存運用により変動するため、組織側で判断する前提とする。</p>
+    </div>
+
+    <!-- ================= 短期項目 ================= -->
+    <h2 class="section"><span class="phase short">短期</span> 既存環境への影響が小さく即効性のある対策</h2>
+
+    <!-- 短期 1 -->
+    <div class="item">
+      <div class="item-header short">
+        <div class="num">1</div>
+        <div class="title">サービス監視の深さの点検・拡充</div>
+        <div class="period-badge">短期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>サービス影響を迅速に検知できるかは、監視の深さに依存する。リソース監視のみでは利用者影響を捉えきれないため、サービス監視・外形監視・アプリケーションレベルの監視(業務指標)まで点検・拡充する。既存の監視基盤を活かせるため即効性が高く、後続の検知設計の土台となる。</p>
+        <h4>設計内容</h4>
+        <table class="data">
+          <thead><tr><th style="width:220px">監視の深さ</th><th>拡充の方向</th></tr></thead>
+          <tbody>
+            <tr><td>リソース監視</td><td>(現状で実施) CPU・メモリ・I/O・接続数等を継続</td></tr>
+            <tr><td>サービス監視</td><td>エラー率・レイテンシ等のサービス稼働指標を追加</td></tr>
+            <tr><td>外形監視</td><td>利用者視点の到達性・応答監視を重要システムへ拡大</td></tr>
+            <tr><td>アプリケーションレベルの監視(業務指標)</td><td>ログイン数・取引数等の業務指標を監視対象に追加</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:13px; color:var(--text-muted);">具体的な監視手法の設計は、セキュリティを主題とする本スキルのスコープを超えるため、AWS 公式ガイドライン(Well-Architected の可観測性、監視サービスの選定指針、Observability Best Practices 等)を参照する。</p>
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th style="width:44%">シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>ランサム被害でサービスが実質停止</td><td class="before">リソースは正常範囲に見え、利用者影響に気づけない</td><td class="after">外形監視・業務指標の監視で利用者影響を即時検知</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 短期 2 -->
+    <div class="item">
+      <div class="item-header short">
+        <div class="num">2</div>
+        <div class="title">GuardDuty の有効化・保護プランの整備</div>
+        <div class="period-badge">短期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>セキュリティ攻撃そのものを捉えるため、Amazon GuardDuty を組織全体で有効化し、ランサム対策に関連が深い保護プランを対象リソースのカバレッジを踏まえて有効化する。有効化は既存環境への影響が小さく即効性が高い。</p>
+        <h4>設計内容</h4>
+        <p>GuardDuty を有効化すると、基盤検知(CloudTrail / VPC フローログ / DNS ログの自動分析)と拡張脅威検知(多段階攻撃の検知)が追加コストなしで動作する。加えて、以下のようなランサム関連の保護プランを有効化する。</p>
+        <table class="data">
+          <thead><tr><th style="width:240px">保護プラン(例)</th><th>概要</th></tr></thead>
+          <tbody>
+            <tr><td>Malware Protection for EC2</td><td>EC2 にアタッチされた EBS ボリュームのマルウェアを検知</td></tr>
+            <tr><td>Malware Protection for S3</td><td>S3 へ新規アップロードされたオブジェクトのマルウェアを検知</td></tr>
+            <tr><td>Runtime Monitoring</td><td>EKS / EC2 / ECS(Fargate)の OS レベルイベントを監視</td></tr>
+            <tr><td>S3 Protection</td><td>S3 へのデータ持ち出し・破壊の試みを検知</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:13px; color:var(--text-muted);">保護プランは追加・変更されることがあり、対応リソースも機能拡張により変わる可能性があるため、有効化の判断時には公式ドキュメントの最新版で現行の保護プランと対応範囲を確認する。サードパーティ製品(EDR 等)の併用も、既存運用・方針を尊重して検討する。</p>
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th style="width:44%">シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>未有効化アカウントで不審なアクティビティが発生</td><td class="before">検知の空白があり、攻撃の兆候に気づけない</td><td class="after">組織全体で攻撃の兆候をアラートとして検知</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 短期 3 -->
+    <div class="item">
+      <div class="item-header short">
+        <div class="num">3</div>
+        <div class="title">重要システムの監視レベルのラベリング</div>
+        <div class="period-badge">短期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>限られた運用リソースを重要システムに重点配分するため、システムの重要度に応じて監視レベルをラベリングする。重要システム(基幹系・重要業務系等)とそれ以外で監視の手厚さ・検知のレベルを段階的に設計する。</p>
+        <h4>設計内容</h4>
+        <p>システムの重要度を分類し、重要度に応じて監視の深さ・アラートのしきい値・通知先を段階的に設定する。「システムの重要度に応じて要求レベルを段階的に設定する」考え方は、IPA の非機能要求グレード等でも示されている。</p>
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th style="width:44%">シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>重要システムでの異常発生</td><td class="before">一律の監視で重要システムの異常が埋もれる</td><td class="after">重要システムに重点配分した監視で優先的に検知</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ================= 中期項目 ================= -->
+    <h2 class="section"><span class="phase mid">中期</span> 個別に進められる対策</h2>
+
+    <!-- 中期 4 -->
+    <div class="item">
+      <div class="item-header mid">
+        <div class="num">4</div>
+        <div class="title">原因切り分けオペレーション(手動確認)の運用手順の整備</div>
+        <div class="period-badge">中期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>サービス影響検知・セキュリティ攻撃検知のアラートが発生した際、それが外部攻撃(ランサム等)によるものかを見極める原因切り分けオペレーション(手動確認)を、属人的な対応から脱却させ、誰でも再現できる手順として整備する。日常的な独立した予防監視ではなく、アラート発生を起点とする切り分け手順として位置づける。</p>
+        <h4>設計内容</h4>
+        <p>原因切り分けの観点をチェックリスト化する。例として、Web システムへのブラウザアクセスによる脅迫文の有無確認、SSH / SSM セッションマネージャでのサーバログインによる不審ファイルの確認、OS ログからの暗号化ファイルの発生・不審なプロセス・怪しいドメインや国外への外部通信の確認が挙げられる。実施者(一次対応者・当直・SOC 等)・実施タイミング(アラート発生後何分以内か)・エスカレーション先を定める。</p>
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th style="width:44%">シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>サービス異常のアラートが発生</td><td class="before">切り分け手順がなく、外部攻撃かの判断が遅れて対応方針の決定が遅延する</td><td class="after">チェックリストに沿った確認で外部攻撃かどうかを迅速に判断できる</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 中期 5 -->
+    <div class="item">
+      <div class="item-header mid">
+        <div class="num">5</div>
+        <div class="title">ログを活用した分析基盤の整備</div>
+        <div class="period-badge">中期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>検知した事象を深掘りし、外部攻撃かどうか・影響範囲を見極めるため、収集済みのログを活用した分析・調査基盤を整備する。検知から分析への接続を強化する。</p>
+        <h4>設計内容</h4>
+        <p>Amazon Detective で検知結果(GuardDuty Findings 等)を起点にエンティティのつながり・時系列の挙動を可視化する。SIEM on Amazon OpenSearch Service で複数ログソースを横断した相関分析を行う。分析に用いるログの多くは検知にも用いられるものと共通であり、平時から参照・クエリ可能な状態にあることが前提となる。</p>
+        <p style="font-size:13px; color:var(--text-muted);">ログの収集・保護そのものの設計は保護(Protect)フェーズで扱うため、本項目では「収集済みログを活用できる状態か」に焦点を当てる。ログ収集・保護の検討が必要な場合は、保護(Protect)フェーズのスキルの活用をご案内する。</p>
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th style="width:44%">シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>検知した事象の影響範囲を確認したい</td><td class="before">ログが散在し、影響範囲の分析に時間を要する</td><td class="after">分析基盤で不審アクティビティの広がりを可視化し、初動を絞り込める</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 中期 6 -->
+    <div class="item">
+      <div class="item-header mid">
+        <div class="num">6</div>
+        <div class="title">フォレンジックベンダ連携の事前準備</div>
+        <div class="period-badge">中期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>根本原因(侵入経路)・被害範囲の特定には高度な専門技能を要し、画一的な調査手法も存在しない。自組織で対応する範囲と、専門組織へ依頼する範囲をあらかじめ整理し、有事に速やかに連携できる準備を平時から整える。</p>
+        <h4>設計内容</h4>
+        <ul>
+          <li>フォレンジックベンダへの連携手順(誰が・いつ・どのように依頼するか)の整理</li>
+          <li>ベンダへ提供する分析対象データの受け渡し方法や、外部組織とのデータ連携に関する社内ルール・契約面の調整</li>
+          <li>自組織で対応する範囲と、専門組織へ依頼する範囲の区分の整理</li>
+        </ul>
+        <p style="font-size:13px; color:var(--text-muted);">検知した事象に対する証拠保全の実行や本格的なフォレンジック分析の実施そのものは、対応(Respond)フェーズで扱う。これらが必要な場合は、対応(Respond)フェーズのスキルの活用をご案内する。</p>
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th style="width:44%">シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>自組織での分析に限界が生じる事象が発生</td><td class="before">連携先を有事に探し始め、原因究明・被害範囲特定が遅延</td><td class="after">平時準備に沿って速やかに専門組織と連携できる</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ================= 長期項目 ================= -->
+    <h2 class="section"><span class="phase long">長期</span> 組織横断・集中管理の領域</h2>
+
+    <!-- 長期 7 -->
+    <div class="item">
+      <div class="item-header long">
+        <div class="num">7</div>
+        <div class="title">検知・分析の集約・委任管理</div>
+        <div class="period-badge">長期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>各アカウントで個別に検知結果を確認するのではなく、セキュリティアカウントに集約して組織内の検知・管理を一元化する。組織横断の集中管理基盤の整備にあたるため、長期に位置づける。</p>
+        <h4>設計内容</h4>
+        <p>Amazon GuardDuty は AWS Organizations による委任管理者(delegated administrator)を指定することで、組織内アカウントの検知結果を集約・一元管理できる。AWS Security Hub を併用することで、複数のセキュリティサービスの検知結果を集約し、組織横断で優先度付け・可視化できる。</p>
+        <p style="font-size:13px; color:var(--text-muted);">アカウント構成そのものの設計(セキュリティアカウントや Log Archive アカウントの位置づけ等)は保護(Protect)フェーズで扱う。アカウント構成の検討が必要な場合は、保護(Protect)フェーズのスキルの活用をご案内する。本項目は、既存のアカウント構成を前提として検知の集約・一元管理に焦点を当てる。</p>
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th style="width:44%">シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>あるアカウントで検知が上がる</td><td class="before">個別アカウントを見るまで気づけず、対応開始が遅延</td><td class="after">集約された可視化で組織横断に即時把握し、優先度付けできる</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 長期 8 -->
+    <div class="item">
+      <div class="item-header long">
+        <div class="num">8</div>
+        <div class="title">検知から対応への連携設計の高度化</div>
+        <div class="period-badge">長期</div>
+      </div>
+      <div class="item-body">
+        <h4>位置づけ</h4>
+        <p>検知・分析で捉えた事象を、対応(Respond)フェーズへ円滑につなぐ連携を高度化する。検知から対応への橋渡しを確実にすることで、被害の封じ込め・復旧までの時間短縮につなげる。</p>
+        <h4>設計内容</h4>
+        <p>検知のアラートを起点に、対応プロセス(証拠保全・隔離・専門組織連携)へ速やかに引き継ぐ連携を整理する。検知・分析の集約基盤(項目 7)を前提に、検知から対応開始までのフローを定める。</p>
+        <p style="font-size:13px; color:var(--text-muted);">証拠保全の実行・隔離・本格的なフォレンジック分析は対応(Respond)フェーズで扱う。対応フェーズの設計が必要な場合は、対応(Respond)フェーズのスキルの活用をご案内する。本項目は、検知・分析から対応への橋渡しに焦点を当てる。</p>
+        <h4>期待される効果</h4>
+        <table class="compare">
+          <thead><tr><th style="width:44%">シナリオ</th><th>現状</th><th>改善後</th></tr></thead>
+          <tbody>
+            <tr><td>攻撃を検知・分析した後の対応着手</td><td class="before">検知から対応への引き継ぎが不明確で、対応開始が遅延</td><td class="after">検知を起点に対応プロセスへ速やかに引き継げる</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 付録 -->
+    <h2 class="section">付録</h2>
+    <h3 class="minor">参照した reference 一覧</h3>
+    <p style="font-size: 13.5px; color: var(--text-muted); margin: 0 0 12px;">ランサムウェア対策 SKILL の検知・分析 (Detect) フェーズの <code>references/</code> フォルダに格納された以下の詳細ガイドファイルを参照して作成している。</p>
+    <ul style="font-size: 14px;">
+      <li><span class="ref-link">references/01-detection-strategy.md</span> 検知の設計(サービス影響の検知 + セキュリティ攻撃の検知、監視の深さ、GuardDuty 保護プラン、アラート起点の原因切り分け(手動確認)、検知の集約・委任管理)</li>
+      <li><span class="ref-link">references/02-log-analysis-and-investigation.md</span> ログを活用した分析・調査(Amazon Detective / SIEM on Amazon OpenSearch Service、感染兆候の確認、フォレンジックベンダ連携の事前準備)</li>
+    </ul>
+
+  </div>
+</div>
+
+<footer>
+  Generated by fsi-ransomware-detect (Roadmap Detail) / Skill version 1 / 2026-06-03
+</footer>
+
+</body>
+</html>

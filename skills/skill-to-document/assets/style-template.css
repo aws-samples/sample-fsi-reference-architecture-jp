@@ -1,0 +1,351 @@
+/* style-template.css — Enterprise document stylesheet for skill-to-document */
+/* Designed for professional, print-friendly Japanese technical documents */
+
+:root {
+  --color-text: #1a1a2e;
+  --color-text-secondary: #4a4a5a;
+  --color-heading: #0f1b3d;
+  --color-accent: #1b3a6b;
+  --color-accent-light: #e8edf5;
+  --color-border: #c5cdd9;
+  --color-border-light: #dfe4ec;
+  --color-bg: #ffffff;
+  --color-bg-alt: #f5f7fa;
+  --color-code-bg: #f0f2f6;
+  --color-code-border: #d4d9e3;
+  --color-table-header: #1b3a6b;
+  --color-table-header-text: #ffffff;
+  --color-table-row-alt: #f5f7fa;
+  --font-body: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  --font-heading: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  --font-mono: "SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", monospace;
+  --content-width: 960px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 15px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.8;
+  margin: 0;
+  padding: 0;
+}
+
+.document {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 2rem 2.5rem;
+}
+
+/* ── Title Page ── */
+.title-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+  border-bottom: 3px solid var(--color-accent);
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+}
+
+.title-page h1 {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  letter-spacing: 0.04em;
+  margin: 0 0 1.5rem 0;
+  border: none;
+  padding: 0;
+}
+
+.title-page .skill-name {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.title-page .date {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin-top: 2rem;
+}
+
+/* ── Table of Contents ── */
+.toc {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.toc h2 {
+  font-size: 1.5rem;
+  color: var(--color-heading);
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.toc ol {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.toc li {
+  margin: 0.3rem 0;
+}
+
+.toc a {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--color-border);
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.toc a:hover {
+  color: var(--color-heading);
+  border-bottom-color: var(--color-accent);
+}
+
+.toc .toc-level-1 { padding-left: 0; font-weight: 600; font-size: 1.05rem; }
+.toc .toc-level-2 { padding-left: 1.5rem; font-weight: 400; font-size: 0.98rem; }
+.toc .toc-level-3 { padding-left: 3rem; font-weight: 400; font-size: 0.92rem; color: var(--color-text-secondary); }
+
+/* ── Headings ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-heading);
+  line-height: 1.4;
+  margin-top: 2.2rem;
+  margin-bottom: 0.8rem;
+}
+
+h1 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.4rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.3rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+h5, h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+/* ── Paragraphs & Inline ── */
+p {
+  margin: 0.8rem 0;
+}
+
+strong {
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+a:hover {
+  border-bottom-color: var(--color-accent);
+}
+
+/* ── Lists ── */
+ul, ol {
+  margin: 0.6rem 0;
+  padding-left: 1.8rem;
+}
+
+li {
+  margin: 0.3rem 0;
+}
+
+li > ul, li > ol {
+  margin: 0.2rem 0;
+}
+
+/* ── Code ── */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-code-border);
+  border-radius: 3px;
+  padding: 0.15em 0.4em;
+}
+
+pre {
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-code-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 3px;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  line-height: 1.5;
+  margin: 1rem 0;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+}
+
+/* ── Tables ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2rem 0;
+  font-size: 0.93rem;
+}
+
+thead th {
+  background: var(--color-table-header);
+  color: var(--color-table-header-text);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--color-table-header);
+}
+
+tbody td {
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+tbody tr:nth-child(even) {
+  background: var(--color-table-row-alt);
+}
+
+/* ── Blockquote ── */
+blockquote {
+  margin: 1rem 0;
+  padding: 0.8rem 1.2rem;
+  border-left: 4px solid var(--color-accent);
+  background: var(--color-accent-light);
+  color: var(--color-text-secondary);
+}
+
+blockquote p {
+  margin: 0.3rem 0;
+}
+
+/* ── Horizontal Rule ── */
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 2rem 0;
+}
+
+/* ── Images ── */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.2rem auto;
+}
+
+.image-placeholder {
+  display: block;
+  padding: 1rem;
+  background: var(--color-bg-alt);
+  border: 1px dashed var(--color-border);
+  color: var(--color-text-secondary);
+  text-align: center;
+  font-size: 0.9rem;
+  margin: 1.2rem 0;
+}
+
+/* ── Appendix ── */
+.appendix {
+  margin-top: 3rem;
+  border-top: 2px solid var(--color-accent);
+  padding-top: 1.5rem;
+}
+
+/* ── Print ── */
+@media print {
+  html { font-size: 11pt; }
+
+  body { color: #000; }
+
+  .document {
+    max-width: none;
+    padding: 0;
+  }
+
+  .title-page {
+    min-height: auto;
+    page-break-after: always;
+  }
+
+  .toc {
+    page-break-after: always;
+  }
+
+  .chapter {
+    page-break-before: always;
+  }
+
+  .appendix {
+    page-break-before: always;
+  }
+
+  a { color: #000; border-bottom: none; }
+  a[href]::after { content: none; }
+
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border-left-color: #666;
+  }
+
+  thead th {
+    background: #e0e0e0 !important;
+    color: #000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #f0f0f0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

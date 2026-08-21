@@ -1,0 +1,9 @@
+[project]
+name = "skill-to-document-scripts"
+version = "1.0.0"
+description = "PDF/DOCX generation scripts for skill-to-document"
+requires-python = ">=3.10"
+dependencies = [
+    "fpdf2>=2.8.0",
+    "python-docx>=1.1.0",
+]

@@ -1,0 +1,7 @@
+[project]
+name = "aws-blogs"
+version = "1.0.0"
+description = "Fetch and search AWS blog posts via the official AWS API"
+requires-python = ">=3.11"
+dependencies = []
+
