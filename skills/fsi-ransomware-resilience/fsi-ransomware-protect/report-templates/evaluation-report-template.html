@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  評価結果レポート テンプレート (evaluation-report-template.html)
+  =====================================================================
+  本ファイルは fsi-ransomware-protect Workflow B の Step 8a で生成する
+  評価結果レポートのテンプレートである。AI エージェントは本テンプレートの
+  スタイル・セクション構造・配色・フォントを完全に踏襲し、データ部分
+  (お客様情報・評価結果) のみを差し替える形でレポートを生成する。
+
+  本ファイル内のデータは特定のお客様環境を想定したサンプルである。
+  実際の生成時はお客様の入力情報・評価結果に置き換えること。
+
+  詳細な仕様は同階層の template-spec.md を参照する。
+  =====================================================================
+-->
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>【保護フェーズ】AWS ランサムウェア対策評価結果レポート — fsi-ransomware-protect Workflow B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 表紙・アクセント */
+    --navy-1: #0F2942;
+    --navy-2: #1E4D7B;
+    --teal: #1A7F8E;
+    --teal-light: #CCFBF1;
+    --gold: #C9A961;
+    --primary-light: #E8EEF7;
+    /* テキスト・背景 */
+    --text: #1F2933;
+    --text-muted: #5A6677;
+    --border: #E2E8F0;
+    --bg-page: #F4F6FA;
+    --bg-card: #F7F9FC;
+    --bg-soft: #FAFBFC;
+    /* 判定色 */
+    --ok: #2E7D32;
+    --ok-bg: #E8F5E9;
+    --ok-row: #F5FBF5;
+    --partial: #E89B0E;
+    --partial-bg: #FFF4D9;
+    --partial-row: #FFFBF0;
+    --ng: #C62828;
+    --ng-bg: #FFE3E3;
+    --ng-row: #FFF5F5;
+    --unknown: #757575;
+    --unknown-bg: #F5F5F5;
+    --unknown-row: #F7F7F7;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Inter", "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+    color: var(--text);
+    line-height: 1.75;
+    background: var(--bg-page);
+    margin: 0;
+    padding: 32px 16px;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "palt", "kern";
+  }
+  .page {
+    max-width: 980px;
+    margin: 0 auto 32px;
+    background: var(--bg-card);
+    box-shadow: 0 8px 32px rgba(15, 41, 66, 0.10), 0 2px 8px rgba(15, 41, 66, 0.06);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  /* 表紙 */
+  .cover {
+    background: linear-gradient(135deg, var(--navy-1) 0%, var(--navy-2) 60%, var(--teal) 100%);
+    color: #fff;
+    padding: 64px 72px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: "";
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(201,169,97,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cover::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+  }
+  .cover .label {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    font-weight: 600;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .cover .phase-nav {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+    margin-bottom: 16px;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  .cover .phase-nav .phase {
+    font-size: 12px;
+    line-height: 1.3;
+    padding: 5px 12px;
+    border-radius: 6px;
+    color: rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.3);
+    text-align: center;
+  }
+  .cover .phase-nav .phase .ja { font-weight: 600; display: block; }
+  .cover .phase-nav .phase .en {
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 1px;
+  }
+  .cover .phase-nav .phase.active {
+    color: var(--navy-1);
+    background: var(--gold);
+    border-color: var(--gold);
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .phase-hl {
+    color: var(--teal);
+    font-weight: 700;
+  }
+  .cover h1 {
+    font-size: 38px;
+    font-weight: 800;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+    position: relative;
+  }
+  .cover .subtitle {
+    color: rgba(255,255,255,0.85);
+    font-size: 16px;
+    margin: 0;
+    position: relative;
+  }
+  .cover .date {
+    margin-top: 32px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 16px;
+    position: relative;
+    font-family: "Inter", monospace;
+    letter-spacing: 0.03em;
+  }
+  /* 本文コンテナ */
+  .body { padding: 56px 96px; }
+  /* このレポートについて */
+  .about {
+    background: linear-gradient(135deg, #F8FAFC 0%, #EEF4FA 100%);
+    border-left: 3px solid var(--teal);
+    padding: 20px 24px;
+    margin: 0 0 40px;
+    font-size: 14px;
+    line-height: 1.9;
+    border-radius: 0 8px 8px 0;
+  }
+  .about h2 {
+    font-size: 11px;
+    color: var(--teal);
+    margin: 0 0 8px;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    padding: 0;
+    background: none;
+    border: none;
+  }
+  .about p { margin: 0 0 10px; }
+  .about p:last-child { margin-bottom: 0; }
+  .about ul { margin: 6px 0 10px; padding-left: 24px; }
+  .about li { margin-bottom: 4px; }
+  /* 「より詳細な改善設計について」のハイライト用 */
+  .callout {
+    color: var(--teal);
+    font-weight: 600;
+  }
+  /* セクション見出し */
+  h2.section {
+    font-size: 22px;
+    color: var(--navy-1);
+    margin: 48px 0 20px;
+    padding: 0 0 12px;
+    border-bottom: 2px solid var(--navy-1);
+    position: relative;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  h2.section::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+  }
+  /* 評価サマリブロック */
+  .summary-block {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 40px;
+    align-items: center;
+    margin: 20px 0 24px;
+    padding: 36px 32px;
+    background: linear-gradient(135deg, var(--teal-light) 0%, #ffffff 55%, var(--primary-light) 100%);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(15,41,66,0.10), 0 2px 6px rgba(15,41,66,0.06);
+  }
+  .summary-block::before {
+    content: "";
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(26, 127, 142, 0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .pie-wrap { display: flex; justify-content: center; position: relative; z-index: 1; }
+  .pie-wrap svg {
+    width: 220px; height: 220px;
+    filter: drop-shadow(0 4px 16px rgba(15,41,66,0.12));
+  }
+  .legend { font-size: 14px; position: relative; z-index: 1; }
+  .legend-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+  }
+  .legend-row.r-ok { background: rgba(46, 125, 50, 0.08); }
+  .legend-row.r-partial { background: rgba(232, 155, 14, 0.10); }
+  .legend-row.r-ng { background: rgba(198, 40, 40, 0.08); }
+  .legend-row.r-unknown { background: rgba(148, 163, 184, 0.10); }
+  .legend-swatch {
+    width: 12px; height: 12px;
+    border-radius: 3px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
+  }
+  .legend-label { flex: 1; font-weight: 600; }
+  .legend-value {
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    font-family: "Inter", monospace;
+    font-size: 13px;
+  }
+  .legend-value strong { color: var(--text); margin-right: 4px; font-weight: 700; font-size: 16px; }
+  /* 総合評価 */
+  h3.minor {
+    font-size: 12px;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    margin: 32px 0 12px;
+    text-transform: uppercase;
+  }
+  .overall-comment {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    padding: 24px 28px;
+    margin: 0 0 24px;
+    font-size: 14px;
+    line-height: 1.95;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 4px 14px rgba(15,41,66,0.08), 0 1px 3px rgba(15,41,66,0.05);
+  }
+  .overall-comment p { margin: 0 0 12px; }
+  .overall-comment p:last-child { margin-bottom: 0; }
+  .overall-comment strong { color: var(--ng); font-weight: 700; }
+  /* 表 */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 12px 0 24px;
+    font-size: 13.5px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(15,41,66,0.08), 0 1px 3px rgba(15,41,66,0.05);
+  }
+  th {
+    background: linear-gradient(180deg, var(--navy-1) 0%, var(--navy-2) 100%);
+    color: #fff;
+    text-align: left;
+    padding: 14px 16px;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+  }
+  td {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px;
+    vertical-align: top;
+  }
+  /* 評価サマリ表の観点列を強調 */
+  table.eval-summary td:nth-child(2) {
+    font-weight: 700;
+    font-size: 14.5px;
+    color: var(--navy-1);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  /* 評価サマリ表: 判定別行色 */
+  table.eval-summary tr.row-ok td { background: var(--ok-row); }
+  table.eval-summary tr.row-partial td { background: var(--partial-row); }
+  table.eval-summary tr.row-ng td { background: var(--ng-row); }
+  table.eval-summary tr.row-unknown td { background: var(--unknown-row); }
+  /* 入力情報表: zebra */
+  table.input-table tbody tr:nth-child(even) td { background: var(--bg-soft); }
+  /* 判定バッジ */
+  .verdict {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+  }
+  .verdict.ok { color: var(--ok); background: var(--ok-bg); }
+  .verdict.partial { color: var(--partial); background: var(--partial-bg); }
+  .verdict.ng { color: var(--ng); background: var(--ng-bg); }
+  .verdict.unknown { color: var(--unknown); background: var(--unknown-bg); }
+  /* 評価項目カード */
+  .item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 18px 0 20px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(15,41,66,0.08), 0 1px 3px rgba(15,41,66,0.05);
+  }
+  .item-header {
+    padding: 14px 22px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .item-header.ok { background: linear-gradient(180deg, var(--ok) 0%, #1F5F22 100%); }
+  .item-header.partial { background: linear-gradient(180deg, var(--partial) 0%, #B07000 100%); }
+  .item-header.ng { background: linear-gradient(180deg, var(--ng) 0%, #931E1E 100%); }
+  .item-header.unknown { background: linear-gradient(180deg, var(--unknown) 0%, #4D4D4D 100%); }
+  .item-header .num {
+    background: rgba(255,255,255,0.22);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    flex-shrink: 0;
+    font-family: "Inter", monospace;
+  }
+  .item-header .title { flex: 1; font-weight: 700; font-size: 17px; letter-spacing: 0.01em; }
+  .item-header .verdict-inline {
+    background: rgba(255,255,255,0.22);
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .item-body { padding: 22px 26px; }
+  .item-body h4 {
+    font-size: 13px;
+    color: var(--navy-1);
+    margin: 16px 0 6px;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 4px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .item-body h4:first-child { margin-top: 0; }
+  .item-body p { margin: 0 0 8px; font-size: 14px; }
+  .item-body ul { margin: 4px 0 8px; padding-left: 24px; font-size: 14px; }
+  .item-body li { margin-bottom: 4px; }
+  .scenario {
+    background: var(--bg-soft);
+    border-left: 3px solid var(--ng);
+    padding: 10px 14px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: var(--text);
+    border-radius: 0 6px 6px 0;
+  }
+  .scenario.mitigated { border-left-color: var(--ok); }
+  .ref-link {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--navy-1);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  /* フッター */
+  footer {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 16px 72px;
+    color: var(--text-muted);
+    font-size: 11px;
+    text-align: center;
+    font-family: "Inter", monospace;
+    letter-spacing: 0.05em;
+  }
+  /* 印刷 */
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; padding: 40px 56px; margin: 0; border-radius: 0; }
+    h2 { page-break-after: avoid; }
+    .item { page-break-inside: avoid; }
+    .summary-block { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- 表紙 -->
+  <div class="cover">
+    <div class="label">FSI RANSOMWARE PROTECT — WORKFLOW B</div>
+    <h1>【保護フェーズ】<br>AWS ランサムウェア対策評価結果レポート</h1>
+    <div class="phase-nav">
+      <span class="phase active"><span class="ja">保護</span><span class="en">Protect</span></span>
+      <span class="phase"><span class="ja">検知</span><span class="en">Detect</span></span>
+      <span class="phase"><span class="ja">対応</span><span class="en">Respond</span></span>
+      <span class="phase"><span class="ja">復旧</span><span class="en">Recover</span></span>
+    </div>
+    <p class="subtitle">既存バックアップ環境のランサムウェア対策十分性評価</p>
+    <div class="date">GENERATED — 2026-05-28</div>
+  </div>
+
+  <div class="body">
+
+    <!-- このレポートについて -->
+    <div class="about">
+      <h2>ABOUT THIS REPORT</h2>
+      <p>ランサムウェア対策は、保護（Protect）・検知（Detect）・対応（Respond）・復旧（Recover）の 4 つの観点で体系的に整備することが有効である。本レポートは、このうち <span class="phase-hl">保護（Protect）フェーズ</span> ― 攻撃を受けてもデータを失わない・改ざんされないバックアップ環境 ― を対象に、既存環境の十分性を評価したものである。検知・対応・復旧の各フェーズは別途扱う。</p>
+      <p>本レポートは、AWS 金融リファレンスアーキテクチャ日本版で公開されているランサムウェア対策向けの SKILL を用いて、お客様の既存バックアップ環境をランサムウェア対策の観点で評価した結果をまとめたものである。AWS Well-Architected Framework Financial Services Industry Lens、AWS Blueprint for Ransomware Defense 等の AWS 公式ガイダンスをベースに、金融機関の文脈で求められる設計考慮を加味した観点で評価を実施している。</p>
+    </div>
+
+    <!-- 評価サマリ -->
+    <h2 class="section">評価サマリ</h2>
+    <div class="summary-block">
+      <div class="pie-wrap">
+        <svg viewBox="0 0 42 42" role="img" aria-label="判定サマリ円グラフ">
+          <!-- 円周 ≈ 100 (r=15.9155, 2πr ≈ 100) -->
+          <!-- rotate(-90) により 12 時方向を 0 とし、時計回りで描画 -->
+          <circle cx="21" cy="21" r="15.9155" fill="#fff" stroke="#F1F4F8" stroke-width="6"/>
+          <!-- OK: 0% → 11.1% -->
+          <circle cx="21" cy="21" r="15.9155" fill="transparent"
+                  stroke="#2E7D32" stroke-width="6"
+                  stroke-dasharray="11.1 88.9" stroke-dashoffset="0"
+                  transform="rotate(-90 21 21)"/>
+          <!-- 一部対応: 11.1% → 44.4% -->
+          <circle cx="21" cy="21" r="15.9155" fill="transparent"
+                  stroke="#E89B0E" stroke-width="6"
+                  stroke-dasharray="33.3 66.7" stroke-dashoffset="-11.1"
+                  transform="rotate(-90 21 21)"/>
+          <!-- NG: 44.4% → 100% -->
+          <circle cx="21" cy="21" r="15.9155" fill="transparent"
+                  stroke="#C62828" stroke-width="6"
+                  stroke-dasharray="55.6 44.4" stroke-dashoffset="-44.4"
+                  transform="rotate(-90 21 21)"/>
+          <text x="21" y="20" text-anchor="middle" style="font-size:5px; fill:#0F2942; font-weight:800;">全 9 項目</text>
+          <text x="21" y="26" text-anchor="middle" style="font-size:3px; fill:#5A6677;">評価結果</text>
+        </svg>
+      </div>
+      <div class="legend">
+        <div class="legend-row r-ok">
+          <span class="legend-swatch" style="background:#2E7D32"></span>
+          <span class="legend-label">OK</span>
+          <span class="legend-value"><strong>1 件</strong>(11.1%)</span>
+        </div>
+        <div class="legend-row r-partial">
+          <span class="legend-swatch" style="background:#E89B0E"></span>
+          <span class="legend-label">一部対応</span>
+          <span class="legend-value"><strong>3 件</strong>(33.3%)</span>
+        </div>
+        <div class="legend-row r-ng">
+          <span class="legend-swatch" style="background:#C62828"></span>
+          <span class="legend-label">NG</span>
+          <span class="legend-value"><strong>5 件</strong>(55.6%)</span>
+        </div>
+        <div class="legend-row r-unknown">
+          <span class="legend-swatch" style="background:#94A3B8"></span>
+          <span class="legend-label">未確認</span>
+          <span class="legend-value"><strong>0 件</strong>(0%)</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="minor">Overall Assessment</h3>
+    <div class="overall-comment">
+      <p>暗号化については CMK によるバックアップデータの保護が実装されており、暗号化レイヤーでの基盤対応はできている状況である。また、CloudTrail / Config によるログ収集の有効化と一元保管も整備されており、フォレンジック分析の前提となる証跡基盤は一定確保されている。SCP の利用による予防的統制の枠組みも既に組織内で運用されている点は、今後の拡張のベースとして活用が可能である。</p>
+      <p>一方で、ランサムウェア対策の核心となる<strong>「アカウント分離」「イミュータブル化」「クロスアカウント / クロスリージョンコピー」のいずれもが未対応</strong>であり、現状では業務アカウントが侵害された場合にバックアップデータも同時に破壊される構成となっている。加えて、200 アカウント規模の運用にも関わらず、バックアップ運用の組織横断的な監視・監査の仕組みが整備されておらず、有事の際に復旧不能が発覚するリスクを抱えている。</p>
+      <p>早急に対応が必要なのは、既存の Organizations + SCP 基盤を活用したバックアップ・KMS キー・ログ取得の<strong>削除防止 SCP の追加</strong>と、ログ保管 S3 バケットへの<strong>Object Lock / Versioning / MFA Delete の適用</strong>である。これらは新規アカウント作成やアーキテクチャ変更を伴わず、1〜2 ヶ月の短期で防御力を大きく引き上げられる。中期では Backup / 隔離 / リカバリの 3 アカウント新設と AWS Backup への移行を計画的に進めることを推奨する。</p>
+    </div>
+
+    <!-- 評価結果サマリ表 -->
+    <h2 class="section">評価結果サマリ</h2>
+    <table class="eval-summary">
+      <thead>
+        <tr>
+          <th style="width:36px">#</th>
+          <th style="width:140px">観点</th>
+          <th>現状</th>
+          <th style="width:80px">判定</th>
+          <th>不足ポイント</th>
+          <th>リスク</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="row-ng">
+          <td>1</td><td>アカウント分離</td>
+          <td>バックアップ専用アカウントなし。業務アカウント内で保管</td>
+          <td><span class="verdict ng">NG</span></td>
+          <td>Backup / 隔離 / リカバリアカウントが未設置</td>
+          <td>業務アカウント侵害時にバックアップも同時破壊</td>
+        </tr>
+        <tr class="row-partial">
+          <td>2</td><td>バックアッププラン設計</td>
+          <td>各サービス個別のスナップショット。AWS Backup 未使用。頻度・保持期間は未確認</td>
+          <td><span class="verdict partial">一部対応</span></td>
+          <td>組織横断の一元管理なし。200 アカウントで設定漏れ・不整合のリスク</td>
+          <td>設定漏れによる保護対象外リソースの発生、必要な取得世代が欠落する可能性</td>
+        </tr>
+        <tr class="row-ng">
+          <td>3</td><td>イミュータブル化</td>
+          <td>Vault Lock / S3 Object Lock いずれも未使用</td>
+          <td><span class="verdict ng">NG</span></td>
+          <td>バックアップデータに WORM 保護なし</td>
+          <td>管理者権限奪取時にバックアップが削除・改ざん可能</td>
+        </tr>
+        <tr class="row-ng">
+          <td>4</td><td>コピー戦略</td>
+          <td>クロスアカウント・クロスリージョンコピーなし</td>
+          <td><span class="verdict ng">NG</span></td>
+          <td>3-2-1 ルール未達。単一アカウント・単一リージョンに依存</td>
+          <td>アカウント侵害・リージョン障害で全バックアップ消失</td>
+        </tr>
+        <tr class="row-ok">
+          <td>5</td><td>暗号化</td>
+          <td>CMK で暗号化済み、S3 は SSE-KMS</td>
+          <td><span class="verdict ok">OK</span></td>
+          <td>(KMS キー削除防止の SCP がないため、キー削除リスクは残存)</td>
+          <td>—</td>
+        </tr>
+        <tr class="row-partial">
+          <td>6</td><td>マルウェアスキャン</td>
+          <td>リストア前のスキャン仕組みなし。EC2 上に EDR あり</td>
+          <td><span class="verdict partial">一部対応</span></td>
+          <td>バックアップデータに対する直接スキャンの仕組みがない</td>
+          <td>感染済みバックアップから復旧し、再感染が発生する</td>
+        </tr>
+        <tr class="row-partial">
+          <td>7</td><td>ログ収集・保護</td>
+          <td>CloudTrail / Config 有効化済み、S3 一元保管。改ざん対策なし</td>
+          <td><span class="verdict partial">一部対応</span></td>
+          <td>ログ保管 S3 に Object Lock / MFA Delete 未設定</td>
+          <td>攻撃者がログを削除・改ざんし、フォレンジック分析が不可能に</td>
+        </tr>
+        <tr class="row-ng">
+          <td>8</td><td>SCP・予防的統制</td>
+          <td>SCP は利用中だがバックアップ関連の統制なし</td>
+          <td><span class="verdict ng">NG</span></td>
+          <td>Vault 削除防止、KMS キー削除防止、CloudTrail 停止防止等の SCP がない</td>
+          <td>攻撃者が管理者権限を得た場合、バックアップ・ログの破壊を防げない</td>
+        </tr>
+        <tr class="row-ng">
+          <td>9</td><td>バックアップ運用の監視</td>
+          <td>成功/失敗の監視なし、横断可視化なし、Audit Manager なし</td>
+          <td><span class="verdict ng">NG</span></td>
+          <td>200 アカウントのバックアップ状況が把握できていない</td>
+          <td>バックアップ失敗に気づかず、有事に復旧不能が判明する</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 評価項目の詳細 (全 9 項目をカード形式で展開) -->
+    <h2 class="section">評価項目の詳細</h2>
+
+    <!-- 1 -->
+    <div class="item">
+      <div class="item-header ng">
+        <div class="num">1</div>
+        <div class="title">アカウント分離</div>
+        <span class="verdict-inline">NG</span>
+      </div>
+      <div class="item-body">
+        <h4>現状の整理</h4>
+        <p>バックアップ専用アカウントは設置されておらず、各業務アカウント内でスナップショットとして保管されている。Organizations は利用しているが、200 アカウントすべてが業務システム単位で並列に存在する構成。</p>
+        <h4>判定の根拠</h4>
+        <p>ランサムウェア対策の前提となる「責務の分離 (Separation of Duties)」が成立しておらず、業務アカウントが攻撃者に掌握された場合にバックアップデータが同一権限境界内で削除可能な状態となっている。</p>
+        <h4>不足している要素 / なぜそれが問題か</h4>
+        <ul>
+          <li>Backup アカウント (組織横断のバックアップポリシー集中管理) が未設置</li>
+          <li>隔離アカウント (Vault Lock を適用した最終保護先) が未設置</li>
+          <li>リカバリアカウント (フォレンジック分析・復旧オペレーション専用) が未設置</li>
+        </ul>
+        <p>200 アカウント規模の組織では、各アカウントで個別運用するのは設定漏れ・統制バラつきの温床となるため、Backup アカウントによる集中管理の効果が大きく出る領域でもある。</p>
+        <h4>想定されるリスクシナリオ</h4>
+        <div class="scenario">攻撃者が業務アカウントの管理者権限を奪取 → 同一アカウント内のスナップショットを全削除 → バックアップ消失 → 復旧不能</div>
+        <h4>関連する改善項目</h4>
+        <p><span class="ref-link">中期 3</span> マルチアカウント構成の導入 (Backup / 隔離 / リカバリの 3 アカウント新設)</p>
+        <h4>参照 reference</h4>
+        <p><span class="ref-link">references/01-multi-account-architecture.md</span></p>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="item">
+      <div class="item-header partial">
+        <div class="num">2</div>
+        <div class="title">バックアッププラン設計</div>
+        <span class="verdict-inline">一部対応</span>
+      </div>
+      <div class="item-body">
+        <h4>現状の整理</h4>
+        <p>各サービス個別のスナップショット機能を利用 (EBS スナップショット、RDS 自動バックアップ、FSx 自動バックアップ等)。AWS Backup による組織横断の一元管理は未導入。取得頻度・保持期間は各アカウントで個別に設定されており、組織全体での標準化・把握はできていない。</p>
+        <h4>判定の根拠</h4>
+        <p>バックアップ自体は取得されているため一定の備えはあるが、200 アカウントで個別設定する構造のため、設定漏れ・標準からの逸脱・取得頻度の不整合が発生しやすい。ランサム対策の観点では、組織横断で一元的に管理され、イミュータブル化・適切な取得世代/保管が担保された構成になっていない点が懸念。</p>
+        <h4>不足している要素 / なぜそれが問題か</h4>
+        <ul>
+          <li>組織横断のバックアップポリシー (Organizations のバックアップポリシー機能) が未利用</li>
+          <li>業務影響度別のプラン分割 (基幹系 / 情報系) が体系化されていない</li>
+          <li>タグベースの対象選定が標準化されておらず、新規リソース作成時に保護対象から漏れるリスク</li>
+        </ul>
+        <h4>想定されるリスクシナリオ</h4>
+        <div class="scenario">200 アカウントの一部で取得頻度・対象設定が誤っており、ランサム被災時に必要な時点のクリーンなバックアップが存在しないことが被災時にはじめて発覚 → 想定外のデータロス</div>
+        <h4>関連する改善項目</h4>
+        <p><span class="ref-link">中期 4</span> AWS Backup への移行と組織横断管理</p>
+        <h4>参照 reference</h4>
+        <p><span class="ref-link">references/03-backup-plan-design.md</span></p>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="item">
+      <div class="item-header ng">
+        <div class="num">3</div>
+        <div class="title">イミュータブル化</div>
+        <span class="verdict-inline">NG</span>
+      </div>
+      <div class="item-body">
+        <h4>現状の整理</h4>
+        <p>AWS Backup Vault Lock、S3 Object Lock いずれも未適用。バックアップデータへの WORM (Write Once, Read Many) 保護機構が一切組み込まれていない状態。</p>
+        <h4>判定の根拠</h4>
+        <p>イミュータブル化はランサムウェア対策の核心要素のひとつであり、これが未適用であるとは「攻撃者が管理者権限を奪取した場合、バックアップデータの削除・改ざんが何の追加障壁もなく成立する」ことを意味する。</p>
+        <h4>不足している要素 / なぜそれが問題か</h4>
+        <ul>
+          <li>Backup vault に Vault Lock (Compliance mode) 未適用</li>
+          <li>ログ・監査証跡保管 S3 への Object Lock 未適用</li>
+          <li>金融機関の規制対応 (SEC 17a-4、CFTC、FINRA 等の Cohasset 評価) の説明材料としての WORM 保護が確保されていない</li>
+        </ul>
+        <h4>想定されるリスクシナリオ</h4>
+        <div class="scenario">攻撃者が管理者権限を奪取 → Backup vault のリカバリポイントを全削除 / 暗号化キーを削除して復号不能化 → 復旧手段の喪失</div>
+        <h4>関連する改善項目</h4>
+        <p><span class="ref-link">中期 6</span> Vault Lock (Compliance mode) の適用、<span class="ref-link">短期 2</span> ログ保管 S3 への Object Lock 適用</p>
+        <h4>参照 reference</h4>
+        <p><span class="ref-link">references/02-immutability.md</span></p>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="item">
+      <div class="item-header ng">
+        <div class="num">4</div>
+        <div class="title">コピー戦略 (3-2-1 ルール)</div>
+        <span class="verdict-inline">NG</span>
+      </div>
+      <div class="item-body">
+        <h4>現状の整理</h4>
+        <p>クロスアカウント・クロスリージョンコピーいずれも未実施。バックアップは取得元と同一アカウント・同一リージョンに留まっている。</p>
+        <h4>判定の根拠</h4>
+        <p>「コピーを 3 つ、異なる場所に 2 つ、オフサイトに 1 つ」という 3-2-1 ルールが未達であり、単一アカウント・単一リージョンへの完全依存となっているため、ランサムウェア対策・事業継続の両面で脆弱な構成。</p>
+        <h4>不足している要素 / なぜそれが問題か</h4>
+        <ul>
+          <li>業務アカウント (東京) → 業務アカウント (大阪) のクロスリージョンコピーなし → リージョン障害でバックアップごと消失</li>
+          <li>業務アカウント (東京) → 隔離アカウント (東京) のクロスアカウントコピーなし → 業務アカウント侵害でバックアップ全滅</li>
+          <li>隔離アカウントから リカバリアカウントへの平時コピーなし → ランサム被災時の復旧着手に追加のコピー時間を要する</li>
+        </ul>
+        <h4>想定されるリスクシナリオ</h4>
+        <div class="scenario">攻撃者が業務アカウントを掌握、または東京リージョンで広域障害が発生 → コピー先が存在しないためバックアップが完全に失われる</div>
+        <h4>関連する改善項目</h4>
+        <p><span class="ref-link">中期 5</span> クロスアカウント・クロスリージョンコピーの実装</p>
+        <h4>参照 reference</h4>
+        <p><span class="ref-link">references/01-multi-account-architecture.md</span></p>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="item">
+      <div class="item-header ok">
+        <div class="num">5</div>
+        <div class="title">暗号化</div>
+        <span class="verdict-inline">OK</span>
+      </div>
+      <div class="item-body">
+        <h4>現状の整理</h4>
+        <p>EBS スナップショットは顧客管理キー (CMK) で暗号化済み。S3 バケットも SSE-KMS が適用されている。</p>
+        <h4>判定の根拠</h4>
+        <p>主要なバックアップデータに対して顧客管理キーによる暗号化が実装されており、暗号化レイヤーの基本対応は完了している。AWS マネージドキーではなく CMK を採用している点も、キー管理の透明性・統制可能性の観点で適切。</p>
+        <h4>留意点 / 残存リスク</h4>
+        <ul>
+          <li>KMS キー削除防止の SCP が未設定のため、攻撃者が <code>kms:ScheduleKeyDeletion</code> や <code>kms:DisableKey</code> を実行することでキーを使用不能にし、結果としてバックアップを復号不能にできる状態</li>
+          <li>キーローテーションの設定状況、キーポリシーのアクセス制御範囲も継続的にレビューする運用が望ましい</li>
+        </ul>
+        <h4>想定されるリスクシナリオ</h4>
+        <div class="scenario">攻撃者が KMS キー管理権限を奪取 → 暗号化キーを削除 → バックアップは存在するが復号できず実質的に喪失</div>
+        <h4>関連する改善項目</h4>
+        <p><span class="ref-link">短期 1</span> KMS キー削除防止 SCP の追加 (補完)</p>
+        <h4>参照 reference</h4>
+        <p><span class="ref-link">references/04-encryption-strategy.md</span></p>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="item">
+      <div class="item-header partial">
+        <div class="num">6</div>
+        <div class="title">マルウェアスキャン</div>
+        <span class="verdict-inline">一部対応</span>
+      </div>
+      <div class="item-body">
+        <h4>現状の整理</h4>
+        <p>EC2 稼働中のリアルタイム検知は EDR で対応済み。ただし、バックアップデータ (スナップショット) に対する直接スキャンの仕組みは未整備。リストア前のクリーンチェックの仕組みもない。</p>
+        <h4>判定の根拠</h4>
+        <p>稼働中のリアルタイム検知層は確保されているが、ランサムウェア対策で重要となる「バックアップ自体が感染していないことの保証」が不足。EDR は OS 上のエージェント型のため、スナップショット内部の検査には対応しないのが一般的。</p>
+        <h4>不足している要素 / なぜそれが問題か</h4>
+        <ul>
+          <li>バックアップデータに対する定期的なマルウェアスキャンがない (GuardDuty Malware Protection for Backup 等)</li>
+          <li>リストア時のクリーンチェック手順が運用に組み込まれていない</li>
+          <li>結果として、感染した状態のスナップショットが保管され、それを元にリストアして再感染するリスクが残る</li>
+        </ul>
+        <h4>想定されるリスクシナリオ</h4>
+        <div class="scenario">攻撃者が一定期間潜伏 → 既に感染済みのデータがバックアップに含まれる → 復旧時に感染状態をそのまま戻し再感染が発生</div>
+        <h4>関連する改善項目</h4>
+        <p><span class="ref-link">長期 7</span> マルウェアスキャンの導入 (GuardDuty Malware Protection for Backup + EDR の補完)</p>
+        <h4>参照 reference</h4>
+        <p><span class="ref-link">references/05-malware-protection.md</span></p>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="item">
+      <div class="item-header partial">
+        <div class="num">7</div>
+        <div class="title">ログ収集・保護</div>
+        <span class="verdict-inline">一部対応</span>
+      </div>
+      <div class="item-body">
+        <h4>現状の整理</h4>
+        <p>CloudTrail / Config が有効化されており、ログは S3 バケットに一元保管されている。フォレンジック分析の前提となる証跡基盤は確保されている。一方で、ログ保管 S3 バケットへの改ざん防止 (Object Lock、MFA Delete 等) が未設定。</p>
+        <h4>判定の根拠</h4>
+        <p>ログを集めること自体はできているが、攻撃者がログ保管 S3 への権限を獲得した場合、ログを削除・改ざんできる構成のため、有事のフォレンジック分析が成立しないリスクがある。</p>
+        <h4>不足している要素 / なぜそれが問題か</h4>
+        <ul>
+          <li>S3 Versioning が未有効化 (オブジェクト上書き時に旧バージョンが残らない)</li>
+          <li>S3 Object Lock (Compliance mode) が未適用 (削除に対する WORM 保護がない)</li>
+          <li>MFA Delete が未設定 (ルートユーザーが削除アクションを実行できる)</li>
+          <li>バケットポリシーによる読み書き権限の最小化が未徹底</li>
+        </ul>
+        <h4>想定されるリスクシナリオ</h4>
+        <div class="scenario">攻撃者がログ保管 S3 への書き込み権限を獲得 → 痕跡となるログを削除・上書き → 攻撃の経緯が追跡不能に</div>
+        <h4>関連する改善項目</h4>
+        <p><span class="ref-link">短期 2</span> ログ保管 S3 の改ざん防止 (Versioning + Object Lock + MFA Delete)、<span class="ref-link">短期 1</span> CloudTrail / Config 停止防止 SCP</p>
+        <h4>参照 reference</h4>
+        <p><span class="ref-link">references/07-log-collection-and-protection.md</span></p>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="item">
+      <div class="item-header ng">
+        <div class="num">8</div>
+        <div class="title">SCP・予防的統制</div>
+        <span class="verdict-inline">NG</span>
+      </div>
+      <div class="item-body">
+        <h4>現状の整理</h4>
+        <p>SCP は組織内で既に利用されており、利用禁止サービスのアクション制御は実装済み。一方で、バックアップ・KMS キー・CloudTrail / Config 等のランサムウェア対策に直結する SCP は未設定。</p>
+        <h4>判定の根拠</h4>
+        <p>SCP の運用基盤は整備されているが、ランサムウェア対策の文脈で求められる予防的統制 (削除防止系 SCP) が組み込まれていないため、攻撃者が管理者権限を奪取した場合の防御として機能しない。</p>
+        <h4>不足している要素 / なぜそれが問題か</h4>
+        <ul>
+          <li>EBS / RDS / FSx スナップショット削除防止 SCP がない</li>
+          <li>KMS キー削除・無効化防止 SCP がない</li>
+          <li>CloudTrail 停止・削除防止 SCP がない</li>
+          <li>Organizations 離脱防止 SCP がない</li>
+        </ul>
+        <h4>想定されるリスクシナリオ</h4>
+        <div class="scenario">攻撃者が業務アカウントの管理者権限を奪取 → スナップショット削除、KMS キー削除、CloudTrail 停止を順次実行 → 復旧基盤と監査証跡の両方を喪失</div>
+        <h4>関連する改善項目</h4>
+        <p><span class="ref-link">短期 1</span> SCP によるバックアップ・ログ保護の予防的統制</p>
+        <h4>参照 reference</h4>
+        <p><span class="ref-link">references/06-policy-and-access-control.md</span></p>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="item">
+      <div class="item-header ng">
+        <div class="num">9</div>
+        <div class="title">バックアップ運用の監視</div>
+        <span class="verdict-inline">NG</span>
+      </div>
+      <div class="item-body">
+        <h4>現状の整理</h4>
+        <p>バックアップジョブの成功 / 失敗の監視、組織横断の可視化、Backup Audit Manager によるレポート出力 のいずれも未実施。200 アカウントのバックアップ状況を集中的に把握する仕組みがない状態。</p>
+        <h4>判定の根拠</h4>
+        <p>200 アカウント規模の運用において、各アカウントに個別ログインしてジョブ状況を確認するのは現実的ではなく、組織横断の可視化は事実上必須。バックアップ失敗の検知が遅れることで「復旧不能が有事に判明する」最悪のシナリオが現実化しうる構成。</p>
+        <h4>不足している要素 / なぜそれが問題か</h4>
+        <ul>
+          <li>クロスアカウントモニタリングが未利用 (Organizations 配下のジョブを Backup アカウントから一元確認できない)</li>
+          <li>Backup Audit Manager のレポートプランが未設定 (継続的な監査証跡が自動化されていない)</li>
+          <li>バックアップ失敗時のアラート通知が組み込まれていない</li>
+        </ul>
+        <h4>想定されるリスクシナリオ</h4>
+        <div class="scenario">特定アカウントでバックアップジョブが数週間失敗継続 → 組織として誰も気づかない → ランサムウェア被災時にそのシステムだけ復旧データが古い、または存在しないことが発覚</div>
+        <h4>関連する改善項目</h4>
+        <p><span class="ref-link">長期 8</span> クロスアカウントモニタリング + Audit Manager レポート</p>
+        <h4>参照 reference</h4>
+        <p><span class="ref-link">references/08-monitoring-and-audit.md</span></p>
+      </div>
+    </div>
+
+    <!-- お客様環境の前提情報 -->
+    <h2 class="section">お客様環境の前提情報</h2>
+    <table class="input-table">
+      <thead>
+        <tr><th style="width:60px">#</th><th style="width:240px">項目</th><th>回答</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>保護対象リソースの種類</td><td>EC2、RDS / Aurora、S3、EFS、FSx for Windows</td></tr>
+        <tr><td>2</td><td>オンプレミス環境を含めるか</td><td>含めない (オンプレは不要)</td></tr>
+        <tr><td>3</td><td>規制・コンプライアンス由来の保護要件</td><td><span class="verdict unknown">未確認</span></td></tr>
+        <tr><td>4</td><td>マルチアカウント構成・組織構成</td><td>Organizations 利用、Control Tower 未使用、業務システム単位で約 200 アカウント</td></tr>
+        <tr><td>5</td><td>既存セキュリティ製品</td><td>EC2 上で EDR を使用</td></tr>
+        <tr><td>6</td><td>バックアップ取得対象の優先度</td><td><span class="verdict unknown">未確認</span></td></tr>
+        <tr><td>7</td><td>既存ログ収集基盤</td><td><span class="verdict unknown">未確認</span></td></tr>
+      </tbody>
+    </table>
+
+    <!-- 現在のバックアップ環境の状況 -->
+    <h2 class="section">現在のバックアップ環境の状況</h2>
+    <table class="input-table">
+      <thead>
+        <tr><th style="width:60px">#</th><th style="width:240px">項目</th><th>回答</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>現在のバックアップ取得状況</td><td>各サービス個別のスナップショット機能を利用。AWS Backup による一元管理は未使用。頻度・保持期間は正確には不明だが、業務要件に基づき取得している想定</td></tr>
+        <tr><td>2</td><td>現在のアカウント構成・分離</td><td>バックアップ専用アカウントなし。業務アカウント内で取得・保管</td></tr>
+        <tr><td>3</td><td>Vault Lock / S3 Object Lock の適用</td><td>いずれも未使用</td></tr>
+        <tr><td>4</td><td>クロスアカウント・クロスリージョンコピー</td><td>実施していない</td></tr>
+        <tr><td>5</td><td>マルウェアスキャンの実施状況</td><td>バックアップに対するスキャンは未実施。EC2 上で EDR は稼働</td></tr>
+        <tr><td>6</td><td>ログ収集・保護状況</td><td>CloudTrail 有効化、Config 有効化、S3 に一元保管。ただしログ保管 S3 への改ざん対策 (Object Lock 等) は未設定</td></tr>
+        <tr><td>7</td><td>SCP・予防的統制</td><td>SCP は利用中 (利用禁止サービスのアクション制御)。バックアップ関連の SCP は未設定</td></tr>
+        <tr><td>8</td><td>暗号化設定</td><td>スナップショットは CMK で暗号化。S3 は SSE-KMS</td></tr>
+        <tr><td>9</td><td>バックアップ運用の監視状況</td><td>成功/失敗の監視、横断可視化、Audit Manager レポート いずれも未実施</td></tr>
+      </tbody>
+    </table>
+
+    <!-- より詳細な改善設計について -->
+    <h2 class="section">より詳細な改善設計について</h2>
+    <div class="about" style="margin: 16px 0 0;">
+      <p>本レポートで示した評価結果と総合評価の改善方針について、<span class="callout">具体的な実装ロードマップ (短期・中期・長期) と各施策の詳細設計は、本レポートに続けて生成できる「ロードマップ詳細レポート」で扱う。</span></p>
+      <p>ロードマップ詳細レポートには以下の内容が含まれる。</p>
+      <ul>
+        <li>改善ロードマップの全体像 (短期・中期・長期のフェーズ分けと依存関係)</li>
+        <li>各施策の位置づけ・設計判断・期待される防御効果 (Before/After 比較)</li>
+        <li>関連する公式ドキュメントおよび詳細リファレンスへの参照</li>
+      </ul>
+      <p><span class="callout">本レポートと、続けて生成できるロードマップ詳細レポートを併せて参照することで、現状把握から改善実装までを一気通貫で把握することが可能となる。</span></p>
+      <p style="font-size: 13px; margin-top: 12px;">
+        <strong style="color: var(--navy-1);">出力先(ロードマップ詳細レポートを生成した場合):</strong>
+        <code>../html/roadmap-detail.html</code> / <code>../md/roadmap-detail.md</code>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Generated by fsi-ransomware-protect Workflow B / Skill version 1 / 2026-05-28
+</footer>
+
+</body>
+</html>

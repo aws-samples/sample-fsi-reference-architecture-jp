@@ -1,0 +1,12 @@
+# FISC → AWS Security Agent 変換 Skill の依存関係(ピン留め)。
+# PyMuPDF を固定し、抽出エンジンが暗黙に pdftotext フォールバックへ切り替わって
+# 抽出忠実度が変わる事態を防ぐ(脅威モデル #1 対策)。
+#
+# 導入:
+#   python3 -m pip install -r requirements.txt
+#
+# 注記:
+#   - PDF本体(FISC安対基準/AWS対応リファレンス)は本Skillに同梱しない。
+#   - pdftotext(poppler)は任意のフォールバック手段であり、利用時は許可された
+#     システムディレクトリ配下の絶対パスのみ実行される(脅威モデル #8 対策)。
+PyMuPDF==1.27.2.3

@@ -1,0 +1,20 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["tracing"]
+}
+
+model Count {
+  accountId                  String
+  period                     String
+  count                      Int
+  lastProcessedTransactionId String?
+  updatedAt                  DateTime @default(now())
+  createdAt                  DateTime @default(now())
+
+  @@unique([accountId, period])
+}

@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<!--
+  =====================================================================
+  設計提案レポート テンプレート (design-proposal-template.html)
+  =====================================================================
+  本ファイルは fsi-ransomware-protect Workflow A の Step 8a で生成する
+  設計提案レポートのテンプレートである。AI エージェントは本テンプレートの
+  スタイル・セクション構造・配色・フォントを完全に踏襲し、データ部分
+  (お客様情報・設計提案内容・ロードマップ概観) のみを差し替える形で
+  レポートを生成する。
+
+  本ファイル内のデータは特定のお客様環境を想定したサンプルである。
+  実際の生成時はお客様の入力情報・設計提案内容に置き換えること。
+
+  Workflow A は「評価」ではなく「設計提案」がメインである点が Workflow B
+  との違いである。各設計領域には対応の優先度・スピード感を示すフェーズ
+  (短期 / 中期 / 長期) を付し、フェーズ色 (短期 = 緑、中期 = 青、長期 = 紫)
+  でカードを色分けする。
+
+  詳細な仕様は同階層の template-spec.md を参照する。
+  =====================================================================
+-->
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>【保護フェーズ】AWS ランサムウェア対策設計提案レポート — fsi-ransomware-protect Workflow A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* アクセント */
+    --navy-1: #0F2942;
+    --navy-2: #1E4D7B;
+    --teal: #1A7F8E;
+    --teal-light: #CCFBF1;
+    --gold: #C9A961;
+    --primary-light: #E8EEF7;
+    /* 表紙(ラベンダー系) */
+    --cover-1: #C9B8E8;
+    --cover-2: #D6C6E8;
+    --cover-3: #C6D6EC;
+    --cover-text: #2A2342;
+    --cover-accent: #6A4F9C;
+    /* テキスト・背景 */
+    --text: #1F2933;
+    --text-muted: #5A6677;
+    --border: #E2E8F0;
+    --bg-page: #F4F6FA;
+    --bg-card: #F7F9FC;
+    --bg-soft: #FAFBFC;
+    /* フェーズ色(短期/中期/長期) */
+    --short: #2E7D32;
+    --short-light: #E8F5E9;
+    --mid: #1565C0;
+    --mid-light: #E3F2FD;
+    --long: #6A1B9A;
+    --long-light: #F3E5F5;
+    /* ハイライト・補足・強調 */
+    --highlight-bg: #F0F9FA;
+    --note-bg: #FFF8E7;
+    --note-border: #E89B0E;
+    --accent-red: #C62828;
+    --unknown: #757575;
+    --unknown-bg: #F5F5F5;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Inter", "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+    color: var(--text);
+    line-height: 1.75;
+    background: var(--bg-page);
+    margin: 0;
+    padding: 32px 16px;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "palt", "kern";
+  }
+  .page {
+    max-width: 980px;
+    margin: 0 auto 32px;
+    background: var(--bg-card);
+    box-shadow: 0 8px 32px rgba(15, 41, 66, 0.10), 0 2px 8px rgba(15, 41, 66, 0.06);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  /* 表紙(ラベンダー系) */
+  .cover {
+    background: linear-gradient(120deg, var(--cover-1) 0%, var(--cover-2) 45%, var(--cover-3) 100%);
+    color: var(--cover-text);
+    padding: 64px 72px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: "";
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cover::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--cover-accent) 0%, transparent 100%);
+  }
+  .cover .label {
+    color: var(--cover-accent);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    font-weight: 700;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .cover .phase-nav {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+    margin-bottom: 0;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  .cover .phase-nav .phase {
+    font-size: 12px;
+    line-height: 1.3;
+    padding: 5px 12px;
+    border-radius: 6px;
+    color: rgba(42,35,66,0.45);
+    border: 1px solid rgba(42,35,66,0.18);
+    text-align: center;
+  }
+  .cover .phase-nav .phase .ja { font-weight: 600; display: block; }
+  .cover .phase-nav .phase .en {
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 1px;
+  }
+  .cover .phase-nav .phase.active {
+    color: #fff;
+    background: var(--cover-accent);
+    border-color: var(--cover-accent);
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(42,35,66,0.18);
+  }
+  .phase-hl {
+    color: var(--cover-accent);
+    font-weight: 700;
+  }
+  .cover h1 {
+    font-size: 34px;
+    font-weight: 800;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+    position: relative;
+    color: var(--cover-text);
+  }
+  .cover .subtitle {
+    color: rgba(42,35,66,0.75);
+    font-size: 16px;
+    margin: 0;
+    position: relative;
+  }
+  .cover .date {
+    margin-top: 32px;
+    font-size: 13px;
+    color: rgba(42,35,66,0.6);
+    border-top: 1px solid rgba(42,35,66,0.2);
+    padding-top: 16px;
+    position: relative;
+    font-family: "Inter", monospace;
+    letter-spacing: 0.03em;
+  }
+  /* 本文コンテナ */
+  .body { padding: 56px 96px; }
+  /* このレポートについて */
+  .about {
+    background: linear-gradient(135deg, #F8FAFC 0%, #EEF4FA 100%);
+    border-left: 3px solid var(--teal);
+    padding: 20px 24px;
+    margin: 0 0 40px;
+    font-size: 14px;
+    line-height: 1.9;
+    border-radius: 0 8px 8px 0;
+  }
+  .about h2 {
+    font-size: 11px;
+    color: var(--teal);
+    margin: 0 0 8px;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    padding: 0; background: none; border: none;
+  }
+  .about p { margin: 0 0 10px; }
+  .about p:last-child { margin-bottom: 0; }
+  .about ul { margin: 6px 0 10px; padding-left: 24px; }
+  .about li { margin-bottom: 4px; }
+  .callout { color: var(--teal); font-weight: 600; }
+  /* セクション見出し */
+  h2.section {
+    font-size: 22px;
+    color: var(--navy-1);
+    margin: 48px 0 20px;
+    padding: 0 0 12px;
+    border-bottom: 2px solid var(--navy-1);
+    position: relative;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  h2.section::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 60px; height: 2px;
+    background: var(--gold);
+  }
+  h3.minor {
+    font-size: 12px;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    margin: 32px 0 12px;
+    text-transform: uppercase;
+  }
+  /* 提案サマリ */
+  .summary-block {
+    margin: 20px 0 24px;
+    padding: 36px 32px;
+    background: linear-gradient(135deg, var(--teal-light) 0%, #ffffff 55%, var(--primary-light) 100%);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(15,41,66,0.10), 0 2px 6px rgba(15,41,66,0.06);
+  }
+  .summary-block::before {
+    content: "";
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(26, 127, 142, 0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .summary-block > * { position: relative; z-index: 1; }
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 16px 0 8px;
+  }
+  .pillar {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px 18px;
+    box-shadow: 0 2px 8px rgba(15,41,66,0.06);
+    border-top: 3px solid var(--teal);
+  }
+  .pillar .num {
+    display: inline-block;
+    background: var(--teal);
+    color: #fff;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 22px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 6px;
+    font-family: "Inter", monospace;
+  }
+  .pillar .title { font-weight: 700; color: var(--navy-1); font-size: 14.5px; }
+  .pillar .desc { font-size: 13px; color: var(--text-muted); margin-top: 6px; line-height: 1.7; }
+  /* 概観コメント */
+  .overall-comment {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    padding: 24px 28px;
+    margin: 0 0 24px;
+    font-size: 14px;
+    line-height: 1.95;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 4px 14px rgba(15,41,66,0.08), 0 1px 3px rgba(15,41,66,0.05);
+  }
+  .overall-comment p { margin: 0 0 12px; }
+  .overall-comment p:last-child { margin-bottom: 0; }
+  .overall-comment strong { color: var(--accent-red); font-weight: 700; }
+  /* 表 */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 12px 0 24px;
+    font-size: 13.5px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(15,41,66,0.08), 0 1px 3px rgba(15,41,66,0.05);
+  }
+  th {
+    background: linear-gradient(180deg, var(--navy-1) 0%, var(--navy-2) 100%);
+    color: #fff;
+    text-align: left;
+    padding: 14px 16px;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: 0.05em;
+  }
+  td {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px;
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  table.input-table tbody tr:nth-child(even) td { background: var(--bg-soft); }
+  table.compact { font-size: 13px; margin: 8px 0 16px; }
+  table.compact th { padding: 10px 12px; font-size: 13px; }
+  table.compact td { padding: 10px 12px; }
+  /* 領域カード(フェーズカラー対応) */
+  .domain {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 18px 0 22px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(15,41,66,0.08), 0 1px 3px rgba(15,41,66,0.05);
+  }
+  .domain-header {
+    padding: 14px 22px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .domain-header.short { background: linear-gradient(180deg, var(--short) 0%, #1F5F22 100%); }
+  .domain-header.mid { background: linear-gradient(180deg, var(--mid) 0%, #0D47A1 100%); }
+  .domain-header.long { background: linear-gradient(180deg, var(--long) 0%, #4A148C 100%); }
+  .domain-header .icon {
+    background: rgba(255,255,255,0.22);
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    flex-shrink: 0;
+    font-family: "Inter", monospace;
+    font-size: 13px;
+  }
+  .domain-header .title { flex: 1; font-weight: 700; font-size: 16px; letter-spacing: 0.01em; }
+  .domain-header .phase-badge {
+    background: rgba(255,255,255,0.25);
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .domain-body { padding: 22px 26px; }
+  .domain-body h4 {
+    font-size: 13px;
+    color: var(--navy-1);
+    margin: 16px 0 6px;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 4px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .domain-body h4:first-child { margin-top: 0; }
+  .domain-body p { margin: 0 0 8px; font-size: 14px; }
+  .domain-body ul { margin: 4px 0 8px; padding-left: 24px; font-size: 14px; }
+  .domain-body li { margin-bottom: 4px; }
+  .domain-body strong { color: var(--navy-1); font-weight: 700; }
+  .domain-body code {
+    background: var(--bg-soft);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 12.5px;
+    border: 1px solid var(--border);
+    font-family: "Inter", monospace;
+    color: var(--navy-1);
+  }
+  /* 設計の核心(ハイライト枠)、フェーズ色で左罫線 */
+  .core {
+    background: var(--highlight-bg);
+    border-left: 3px solid var(--teal);
+    padding: 14px 18px;
+    margin: 4px 0 14px;
+    font-size: 14px;
+    border-radius: 0 6px 6px 0;
+    line-height: 1.85;
+  }
+  .core.short { background: var(--short-light); border-left-color: var(--short); }
+  .core.mid { background: var(--mid-light); border-left-color: var(--mid); }
+  .core.long { background: var(--long-light); border-left-color: var(--long); }
+  .core .label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+    color: var(--teal);
+  }
+  .core.short .label { color: var(--short); }
+  .core.mid .label { color: var(--mid); }
+  .core.long .label { color: var(--long); }
+  /* 注意点ブロック */
+  .note {
+    background: var(--note-bg);
+    border-left: 3px solid var(--note-border);
+    padding: 12px 16px;
+    margin: 8px 0 14px;
+    font-size: 13.5px;
+    border-radius: 0 6px 6px 0;
+    line-height: 1.8;
+  }
+  .note .label {
+    color: var(--note-border);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+  /* 構造化図(アカウント階層・データフロー) */
+  .arch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin: 20px 0 8px;
+  }
+  .arch-node {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 22px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(15,41,66,0.05);
+    width: 100%;
+    max-width: 540px;
+  }
+  .arch-node .role { font-size: 12px; font-weight: 500; color: var(--text-muted); margin-top: 3px; }
+  .arch-node.mgmt { border-color: var(--navy-2); background: var(--primary-light); color: var(--navy-1); }
+  .arch-node.backup { border-color: var(--teal); background: var(--teal-light); color: var(--navy-1); }
+  .arch-node.isolated { border-color: var(--long); background: var(--long-light); color: var(--long); }
+  .arch-node.recovery { border-color: var(--mid); background: var(--mid-light); color: var(--mid); }
+  .arch-node.workload { border-color: var(--gold); background: #FBF6EA; color: #8A6D2B; }
+  .arch-node.new-badge::after {
+    content: "新設";
+    display: inline-block;
+    background: var(--long);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 8px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .arch-arrow {
+    color: var(--text-muted);
+    font-size: 20px;
+    padding: 4px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.2;
+  }
+  .arch-arrow .lbl { font-size: 11px; font-weight: 600; color: var(--teal); margin-bottom: 1px; }
+  /* OU ツリー */
+  .ou-tree {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 12px 0 16px;
+    font-size: 13.5px;
+  }
+  .ou-tree .ou-root { font-weight: 700; color: var(--navy-1); margin-bottom: 8px; }
+  .ou-tree .ou-group { margin: 4px 0 4px 16px; }
+  .ou-tree .ou-name { font-weight: 700; color: var(--navy-2); }
+  .ou-tree .ou-child { margin-left: 32px; color: var(--text-muted); }
+  .ou-tree .new-tag {
+    display: inline-block;
+    background: var(--long);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 8px;
+    margin-left: 6px;
+  }
+  /* ロードマップ概観 */
+  .phase {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .phase.short { color: var(--short); background: var(--short-light); }
+  .phase.mid { color: var(--mid); background: var(--mid-light); }
+  .phase.long { color: var(--long); background: var(--long-light); }
+  /* 未確認バッジ */
+  .verdict.unknown {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--unknown);
+    background: var(--unknown-bg);
+    letter-spacing: 0.03em;
+  }
+  /* 参照 reference 一覧 */
+  .ref-link {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--navy-1);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  /* フッター */
+  footer {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 16px 72px;
+    color: var(--text-muted);
+    font-size: 11px;
+    text-align: center;
+    font-family: "Inter", monospace;
+    letter-spacing: 0.05em;
+  }
+  /* 印刷 */
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; padding: 40px 56px; margin: 0; border-radius: 0; }
+    h2 { page-break-after: avoid; }
+    .domain { page-break-inside: avoid; }
+    .summary-block { page-break-inside: avoid; }
+    .arch { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- 表紙 -->
+  <div class="cover">
+    <div class="label">FSI RANSOMWARE PROTECT — WORKFLOW A</div>
+    <h1>【保護フェーズ】<br>AWS ランサムウェア対策設計提案レポート</h1>
+    <div class="phase-nav">
+      <span class="phase active"><span class="ja">保護</span><span class="en">Protect</span></span>
+      <span class="phase"><span class="ja">検知</span><span class="en">Detect</span></span>
+      <span class="phase"><span class="ja">対応</span><span class="en">Respond</span></span>
+      <span class="phase"><span class="ja">復旧</span><span class="en">Recover</span></span>
+    </div>
+    <div class="date">GENERATED — 2026-05-28</div>
+  </div>
+
+  <div class="body">
+
+    <!-- このレポートについて -->
+    <div class="about">
+      <h2>ABOUT THIS REPORT</h2>
+      <p>本レポートは、AWS 金融リファレンスアーキテクチャ日本版で公開されているランサムウェア対策向けの SKILL を用いて、お客様のランサム対策アーキテクチャの全体設計をまとめたものである。AWS Well-Architected Framework Financial Services Industry Lens、AWS Blueprint for Ransomware Defense 等の AWS 公式ガイダンスをベースに、金融機関の文脈で求められる設計考慮を加味したうえで、お客様環境に合わせた設計提案を行っている。</p>
+      <p>ランサムウェア対策は、保護（Protect）・検知（Detect）・対応（Respond）・復旧（Recover）の 4 つの観点で体系的に整備することが有効である。本レポートは、このうち <span class="phase-hl">保護（Protect）フェーズ</span> ― 攻撃を受けてもデータを失わない・改ざんされないバックアップ環境の設計 ― を対象とする。検知・対応・復旧の各フェーズは別途扱う。</p>
+      <p>各設計領域には、対応の優先度・スピード感を示す<span class="callout">フェーズ(短期 / 中期 / 長期)</span>を付している。具体的な実装手順・設計判断の根拠・期待される防御効果については、本レポートに続けて「ロードマップ詳細レポート」を生成することができる。</p>
+    </div>
+
+    <!-- 提案サマリ -->
+    <h2 class="section">提案サマリ</h2>
+    <div class="summary-block">
+      <h3 class="minor" style="margin-top:0;">設計方針の 3 本柱</h3>
+      <div class="pillars">
+        <div class="pillar">
+          <p class="title"><span class="num">1</span>3-2-1 ルール</p>
+          <p class="desc">3 つの複製を、異なる 2 種類の場所に、1 つはアカウント・リージョンを跨いだ場所に保管する。</p>
+        </div>
+        <div class="pillar">
+          <p class="title"><span class="num">2</span>多層防御</p>
+          <p class="desc">単一のポリシー・統制では破られないよう、SCP / IAM / KMS / Vault Lock / Object Lock を組み合わせる。</p>
+        </div>
+        <div class="pillar">
+          <p class="title"><span class="num">3</span>責務分離</p>
+          <p class="desc">業務 / バックアップ管理 / データ保管 / 復旧オペレーションをアカウント単位で分離する。</p>
+        </div>
+      </div>
+      <h3 class="minor">ロードマップ早見表</h3>
+      <table class="overview-table" style="margin:0;">
+        <thead><tr><th style="width:110px">フェーズ</th><th>主要な取り組み</th></tr></thead>
+        <tbody>
+          <tr><td><span class="phase short">短期</span></td><td>SCP による予防的統制の追加、既存ログ保管 S3 の保護強化(既存環境への影響が小さく即効性が高い領域)</td></tr>
+          <tr><td><span class="phase mid">中期</span></td><td>個別アカウント単位でのバックアッププラン整備、Vault Lock 適用、暗号化点検(個別の対象単位で完結する領域)</td></tr>
+          <tr><td><span class="phase long">長期</span></td><td>Backup / 隔離 / リカバリアカウント新設、組織横断 Backup Policy、クロスアカウント・クロスリージョンコピー、監視・監査の集中管理、マルウェアスキャン全社展開、LAG vault 移行(影響範囲が広く対応負荷の大きい領域)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="minor">Overall Direction</h3>
+    <div class="overall-comment">
+      <p>本設計は、既存の <strong>AWS Organizations + 約 200 アカウントの構造</strong> をそのまま活かしつつ、Backup / 隔離 / リカバリの 3 アカウントを新設して責務分離を実現する構成を目標形とする。Control Tower は未利用とのことだが、本設計はその前提でも成立する。</p>
+      <p>ランサム対策の要は、業務アカウントが侵害されてもバックアップが残り、暗号化キーが奪われても復号でき、削除操作が組織側から防がれ、感染データのリストアを未然に検知できる構造を作ることである。本提案ではこれを「3-2-1 ルール × 多層防御 × 責務分離」の 3 本柱で実装する。</p>
+      <p>RDS / Aurora を含む幅広いリソースが保護対象であるため、<strong>LAG vault と通常 Vault + Vault Lock のハイブリッド構成</strong>を採用する。基幹系の数分〜1 時間ごとの取得が求められるバックアップ要件に対しては、対応リソース(RDS / Aurora / S3)で Continuous backup (PITR) を活用し、その他リソースはスナップショット間隔で対応する。</p>
+      <p>200 アカウント規模のため、個別アカウント単位の運用は破綻する前提で、組織共通のバックアップポリシーを OU + タグで配り分ける運用設計を採用する。なお、<strong>組織横断のアカウント構成変更は影響範囲が大きく対応負荷も高いため、本設計では長期の取り組み</strong>と位置づけ、まずは既存環境への影響が小さい予防的統制から着手する段階的アプローチを推奨する。</p>
+    </div>
+
+    <!-- ヒアリング結果 -->
+    <h2 class="section">ヒアリング結果</h2>
+    <p style="font-size:13.5px; color:var(--text-muted); margin:0 0 12px;">本設計は以下の必須項目の回答に基づいて作成している。推奨・任意項目で未取得のものは「未確認」として明示し、巻末の「未確認事項とフォローアップ推奨」に整理した。</p>
+    <table class="input-table">
+      <thead>
+        <tr><th style="width:50px">#</th><th style="width:240px">項目</th><th>回答 / 状況</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>保護対象リソース</td><td>EC2 / ECS / Fargate / Lambda / RDS / Aurora / DynamoDB / ElastiCache / S3 / EBS / EFS / FSx / Redshift</td></tr>
+        <tr><td>2</td><td>オンプレミス検討要否</td><td>スコープ外、AWS 上のリソースのみ</td></tr>
+        <tr><td>3</td><td>バックアップ要件</td><td>基幹系・重要業務系: 数分〜1 時間ごとの取得が求められる、一般業務系: 半日〜1 日ごとの取得で許容</td></tr>
+        <tr><td>4</td><td>マルチアカウント構成</td><td>Organizations 利用、Control Tower 未利用、業務システム単位 × 本番/開発環境分離、200+ アカウント、Log 集約用アカウントあり、その他統制は Organizations 管理アカウント</td></tr>
+        <tr><td>5</td><td>規制・コンプライアンス由来の保護要件</td><td><span class="verdict unknown">未確認</span></td></tr>
+        <tr><td>6</td><td>既存セキュリティ製品 (EDR / AV)</td><td><span class="verdict unknown">未確認</span></td></tr>
+        <tr><td>7</td><td>バックアップ取得対象の優先度</td><td><span class="verdict unknown">未確認</span></td></tr>
+        <tr><td>8</td><td>既存ログ収集基盤 / SIEM</td><td><span class="verdict unknown">未確認 (Log 集約用アカウントの存在のみ確認)</span></td></tr>
+      </tbody>
+    </table>
+
+    <!-- 設計方針の大枠 -->
+    <h2 class="section">設計方針の大枠</h2>
+
+    <h3 class="minor">全体アーキテクチャ</h3>
+    <div class="arch">
+      <div class="arch-node mgmt">Organizations 管理アカウント<div class="role">SCP / 組織トレイル</div></div>
+      <div class="arch-arrow"><span class="lbl">AWS Backup 管理委任</span>↓</div>
+      <div class="arch-node backup new-badge">Backup アカウント<div class="role">組織共通バックアップポリシー / 組織横断モニタリング</div></div>
+      <div class="arch-arrow"><span class="lbl">Backup Policy 配布</span>↓</div>
+      <div class="arch-node workload">業務アカウント 200+(東京)<div class="role">業務 A / 業務 B / ... 本番・開発。大阪へは DR 用クロスリージョンコピー</div></div>
+      <div class="arch-arrow"><span class="lbl">クロスアカウントコピー</span>↓</div>
+      <div class="arch-node isolated new-badge">隔離(データバンカー)アカウント<div class="role">LAG vault(LAG 対応リソース) + 通常 Vault + Vault Lock(RDS 等)</div></div>
+      <div class="arch-arrow"><span class="lbl">平時から継続的にコピー</span>↓</div>
+      <div class="arch-node recovery new-badge">リカバリアカウント<div class="role">リストアテスト / 有事復旧 / フォレンジック分析の場</div></div>
+    </div>
+
+    <h3 class="minor">採用する AWS サービスと役割</h3>
+    <table class="compact">
+      <thead><tr><th style="width:280px">サービス</th><th>役割</th></tr></thead>
+      <tbody>
+        <tr><td>AWS Organizations + バックアップポリシー</td><td>200+ アカウントへの統一バックアップ要件適用(既存 Organizations にそのまま組み込み)</td></tr>
+        <tr><td>AWS Backup (cross-account management)</td><td>組織横断のバックアップ取得・コピー管理。delegated administrator として Backup アカウントへ委任</td></tr>
+        <tr><td>LAG vault + 通常 Vault + Vault Lock</td><td>バックアップのイミュータブル化。RDS 含むためハイブリッド構成</td></tr>
+        <tr><td>AWS KMS (CMK)</td><td>アカウント・リージョンごとの独立鍵で再暗号化、単一鍵掌握による全データ復号を防止</td></tr>
+        <tr><td>SCP (Service Control Policy)</td><td>Vault 削除・KMS 鍵削除・CloudTrail 停止等の予防的 Deny</td></tr>
+        <tr><td>AWS CloudTrail (組織トレイル) + Config</td><td>バックアップ操作ログの集約(既存 Log 集約用アカウント活用)</td></tr>
+        <tr><td>AWS Backup Audit Manager</td><td>バックアップ運用の監査レポート、規制対応・監査証跡</td></tr>
+        <tr><td>AWS Backup Malware Protection (GuardDuty 統合)</td><td>リカバリポイントのマルウェアスキャン、感染済みバックアップでの復旧を防止</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="minor">既存環境を踏まえた重要な判断ポイント</h3>
+    <div class="core">
+      <span class="label">Key Decisions</span>
+      <ol style="margin:0; padding-left:20px;">
+        <li>既存 Organizations 構造を維持しつつ、ランサム対策専用 OU / アカウントを<strong style="color:var(--navy-1);">追加</strong>する形を推奨。Control Tower はランサム対策のためだけに導入する必要はない。</li>
+        <li>200+ アカウント規模では、バックアップポリシーを業務影響度別に 2〜3 種類用意して OU / タグで配り分けるのが現実的。</li>
+        <li>「Organizations 管理アカウントへの権限集中」を解消する好機。Backup 管理を新設の Backup アカウントへ委任することで、自然にこの方向に揃う。</li>
+        <li>RDS / Aurora / S3 は Continuous Backup (PITR) を基幹系で活用し、数分ごとの取得が求められるバックアップ要件に対応。PITR 非対応リソースは業務側静止点運用と組み合わせたスナップショット設計が必要。</li>
+      </ol>
+    </div>
+
+    <!-- アカウント構成の詳細設計 -->
+    <h2 class="section">アカウント構成の詳細設計</h2>
+    <p style="font-size:13.5px; color:var(--text-muted); margin:0 0 12px;">アカウント構成の変更は影響範囲が大きいため、本設計では<span class="phase long">長期</span>の取り組みと位置づける。各アカウントの役割と全体像を以下に示す。設定手順・ポリシー連携の詳細は、続けて生成できるロードマップ詳細レポートで扱う。</p>
+
+    <h3 class="minor">新設するアカウントと既存リソースの活用</h3>
+    <table class="compact">
+      <thead><tr><th style="width:200px">アカウント</th><th>役割</th><th style="width:90px">区分</th></tr></thead>
+      <tbody>
+        <tr><td>Backup アカウント</td><td>組織共通バックアップポリシーの集中管理、組織横断モニタリング、Audit Manager レポート集約</td><td>新設</td></tr>
+        <tr><td>隔離(データバンカー)アカウント</td><td>業務アカウントから切り離されたバックアップの最終避難先。LAG vault と通常 Vault + Vault Lock のハイブリッド構成</td><td>新設</td></tr>
+        <tr><td>リカバリアカウント</td><td>リストアテスト、有事の復旧オペレーション、フォレンジック分析の場</td><td>新設</td></tr>
+        <tr><td>Organizations 管理アカウント</td><td>SCP・組織トレイルを担う。AWS Backup 管理は Backup アカウントへ委任し権限肥大化を緩和</td><td>既存活用</td></tr>
+        <tr><td>Log 集約用アカウント</td><td>CloudTrail / Config / VPC Flow Logs 等の集約先として継続利用</td><td>既存活用</td></tr>
+        <tr><td>業務アカウント 200+</td><td>Backup Policy が OU / タグ経由で適用される対象側。新規アカウントは作成しない</td><td>既存活用</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="minor">OU 構造への組み込み</h3>
+    <div class="ou-tree">
+      <div class="ou-root">Root</div>
+      <div class="ou-group"><span class="ou-name">Security OU</span>(新設 or 既存)</div>
+      <div class="ou-child">├ Log 集約用アカウント(既存)</div>
+      <div class="ou-child">├ Backup アカウント <span class="new-tag">新設</span></div>
+      <div class="ou-child">├ 隔離アカウント <span class="new-tag">新設</span></div>
+      <div class="ou-child">└ リカバリアカウント <span class="new-tag">新設</span></div>
+      <div class="ou-group"><span class="ou-name">業務システム A OU</span>(既存) — Prod / Dev</div>
+      <div class="ou-group"><span class="ou-name">業務システム B OU</span>(既存) — Prod / Dev</div>
+      <div class="ou-group">... 既存 200+ アカウント</div>
+    </div>
+    <div class="core long">
+      <span class="label">Design Core</span>
+      ランサム対策関連アカウントは Security OU 配下に集約し、業務 OU とは異なる SCP セットを適用しやすくする。Backup ポリシーは OU 単位で適用できるため、Prod と Dev で異なるポリシーを当てられる。<strong style="color:var(--navy-1);">既存の OU 構造を変更する必要はなく、追加だけで済む。</strong>
+    </div>
+
+    <h3 class="minor">Backup Policy の配り分けとデータフロー</h3>
+    <p style="font-size:14px;">200+ アカウントへは、OU 単位の Backup Policy(Critical / Standard / Dev-Test の業務影響度別)と、タグ(<code>Backup-Tier</code> 等)によるリソース割当を組み合わせて配布する。タグ命名の統一には Organizations のタグポリシーを併用する。データフローは以下の 3 経路で構成する。</p>
+    <table class="compact">
+      <thead><tr><th style="width:260px">コピー経路</th><th>主目的</th></tr></thead>
+      <tbody>
+        <tr><td>業務(東京) → 業務(大阪)</td><td>3-2-1 ルール「異なる場所」、リージョン障害・自然災害対策(DR 兼用)</td></tr>
+        <tr><td>業務(東京) → 隔離(東京)</td><td>3-2-1 ルール「異なるアカウント」、ランサム・内部不正・誤操作対策(本丸)</td></tr>
+        <tr><td>隔離 → リカバリ</td><td>有事の復旧着手の迅速化、フォレンジック分析・リストアテストの場(平時から継続コピー推奨)</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <span class="label">Notes</span>
+      RDS / Aurora 等 LAG vault 非対応リソースは通常 Vault + Vault Lock、EC2 / EBS / S3 等 LAG 対応リソースは LAG vault に分割保護するハイブリッド構成とする。LAG vault のサポートリソースは AWS の機能拡張で随時変わるため、設計時に公式ドキュメントで最新の対応リソースを確認する。
+    </div>
+
+    <!-- コア構成要素の設計 -->
+    <h2 class="section">コア構成要素の設計</h2>
+
+    <!-- 領域 1: バックアッププラン設計(中期) -->
+    <div class="domain">
+      <div class="domain-header mid">
+        <div class="icon">B</div>
+        <div class="title">バックアッププラン設計</div>
+        <div class="phase-badge">中期</div>
+      </div>
+      <div class="domain-body">
+        <div class="core mid">
+          <span class="label">Design Core</span>
+          200+ アカウントでは個別アカウントごとの設計は破綻する。<strong>組織共通の Backup Policy をテンプレート化し、OU + タグで配り分ける運用</strong>に集約する。まずは個別アカウント単位での整備から進められるため、中期に位置づける。
+        </div>
+        <h4>業務影響度別の 3 プラン構成</h4>
+        <table class="compact">
+          <thead><tr><th style="width:160px">プラン</th><th>取得方式</th><th style="width:120px">取得間隔の目安</th></tr></thead>
+          <tbody>
+            <tr><td>Critical(基幹系)</td><td>Continuous Backup (PITR 対応) + 時間単位スナップショット</td><td>数分〜1h</td></tr>
+            <tr><td>Standard(一般系)</td><td>12 時間ごと または 日次</td><td>半日〜1d</td></tr>
+            <tr><td>Dev/Test</td><td>日次 / 週次 / 対象外</td><td>—</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:13.5px; color:var(--text-muted);">RDS / Aurora / S3 は Continuous Backup (PITR)、EC2 / EBS / EFS / FSx はスナップショット間隔 + 業務側静止点と連動。リソース別の PITR 対応可否・保持期間・ライフサイクルの詳細は、続けて生成できるロードマップ詳細レポートで扱う。</p>
+        <div class="note">
+          <span class="label">Notes</span>
+          Continuous Backup の保持期間や開始ウィンドウの仕様には制約があるため、設計時に公式ドキュメントで最新仕様を確認する。長期保管はスナップショット併存 + コールドストレージ移行で対応する。
+        </div>
+      </div>
+    </div>
+
+    <!-- 領域 2: イミュータブル化(中期) -->
+    <div class="domain">
+      <div class="domain-header mid">
+        <div class="icon">I</div>
+        <div class="title">イミュータブル化 (Vault Lock / Object Lock)</div>
+        <div class="phase-badge">中期</div>
+      </div>
+      <div class="domain-body">
+        <div class="core mid">
+          <span class="label">Design Core</span>
+          「攻撃者が管理者権限を奪取しても削除・改ざんできない状態」を作るのが目的。本構成では <strong>Compliance mode を基本</strong>とし、初期検証のみ Governance mode で動作確認する 2 段階アプローチを推奨する。個別アカウント内の Vault への適用から段階的に進められる。
+        </div>
+        <table class="compact">
+          <thead><tr><th style="width:280px">対象</th><th>モード</th></tr></thead>
+          <tbody>
+            <tr><td>隔離アカウントの通常 Vault(RDS / Aurora 等)</td><td>Compliance mode</td></tr>
+            <tr><td>隔離アカウントの LAG vault(EC2 / EBS / S3 等)</td><td>Compliance mode 相当が強制適用</td></tr>
+            <tr><td>Log 集約用 S3(ログ保護)</td><td>S3 Object Lock (Compliance mode) + Versioning + MFA Delete</td></tr>
+          </tbody>
+        </table>
+        <div class="note">
+          <span class="label">Caution</span>
+          Compliance mode は grace time 経過後は<strong>いかなる権限でも、また AWS 側からも解除できない</strong>。保持期間を長く設定しすぎるとコストが累積し、無期限設定は致命的。業務要件 × 規制要件 × コストの三点で慎重に決定する。
+        </div>
+      </div>
+    </div>
+
+    <!-- 領域 3: 暗号化・KMS キー管理(中期) -->
+    <div class="domain">
+      <div class="domain-header mid">
+        <div class="icon">K</div>
+        <div class="title">暗号化・KMS キー管理</div>
+        <div class="phase-badge">中期</div>
+      </div>
+      <div class="domain-body">
+        <div class="core mid">
+          <span class="label">Design Core</span>
+          アカウント別・リージョン別に独立した <strong>KMS CMK で再暗号化</strong>することで、攻撃者が業務アカウントの鍵を掌握しても、隔離アカウント側のデータは復号できない構造を作る。既存リソースの暗号化点検は個別アカウント単位で進められるため、中期に位置づける。
+        </div>
+        <p style="font-size:14px;">各コピー先(業務東京 / 業務大阪 / 隔離 / リカバリ)で独立した CMK を管理し、コピー時に再暗号化する。利用主体の分離(バックアップ実行 / リストア実行 / キー管理を別ロール)、自動キーローテーション、SCP によるキー削除の Deny を組み合わせる。</p>
+        <div class="note">
+          <span class="label">Notes</span>
+          EBS / EC2 / RDS / Aurora / FSx / Redshift は独立暗号化非対応で、ソースリソースの暗号化キーを継承する。<strong>既存 200+ アカウントのリソース暗号化状況の点検をロードマップに含める</strong>必要がある。リソース別の独立暗号化対応の詳細は、続けて生成できるロードマップ詳細レポートで扱う。
+        </div>
+      </div>
+    </div>
+
+    <!-- 領域 4: ポリシー設計(短期) -->
+    <div class="domain">
+      <div class="domain-header short">
+        <div class="icon">P</div>
+        <div class="title">ポリシー設計 (IAM / KMS / Vault Access / SCP)</div>
+        <div class="phase-badge">短期</div>
+      </div>
+      <div class="domain-body">
+        <div class="core short">
+          <span class="label">Design Core</span>
+          複数のポリシー機構を組み合わせた多層防御。<strong>単一のポリシー突破では不正操作が成立しない構造</strong>を作る。特に SCP による予防的統制は、既存の Organizations 基盤をそのまま使え、新規アカウント作成やアーキテクチャ変更なしで即座に防御力を引き上げられるため、短期に位置づける(既存環境に SCP があれば活用、なければ導入から)。
+        </div>
+        <h4>クロスアカウントコピーを支える 6 つのポリシー制御ポイント(概要)</h4>
+        <p style="font-size:14px;">Organizations 委任 / 業務側 KMS キーポリシー / バックアップ実行ロール / リストア実行ロール / Vault アクセスポリシー / コピー先 KMS キーポリシー の 6 点で構成する。Vault アクセスポリシーで許可可能なクロスアカウントアクションは <code>backup:CopyIntoBackupVault</code> のみで、コピー先 Vault への破壊的操作はクロスアカウントでは構造的に不可能となる。各制御ポイントの詳細は、続けて生成できるロードマップ詳細レポートで扱う。</p>
+        <h4>SCP による予防的統制(短期で着手すべき領域)</h4>
+        <p style="font-size:14px;">Vault / リカバリポイント削除、KMS キー削除・無効化、CloudTrail / Config 停止、Log 集約バケット改変、組織離脱 を Deny する。SCP は管理アカウント自体には適用されないため、管理アカウントの権限肥大化を避ける委任設計が前提となる。</p>
+        <div class="note">
+          <span class="label">Caution</span>
+          SCP / Vault Lock (Compliance) / Multi-party approval は強力な統制だが、緊急時の例外手順(Break Glass ロール、代替承認者、保持期間設計ミスへの対処)を組織のセキュリティ・運用・コンプライアンス部門と事前に合意しておく。
+        </div>
+      </div>
+    </div>
+
+    <!-- 周辺機能の設計 -->
+    <h2 class="section">周辺機能の設計</h2>
+
+    <!-- 領域 5: マルウェアスキャン(長期) -->
+    <div class="domain">
+      <div class="domain-header long">
+        <div class="icon">M</div>
+        <div class="title">マルウェアスキャン</div>
+        <div class="phase-badge">長期</div>
+      </div>
+      <div class="domain-body">
+        <div class="core long">
+          <span class="label">Design Core</span>
+          「感染済みバックアップから復旧して再感染する」事態を防ぐため、平時からバックアップに対するスキャンを実施する。バックアップ保護の基盤が整った後の高度化施策であり、<strong>AWS Backup Malware Protection を主軸</strong>に、必要に応じて 3rd party 製品を併用する。長期に位置づける。
+        </div>
+        <p style="font-size:14px;">EC2 / EBS / S3 リカバリポイントはネイティブスキャン対応、RDS / Aurora / DynamoDB / EFS / FSx は対象外。日々の増分スキャン + 月次フルスキャン + リストア直前のオンデマンドフルスキャンの運用を推奨する。ECS / Fargate を含むため、ECR コンテナイメージはレプリケーション・イメージタグ Immutability 等で別途保護する。</p>
+        <div class="note">
+          <span class="label">Notes</span>
+          クロスアカウント・クロスリージョンでコピーされた EC2 リカバリポイント、および LAG vault 内 EC2 リカバリポイントは増分スキャン非対応でフルスキャンが必要となる。クォータの最新値は公式ドキュメントで確認する。3rd party 併用や対象外リソースの扱いの詳細は、続けて生成できるロードマップ詳細レポートで扱う。
+        </div>
+      </div>
+    </div>
+
+    <!-- 領域 6: ログ収集・保護(短期) -->
+    <div class="domain">
+      <div class="domain-header short">
+        <div class="icon">L</div>
+        <div class="title">ログ収集・保護</div>
+        <div class="phase-badge">短期</div>
+      </div>
+      <div class="domain-body">
+        <div class="core short">
+          <span class="label">Design Core</span>
+          「ランサム被害後のフォレンジック分析を可能にする」ためのログ基盤。<strong>収集と保護の 2 軸</strong>で設計する。既存の Log 集約用アカウントを核として不足分を補強する形であり、特に既存 S3 への保護強化は影響が小さく即効性が高いため、短期に位置づける。
+        </div>
+        <p style="font-size:14px;">CloudTrail(組織トレイル)、Config(Aggregator)、VPC Flow Logs、Route 53 Resolver クエリログ等を Log 集約用アカウントへ集約する。既存 Log 集約用 S3 には S3 Versioning + Object Lock (Compliance mode) + MFA Delete + 最小権限化を適用する。ログ停止・削除には予防(SCP)・検知(EventBridge)・自動復旧(Config Rules)・データ保全(Object Lock)の 4 段階防御で対応する。</p>
+        <div class="note">
+          <span class="label">Notes</span>
+          ログを取り揃えても、実際のフォレンジック分析は高度な専門性を要する。<strong>平時からフォレンジックベンダとの契約を準備しておくこと</strong>を推奨する。Security Lake / Control Tower は必須ではなく、効率化要素として部分導入を検討する。
+        </div>
+      </div>
+    </div>
+
+    <!-- 領域 7: バックアップ運用の監視・監査(長期) -->
+    <div class="domain">
+      <div class="domain-header long">
+        <div class="icon">A</div>
+        <div class="title">バックアップ運用の監視・監査</div>
+        <div class="phase-badge">長期</div>
+      </div>
+      <div class="domain-body">
+        <div class="core long">
+          <span class="label">Design Core</span>
+          「バックアップが想定通りに動作し続けているか」「設定が変更されていないか」を継続監視し、監査証跡を継続的に確保する。組織横断の集中管理基盤の整備にあたり、Backup アカウントへの集約が前提となるため、長期に位置づける。
+        </div>
+        <p style="font-size:14px;">クロスアカウントモニタリング(リアルタイム状況把握)と AWS Backup Audit Manager レポート(ジョブレポート + コンプライアンスレポート)を併用する。200+ アカウントの規模では、個別ログイン不要で全社状況を一望できる効率化効果が大きい。</p>
+        <div class="note">
+          <span class="label">Notes</span>
+          Audit Manager レポートの配信先は Backup アカウント所有 S3 のみ(クロスアカウント S3 配信は非サポート)。レポート保管 S3 にはログ保管 S3 と同等の保護を適用する。監査では Vault Lock 適用状況・保持期間・暗号化設定の逸脱を自動的に証跡化でき、規制対応・監査対応の工数削減が見込める。
+        </div>
+      </div>
+    </div>
+
+    <!-- 段階的ロードマップ概観 -->
+    <h2 class="section">段階的ロードマップ概観</h2>
+    <p style="font-size:13.5px; color:var(--text-muted); margin:0 0 12px;">対応コスト・時間・既存環境への影響が小さく即効性のある対策から短期で着手し、影響は大きいが効果の高い対策を中期・長期へ段階的に位置づける。各フェーズの具体的な期間は組織の体制・予算・既存運用により変動するため、組織側で判断する前提とする。各項目の設計判断・期待される防御効果は、続けて生成できるロードマップ詳細レポートで扱う。</p>
+
+    <h3 class="minor"><span class="phase short">短期</span> 既存環境への影響が小さく即効性のある対策</h3>
+    <ul style="font-size:14px;">
+      <li>SCP による予防的統制の追加(Vault / KMS 削除防止、CloudTrail / Config 停止防止、組織離脱防止)</li>
+      <li>既存 Log 集約用 S3 バケットの保護強化(Versioning / Object Lock / MFA Delete)</li>
+      <li>最重要システムの選定と <code>Backup-Tier</code> タグ命名規則の決定</li>
+    </ul>
+
+    <h3 class="minor"><span class="phase mid">中期</span> 個別アカウント単位で完結する対策</h3>
+    <ul style="font-size:14px;">
+      <li>業務影響度別バックアッププランの整備(個別アカウント内での AWS Backup 活用、PITR 設定)</li>
+      <li>Vault Lock(Governance mode 検証 → Compliance mode)の適用</li>
+      <li>リソース暗号化状況の点検と KMS CMK への揃え込み</li>
+      <li>タグポリシー(Organizations)による <code>Backup-Tier</code> 命名の統一</li>
+    </ul>
+
+    <h3 class="minor"><span class="phase long">長期</span> 組織横断の構成変更・集中管理基盤の整備・高度化</h3>
+    <ul style="font-size:14px;">
+      <li>Backup / 隔離 / リカバリの 3 アカウント新設と Security OU への配置、AWS Backup 管理委任</li>
+      <li>組織横断 Backup Policy の全 Prod 展開、クロスアカウント・クロスリージョンコピーの全面適用</li>
+      <li>クロスアカウントモニタリング + Audit Manager による監視・監査の集中管理</li>
+      <li>AWS Backup Malware Protection の全社展開、ECR 保護強化</li>
+      <li>LAG vault への段階移行、Multi-party approval の本格運用</li>
+      <li>フォレンジックベンダとの平時契約、他フェーズ(Detect / Respond / Recover)Skill との統合</li>
+    </ul>
+
+    <!-- 未確認事項とフォローアップ推奨 -->
+    <h2 class="section">未確認事項とフォローアップ推奨</h2>
+    <p style="font-size:13.5px; color:var(--text-muted); margin:0 0 12px;">本設計は必須ヒアリング項目の回答に基づいて作成している。以下の項目は未取得のため、設計精度向上のために組織内で確認・合意形成を進めることを推奨する。これらの項目を反映した最終的な設計値は、お客様側で確定いただく前提とする。</p>
+    <table class="input-table">
+      <thead>
+        <tr><th style="width:240px">確認推奨項目</th><th>影響箇所</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>規制・コンプライアンス由来の保護要件</td><td>Vault Lock / S3 Object Lock のモード選択(改ざん防止・WORM 化)、保持期間設計、Glacier 移行・コールドストレージ移行のライフサイクル</td></tr>
+        <tr><td>既存 EDR / AV 製品の有無</td><td>マルウェアスキャンを AWS ネイティブ単独 or 3rd party 併用かの判断</td></tr>
+        <tr><td>バックアップ取得対象の優先度</td><td>Critical Plan に振るシステムの選定、業務影響度 Tier 分類の合意形成</td></tr>
+        <tr><td>既存 SIEM / Security Lake 等</td><td>ログ集約と SIEM 連携の方針、Security Lake 採用判断</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ロードマップ詳細レポート案内 -->
+    <h2 class="section">より詳細な実装ロードマップについて</h2>
+    <div class="about" style="margin: 16px 0 0;">
+      <p>本レポートは、ランサムウェア対策の 4 フェーズ（保護（Protect）・検知（Detect）・対応（Respond）・復旧（Recover））のうち <span class="phase-hl">保護（Protect）フェーズ</span> を対象とした設計提案である。保護フェーズの中での「設計の全体像」と「実装ロードマップ」は、本レポートと、続けて生成できる「ロードマップ詳細レポート」で住み分けている。</p>
+      <p>本レポートは設計の全体像と方針を俯瞰するための資料である。<span class="callout">各設計領域を実際に「どの順序で・何を根拠に・どんな防御効果を狙って」実装するかは、本レポートに続けて生成できる「ロードマップ詳細レポート」で詳しく扱う。</span></p>
+      <p>本レポートと、続けて生成できるロードマップ詳細レポートの記載内容は、以下のように住み分けている。</p>
+      <table class="compact" style="margin-top:8px;">
+        <thead><tr><th style="width:50%">本レポート(設計提案)</th><th>ロードマップ詳細レポート</th></tr></thead>
+        <tbody>
+          <tr><td>設計方針 3 本柱・全体アーキテクチャ・各設計領域の核心と概略</td><td>各施策の位置づけ・設計判断の根拠・実装ステップ</td></tr>
+          <tr><td>領域ごとのフェーズ(短期/中期/長期)の俯瞰</td><td>短期 / 中期 / 長期の各項目の詳細展開と依存関係</td></tr>
+          <tr><td>詳細パラメータは概略表のみ</td><td>リソース別の詳細パラメータ表・ポリシー連携・期待される防御効果(対策前のリスク vs 対策後)</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:13px;"><strong style="color:var(--navy-1);">読み方ガイド:</strong> 経営層・コンプライアンス層は本レポートで全体像を把握し、実装担当はロードマップ詳細レポートを生成のうえ併読することで、設計方針の俯瞰から実装ロードマップまでを一気通貫で把握できる。</p>
+      <p style="font-size: 13px; margin-top: 12px;">
+        <strong style="color: var(--navy-1);">出力先(ロードマップ詳細レポートを生成した場合):</strong>
+        <code>../html/roadmap-detail.html</code> / <code>../md/roadmap-detail.md</code>
+      </p>
+    </div>
+
+    <!-- 参照 reference 一覧 -->
+    <h2 class="section">付録</h2>
+    <h3 class="minor">参照した reference 一覧</h3>
+    <p style="font-size: 13.5px; color: var(--text-muted); margin: 0 0 12px;">ランサムウェア対策 SKILL の保護 (Protect) フェーズの <code>references/</code> フォルダに格納された以下の詳細ガイドファイルを参照して作成している。</p>
+    <ul style="font-size: 14px;">
+      <li><span class="ref-link">references/01-multi-account-architecture.md</span> 全体構造の土台(アカウント構成・データフロー・LAG vault・クロスアカウントコピー)</li>
+      <li><span class="ref-link">references/02-immutability.md</span> イミュータブル化(Vault Lock、Object Lock)</li>
+      <li><span class="ref-link">references/03-backup-plan-design.md</span> 取得頻度・対象選定・保持期間・ライフサイクル</li>
+      <li><span class="ref-link">references/04-encryption-strategy.md</span> KMS 暗号化、キー管理</li>
+      <li><span class="ref-link">references/05-malware-protection.md</span> AWS Backup マルウェアスキャン + サードパーティ + ECR コンテナ保護</li>
+      <li><span class="ref-link">references/06-policy-and-access-control.md</span> 6 つのポリシー制御ポイント + SCP</li>
+      <li><span class="ref-link">references/07-log-collection-and-protection.md</span> ログ収集カテゴリ・ログ保護・CloudTrail / Config 集約</li>
+      <li><span class="ref-link">references/08-monitoring-and-audit.md</span> クロスアカウントモニタリング・Audit Manager</li>
+    </ul>
+
+  </div>
+</div>
+
+<footer>
+  Generated by fsi-ransomware-protect Workflow A / Skill version 1 / 2026-05-28
+</footer>
+
+</body>
+</html>

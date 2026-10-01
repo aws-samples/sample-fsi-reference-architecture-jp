@@ -1,0 +1,8 @@
+[project]
+name = "customer-context-manager-scripts"
+version = "1.0.0"
+description = "Store validation script for customer-context-manager"
+# 標準ライブラリのみで動作する。3.9 を下限とするのは f-string と
+# glob(recursive=True) 以外に新しい構文を使っていないため。
+requires-python = ">=3.9"
+dependencies = []

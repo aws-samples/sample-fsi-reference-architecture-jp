@@ -1,0 +1,13 @@
+[project]
+name = "jp-security-advisories"
+version = "1.0.0"
+description = "Fetch and search Japanese security advisories from JPCERT/CC, IPA, JVN, and JVN iPedia"
+requires-python = ">=3.11"
+dependencies = [
+    "defusedxml>=0.7.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
