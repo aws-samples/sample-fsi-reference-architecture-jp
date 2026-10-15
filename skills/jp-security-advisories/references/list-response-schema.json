@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aws-jp-fsi-sa/jp-security-advisories/list-response-schema.json",
+  "title": "Japan Security Advisories — list response",
+  "type": "object",
+  "required": ["items", "metadata"],
+  "additionalProperties": false,
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "category", "title", "link", "date"],
+        "additionalProperties": false,
+        "properties": {
+          "source": {
+            "type": "string",
+            "enum": ["jpcert", "jpcert-all", "myjvn-alert", "myjvn-vuln"]
+          },
+          "category": { "type": "string" },
+          "title": { "type": "string" },
+          "link": { "type": "string", "format": "uri" },
+          "date": { "type": "string", "format": "date-time" },
+          "description": {
+            "type": ["string", "null"],
+            "description": "Truncated overview / summary if available"
+          },
+          "id": {
+            "type": ["string", "null"],
+            "description": "Source-native identifier (e.g. JVNDB-YYYY-NNNNNN, MYJVN-ALT-YYYY-NNNN)"
+          },
+          "cves": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^CVE-\\d{4}-\\d{4,7}$" }
+          },
+          "jvn_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "severity": {
+            "type": ["string", "null"],
+            "enum": ["none", "low", "medium", "high", "critical", "info", "important", null],
+            "description": "For myjvn-alert/myjvn-vuln when CVSS or alert severity is present"
+          },
+          "cvss_score": {
+            "type": ["number", "null"],
+            "description": "Highest CVSS base score across evaluators (myjvn-vuln only)"
+          },
+          "related": {
+            "type": "array",
+            "description": "For myjvn-alert: structured related-reference items (sec:items/sec:item)",
+            "items": {
+              "type": "object",
+              "required": ["title", "url"],
+              "properties": {
+                "title": { "type": "string" },
+                "identifier": { "type": ["string", "null"] },
+                "url": { "type": "string", "format": "uri" },
+                "published": { "type": ["string", "null"] }
+              }
+            }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["total_fetched", "filtered_count", "sources_used"],
+      "additionalProperties": false,
+      "properties": {
+        "total_fetched": { "type": "integer" },
+        "filtered_count": { "type": "integer" },
+        "sources_used": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["source", "code", "message"],
+            "properties": {
+              "source": { "type": "string" },
+              "code": { "type": "string" },
+              "message": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

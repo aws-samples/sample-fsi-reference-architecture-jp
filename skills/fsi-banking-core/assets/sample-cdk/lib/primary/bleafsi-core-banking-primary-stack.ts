@@ -1,0 +1,185 @@
+import * as cdk from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import { aws_elasticloadbalancingv2 as elbv2 } from 'aws-cdk-lib';
+import { aws_ec2 as ec2 } from 'aws-cdk-lib';
+import { BuildContainer } from './build-container';
+import { ECR } from './ecr';
+import { DbAuroraPgGlobalPrimary } from './db-aurora-pg-global-primary';
+import { DbDynamoDbGlobal } from './db-dynamoDb-global';
+import { Vpc } from '../shared/vpc';
+import { Waf } from '../shared/waf';
+import { KeyApp } from '../shared/key-app';
+import { MonitorAlarm } from '../shared/monitor-alarm';
+import { PrimaryContainerAppSample } from './primary-container-app-sample';
+import { PrivateHostedZone } from './private-hosted-zone';
+import { CrossRegionSsmParamName } from '../shared/constants';
+import { StackParameter, SampleEcsAppParameter, SampleMultiRegionAppParameter } from '../../bin/parameter';
+import { NlbOnlyForTest } from './nlb-only-for-test';
+// ServiceLikedRoleを生成するライブラリ https://constructs.dev/packages/upsert-slr/v/1.0.1?lang=typescript
+import { ServiceLinkedRole } from 'upsert-slr';
+//マルチリージョン 勘定系サンプルアプリ
+import { SampleMultiRegionApp } from '../shared/sample-multi-region-app/app';
+import { SampleAppClient } from '../shared/sample-multi-region-app/app-client';
+import { Backup } from './backup';
+import { ApplicationSignalsConfig } from '../shared/application-signals-config';
+/*
+ * BLEA-FSI Core Banking Sample application stack(Primaly Region)
+ */
+
+export class CoreBankingPrimaryStack extends cdk.Stack {
+  public readonly PrimaryDB: DbAuroraPgGlobalPrimary;
+  public readonly tgwRouteTableId: string;
+  public readonly alb: elbv2.ApplicationLoadBalancer;
+  public readonly dynamoDb: DbDynamoDbGlobal;
+  public readonly hostedZone: PrivateHostedZone;
+  public readonly sampleMultiRegionApp?: SampleMultiRegionApp;
+  public readonly backup: Backup;
+  public readonly myVpc: ec2.Vpc;
+
+  constructor(scope: Construct, id: string, props: StackParameter) {
+    super(scope, id, props);
+
+    const { notifyEmail, primary, secondary, monitoring, envName, dbUser, hostedZoneName } = props;
+
+    // ReplicationDynamoDB ServiceLikedRoke を事前に作成（既に存在する場合はスルーされる）
+    // DynamoDbGlobalの作成時に 'AWSServiceLinkedRoleForDynamoDBReplication'が裏側で自動作成されるが、タイミングによりエラーになることがある
+    new ServiceLinkedRole(this, 'ReplicationDynamoDBServiceLinkeRole', {
+      awsServiceName: 'replication.dynamodb.amazonaws.com',
+      description: 'Service linked role for dynamodb global tables',
+    });
+
+    // Topic for monitoring guest system
+    const monitorPrimaryAlarm = new MonitorAlarm(this, `MonitorAlarm`, { notifyEmail });
+
+    // CMK for Primary Apps
+    const primaryAppKey = new KeyApp(this, `AppKey`);
+
+    // Networking
+    const primaryVpc = new Vpc(this, `Vpc`, {
+      regionEnv: primary,
+      oppositeRegionCidrs: [secondary.vpcCidr, monitoring.vpcCidr],
+    });
+    primaryVpc.addTgwIdToSsmParam(CrossRegionSsmParamName.TGW_PRIMARY_ID, primary.region, envName);
+
+    // VPCをpublicプロパティとして設定
+    this.myVpc = primaryVpc.myVpc;
+
+    // WebACL for ALB
+    const waf = new Waf(this, `Waf`, {
+      scope: 'REGIONAL',
+    });
+
+    //ECSサンプルアプリのデプロイ
+    let ecsApp;
+    if (SampleEcsAppParameter.deploy == true) {
+      // Container Repository
+      const ecr = new ECR(this, `ECR`, {
+        repositoryName: 'apprepo',
+        alarmTopic: monitorPrimaryAlarm.alarmTopic,
+        secondaryRegion: secondary.region,
+      });
+
+      // Build Container Image
+      const build_container = new BuildContainer(this, `ContainerImage`, {
+        ecrRepository: ecr.repository,
+      });
+
+      // Sample Application Stack (LoadBalancer + Fargate)
+      ecsApp = new PrimaryContainerAppSample(this, `ECSApp`, {
+        envName,
+        myVpc: primaryVpc.myVpc,
+        webAcl: waf.webAcl,
+        repository: ecr.repository,
+        imageTag: build_container.imageTag,
+        appKey: primaryAppKey.kmsKey,
+        primary,
+      });
+      ecsApp.node.addDependency(build_container);
+      this.alb = ecsApp.appAlb;
+
+      // NLB only for test
+      if (SampleEcsAppParameter.createTestResource) {
+        const nlb = new NlbOnlyForTest(this, `Nlb`, {
+          myVpc: primaryVpc.myVpc,
+          targetAlb: this.alb,
+        });
+        nlb.node.addDependency(ecsApp);
+      }
+    }
+
+    // Route 53 Private Hosted Zone
+    const privateHostedZoneConstruct = new PrivateHostedZone(this, `PrivateHostedZone`, {
+      myVpc: primaryVpc.myVpc,
+      alb: this.alb,
+      primary,
+      envName,
+      zoneName: hostedZoneName,
+    });
+    this.hostedZone = privateHostedZoneConstruct;
+    if (ecsApp != null) {
+      //private hosted zone にECSアプリへの依存関係を設定
+      privateHostedZoneConstruct.node.addDependency(ecsApp);
+    }
+
+    // DynamoDB for transaction management
+    this.dynamoDb = new DbDynamoDbGlobal(this, `transaction-DBDynamoDb`, {
+      primary,
+      secondary,
+    });
+    this.dynamoDb.node.addDependency(primaryAppKey);
+
+    // Aurora Global DB
+    this.PrimaryDB = new DbAuroraPgGlobalPrimary(this, `DBAuroraPg`, {
+      myVpc: primaryVpc.myVpc,
+      dbName: 'mydbname',
+      dbUser,
+      dbAllocatedStorage: 25,
+      vpcSubnets: primaryVpc.myVpc.selectSubnets({
+        subnetGroupName: 'Protected',
+      }),
+      appServerSecurityGroup: ecsApp?.appServerSecurityGroup,
+      appKey: primaryAppKey.kmsKey,
+      alarmTopic: monitorPrimaryAlarm.alarmTopic,
+      secondaryRegion: secondary.region,
+    });
+
+    // AWS Backup
+    this.backup = new Backup(this, 'Backup', {
+      PrimaryDB: this.PrimaryDB,
+      dynamoDb: this.dynamoDb,
+    });
+
+    this.tgwRouteTableId = primaryVpc.getTgwRouteTableId(this);
+
+    //マルチリージョン 勘定系サンプルアプリのデプロイ
+    if (SampleMultiRegionAppParameter.deploy == true) {
+      // Application Signals 用の SSM パラメータを作成
+      // SampleMultiRegionApp の前に作成して依存関係を保証
+      const applicationSignalsConfig = new ApplicationSignalsConfig(this, 'ApplicationSignalsConfig', {
+        envName,
+        region: primary.region,
+      });
+
+      const app = new SampleMultiRegionApp(this, 'SampleMultiRegionApp', {
+        mainDynamoDbTableName: this.dynamoDb.tableName,
+        balanceDatabase: this.PrimaryDB,
+        countDatabase: this.PrimaryDB,
+        vpc: primaryVpc.myVpc,
+        hostedZone: this.hostedZone.privateHostedZone,
+        alarmTopic: monitorPrimaryAlarm.alarmTopic,
+        cwAgentConfigParameter: applicationSignalsConfig.parameter,
+      });
+      // SampleMultiRegionApp が ApplicationSignalsConfig に依存することを明示
+      app.node.addDependency(applicationSignalsConfig);
+      this.sampleMultiRegionApp = app;
+
+      new SampleAppClient(this, 'SampleAppClient', {
+        vpcCidr: SampleMultiRegionAppParameter.appClientVpcCidr,
+        parentVpc: primaryVpc.myVpc,
+        transitGateway: primaryVpc.tgw,
+        hostedZone: this.hostedZone.privateHostedZone,
+        secondaryVpcCidr: secondary.vpcCidr,
+      });
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AWS Blog List Response",
+  "description": "Output schema for `fetch_blogs.py list` mode. An array of blog post summaries.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["locale", "dateUpdated", "title", "excerpt", "url"],
+    "properties": {
+      "locale": {
+        "type": "string",
+        "description": "Locale of the blog post (en_US or ja_JP).",
+        "enum": ["en_US", "ja_JP"]
+      },
+      "dateUpdated": {
+        "type": "string",
+        "description": "Last updated timestamp of the blog post (ISO 8601)."
+      },
+      "title": {
+        "type": "string",
+        "description": "Title of the blog post."
+      },
+      "excerpt": {
+        "type": "string",
+        "description": "Short summary / excerpt of the blog post."
+      },
+      "url": {
+        "type": "string",
+        "format": "uri",
+        "description": "Canonical URL of the blog post."
+      }
+    },
+    "additionalProperties": false
+  }
+}

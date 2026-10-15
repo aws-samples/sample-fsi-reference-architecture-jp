@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AWS Customer References Output",
+  "type": "object",
+  "required": ["metadata", "references"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["total_hits", "filtered_count", "filters_applied"],
+      "properties": {
+        "total_hits": {
+          "type": "integer",
+          "description": "Total number of results from the API before client-side filtering"
+        },
+        "filtered_count": {
+          "type": "integer",
+          "description": "Number of results after all filters applied"
+        },
+        "filters_applied": {
+          "type": "object",
+          "properties": {
+            "industry": { "type": "string" },
+            "locales": { "type": "array", "items": { "type": "string" } },
+            "start_date": { "type": ["string", "null"], "format": "date" },
+            "end_date": { "type": ["string", "null"], "format": "date" },
+            "keywords": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["locale", "location", "name", "publishedDate", "title", "body", "url"],
+        "properties": {
+          "locale": { "type": "string", "description": "Locale code, e.g. en_US, ja_JP" },
+          "location": { "type": "string", "description": "Geographic location of the customer" },
+          "name": { "type": "string", "description": "Slug identifier of the case study" },
+          "publishedDate": { "type": "string", "description": "Published date in ISO 8601 or YYYY-MM-DD" },
+          "title": { "type": "string", "description": "Title of the case study" },
+          "body": { "type": "string", "description": "Summary description" },
+          "url": { "type": "string", "description": "URL to the full case study page" }
+        }
+      }
+    }
+  }
+}

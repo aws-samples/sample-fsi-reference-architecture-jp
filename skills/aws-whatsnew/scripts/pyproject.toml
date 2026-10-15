@@ -1,0 +1,7 @@
+[project]
+name = "aws-whatsnew"
+version = "1.0.0"
+description = "Fetch AWS What's New announcements via the official AWS API"
+requires-python = ">=3.11"
+dependencies = []
+

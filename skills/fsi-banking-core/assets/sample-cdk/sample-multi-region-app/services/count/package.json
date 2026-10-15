@@ -1,0 +1,24 @@
+{
+  "name": "count",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node-dev index.ts",
+    "bundle": "esbuild index.ts --bundle --outdir=dist --platform=node --sourcemap --bundle --packages=external",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.11",
+    "esbuild": "^0.17.17",
+    "jest": "^29.5.0",
+    "prisma": "^5.12.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.12.1",
+    "express": "^4.21.2"
+  }
+}
